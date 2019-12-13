@@ -1,0 +1,22 @@
+# ninja log v5
+1	997	597979612	Evora/CMakeFiles/Evora.dir/Evora.cpp.obj	d0769b2d010d8fbf
+997	1885	597979613	Evora/Evora.exe	9bc8861ce60c4998
+4	545	597980110	build.ninja	883cc5fb0e66ecca
+1	293	597980138	build.ninja	883cc5fb0e66ecca
+1	848	597980138	build.ninja	883cc5fb0e66ecca
+32	565	597980138	Evora/CMakeFiles/Evora.dir/Evora.cpp.obj	d0769b2d010d8fbf
+31	573	597980139	Evora/CMakeFiles/Evora.dir/Evora.cpp.obj	d0769b2d010d8fbf
+18	459	597980178	Evora/Evora.exe	9bc8861ce60c4998
+1	553	597980178	Engine/CMakeFiles/Engine.dir/Engine.cpp.obj	ef603fb72fe05b3b
+554	1560	597980179	Engine/Engine.exe	ad975905a8d3d85b
+1	538	597980242	build.ninja	883cc5fb0e66ecca
+1	990	597980243	Engine/CMakeFiles/Engine.dir/Engine.cpp.obj	456092e241524347
+990	1265	597980243	Engine/Engine.lib	e11599d11bd5ddcf
+0	37	0	clean	b049eaf95b698d8c
+1	303	597980328	build.ninja	883cc5fb0e66ecca
+0	30	0	clean	67256af933a03e99
+1	349	597980337	build.ninja	883cc5fb0e66ecca
+23	1033	597980338	Evora/CMakeFiles/Evora.dir/Evora.cpp.obj	d0769b2d010d8fbf
+1	1082	597980338	Engine/CMakeFiles/Engine.dir/Engine.cpp.obj	456092e241524347
+1082	1218	597980339	Engine/Engine.lib	e11599d11bd5ddcf
+1033	1522	597980339	Evora/Evora.exe	9bc8861ce60c4998
