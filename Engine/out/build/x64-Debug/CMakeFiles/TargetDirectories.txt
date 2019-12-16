@@ -1,8 +1,0 @@
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/Evora/CMakeFiles/Evora.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/Evora/CMakeFiles/edit_cache.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/Evora/CMakeFiles/rebuild_cache.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/Engine/CMakeFiles/Engine.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/Engine/CMakeFiles/edit_cache.dir
-C:/Users/Miso/Documents/software/Evora/Engine/out/build/x64-Debug/Engine/CMakeFiles/rebuild_cache.dir
