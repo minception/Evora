@@ -21,6 +21,8 @@ config/icon="res://icon.png"
 
 [display]
 
+window/size/width=920
+window/size/height=922
 window/size/resizable=false
 
 [layer_names]
