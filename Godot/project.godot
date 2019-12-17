@@ -23,6 +23,11 @@ config/icon="res://icon.png"
 
 window/size/resizable=false
 
+[layer_names]
+
+2d_physics/layer_1="Board"
+2d_physics/layer_2="Pieces"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
