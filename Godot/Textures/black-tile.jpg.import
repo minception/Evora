@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/starting-player-marker.jpg-89f4a412a60bb7fb8d8ba4a5e5b935f3.stex"
+path="res://.import/black-tile.jpg-c3d43477a516a390d46d8d11ca563a71.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://starting-player-marker.jpg"
-dest_files=[ "res://.import/starting-player-marker.jpg-89f4a412a60bb7fb8d8ba4a5e5b935f3.stex" ]
+source_file="res://Textures/black-tile.jpg"
+dest_files=[ "res://.import/black-tile.jpg-c3d43477a516a390d46d8d11ca563a71.stex" ]
 
 [params]
 

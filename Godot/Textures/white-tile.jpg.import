@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/factory.jpg-dcaf7fa3445eafa20652f133145f5bb9.stex"
+path="res://.import/white-tile.jpg-2f9e473bb1893792f128f1710eac6e58.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://factory.jpg"
-dest_files=[ "res://.import/factory.jpg-dcaf7fa3445eafa20652f133145f5bb9.stex" ]
+source_file="res://Textures/white-tile.jpg"
+dest_files=[ "res://.import/white-tile.jpg-2f9e473bb1893792f128f1710eac6e58.stex" ]
 
 [params]
 

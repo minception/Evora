@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/yellow-tile.jpg-2a1ef6c38e748512794b6cb47eb6e839.stex"
+path="res://.import/starting-player-marker.jpg-13767ba466ca6f218e60514d160f1a18.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yellow-tile.jpg"
-dest_files=[ "res://.import/yellow-tile.jpg-2a1ef6c38e748512794b6cb47eb6e839.stex" ]
+source_file="res://Textures/starting-player-marker.jpg"
+dest_files=[ "res://.import/starting-player-marker.jpg-13767ba466ca6f218e60514d160f1a18.stex" ]
 
 [params]
 
