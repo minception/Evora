@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{956D592D-B861-40C9-87D2-0A5CD247FABB}</ProjectGuid>
-    <RootNamespace>Evora</RootNamespace>
+    <ProjectGuid>{08ABD9C5-D1B5-484E-AE7E-8833EBB2B1C6}</ProjectGuid>
+    <RootNamespace>GodotUI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,30 +71,30 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\Godot</OutDir>
+    <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;$(IncludePath)</IncludePath>
+    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;C:\godot3\godotcpp\godot-cpp-master\include\core;$(IncludePath)</IncludePath>
     <LibraryPath>C:\godot3\godotcpp\godot-cpp-master\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\Godot</OutDir>
+    <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;$(IncludePath)</IncludePath>
+    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;C:\godot3\godotcpp\godot-cpp-master\include\core;$(IncludePath)</IncludePath>
     <LibraryPath>C:\godot3\godotcpp\godot-cpp-master\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\Godot</OutDir>
+    <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;$(IncludePath)</IncludePath>
+    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;C:\godot3\godotcpp\godot-cpp-master\include\core;$(IncludePath)</IncludePath>
     <LibraryPath>C:\godot3\godotcpp\godot-cpp-master\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\Godot</OutDir>
+    <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;$(IncludePath)</IncludePath>
+    <IncludePath>C:\godot3\godotcpp\godot-cpp-master\godot_headers;C:\godot3\godotcpp\godot-cpp-master\include;C:\godot3\godotcpp\godot-cpp-master\include\gen;C:\godot3\godotcpp\godot-cpp-master\include\core;$(IncludePath)</IncludePath>
     <LibraryPath>C:\godot3\godotcpp\godot-cpp-master\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -158,11 +158,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Root.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Root.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
