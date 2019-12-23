@@ -15,5 +15,8 @@ namespace engine {
 		const Type GetType() { return m_type; }
 	private:
 		Type m_type;
+	public:
+		Tile();
+		~Tile();
 	};
 }

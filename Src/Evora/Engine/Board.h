@@ -1,6 +1,7 @@
 #pragma once
 
 #include<array>
+#include<map>
 
 #include "Bag.h"
 #include "Factory.h"
@@ -18,5 +19,8 @@ namespace engine {
 		Lid m_lid;
 		std::array<Factory, MAX_FACTORIES> m_factories;
 		std::array<Player, MAX_PLAYERS> m_players;
+	public:
+		Board(int32_t players);
+		~Board();
 	};
 }
