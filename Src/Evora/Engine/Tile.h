@@ -12,11 +12,12 @@ namespace engine {
 	class tile
 	{
 	public:
-		bool IsEmpty() { return m_type == type::empty; }
-		const type GetType() { return m_type; }
+		bool is_empty() const { return m_type == type::empty; }
+		type get_type() const { return m_type; }
+		void set_type(const type type) { m_type = type; }
 	private:
 		type m_type;
 	public:
-		tile(type type);
+		explicit tile(type type);
 	};
 }

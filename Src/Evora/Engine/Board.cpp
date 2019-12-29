@@ -33,4 +33,10 @@ namespace engine {
 			}
 		}
 	}
+
+	void board::get_tiles_factory(size_t factory, type color)
+	{
+		_ASSERT(factory <= m_factories.size(), "trying to access nonexistent factory");
+		
+	}
 }
