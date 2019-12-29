@@ -20,7 +20,10 @@ namespace engine {
 		std::mt19937 m_rng;
 	public:
 		bag(int numberOfTiles = SIZE);
+		bool getTile(tile& out);
 		void generateTiles();
 		void shuffle();
+		bool is_empty() { return m_tiles.empty(); }
+		bool refill(lid lid);
 	};
 }

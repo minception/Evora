@@ -2,6 +2,7 @@
 namespace engine {
 	enum class type {
 		empty = 0,
+		starter,
 		red,
 		yellow,
 		blue,

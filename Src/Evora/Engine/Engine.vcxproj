@@ -140,7 +140,9 @@
   <ItemGroup>
     <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Center.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Lid.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -148,7 +150,9 @@
   <ItemGroup>
     <ClInclude Include="Bag.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Center.h" />
     <ClInclude Include="Factory.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Lid.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tile.h" />

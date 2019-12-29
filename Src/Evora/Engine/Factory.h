@@ -3,6 +3,7 @@
 #include<vector>
 
 #include "Tile.h"
+#include "Bag.h"
 
 namespace engine {
 	class factory
@@ -12,5 +13,7 @@ namespace engine {
 		std::vector<tile> m_tiles;
 	public:
 		factory();
+		// Fill the factory from the bag
+		bool fill(bag bag);
 	};
 }

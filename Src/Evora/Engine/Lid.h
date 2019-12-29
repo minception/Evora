@@ -12,5 +12,8 @@ namespace engine {
 		std::vector<tile> m_tiles;
 	public:
 		lid();
+
+		bool is_empty() const { return m_tiles.empty(); }
+		bool get_tile(tile& out);
 	};
 }

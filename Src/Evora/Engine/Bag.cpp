@@ -8,6 +8,18 @@ namespace engine {
 		std::random_device seed;
 		m_rng = std::default_random_engine{ seed() };
 	}
+
+	bool bag::getTile(tile& out)
+	{
+		if(m_tiles.empty())
+		{
+			return false;
+		}
+		out = m_tiles.back();
+		m_tiles.pop_back();
+		return true;
+	}
+
 	void bag::generateTiles()
 	{
 		for (size_t i = 0; i < RED_TILES; i++)
@@ -34,5 +46,19 @@ namespace engine {
 	void bag::shuffle()
 	{
 		std::shuffle(m_tiles.begin(), m_tiles.end(), m_rng);
+	}
+
+	bool bag::refill(lid lid)
+	{
+		if(lid.is_empty())
+		{
+			return false;
+		}
+		tile temp(type::empty);
+		while(lid.get_tile(temp))
+		{
+			m_tiles.push_back(temp);
+		}
+		return true;
 	}
 }

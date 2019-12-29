@@ -22,5 +22,6 @@ namespace engine {
 	public:
 		board(int32_t players);
 		void start_game();
+		void fill_factories();
 	};
 }
