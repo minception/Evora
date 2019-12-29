@@ -6,7 +6,8 @@
 
 int main()
 {
-    engine::Board board(2);
+    engine::board board(2);
+    board.start_game();
     std::cout << "Hello World!\n";
 }
 

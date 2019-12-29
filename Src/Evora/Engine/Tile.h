@@ -1,22 +1,21 @@
 #pragma once
 namespace engine {
-	class Tile
+	enum class type {
+		empty = 0,
+		red,
+		yellow,
+		blue,
+		white,
+		black
+	};
+	class tile
 	{
 	public:
-		enum class Type {
-			empty = 0,
-			red,
-			yellow,
-			blue,
-			white,
-			black
-		};
-		bool IsEmpty() { return m_type == Type::empty; }
-		const Type GetType() { return m_type; }
+		bool IsEmpty() { return m_type == type::empty; }
+		const type GetType() { return m_type; }
 	private:
-		Type m_type;
+		type m_type;
 	public:
-		Tile();
-		~Tile();
+		tile(type type);
 	};
 }

@@ -1,9 +1,6 @@
 #include "Tile.h"
+
 namespace engine {
-	Tile::Tile()
-	{
-	}
-	Tile::~Tile()
-	{
-	}
+	tile::tile(type type): m_type(type)
+	{}
 }

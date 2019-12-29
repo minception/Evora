@@ -1,9 +1,11 @@
 #include "Factory.h"
+
 namespace engine {
-	Factory::Factory()
+	factory::factory()
 	{
-	}
-	Factory::~Factory()
-	{
+		for (size_t i = 0; i < MAX_TILES; ++i)
+		{
+			m_tiles.emplace_back(type::empty);
+		}
 	}
 }

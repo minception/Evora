@@ -1,17 +1,16 @@
 #pragma once
 
-#include<array>
+#include<vector>
 
 #include "Tile.h"
 
 namespace engine {
-	class Lid
+	class lid
 	{
 	private:
 		static const uint32_t MAX_TILES = 100;
-		std::array<Tile, MAX_TILES> m_tiles;
+		std::vector<tile> m_tiles;
 	public:
-		Lid();
-		~Lid();
+		lid();
 	};
 }

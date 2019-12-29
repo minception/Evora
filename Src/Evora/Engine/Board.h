@@ -1,6 +1,6 @@
 #pragma once
 
-#include<array>
+#include<vector>
 #include<map>
 
 #include "Bag.h"
@@ -10,17 +10,17 @@
 #include "Tile.h"
 
 namespace engine {
-	class Board
+	class board
 	{
 	private:
 		static const int32_t MAX_PLAYERS = 4;
 		static const int32_t MAX_FACTORIES = 9;
-		Bag m_bag;
-		Lid m_lid;
-		std::array<Factory, MAX_FACTORIES> m_factories;
-		std::array<Player, MAX_PLAYERS> m_players;
+		bag m_bag;
+		lid m_lid;
+		std::vector<factory> m_factories;
+		std::vector<player> m_players;
 	public:
-		Board(int32_t players);
-		~Board();
+		board(int32_t players);
+		void start_game();
 	};
 }

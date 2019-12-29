@@ -1,12 +1,18 @@
 #include "Board.h"
+
 namespace engine {
-	Board::Board(int32_t players)
+	board::board(int32_t players)
 	{
 		int numberOfFactories = players * 2 + 1;
 		for (size_t i = 0; i < numberOfFactories; i++)
 		{
-			m_factories[i] = Factory();
+			m_factories[i] = factory();
 		}
 	}
-	Board::~Board() {}
+
+	void board::start_game()
+	{
+		m_bag.generateTiles();
+		m_bag.shuffle();
+	}
 }
