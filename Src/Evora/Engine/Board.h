@@ -11,6 +11,8 @@
 #include "Center.h"
 
 namespace engine {
+	using factories_iterator = std::vector<factory>::const_iterator;
+	using players_iterator = std::vector<player>::const_iterator;
 	class board
 	{
 	private:
@@ -26,5 +28,9 @@ namespace engine {
 		void start_game();
 		void fill_factories();
 		void get_tiles_factory(size_t factory, type color);
+		factories_iterator factories_begin() const;
+		factories_iterator factories_end() const;
+		players_iterator players_begin() const;
+		players_iterator players_end() const;
 	};
 }

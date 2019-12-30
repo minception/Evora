@@ -3,10 +3,10 @@
 namespace engine {
 	board::board(int32_t players)
 	{
-		const size_t numberOfFactories = players * 2 + 1;
+		const size_t numberOfFactories = 2 * players + 1;
 		for (size_t i = 0; i < numberOfFactories; i++)
 		{
-			m_factories[i] = factory();
+			m_factories.emplace_back();
 		}
 	}
 
@@ -38,5 +38,25 @@ namespace engine {
 	{
 		_ASSERT(factory <= m_factories.size(), "trying to access nonexistent factory");
 		
+	}
+
+	factories_iterator board::factories_begin() const
+	{
+		return m_factories.cbegin();
+	}
+
+	factories_iterator board::factories_end() const
+	{
+		return  m_factories.cend();
+	}
+
+	players_iterator board::players_begin() const
+	{
+		return m_players.cbegin();
+	}
+
+	players_iterator board::players_end() const
+	{
+		return m_players.cend();
 	}
 }

@@ -7,6 +7,7 @@
 #include "Center.h"
 
 namespace engine {
+	using factory_iterator = std::vector<tile>::const_iterator;
 	class factory
 	{
 	private:
@@ -15,8 +16,10 @@ namespace engine {
 	public:
 		factory();;
 		// Fill the factory from the bag
-		bool fill(bag bag);
+		bool fill(bag& bag);
 		int get_tiles_of_color(type color);
 		void empty_to_center(center& center);
+		factory_iterator begin() const;
+		factory_iterator end() const;
 	};
 }

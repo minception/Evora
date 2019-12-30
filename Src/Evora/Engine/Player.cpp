@@ -28,4 +28,34 @@ namespace engine {
 			m_floor.emplace_back(type::empty);
 		}
 	}
+
+	matrix_line_iterator player::wall_begin() const
+	{
+		return m_wall.cbegin();
+	}
+
+	matrix_line_iterator player::wall_end() const
+	{
+		return m_wall.cend();
+	}
+
+	matrix_line_iterator player::pattern_lines_begin() const
+	{
+		return m_patternLine.cbegin();
+	}
+
+	matrix_line_iterator player::pattern_lines_end() const
+	{
+		return m_patternLine.cend();
+	}
+
+	floor_iterator player::floor_begin() const
+	{
+		return m_floor.cbegin();
+	}
+
+	floor_iterator player::floor_end() const
+	{
+		return m_floor.cend();
+	}
 }

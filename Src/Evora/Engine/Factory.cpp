@@ -9,7 +9,7 @@ namespace engine {
 		}
 	}
 
-	bool factory::fill(bag bag)
+	bool factory::fill(bag& bag)
 	{
 		tile temp(type::empty);
 		for (size_t i = 0; i < m_tiles.size(); i++)  // NOLINT(modernize-loop-convert)
@@ -50,7 +50,17 @@ namespace engine {
 		{
 			if (tile.is_empty()) continue;
 			center.add_tile(tile.get_type());
-			tile.set_type(type::empty);
+			tile.set_type(type::empty); 
 		}
+	}
+
+	factory_iterator factory::begin() const
+	{
+		return m_tiles.cbegin();
+	}
+
+	factory_iterator factory::end() const
+	{
+		return m_tiles.cend();
 	}
 }

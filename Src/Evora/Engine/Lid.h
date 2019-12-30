@@ -5,6 +5,7 @@
 #include "Tile.h"
 
 namespace engine {
+	using lid_iterator = std::vector<tile>::const_iterator;
 	class lid
 	{
 	private:

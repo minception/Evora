@@ -6,6 +6,8 @@
 #include "Tile.h"
 
 namespace engine {
+	using matrix_line_iterator = std::vector<std::vector<tile>>::const_iterator;
+	using floor_iterator = std::vector<tile>::const_iterator;
 	class player
 	{
 	private:
@@ -19,5 +21,11 @@ namespace engine {
 		int32_t m_score = 0;
 	public:
 		player();
+		matrix_line_iterator wall_begin() const;
+		matrix_line_iterator wall_end() const;
+		matrix_line_iterator pattern_lines_begin() const;
+		matrix_line_iterator pattern_lines_end() const;
+		floor_iterator floor_begin() const;
+		floor_iterator floor_end() const;
 	};
 }
