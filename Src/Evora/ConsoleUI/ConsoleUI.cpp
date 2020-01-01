@@ -4,10 +4,11 @@
 #include <iostream>
 #include "Board.h"
 
-int main()
+
+int main(int argc, const char** argv)
 {
     engine::board board(2);
     board.start_game();
-    std::cout << "Hello World!\n";
+    return 0;
 }
 
