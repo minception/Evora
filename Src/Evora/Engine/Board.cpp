@@ -59,4 +59,14 @@ namespace engine {
 	{
 		return m_players.cend();
 	}
+
+	factory board::get_factory(size_t index)
+	{
+		return m_factories[index];
+	}
+
+	player board::get_player(size_t index)
+	{
+		return m_players[index];
+	}
 }

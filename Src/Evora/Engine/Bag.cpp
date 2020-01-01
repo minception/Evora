@@ -9,13 +9,13 @@ namespace engine {
 		m_rng = std::default_random_engine{ seed() };
 	}
 
-	bool bag::getTile(tile& out)
+	bool bag::getTile(tile out)
 	{
 		if(m_tiles.empty())
 		{
 			return false;
 		}
-		out = m_tiles.back();
+		out = std::move(m_tiles.back());
 		m_tiles.pop_back();
 		return true;
 	}

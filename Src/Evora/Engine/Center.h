@@ -14,7 +14,8 @@ namespace engine
 	public:
 		void add_tile(type color);
 		std::tuple<bool, int> get_tiles_of_color(type color);
-		center_iterator begin();
-		center_iterator end();
+		center_iterator begin() const;
+		center_iterator end() const;
+		tile operator[](size_t i) const;
 	};
 }

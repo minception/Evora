@@ -16,5 +16,6 @@ namespace engine {
 
 		bool is_empty() const { return m_tiles.empty(); }
 		bool get_tile(tile& out);
+		void add_tile(type color);
 	};
 }

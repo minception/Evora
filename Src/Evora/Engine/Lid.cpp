@@ -15,4 +15,9 @@ namespace engine {
 		m_tiles.pop_back();
 		return true;
 	}
+
+	void lid::add_tile(type color)
+	{
+		m_tiles.emplace_back(color);
+	}
 }

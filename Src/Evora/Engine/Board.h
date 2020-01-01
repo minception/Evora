@@ -32,5 +32,7 @@ namespace engine {
 		factories_iterator factories_end() const;
 		players_iterator players_begin() const;
 		players_iterator players_end() const;
+		factory get_factory(size_t index);
+		player get_player(size_t index);
 	};
 }

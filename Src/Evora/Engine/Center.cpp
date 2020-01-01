@@ -28,4 +28,19 @@ namespace engine
 		}
 		return { false, res };
 	}
+
+	center_iterator center::begin() const
+	{
+		return m_tiles.cbegin();
+	}
+
+	center_iterator center::end() const
+	{
+		return m_tiles.cend();
+	}
+
+	tile center::operator[](size_t i) const
+	{
+		return m_tiles[i];
+	}
 }

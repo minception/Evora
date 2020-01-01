@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 namespace engine {
 	enum class type {
 		empty = 0,
@@ -9,6 +10,7 @@ namespace engine {
 		white,
 		black
 	};
+	
 	class tile
 	{
 	public:
