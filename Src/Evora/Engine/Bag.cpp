@@ -9,15 +9,20 @@ namespace engine {
 		m_rng = std::default_random_engine{ seed() };
 	}
 
-	bool bag::getTile(tile out)
+	bool bag::get_tile(type& out)
 	{
-		if(m_tiles.empty())
+		if (m_tiles.empty())
 		{
 			return false;
 		}
-		out = std::move(m_tiles.back());
+		out = m_tiles
 		m_tiles.pop_back();
 		return true;
+	}
+
+	bool bag::getTile(tile out)
+	{
+		
 	}
 
 	void bag::generateTiles()

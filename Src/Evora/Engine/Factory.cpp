@@ -18,7 +18,7 @@ namespace engine {
 			{
 				continue;
 			}
-			if(bag.getTile(temp))
+			if(bag.get_tile(temp))
 			{
 				m_tiles[i] = temp;
 			}

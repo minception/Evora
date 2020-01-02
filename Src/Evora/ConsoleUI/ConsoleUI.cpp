@@ -1,4 +1,4 @@
-// ConsoleUI is a testing enviroment for the engine
+// ConsoleUI is a testing environment for the engine
 //
 
 #include <iostream>

@@ -12,7 +12,7 @@ namespace engine {
 				return i;
 			}
 		}
-		return -1;
+		return m_patternLine[patternLine].size();
 	}
 
 	player::player()
@@ -87,13 +87,30 @@ namespace engine {
 		return false;
 	}
 
-	bool player::put_to_pattern_line(size_t patternLine, type color, size_t count)
+	void player::put_to_floor(type type, size_t count, lid& lid)
+	{
+		for (size_t i = 0; i < count; i++)
+		{
+			// Overflow from the pattern line falls to the floor
+			if (!put_to_floor(type))
+			{
+				// Overflow from the floor goes to the lid
+				for (size_t k = j; k < count; k++)
+				{
+					lid.add_tile(color);
+				}
+				break;
+			}
+		}
+	}
+
+	bool player::put_to_pattern_line(size_t patternLine, type color, size_t count, lid& lid)
 	{
 		if(m_patternLine[patternLine].front().get_type() == type::empty
 			|| m_patternLine[patternLine].front().get_type() == color)
 		{
 			const int first_empty_index = first_empty_spot(patternLine);
-			if(first_empty_index == -1)
+			if(first_empty_index < m_patternLine[patternLine].size())
 			{
 				return false;
 			}
@@ -103,8 +120,16 @@ namespace engine {
 				{
 					for (size_t j = i; j < count; j++)
 					{
-						put_to_floor(color);
-						// TODO: if this returns false, throw the remaining stones to the lid
+						// Overflow from the pattern line falls to the floor
+						if(!put_to_floor(color))
+						{
+							// Overflow from the floor goes to the lid
+							for (size_t k = j; k < count; k++)
+							{
+								lid.add_tile(color);
+							}
+							break;
+						}
 					}
 					break;
 				}

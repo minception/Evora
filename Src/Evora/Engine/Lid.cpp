@@ -16,8 +16,8 @@ namespace engine {
 		return true;
 	}
 
-	void lid::add_tile(type color)
+	void lid::add_tile(type type)
 	{
-		m_tiles.emplace_back(color);
+		m_tiles.emplace_back(type);
 	}
 }
