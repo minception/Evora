@@ -139,20 +139,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="bag.h" />
-    <ClInclude Include="board.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="center.h" />
     <ClInclude Include="factory.h" />
     <ClInclude Include="lid.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="board.h" />
     <ClInclude Include="tile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bag.cpp" />
-    <ClCompile Include="board.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="center.cpp" />
     <ClCompile Include="factory.cpp" />
     <ClCompile Include="lid.cpp" />
-    <ClCompile Include="player.cpp" />
+    <ClCompile Include="board.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

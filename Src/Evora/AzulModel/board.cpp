@@ -1,14 +1,23 @@
-﻿#include "board.h"
-
-model::board::board(int number_of_players)
+﻿#include "player.h"
+namespace model
 {
-	int number_of_factories = number_of_players * 2 + 1;
-	for (int i = 0; i < number_of_factories; i++)
+	player::player()
 	{
-		m_factories.emplace_back();
-	}
-	for (int i = 0; i < number_of_players; i++)
-	{
-		m_players.emplace_back();
+		for (int i = 0; i < COLORS; i++)
+		{
+			m_wall.emplace_back();
+			for (int j = 0; j < COLORS; j++)
+			{
+				m_wall[i].emplace_back(empty);
+			}
+		}
+		for (int i = 0; i < COLORS; i++)
+		{
+			m_pattern_lines.emplace_back();
+			for (int j = 0; j <= i; j++)
+			{
+				m_pattern_lines[i].emplace_back(empty);
+			}
+		}
 	}
 }

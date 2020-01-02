@@ -1,21 +1,16 @@
 ﻿#pragma once
-
-#include "bag.h"
-#include "center.h"
-#include "factory.h"
-#include "lid.h"
-#include "player.h"
+#include <vector>
+#include "tile.h"
 
 namespace model
 {
-	class board
+	class player
 	{
-		bag m_bag;
-		center m_center;
-		std::vector<factory> m_factories;
-		lid m_lid;
-		std::vector<player> m_players;
+		int m_score{0};
+		std::vector<std::vector<tile>> m_pattern_lines;
+		std::vector<std::vector<tile>> m_wall;
+		std::vector<tile> m_floor;
 	public:
-		board(int number_of_players);
+		player();
 	};
 }
