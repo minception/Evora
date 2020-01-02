@@ -16,6 +16,6 @@ namespace model
 		lid m_lid;
 		std::vector<player> m_players;
 	public:
-	
+		board(int number_of_players);
 	};
 }
