@@ -2,7 +2,7 @@
 namespace model
 {
 	static const int COLORS = 5;
-	enum tile
+	enum class tile
 	{
 		empty = 0,
 		starter,

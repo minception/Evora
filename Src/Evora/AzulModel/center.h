@@ -8,6 +8,6 @@ namespace model
 	{
 		std::vector<tile> m_tiles;
 	public:
-	
+		void add_tile(tile type);
 	};
 }

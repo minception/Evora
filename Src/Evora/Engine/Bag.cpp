@@ -15,14 +15,9 @@ namespace engine {
 		{
 			return false;
 		}
-		out = m_tiles
+		out = m_tiles.back().get_type();
 		m_tiles.pop_back();
 		return true;
-	}
-
-	bool bag::getTile(tile out)
-	{
-		
 	}
 
 	void bag::generateTiles()

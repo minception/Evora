@@ -95,9 +95,9 @@ namespace engine {
 			if (!put_to_floor(type))
 			{
 				// Overflow from the floor goes to the lid
-				for (size_t k = j; k < count; k++)
+				for (size_t k = 0; k < count; k++)
 				{
-					lid.add_tile(color);
+					lid.add_tile(type);
 				}
 				break;
 			}
