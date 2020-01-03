@@ -1,16 +1,19 @@
 ﻿#pragma once
 #include <vector>
-#include "tile.h"
+#include "floor.h"
+#include "pattern_line.h"
+#include "wall.h"
+#include <map>
 
 namespace model
 {
 	class board
 	{
-		static const int FLOOR_SIZE = 7;
+		bool starts;
 		int m_score{0};
-		std::vector<std::vector<tile>> m_pattern_lines;
-		std::vector<std::vector<tile>> m_wall;
-		std::vector<tile> m_floor;
+		std::vector<pattern_line> m_pattern_lines;
+		wall m_wall;
+		floor m_floor;
 	public:
 		board();
 	};
