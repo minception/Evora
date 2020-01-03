@@ -14,7 +14,11 @@ namespace model
 		std::vector<pattern_line> m_pattern_lines;
 		wall m_wall;
 		floor m_floor;
+		int tile_wall(int line);
 	public:
 		board();
+		bool can_put_color(int line, tile color);
+		bool add_tiles(int line, int count, tile color, lid& lid);
+		void tile_wall(lid& lid);
 	};
 }

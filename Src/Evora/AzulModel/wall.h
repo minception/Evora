@@ -14,9 +14,14 @@ namespace model
 		int score(int x, int y);
 		int horizontal_score(int x, int y);
 		int vertical_score(int x, int y);
+		int count_finished_lines();
+		int count_finished_columns();
+		int count_finished_colors();
+		
 	public:
 		wall();
 		bool can_add_color(int line, tile color);
 		int tile(pattern_line& pattern_line, int line, lid& lid);
+		int final_score();
 	};
 }

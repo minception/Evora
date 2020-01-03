@@ -16,5 +16,6 @@ namespace model
 		bool add_tiles(int count, tile color, floor& floor, lid& lid);
 		void clear(lid& lid);
 		tile get_color() const { return m_color; };
+		bool can_put_color(tile color) const;
 	};
 }

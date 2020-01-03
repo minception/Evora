@@ -17,5 +17,7 @@ namespace model
 		std::vector<board> m_players;
 	public:
 		game(int number_of_players);
+		bool factory_offer(int player, int factory, tile color, int line);
+		void tile_walls();
 	};
 }

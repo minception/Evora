@@ -23,19 +23,19 @@ namespace model
 
 	int wall::horizontal_score(int x, int y)
 	{
-		int first = x;
-		int last = x;
-		while (first > 0 && m_tiles[y][first - 1] != tile::empty) first--;
-		while (last < COLORS - 1 && m_tiles[y][last + 1] != tile::empty) last++;
+		long first = x;
+		long last = x;
+		while (first > 0 && m_tiles[y][first - 1l] != tile::empty) first--;
+		while (last < COLORS - 1 && m_tiles[y][last + 1l] != tile::empty) last++;
 		return last - first + 1;
 	}
 
 	int wall::vertical_score(int x, int y)
 	{
-		int first = y;
-		int last = y;
-		while (first > 0 && m_tiles[first - 1][x] != tile::empty) first--;
-		while (last < COLORS - 1 && m_tiles[last + 1][x] != tile::empty) last++;
+		long first = y;
+		long last = y;
+		while (first > 0 && m_tiles[first - 1l][x] != tile::empty) first--;
+		while (last < COLORS - 1 && m_tiles[last + 1l][x] != tile::empty) last++;
 		return last - first + 1;
 	}
 
@@ -62,5 +62,66 @@ namespace model
 		m_tiles[line][x] = pattern_line.get_color();
 		pattern_line.clear(lid);
 		return score(x, line);
+	}
+
+	int wall::count_finished_lines()
+	{
+		int result(0);
+		for (int i = 0; i < COLORS; i++)
+		{
+			for (int j = 0; j < COLORS; j++)
+			{
+				if (m_tiles[i][j] == tile::empty)
+				{
+					break;
+				}
+				if (j == COLORS - 1) ++result;
+			}
+		}
+		return result;
+	}
+
+	int wall::count_finished_columns()
+	{
+		int result(0);
+		for (int i = 0; i < COLORS; i++)
+		{
+			for (int j = 0; j < COLORS; j++)
+			{
+				if (m_tiles[j][i] == tile::empty)
+				{
+					break;
+				}
+				if (j == COLORS - 1) ++result;
+			}
+		}
+		return result;
+	}
+
+	int wall::count_finished_colors()
+	{
+		std::map<model::tile, int> colorcount;
+		for (int i = 0; i < COLORS; i++)
+		{
+			for (int j = 0; j < COLORS; j++)
+			{
+				if (m_tiles[i][j] != tile::empty)
+				{
+					++colorcount.at(m_tiles[i][j]);
+				}
+			}
+		}
+		int result(0);
+		for (auto && color : colorcount)
+		{
+			if (color.second == COLORS) ++result;
+		}
+		return result;
+	}
+
+	int wall::final_score()
+	{
+		return count_finished_lines() * 2 + count_finished_columns() * 7 + count_finished_colors() * 10;
+		
 	}
 }

@@ -4,12 +4,12 @@ namespace model
 	static const int COLORS = 5;
 	enum class tile
 	{
-		empty = 0,
-		starter,
-		red,
+		blue = 0,
 		yellow,
-		blue,
+		red,
+		black,
 		white,
-		black
+		empty,
+		starter
 	};
 }

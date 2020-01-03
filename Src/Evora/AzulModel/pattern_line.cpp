@@ -24,4 +24,9 @@ namespace model
 		m_count = 0;
 		m_color = tile::empty;
 	}
+
+	bool pattern_line::can_put_color(tile color) const
+	{
+		return !is_full() && (m_color == tile::empty || m_color == color);
+	}
 }
