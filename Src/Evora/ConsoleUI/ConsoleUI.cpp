@@ -2,13 +2,12 @@
 //
 
 #include <iostream>
-#include "Board.h"
+#include "game.h"
 
 
 int main(int argc, const char** argv)
 {
-    engine::board board(2);
-    board.start_game();
+    model::game game(2);
     return 0;
 }
 
