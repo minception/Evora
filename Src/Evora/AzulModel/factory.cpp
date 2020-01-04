@@ -23,15 +23,17 @@ namespace model
 		return res;
 	}
 
-	int factory::pick_color(tile color, center& center)
+	void factory::pick_color(tile color, center& center)
 	{
-		int res(0);
 		for (auto && tile : m_tiles)
 		{
-			if (tile == color) ++res;
-			else center.add_tile(tile);
+			if (tile != color) center.add_tile(tile);
 		}
 		m_tiles.clear();
-		return res;
+	}
+
+	bool factory::empty()
+	{
+		return m_tiles.empty();
 	}
 }

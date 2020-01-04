@@ -124,4 +124,13 @@ namespace model
 		return count_finished_lines() * 2 + count_finished_columns() * 7 + count_finished_colors() * 10;
 		
 	}
+
+	bool wall::full_line(int line)
+	{
+		for (int i = 0; i < COLORS; ++i)
+		{
+			if (m_tiles[line][i] == tile::empty) return false;
+		}
+		return true;
+	}
 }

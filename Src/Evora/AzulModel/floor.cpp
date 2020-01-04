@@ -30,4 +30,14 @@ namespace model
 		m_tiles.clear();
 		return res;
 	}
+
+	int floor::score() const
+	{
+		int res = 0;
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			res += FLOOR_SCORE[i];
+		}
+		return res;
+	}
 }

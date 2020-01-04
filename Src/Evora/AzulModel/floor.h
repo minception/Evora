@@ -13,6 +13,8 @@ namespace model
 	public:
 		void add_tiles(tile type, int count, lid& lid);
 		bool empty(lid& lid);
+		bool is_full() const { return m_tiles.size() == FLOOR_SIZE; }
+		int score() const;
 	};
 	
 }

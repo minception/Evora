@@ -18,7 +18,8 @@ namespace model
 	public:
 		board();
 		bool can_put_color(int line, tile color);
-		bool add_tiles(int line, int count, tile color, lid& lid);
-		void tile_wall(lid& lid);
+		bool add_tiles(int line, int count, tile color, lid& lid, bool first_center = false);
+		bool tile_wall(lid& lid);
+		int get_score() const;
 	};
 }

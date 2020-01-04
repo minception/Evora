@@ -18,6 +18,10 @@ namespace model
 	public:
 		game(int number_of_players);
 		bool factory_offer(int player, int factory, tile color, int line);
-		void tile_walls();
+		bool center_offer(int player, tile color, int line);
+		bool tile_walls();
+		int get_winner();
+		bool factories_empty();
+		bool center_empty() const;
 	};
 }

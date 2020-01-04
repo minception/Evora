@@ -7,15 +7,18 @@ namespace model
 		return m_count == m_size;
 	}
 
-	bool pattern_line::add_tiles(int count, tile color, floor& floor, lid& lid)
+	bool pattern_line::add_tiles(int count, tile color, floor& floor, lid& lid, bool first_center)
 	{
 		if (m_color != tile::empty || m_color != color || is_full()) return false;
 		m_count += count;
+		// when taking a first tile from the center also add a starter tile to the floor
+		if (first_center && !floor.is_full()) floor.add_tiles(tile::starter, 1, lid);
 		if(m_count > m_size)
 		{
 			floor.add_tiles(color, m_count - m_size, lid);
 			m_count = m_size;
 		}
+		return true;
 	}
 
 	void pattern_line::clear(lid& lid)
