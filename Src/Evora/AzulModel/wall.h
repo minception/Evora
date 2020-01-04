@@ -21,7 +21,7 @@ namespace model
 	public:
 		wall();
 		bool can_add_color(int line, tile color);
-		int tile(pattern_line& pattern_line, int line, lid& lid);
+		int tile_wall(pattern_line& pattern_line, int line, lid& lid);
 		int final_score();
 		bool full_line(int line);
 	};

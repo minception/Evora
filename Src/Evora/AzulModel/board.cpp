@@ -28,7 +28,7 @@ namespace model
 		int line(0);
 		for (auto && pattern_line : m_pattern_lines)
 		{
-			m_score += m_wall.tile(pattern_line, line, lid);
+			m_score += m_wall.tile_wall(pattern_line, line, lid);
 			if (m_wall.full_line(line)) res = true;
 			++line;
 		}

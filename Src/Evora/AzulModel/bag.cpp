@@ -15,7 +15,7 @@ namespace model
 	bag::bag()
 	{
 		std::random_device seed;
-		m_rng = std::default_random_engine{ seed() };
+		m_rng = std::mt19937{ seed() };
 		generate_tiles(TILES / COLORS, tile::red);
 		generate_tiles(TILES / COLORS, tile::yellow);
 		generate_tiles(TILES / COLORS, tile::blue);

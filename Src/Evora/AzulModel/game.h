@@ -15,6 +15,7 @@ namespace model
 		std::vector<factory> m_factories;
 		lid m_lid;
 		std::vector<board> m_players;
+		int m_current_player;
 	public:
 		game(int number_of_players);
 		bool factory_offer(int player, int factory, tile color, int line);

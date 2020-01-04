@@ -56,7 +56,7 @@ namespace model
 		return m_tiles[line][WALL_COLORS[line].at(color)] == tile::empty;
 	}
 
-	int wall::tile(pattern_line& pattern_line, int line, lid& lid)
+	int wall::tile_wall(pattern_line& pattern_line, int line, lid& lid)
 	{
 		int x = WALL_COLORS[line].at(pattern_line.get_color());
 		m_tiles[line][x] = pattern_line.get_color();

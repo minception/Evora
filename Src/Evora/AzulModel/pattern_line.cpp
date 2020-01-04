@@ -11,7 +11,7 @@ namespace model
 	{
 		if (m_color != tile::empty || m_color != color || is_full()) return false;
 		m_count += count;
-		// when taking a first tile from the center also add a starter tile to the floor
+		// when taking a first tile_wall from the center also add a starter tile_wall to the floor
 		if (first_center && !floor.is_full()) floor.add_tiles(tile::starter, 1, lid);
 		if(m_count > m_size)
 		{
@@ -23,7 +23,7 @@ namespace model
 
 	void pattern_line::clear(lid& lid)
 	{
-		lid.add_tiles(m_color, m_size - 1); // one tile goes to wall
+		lid.add_tiles(m_color, m_size - 1); // one tile_wall goes to wall
 		m_count = 0;
 		m_color = tile::empty;
 	}

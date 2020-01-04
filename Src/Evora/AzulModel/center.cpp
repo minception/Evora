@@ -1,4 +1,5 @@
 ﻿#include "center.h"
+#include <algorithm>
 
 namespace model
 {

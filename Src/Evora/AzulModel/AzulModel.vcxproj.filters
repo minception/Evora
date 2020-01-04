@@ -75,4 +75,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile" />
+  </ItemGroup>
 </Project>
