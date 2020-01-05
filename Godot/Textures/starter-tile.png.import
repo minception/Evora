@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/starting-player-marker.jpg-13767ba466ca6f218e60514d160f1a18.stex"
+path="res://.import/starter-tile.png-962fd1e4229d9571f3954011c8917db9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/starting-player-marker.jpg"
-dest_files=[ "res://.import/starting-player-marker.jpg-13767ba466ca6f218e60514d160f1a18.stex" ]
+source_file="res://Textures/starter-tile.png"
+dest_files=[ "res://.import/starter-tile.png-962fd1e4229d9571f3954011c8917db9.stex" ]
 
 [params]
 
