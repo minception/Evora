@@ -1,11 +1,11 @@
 #pragma once
 
 #include <core/Godot.hpp>
-#include <KinematicBody2D.hpp>
+#include <TextureRect.hpp>
 
 namespace godot {
-	class Board : public KinematicBody2D {
-		GODOT_CLASS(Board, KinematicBody2D)
+	class Board : public TextureRect {
+		GODOT_CLASS(Board, TextureRect)
 	private:
 	public:
 		static void _register_methods();

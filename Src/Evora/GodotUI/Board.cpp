@@ -4,7 +4,6 @@ using namespace godot;
 
 void Board::_register_methods() {
 	register_method("_process", &Board::_process);
-
 }
 
 void godot::Board::_init()
