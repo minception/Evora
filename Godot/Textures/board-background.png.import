@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blue-tile.jpg-bb4c24ec71a77a5333b2998cce171436.stex"
+path="res://.import/board-background.png-3f4b05682078610429796f63e3815b31.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/blue-tile.jpg"
-dest_files=[ "res://.import/blue-tile.jpg-bb4c24ec71a77a5333b2998cce171436.stex" ]
+source_file="res://Textures/board-background.png"
+dest_files=[ "res://.import/board-background.png-3f4b05682078610429796f63e3815b31.stex" ]
 
 [params]
 

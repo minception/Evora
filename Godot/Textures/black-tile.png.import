@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/points-marker.png-bd1d5ab9c516297540430e216da09010.stex"
+path="res://.import/black-tile.png-04e7779df07fa28427df4979ddc88023.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/points-marker.png"
-dest_files=[ "res://.import/points-marker.png-bd1d5ab9c516297540430e216da09010.stex" ]
+source_file="res://Textures/black-tile.png"
+dest_files=[ "res://.import/black-tile.png-04e7779df07fa28427df4979ddc88023.stex" ]
 
 [params]
 
