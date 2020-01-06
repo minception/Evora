@@ -3,6 +3,6 @@
 [ext_resource path="res://GodotUI-Debug.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "Tile"
-class_name = "Tile"
+resource_name = "TileLoader"
+class_name = "TileLoader"
 library = ExtResource( 1 )
