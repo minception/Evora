@@ -350,3 +350,6 @@ data_*/
 
 # Testing environment
 Src/Evora/Testing/
+/Godot/*.dll
+/Godot/*.exp
+/Godot/*.lib
