@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "TileLoader.h"
+#include "Tile.h"
 
 using namespace godot;
 
@@ -15,4 +16,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	Godot::nativescript_init(handle);
 	register_class<Board>();
 	register_class<TileLoader>();
+	register_class<Tile>();
 }

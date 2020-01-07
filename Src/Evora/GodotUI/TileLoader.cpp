@@ -13,7 +13,7 @@ void TileLoader::_ready()
 {
 	Node2D* n = (Node2D*)tileScene->instance();
 	Sprite* sprite = (Sprite*)n->get_child(0)->get_child(0);
-	sprite->set_texture(blackTexture);
+	sprite->set_texture(blueTexture);
 	n->set_position(Vector2(128.f, 128.f));
 	n->set_scale(Vector2(0.2f, 0.2f));
 	add_child(n);
