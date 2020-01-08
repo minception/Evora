@@ -13,7 +13,7 @@ namespace godot
 	{
 		GODOT_CLASS(Tile, Node2D)
 		int _enter_count = 0;
-		bool _holding = false;
+		bool _holding;
 		Label* _label;
 		Input* _input;
 	public:
@@ -21,6 +21,7 @@ namespace godot
 		void _init();
 		void _process(float delta);
 		void _on_mouse_entered();
+		void _on_mouse_exited();
 		void _area_input_event();
 		Tile();
 	};

@@ -13,6 +13,16 @@ namespace model
 		return m_tiles.empty();
 	}
 
+	int center::offer(tile color)
+	{
+		int res = 0;
+		for (auto && tile : m_tiles)
+		{
+			if (tile == color) ++res;
+		}
+		return res;
+	}
+
 	int center::offer(tile color, bool& first)
 	{
 		int res = 0;

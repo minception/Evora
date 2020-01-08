@@ -4,7 +4,7 @@ namespace model
 {
 	game::game(int number_of_players)
 	{
-		int number_of_factories = number_of_players * 2 + 1;
+		const int number_of_factories = number_of_players * 2 + 1;
 		for (int i = 0; i < number_of_factories; i++)
 		{
 			m_factories.emplace_back();
@@ -13,6 +13,20 @@ namespace model
 		{
 			m_players.emplace_back();
 		}
+	}
+
+	bool game::can_factory_offer(int player, int factory, tile color, int line)
+	{
+		int count = m_factories[factory].offer(color);
+		if (count > 0 && m_players[player].can_put_color(line, color)) return true;
+		return false;
+	}
+
+	bool game::can_center_offer(int player, tile color, int line)
+	{
+		int count = m_center.offer(color);
+		if (count > 0 && m_players[player].can_put_color(line, color)) return true;
+		return false;
 	}
 
 	bool game::factory_offer(int player, int factory, tile color, int line)
@@ -38,6 +52,16 @@ namespace model
 			return true;
 		}
 		return false;
+	}
+
+	int game::factory_count() const
+	{
+		return m_factories.size();
+	}
+
+	int game::player_count() const
+	{
+		return m_players.size();
 	}
 
 	bool game::tile_walls()

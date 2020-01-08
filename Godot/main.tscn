@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://TileLoader.gdns" type="Script" id=1]
+[ext_resource path="res://Textures/wood.png" type="Texture" id=2]
 
 [node name="main" type="Node2D"]
 
 [node name="Tiles" type="Node2D" parent="."]
 script = ExtResource( 1 )
+
+[node name="wood" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 465.64, 481.254 )
+z_index = -10
+texture = ExtResource( 2 )
+
+[node name="Boards" type="Node2D" parent="."]
+
+[node name="Factories" type="Node2D" parent="."]

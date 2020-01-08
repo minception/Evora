@@ -11,6 +11,7 @@ namespace model
 	public:
 		void add_tile(tile type);
 		bool empty() const;
+		int offer(tile color);
 		int offer(tile color, bool& first);
 		void pick_color(tile color);
 	};
