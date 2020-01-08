@@ -15,6 +15,10 @@ namespace model
 		bool empty(lid& lid);
 		bool is_full() const { return m_tiles.size() == FLOOR_SIZE; }
 		int score() const;
+
+		// iterator methods for display purposes
+		std::vector<tile>::const_iterator begin() const;
+		std::vector<tile>::const_iterator end() const;
 	};
 	
 }

@@ -40,4 +40,14 @@ namespace model
 		}
 		return res;
 	}
+
+	std::vector<tile>::const_iterator floor::begin() const
+	{
+		return m_tiles.cbegin();
+	}
+
+	std::vector<tile>::const_iterator floor::end() const
+	{
+		return m_tiles.cend();
+	}
 }

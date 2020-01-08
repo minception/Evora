@@ -18,15 +18,29 @@ namespace model
 		int m_current_player;
 	public:
 		game(int number_of_players);
+
+		// game control methods
+		virtual bool factory_offer(int player, int factory, tile color, int line);
+		virtual bool center_offer(int player, tile color, int line);
+		virtual bool tile_walls();
+
+		// game information retrieval methods
 		bool can_factory_offer(int player, int factory, tile color, int line);
 		bool can_center_offer(int player, tile color, int line);
-		bool factory_offer(int player, int factory, tile color, int line);
-		bool center_offer(int player, tile color, int line);
-		bool tile_walls();
 		int get_winner();
 		bool factories_empty();
 		bool center_empty() const;
 		int factory_count() const;
 		int player_count() const;
+
+		// iterator methods for display purposes
+		std::vector<factory>::const_iterator factories_begin() const;
+		std::vector<factory>::const_iterator factories_end() const;
+		std::vector<board>::const_iterator players_begin() const;
+		std::vector<board>::const_iterator players_end() const;
+		std::vector<tile>::const_iterator center_begin() const;
+		std::vector<tile>::const_iterator center_end() const;
+		
+		
 	};
 }

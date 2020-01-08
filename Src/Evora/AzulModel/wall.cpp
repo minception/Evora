@@ -133,4 +133,14 @@ namespace model
 		}
 		return true;
 	}
+
+	std::vector<std::vector<tile>>::const_iterator wall::begin() const
+	{
+		return m_tiles.cbegin();
+	}
+
+	std::vector<std::vector<tile>>::const_iterator wall::end() const
+	{
+		return m_tiles.cend();
+	}
 }

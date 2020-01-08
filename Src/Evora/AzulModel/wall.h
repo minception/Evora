@@ -24,5 +24,10 @@ namespace model
 		int tile_wall(pattern_line& pattern_line, int line, lid& lid);
 		int final_score();
 		bool full_line(int line);
+
+		// iterator methods for display purposes
+		std::vector<std::vector<tile>>::const_iterator begin() const;
+		std::vector<std::vector<tile>>::const_iterator end() const;
+		
 	};
 }

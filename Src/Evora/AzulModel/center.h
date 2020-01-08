@@ -14,5 +14,9 @@ namespace model
 		int offer(tile color);
 		int offer(tile color, bool& first);
 		void pick_color(tile color);
+
+		// iterator methods for display purposes
+		std::vector<tile>::const_iterator begin() const;
+		std::vector<tile>::const_iterator end() const;
 	};
 }

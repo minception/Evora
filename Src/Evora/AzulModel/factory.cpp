@@ -36,4 +36,14 @@ namespace model
 	{
 		return m_tiles.empty();
 	}
+
+	std::vector<tile>::const_iterator factory::begin() const
+	{
+		return m_tiles.cbegin();
+	}
+
+	std::vector<tile>::const_iterator factory::end() const
+	{
+		return m_tiles.cend();
+	}
 }

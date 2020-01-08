@@ -46,4 +46,14 @@ namespace model
 			first_pick = false;
 		}
 	}
+
+	std::vector<tile>::const_iterator center::begin() const
+	{
+		return m_tiles.cbegin();
+	}
+
+	std::vector<tile>::const_iterator center::end() const
+	{
+		return m_tiles.cend();
+	}
 }
