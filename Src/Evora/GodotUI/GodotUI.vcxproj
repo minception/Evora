@@ -73,28 +73,28 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -160,15 +160,22 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="GodotGame.cpp" />
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="TileLoader.cpp" />
+    <ClCompile Include="ObjectLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="GodotGame.h" />
     <ClInclude Include="Root.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileLoader.h" />
+    <ClInclude Include="ObjectLoader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AzulModel\AzulModel.vcxproj">
+      <Project>{bc90037e-326c-4bef-a6cb-eec9bbed8b26}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

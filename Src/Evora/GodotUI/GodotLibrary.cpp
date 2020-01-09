@@ -1,6 +1,7 @@
 #include "Board.h"
-#include "TileLoader.h"
+#include "ObjectLoader.h"
 #include "Tile.h"
+#include "Root.h"
 
 using namespace godot;
 
@@ -15,6 +16,7 @@ extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_opt
 extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	Godot::nativescript_init(handle);
 	register_class<Board>();
-	register_class<TileLoader>();
+	register_class<ObjectLoader>();
 	register_class<Tile>();
+	register_class<Root>();
 }

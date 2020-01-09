@@ -10,9 +10,9 @@
 
 namespace godot
 {
-	class TileLoader :public KinematicBody2D
+	class ObjectLoader :public KinematicBody2D
 	{
-		GODOT_CLASS(TileLoader, KinematicBody2D)
+		GODOT_CLASS(ObjectLoader, KinematicBody2D)
 	private:
 		godot::Ref<PackedScene> tileScene;
 		godot::Ref<Texture> blackTexture;
@@ -26,6 +26,6 @@ namespace godot
 		void _init();
 		void _process(float delta);
 
-		TileLoader();
+		ObjectLoader();
 	};
 }

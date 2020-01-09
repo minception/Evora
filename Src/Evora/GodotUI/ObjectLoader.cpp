@@ -1,16 +1,16 @@
-#include "TileLoader.h"
+#include "ObjectLoader.h"
 #include <Sprite.hpp>
 #include <vector>
 
 using namespace godot;
 
-void TileLoader::_register_methods()
+void ObjectLoader::_register_methods()
 {
-	register_method("_process", &TileLoader::_process);
-	register_method("_ready", &TileLoader::_ready);
+	register_method("_process", &ObjectLoader::_process);
+	register_method("_ready", &ObjectLoader::_ready);
 }
 
-void TileLoader::_ready()
+void ObjectLoader::_ready()
 {
 	std::vector<Node2D*> tiles;
 	for (int i = 0; i < 10; ++i)
@@ -30,15 +30,15 @@ void TileLoader::_ready()
 	add_child(n);
 }
 
-void TileLoader::_init()
+void ObjectLoader::_init()
 {
 }
 
-void TileLoader::_process(float delta)
+void ObjectLoader::_process(float delta)
 {
 }
 
-TileLoader::TileLoader()
+ObjectLoader::ObjectLoader()
 {
 	ResourceLoader* rl = ResourceLoader::get_singleton();
 	tileScene = rl->load("res://Tile.tscn");
