@@ -1,6 +1,7 @@
 ﻿#pragma once
-#include <vector>
+
 #include <random>
+#include <vector>
 
 #include "tile.h"
 

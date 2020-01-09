@@ -1,9 +1,10 @@
 ﻿#pragma once
+
 #include <vector>
+
 #include "floor.h"
 #include "pattern_line.h"
 #include "wall.h"
-#include <map>
 
 namespace model
 {
@@ -14,7 +15,7 @@ namespace model
 		std::vector<pattern_line> m_pattern_lines;
 		wall m_wall;
 		floor m_floor;
-		int tile_wall(int line);
+		
 	public:
 		board();
 		bool can_put_color(int line, tile color);

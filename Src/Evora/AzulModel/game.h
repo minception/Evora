@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include "bag.h"
+#include "board.h"
 #include "center.h"
 #include "factory.h"
 #include "lid.h"
-#include "board.h"
 
 namespace model
 {
@@ -40,7 +40,5 @@ namespace model
 		std::vector<board>::const_iterator players_end() const;
 		std::vector<tile>::const_iterator center_begin() const;
 		std::vector<tile>::const_iterator center_end() const;
-		
-		
 	};
 }

@@ -1,7 +1,9 @@
 ﻿#pragma once
+
 #include <vector>
-#include "tile.h"
+
 #include "lid.h"
+#include "tile.h"
 
 namespace model
 {
@@ -10,6 +12,7 @@ namespace model
 		static const int FLOOR_SIZE = 7;
 		static const std::vector<int> FLOOR_SCORE;
 		std::vector<tile> m_tiles;
+		
 	public:
 		void add_tiles(tile type, int count, lid& lid);
 		bool empty(lid& lid);
@@ -20,5 +23,4 @@ namespace model
 		std::vector<tile>::const_iterator begin() const;
 		std::vector<tile>::const_iterator end() const;
 	};
-	
 }

@@ -1,7 +1,8 @@
 ﻿#pragma once
-#include "tile.h"
+
 #include "floor.h"
 #include "lid.h"
+#include "tile.h"
 
 namespace model
 {

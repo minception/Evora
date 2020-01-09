@@ -1,5 +1,7 @@
 ﻿#pragma once
+
 #include <vector>
+
 #include "tile.h"
 
 namespace model
@@ -8,6 +10,7 @@ namespace model
 	{
 		std::vector<tile> m_tiles;
 		bool first_pick = true;
+		
 	public:
 		void add_tile(tile type);
 		bool empty() const;
