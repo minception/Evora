@@ -6,6 +6,8 @@
 
 using namespace godot;
 
+bool Tile::_holding_one = false;
+
 void Tile::_register_methods()
 {
 	register_method("_process", &Tile::_process);
@@ -53,11 +55,14 @@ void Tile::_area_input_event()
 	int64_t mouse_button_mask = _input->get_mouse_button_mask();
 	if(mouse_button_mask & 1) // left mouse button pressed
 	{
+		if (_holding_one) return;
 		_holding = true;
+		_holding_one = true;
 	}
 	else
 	{
 		_holding = false;
+		_holding_one = false;
 	}
 	
 }

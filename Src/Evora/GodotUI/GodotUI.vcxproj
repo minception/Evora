@@ -159,18 +159,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardLoader.cpp" />
+    <ClCompile Include="FactoryLoader.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="GodotGame.cpp" />
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
+    <ClCompile Include="TileLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardLoader.h" />
+    <ClInclude Include="FactoryLoader.h" />
     <ClInclude Include="GodotGame.h" />
     <ClInclude Include="Root.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="ObjectLoader.h" />
+    <ClInclude Include="TileLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AzulModel\AzulModel.vcxproj">

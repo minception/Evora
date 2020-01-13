@@ -1,21 +1,23 @@
 ﻿#pragma once
 #include "game.h"
-#include "ObjectLoader.h"
-#include <core/Godot.hpp>
 #include <Node2D.hpp>
 #include <vector>
 
+#include "ObjectLoader.h"
+
 namespace godot
 {
+	class ObjectLoader;
 	using namespace model;
-	class GodotGame: public game
+	class GodotGame : public game
 	{
-		std::vector<Node2D> m_tiles;
-		
+		std::vector<godot::Node2D> m_tiles;
+
 	public:
 		bool factory_offer(int player, int factory, tile color, int line) override;
 		bool center_offer(int player, tile color, int line) override;
 		bool tile_walls() override;
-		void draw(ObjectLoader loader);
+		void draw(ObjectLoader* loader);
+		GodotGame(int players) :game(players) {}
 	};
 }

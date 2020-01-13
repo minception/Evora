@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <core/Godot.hpp>
 #include <KinematicBody2D.hpp>
 #include <Resource.hpp>
@@ -10,22 +10,15 @@
 
 namespace godot
 {
-	class ObjectLoader :public KinematicBody2D
+	class FactoryLoader :public KinematicBody2D
 	{
-		GODOT_CLASS(ObjectLoader, KinematicBody2D)
-	private:
-		Ref<PackedScene> tileScene;
-		Ref<Texture> blackTexture;
-		Ref<Texture> whiteTexture;
-		Ref<Texture> blueTexture;
-		Ref<Texture> redTexture;
-		Ref<Texture> yellowTexture;
+		GODOT_CLASS(FactoryLoader, KinematicBody2D)
 	public:
 		static void _register_methods();
 		void _ready();
 		void _init();
 		void _process(float delta);
 
-		ObjectLoader();
+		FactoryLoader();
 	};
 }

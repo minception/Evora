@@ -13,13 +13,13 @@ void ObjectLoader::_register_methods()
 void ObjectLoader::_ready()
 {
 	std::vector<Node2D*> tiles;
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
 		Node2D* tile = (Node2D*)tileScene->instance();
 		tiles.push_back(tile);
 		((Sprite*)tile->get_child(0)->get_child(0))->set_texture(blueTexture);
 		tile->set_scale(Vector2(0.125, 0.125));
-		tile->set_position(Vector2(35 * (i + 1), 35));
+		tile->set_position(Vector2(35.f * (i + 1), 35.f));
 		add_child(tile);
 	}
 	Node2D* n = (Node2D*)tileScene->instance();

@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "TileLoader"
-class_name = "TileLoader"
+class_name = "ObjectLoader"
 library = ExtResource( 1 )
