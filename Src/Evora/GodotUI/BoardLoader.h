@@ -13,6 +13,7 @@ namespace godot
 	class BoardLoader :public KinematicBody2D
 	{
 		GODOT_CLASS(BoardLoader, KinematicBody2D)
+		Ref<PackedScene> m_board_scene;
 	public:
 		static void _register_methods();
 		void _ready();

@@ -20,4 +20,6 @@ void godot::FactoryLoader::_process(float delta)
 
 godot::FactoryLoader::FactoryLoader()
 {
+	ResourceLoader* rl = ResourceLoader::get_singleton();
+	m_factory_scene = rl->load("res://Factory.tscn");
 }

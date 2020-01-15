@@ -76,6 +76,7 @@ void Tile::_area_input_event()
 		_holding = false;
 		_moving_back = true;
 		_holding_one = false;
+		
 	}
 	
 }
