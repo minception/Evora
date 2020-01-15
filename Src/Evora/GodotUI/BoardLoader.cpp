@@ -8,6 +8,7 @@ void godot::BoardLoader::_register_methods()
 
 void godot::BoardLoader::_ready()
 {
+	Root::p_board_loader = this;
 }
 
 void godot::BoardLoader::_init()

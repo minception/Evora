@@ -13,6 +13,9 @@ namespace godot
 		int _enter_count = 0;
 		Label* _label;
 		bool _holding;
+		bool _moving_back;
+		Vector2 _speed;
+		Vector2 _original_position;
 		Input* _input;
 	public:
 		static bool _holding_one;

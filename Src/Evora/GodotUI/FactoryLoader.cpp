@@ -7,6 +7,7 @@ void godot::FactoryLoader::_register_methods()
 
 void godot::FactoryLoader::_ready()
 {
+	Root::p_factory_loader = this;
 }
 
 void godot::FactoryLoader::_init()

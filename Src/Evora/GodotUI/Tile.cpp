@@ -32,6 +32,17 @@ void Tile::_process(float delta)
 			mouse_position.x < viewport_size.x && mouse_position.y < viewport_size.y)
 			set_global_position(get_global_mouse_position());
 	}
+	if(_moving_back)
+	{
+		Vector2 shift = get_global_position() - _original_position;
+		if(shift.length() < 1.f)
+		{
+			set_global_position(_original_position);
+			_moving_back = false;
+		}
+		Vector2 speed = shift * delta * 10;
+		set_global_position(get_global_position() - speed);
+	}
 }
 
 void Tile::_on_mouse_entered()
@@ -57,15 +68,18 @@ void Tile::_area_input_event()
 	{
 		if (_holding_one) return;
 		_holding = true;
+		_original_position = get_global_position();
 		_holding_one = true;
 	}
-	else
+	else if(_holding)
 	{
 		_holding = false;
+		_moving_back = true;
 		_holding_one = false;
 	}
 	
 }
+
 
 Tile::Tile()
 {

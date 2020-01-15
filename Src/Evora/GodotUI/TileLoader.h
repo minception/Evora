@@ -14,12 +14,12 @@ namespace godot
 	{
 		GODOT_CLASS(TileLoader, KinematicBody2D)
 	private:
-		Ref<PackedScene> tileScene;
-		Ref<Texture> blackTexture;
-		Ref<Texture> whiteTexture;
-		Ref<Texture> blueTexture;
-		Ref<Texture> redTexture;
-		Ref<Texture> yellowTexture;
+		static Ref<PackedScene> tileScene;
+		static Ref<Texture> blackTexture;
+		static Ref<Texture> whiteTexture;
+		static Ref<Texture> blueTexture;
+		static Ref<Texture> redTexture;
+		static Ref<Texture> yellowTexture;
 	public:
 		static void _register_methods();
 		void _ready();
