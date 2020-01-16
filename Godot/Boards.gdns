@@ -3,6 +3,6 @@
 [ext_resource path="res://GodotUI-Debug.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "Root"
-class_name = "Root"
+resource_name = "BoardLoader"
+class_name = "BoardLoader"
 library = ExtResource( 1 )

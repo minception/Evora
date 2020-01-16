@@ -7,7 +7,6 @@
 #include "BoardLoader.h"
 #include "FactoryLoader.h"
 #include "GodotGame.h"
-#include "ObjectLoader.h"
 #include "TileLoader.h"
 
 namespace godot
@@ -27,6 +26,7 @@ namespace godot
 		static TileLoader* p_tile_loader;
 		static void _register_methods();
 		void _init();
+		void _ready();
 
 		Root() { m_game = std::make_shared<GodotGame>(2); }
 	};
