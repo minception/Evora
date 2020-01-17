@@ -165,7 +165,7 @@
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="GodotGame.cpp" />
     <ClCompile Include="Root.cpp" />
-    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="GodotTile.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="TileLoader.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -177,7 +177,7 @@
     <ClInclude Include="FactoryLoader.h" />
     <ClInclude Include="GodotGame.h" />
     <ClInclude Include="Root.h" />
-    <ClInclude Include="Tile.h" />
+    <ClInclude Include="GodotTile.h" />
     <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="TileLoader.h" />
     <ClInclude Include="Utils.h" />

@@ -1,4 +1,5 @@
 ﻿#include "GodotGame.h"
+#include "ObjectLoader.h"
 
 using namespace godot;
 
@@ -17,16 +18,22 @@ bool godot::GodotGame::tile_walls()
 	return game::tile_walls();
 }
 
-void GodotGame::draw(ObjectLoader* loader)
+void GodotGame::draw(Vector2 viewport_size)
 {
 	// draw factories
-	for (auto&& factory = factories_begin(); factory!= factories_end(); ++factory)
+	ObjectLoader::factory_loader->load_factories(factory_count(), Vector2(viewport_size.x / 2, 300), 200);
+	// draw tiles in factories
+	int factory_index(0);
+	for(auto&& factory = factories_begin(); factory != factories_end(); factory++)
 	{
-		
+		int index(0);
+		for (auto&& tile : *factory)
+		{
+			ObjectLoader::tile_loader->add_tile(Vector2(35 * index + 50, 50*factory_index + 50), tile);
+			++index;
+		}
+		++factory_index;
 	}
 	// draw boards
-	for(auto&& board = players_begin(); board != players_end(); ++board)
-	{
-		
-	}
+	ObjectLoader::board_loader->load_boards(player_count(), viewport_size);
 }

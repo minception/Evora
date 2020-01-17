@@ -7,24 +7,21 @@
 #include <PackedScene.hpp>
 #include "Root.h"
 #include <Texture.hpp>
+#include "FactoryLoader.h"
+#include "BoardLoader.h"
+#include "TileLoader.h"
 
 namespace godot
 {
-	class ObjectLoader :public KinematicBody2D
+	class FactoryLoader;
+	class BoardLoader;
+	class TileLoader;
+	class ObjectLoader
 	{
-		GODOT_CLASS(ObjectLoader, KinematicBody2D)
-	private:
-		Ref<PackedScene> tileScene;
-		Ref<Texture> blackTexture;
-		Ref<Texture> whiteTexture;
-		Ref<Texture> blueTexture;
-		Ref<Texture> redTexture;
-		Ref<Texture> yellowTexture;
 	public:
-		static void _register_methods();
-		void _ready();
-		void _init();
-		void _process(float delta);
+		static FactoryLoader* factory_loader;
+		static BoardLoader* board_loader;
+		static TileLoader* tile_loader;
 
 		ObjectLoader();
 	};

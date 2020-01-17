@@ -8,7 +8,7 @@
 
 namespace godot
 {
-	class FactoryLoader :public KinematicBody2D
+	class FactoryLoader :public Node2D
 	{
 		GODOT_CLASS(FactoryLoader, KinematicBody2D)
 		Ref<PackedScene> m_factory_scene;

@@ -17,7 +17,7 @@ namespace godot
 		bool factory_offer(int player, int factory, tile color, int line) override;
 		bool center_offer(int player, tile color, int line) override;
 		bool tile_walls() override;
-		void draw(ObjectLoader* loader);
+		void draw(Vector2 viewport_size);
 		GodotGame(int players) :game(players) {}
 	};
 }

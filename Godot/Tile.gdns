@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "Tile"
-class_name = "Tile"
+class_name = "GodotTile"
 library = ExtResource( 1 )

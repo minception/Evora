@@ -33,6 +33,10 @@ namespace model
 		int factory_count() const;
 		int player_count() const;
 
+		// game initialization methods
+		void fill_factories();
+		void shuffle_bag();
+
 		// iterator methods for display purposes
 		std::vector<factory>::const_iterator factories_begin() const;
 		std::vector<factory>::const_iterator factories_end() const;

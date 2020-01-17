@@ -5,6 +5,7 @@
 #include "ResourceLoader.hpp"
 #include "TextureRect.hpp"
 #include "Utils.h"
+#include "ObjectLoader.h"
 
 using namespace godot;
 
@@ -15,7 +16,7 @@ void FactoryLoader::_register_methods()
 
 void FactoryLoader::_ready()
 {
-	Root::p_factory_loader = this;
+	ObjectLoader::factory_loader = this;
 }
 
 void FactoryLoader::_init()

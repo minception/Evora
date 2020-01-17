@@ -64,6 +64,19 @@ namespace model
 		return m_players.size();
 	}
 
+	void game::fill_factories()
+	{
+		for (auto && factory : m_factories)
+		{
+			factory.fill(m_bag);
+		}
+	}
+
+	void game::shuffle_bag()
+	{
+		m_bag.shuffle();
+	}
+
 	std::vector<factory>::const_iterator game::factories_begin() const
 	{
 		return m_factories.cbegin();

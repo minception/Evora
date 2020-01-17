@@ -10,6 +10,8 @@ extents = Vector2( 128, 128 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 200
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [node name="Tile" type="Node2D"]
