@@ -17,6 +17,7 @@ namespace model
 		bool fill(bag& bag);
 		int offer(tile color);
 		void pick_color(tile color, center& center);
+		std::vector<tile> get_colors();
 		bool empty();
 
 		// iterator methods for display purposes

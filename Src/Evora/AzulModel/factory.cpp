@@ -32,6 +32,16 @@ namespace model
 		m_tiles.clear();
 	}
 
+	std::vector<tile> factory::get_colors()
+	{
+		std::vector<tile> res;
+		for (auto&& tile : m_tiles)
+		{
+			if (std::find(res.begin(), res.end(), tile) == res.end()) res.push_back(tile);
+		}
+		return res;
+	}
+
 	bool factory::empty()
 	{
 		return m_tiles.empty();

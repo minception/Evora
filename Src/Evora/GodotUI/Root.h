@@ -21,6 +21,6 @@ namespace godot
 		void _init();
 		void _ready();
 
-		Root() { m_game = std::make_shared<GodotGame>(2); }
+		Root() { m_game = std::make_shared<GodotGame>(3); }
 	};
 }
