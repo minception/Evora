@@ -8,7 +8,7 @@ reloadable=true
 [entry]
 
 Windows.64="res://LibGodotUI-x64-Debug.dll"
-X11.64="res://libgodot_ui.so"
+X11.64="res://../Src/Evora/build/GodotUI/libgodot_ui.so"
 
 [dependencies]
 
