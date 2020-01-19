@@ -340,7 +340,9 @@ ASALocalRun/
 healthchecksdb
 
 # Godot-specific ignores
+*.so
 .import/
+build
 export.cfg
 export_presets.cfg
 

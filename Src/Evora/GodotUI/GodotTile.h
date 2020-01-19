@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <core/Godot.hpp>
 #include <Node2D.hpp>
 #include <Label.hpp>

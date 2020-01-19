@@ -1,4 +1,4 @@
-﻿#include "GodotTile.h"
+#include "GodotTile.h"
 #include <Node2D.hpp>
 #include <Label.hpp>
 #include <string>
