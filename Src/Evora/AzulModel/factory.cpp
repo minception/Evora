@@ -10,6 +10,7 @@ namespace model
 			if (!bag.draw_tile(temp)) return false;
 			m_tiles.emplace_back(temp);
 		}
+		_ASSERT(m_tiles.size() == TILES);
 		return true;
 	}
 

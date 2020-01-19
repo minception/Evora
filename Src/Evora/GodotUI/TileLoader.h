@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include <core/Godot.hpp>
 #include <KinematicBody2D.hpp>
-#include <Resource.hpp>
-#include <ResourceLoader.hpp>
 #include <core/Ref.hpp>
 #include <PackedScene.hpp>
 #include "Root.h"

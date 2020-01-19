@@ -16,11 +16,12 @@ namespace godot
 	{
 		GODOT_CLASS(Root, Node2D)
 		std::shared_ptr<GodotGame> m_game;
+		int number_of_players;
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
 
-		Root() { m_game = std::make_shared<GodotGame>(3); }
+		Root() {}
 	};
 }

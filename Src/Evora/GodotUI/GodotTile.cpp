@@ -11,12 +11,17 @@ bool GodotTile::_holding_one = false;
 void GodotTile::_register_methods()
 {
 	register_method("_process", &GodotTile::_process);
+	register_method("ready", &GodotTile::_ready);
 	register_method("_on_mouse_entered", &GodotTile::_on_mouse_entered);
 	register_method("_on_mouse_exited", &GodotTile::_on_mouse_exited);
 	register_method("_area_input_event", &GodotTile::_area_input_event);
 }
 
 void GodotTile::_init()
+{
+}
+
+void GodotTile::_ready()
 {
 	_label = (Label*)get_child(1);
 	_input = Input::get_singleton();
@@ -79,9 +84,4 @@ void GodotTile::_area_input_event()
 		
 	}
 	
-}
-
-
-GodotTile::GodotTile()
-{
 }

@@ -1,6 +1,8 @@
 ﻿#include "TileLoader.h"
 #include <Sprite.hpp>
 #include "ObjectLoader.h"
+#include "GodotTile.h"
+#include <ResourceLoader.hpp>
 
 using namespace godot;
 
@@ -39,7 +41,7 @@ void godot::TileLoader::_process(float delta)
 
 void TileLoader::add_tile(Vector2 position, tile color)
 {
-	Node2D* to_add = (Node2D*)tileScene->instance();
+	GodotTile* to_add = (GodotTile*)tileScene->instance();
 	Sprite* sprite = (Sprite*)to_add->get_child(0)->get_child(0);
 	switch (color)
 	{

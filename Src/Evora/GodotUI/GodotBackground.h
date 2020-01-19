@@ -8,7 +8,7 @@ namespace godot
 	{
 	GODOT_CLASS(GodotBackground, TextureRect)
 	public:
-		void _register_methods();
+		static void _register_methods();
 		void _init();
 		void _ready();
 		void _on_window_resize();

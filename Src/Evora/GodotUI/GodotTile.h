@@ -3,6 +3,7 @@
 #include <Node2D.hpp>
 #include <Label.hpp>
 #include <Input.hpp>
+#include <Area2D.hpp>
 
 
 namespace godot
@@ -21,10 +22,10 @@ namespace godot
 		static bool _holding_one;
 		static void _register_methods();
 		void _init();
+		void _ready();
 		void _process(float delta);
 		void _on_mouse_entered();
 		void _on_mouse_exited();
 		void _area_input_event();
-		GodotTile();
 	};
 }
