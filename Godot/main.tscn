@@ -1,25 +1,31 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/wood.png" type="Texture" id=2]
-[ext_resource path="res://Factories.gdns" type="Script" id=3]
-[ext_resource path="res://Boards.gdns" type="Script" id=4]
-[ext_resource path="res://TileLoader.gdns" type="Script" id=5]
+[ext_resource path="res://Background.gdns" type="Script" id=3]
+[ext_resource path="res://Factories.gdns" type="Script" id=4]
+[ext_resource path="res://Boards.gdns" type="Script" id=5]
+[ext_resource path="res://TileLoader.gdns" type="Script" id=6]
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="wood" type="Sprite" parent="."]
-show_behind_parent = true
-position = Vector2( 465.64, 481.254 )
-z_index = -10
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 921.0
+margin_bottom = 921.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 2 )
-
-[node name="Factories" type="Node2D" parent="."]
+expand = true
+stretch_mode = 2
 script = ExtResource( 3 )
 
-[node name="Boards" type="Node2D" parent="."]
+[node name="Factories" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
-[node name="Tiles" type="Node2D" parent="."]
+[node name="Boards" type="Node2D" parent="."]
 script = ExtResource( 5 )
+
+[node name="Tiles" type="Node2D" parent="."]
+script = ExtResource( 6 )
+[connection signal="item_rect_changed" from="." to="Background" method="_on_window_resize"]
