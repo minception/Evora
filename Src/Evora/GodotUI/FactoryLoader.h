@@ -5,6 +5,7 @@
 #include <PackedScene.hpp>
 #include <Node2D.hpp>
 #include <vector>
+#include "Factory.h"
 
 namespace godot
 {
@@ -18,7 +19,7 @@ namespace godot
 		void _ready();
 		static void _init();
 		static void _process(float delta);
-		void load_factories(int count, Vector2 c, float r);
+		std::vector<Factory*> load_factories(int count, Vector2 c, float r);
 
 		FactoryLoader();
 	};

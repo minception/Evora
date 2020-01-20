@@ -3,6 +3,7 @@
 #include "GodotTile.h"
 #include "Root.h"
 #include "GodotBackground.h"
+#include "Factory.h"
 
 using namespace godot;
 
@@ -17,6 +18,7 @@ extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_opt
 extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	Godot::nativescript_init(handle);
 	register_class<Board>();
+	register_class<Factory>();
 	register_class<BoardLoader>();
 	register_class<FactoryLoader>();
 	register_class<TileLoader>();

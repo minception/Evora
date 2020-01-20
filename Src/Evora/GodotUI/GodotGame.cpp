@@ -21,18 +21,19 @@ bool godot::GodotGame::tile_walls()
 void GodotGame::draw(Vector2 viewport_size)
 {
 	// draw factories
-	ObjectLoader::factory_loader->load_factories(factory_count(), Vector2(viewport_size.x / 2, 300), 200);
+	m_factories_display = ObjectLoader::factory_loader->load_factories(factory_count(), Vector2(viewport_size.x / 2, 300), 200);
 	// draw tiles in factories
-	int factory_index(0);
-	for(auto&& factory = factories_begin(); factory != factories_end(); factory++)
+	auto&& factory = factories_begin();
+	for(int i = 0; i<factory_count(); ++i)
 	{
 		int index(0);
 		for (auto&& tile : *factory)
 		{
-			ObjectLoader::tile_loader->add_tile(Vector2(35 * index + 50, 50*factory_index + 50), tile);
+			// TODO: get real factory size here
+			ObjectLoader::tile_loader->add_tile(m_factories_display[i]->tile_position(index, Vector2(32,32)), tile);
 			++index;
 		}
-		++factory_index;
+		++factory;
 	}
 	// draw boards
 	ObjectLoader::board_loader->load_boards(player_count(), viewport_size);
