@@ -35,4 +35,15 @@ namespace model
 		m_tiles.pop_back();
 		return true;
 	}
+
+	bool bag::refill(lid& lid)
+	{
+		std::vector<tile> to_refill;
+		if(lid.get_tiles(to_refill))
+		{
+			std::copy(to_refill.begin(), to_refill.end(), m_tiles.end());
+			return true;
+		}
+		return false;
+	}
 }

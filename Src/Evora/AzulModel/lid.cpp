@@ -15,4 +15,17 @@ namespace model
 	{
 		m_tiles.emplace_back(type);
 	}
+
+	bool lid::get_tiles(std::vector<tile>& out)
+	{
+		if (empty()) return false;
+		std::copy(m_tiles.begin(), m_tiles.end(), out.begin());
+		m_tiles.clear();
+		return true;
+	}
+
+	bool lid::empty() const
+	{
+		return m_tiles.empty();
+	}
 }

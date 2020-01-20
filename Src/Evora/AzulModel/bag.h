@@ -4,9 +4,12 @@
 #include <vector>
 
 #include "tile.h"
+#include "lid.h"
 
 namespace model
 {
+	class lid;
+
 	class bag
 	{
 		static const int TILES = 100;
@@ -17,5 +20,6 @@ namespace model
 		bag();
 		void shuffle();
 		bool draw_tile(tile& out);
+		bool refill(lid& lid);
 	};
 }

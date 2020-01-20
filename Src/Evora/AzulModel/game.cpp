@@ -68,7 +68,12 @@ namespace model
 	{
 		for (auto && factory : m_factories)
 		{
-			factory.fill(m_bag);
+			if(!factory.fill(m_bag))
+			{
+				// refill the bag and if there aren't any tiles to refill the bag with in the lid, then stop filling the factories
+				if (!m_bag.refill(m_lid)) break;
+				factory.fill(m_bag);
+			}
 		}
 	}
 
