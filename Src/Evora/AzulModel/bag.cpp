@@ -33,5 +33,6 @@ namespace model
 		if (m_tiles.empty()) return false;
 		out = m_tiles.back();
 		m_tiles.pop_back();
+		return true;
 	}
 }
