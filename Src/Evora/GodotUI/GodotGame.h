@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "ObjectLoader.h"
+#include "Factory.h"
 
 namespace godot
 {

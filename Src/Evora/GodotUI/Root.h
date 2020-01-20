@@ -4,10 +4,10 @@
 #include <memory>
 #include <Node2D.hpp>
 
-#include "BoardLoader.h"
-#include "FactoryLoader.h"
 #include "GodotGame.h"
-#include "TileLoader.h"
+#include "Board.h"
+#include "GodotTile.h"
+
 
 namespace godot
 {

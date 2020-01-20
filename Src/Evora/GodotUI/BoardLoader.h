@@ -20,7 +20,5 @@ namespace godot
 		void _init();
 		void _process(float delta);
 		void load_boards(int count, Vector2 viewport_size);
-
-		BoardLoader();
 	};
 }
