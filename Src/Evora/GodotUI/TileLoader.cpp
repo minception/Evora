@@ -3,6 +3,8 @@
 #include "ObjectLoader.h"
 #include "GodotTile.h"
 #include <ResourceLoader.hpp>
+#include <TextureRect.hpp>
+#include "Utils.h"
 
 using namespace godot;
 
@@ -35,40 +37,35 @@ void godot::TileLoader::_init()
 	starterTexture = rl->load("res://Textures/starter-tile.png");
 }
 
-void godot::TileLoader::_process(float delta)
-{
-}
-
 void TileLoader::add_tile(Vector2 position, tile color)
 {
 	GodotTile* to_add = (GodotTile*)tileScene->instance();
-	Sprite* sprite = (Sprite*)to_add->get_child(0)->get_child(0);
+	TextureRect* image = (TextureRect*)to_add->get_child(get_child_index(to_add, "Image"));
 	switch (color)
 	{
 	case model::tile::black:
-		sprite->set_texture(blackTexture);
+		image->set_texture(blackTexture);
 		break;
 	case model::tile::blue:
-		sprite->set_texture(blueTexture);
+		image->set_texture(blueTexture);
 		break;
 	case model::tile::red:
-		sprite->set_texture(redTexture);
+		image->set_texture(redTexture);
 		break;
 	case model::tile::white:
-		sprite->set_texture(whiteTexture);
+		image->set_texture(whiteTexture);
 		break;
 	case model::tile::yellow:
-		sprite->set_texture(yellowTexture);
+		image->set_texture(yellowTexture);
 		break;
 	case model::tile::starter:
-		sprite->set_texture(starterTexture);
+		image->set_texture(starterTexture);
 		break;
 	case model::tile::empty:
-		sprite->set_texture(nullptr);
+		image->set_texture(nullptr);
 		break;
 	}
 	to_add->set_position(position);
-	to_add->set_scale(Vector2(0.125f, 0.125f));
 	add_child(to_add);
 }
 

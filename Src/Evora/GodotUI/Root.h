@@ -21,7 +21,5 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void _ready();
-
-		Root() {}
 	};
 }

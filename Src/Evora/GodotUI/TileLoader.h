@@ -24,7 +24,6 @@ namespace godot
 		static void _register_methods();
 		void _ready();
 		void _init();
-		void _process(float delta);
 		void add_tile(Vector2 position, model::tile color);
 
 		TileLoader();
