@@ -29,7 +29,7 @@ void GodotGame::draw(Vector2 viewport_size)
 		int index(0);
 		for (auto&& tile : *factory)
 		{
-			// TODO: get real factory size here
+			// TODO: get real tile size here
 			ObjectLoader::tile_loader->add_tile(m_factories_display[i]->tile_position(index, Vector2(32,32)), tile);
 			++index;
 		}

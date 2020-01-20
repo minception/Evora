@@ -9,11 +9,10 @@
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
-players = 3
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 921.0
-margin_bottom = 921.0
+margin_right = 3840.0
+margin_bottom = 2160.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 2 )

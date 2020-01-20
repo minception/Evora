@@ -1,11 +1,11 @@
 #pragma once
 
 #include <core/Godot.hpp>
-#include <TextureRect.hpp>
+#include <Node2D.hpp>
 
 namespace godot {
-	class Board : public TextureRect {
-		GODOT_CLASS(Board, TextureRect)
+	class Board : public Node2D {
+		GODOT_CLASS(Board, Node2D)
 	private:
 	public:
 		static void _register_methods();

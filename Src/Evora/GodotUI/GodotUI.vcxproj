@@ -162,7 +162,6 @@
     <ClCompile Include="BoardLoader.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="FactoryLoader.cpp" />
-    <ClCompile Include="GodotBackground.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="GodotGame.cpp" />
     <ClCompile Include="Root.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="BoardLoader.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="FactoryLoader.h" />
-    <ClInclude Include="GodotBackground.h" />
     <ClInclude Include="GodotGame.h" />
     <ClInclude Include="Root.h" />
     <ClInclude Include="GodotTile.h" />

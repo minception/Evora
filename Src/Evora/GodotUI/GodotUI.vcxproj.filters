@@ -48,9 +48,6 @@
     <ClCompile Include="GodotTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GodotBackground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -81,9 +78,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GodotTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GodotBackground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
