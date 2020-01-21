@@ -5,6 +5,7 @@
 #include <ResourceLoader.hpp>
 #include <TextureRect.hpp>
 #include "Utils.h"
+#include "GodotScenes.h"
 
 using namespace godot;
 
@@ -12,7 +13,6 @@ void godot::TileLoader::_register_methods()
 {
 	register_method("_ready", &TileLoader::_ready);
 }
-Ref<PackedScene> TileLoader::tileScene;
 Ref<Texture> TileLoader::blackTexture;
 Ref<Texture> TileLoader::whiteTexture;
 Ref<Texture> TileLoader::blueTexture;
@@ -28,7 +28,6 @@ void godot::TileLoader::_ready()
 void godot::TileLoader::_init()
 {
 	ResourceLoader* rl = ResourceLoader::get_singleton();
-	tileScene = rl->load("res://Tile.tscn");
 	blackTexture = rl->load("res://Textures/black-tile.png");
 	whiteTexture = rl->load("res://Textures/white-tile.png");
 	blueTexture = rl->load("res://Textures/blue-tile.png");
@@ -39,7 +38,7 @@ void godot::TileLoader::_init()
 
 void TileLoader::add_tile(Vector2 position, tile color)
 {
-	GodotTile* to_add = (GodotTile*)tileScene->instance();
+	GodotTile* to_add = (GodotTile*)GodotScenes::tile_scene->instance();
 	TextureRect* image = (TextureRect*)to_add->get_child(get_child_index(to_add, "Image"));
 	switch (color)
 	{
@@ -66,9 +65,6 @@ void TileLoader::add_tile(Vector2 position, tile color)
 		break;
 	}
 	to_add->set_position(position);
+	to_add->set_color(color);
 	add_child(to_add);
-}
-
-godot::TileLoader::TileLoader()
-{
 }

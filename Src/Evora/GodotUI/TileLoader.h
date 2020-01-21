@@ -2,7 +2,6 @@
 #include <core/Godot.hpp>
 #include <KinematicBody2D.hpp>
 #include <core/Ref.hpp>
-#include <PackedScene.hpp>
 #include "Root.h"
 #include <Texture.hpp>
 #include "tile.h"
@@ -13,7 +12,6 @@ namespace godot
 	{
 		GODOT_CLASS(TileLoader, Node2D)
 	private:
-		static Ref<PackedScene> tileScene;
 		static Ref<Texture> blackTexture;
 		static Ref<Texture> whiteTexture;
 		static Ref<Texture> blueTexture;
@@ -25,7 +23,5 @@ namespace godot
 		void _ready();
 		void _init();
 		void add_tile(Vector2 position, model::tile color);
-
-		TileLoader();
 	};
 }

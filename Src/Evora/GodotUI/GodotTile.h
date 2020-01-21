@@ -6,6 +6,7 @@
 #include <core/Ref.hpp>
 #include <Texture.hpp>
 #include <TextureRect.hpp>
+#include "tile.h"
 
 
 namespace godot
@@ -13,7 +14,6 @@ namespace godot
 	class GodotTile:public Node2D
 	{
 		GODOT_CLASS(GodotTile, Node2D)
-		int _enter_count = 0;
 		
 		Label* _label;
 		TextureRect* _image;
@@ -25,6 +25,7 @@ namespace godot
 		Vector2 _original_position;
 		Input* _input;
 		Ref<Texture> _texture;
+		model::tile _color;
 	public:
 		static bool _holding_one;
 		static void _register_methods();
@@ -34,5 +35,7 @@ namespace godot
 		void _on_mouse_entered();
 		void _on_mouse_exited();
 		void _area_input_event();
+		model::tile get_color() const;
+		void set_color(model::tile color);
 	};
 }

@@ -61,8 +61,6 @@ void GodotTile::_process(float delta)
 
 void GodotTile::_on_mouse_entered()
 {
-	++_enter_count;
-	_label->set_text(String(std::to_string(_enter_count).c_str()));
 	_highlight->set_visible(true);
 }
 
@@ -90,4 +88,14 @@ void GodotTile::_area_input_event()
 		
 	}
 	
+}
+
+model::tile GodotTile::get_color() const
+{
+	return _color;
+}
+
+void GodotTile::set_color(model::tile color)
+{
+	_color = color;
 }
