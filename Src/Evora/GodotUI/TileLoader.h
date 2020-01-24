@@ -12,16 +12,12 @@ namespace godot
 	{
 		GODOT_CLASS(TileLoader, Node2D)
 	private:
-		static Ref<Texture> blackTexture;
-		static Ref<Texture> whiteTexture;
-		static Ref<Texture> blueTexture;
-		static Ref<Texture> redTexture;
-		static Ref<Texture> yellowTexture;
-		static Ref<Texture> starterTexture;
 	public:
 		static void _register_methods();
 		void _ready();
 		void _init();
-		void add_tile(Vector2 position, model::tile color);
+		void add_tile(Vector2 position, model::tile color, int factory, int index);
+		void tile_mouse_entered(int factory, int color);
+		void tile_picked_up(int factory, int color);
 	};
 }

@@ -4,12 +4,55 @@
 #include <string>
 #include <Sprite.hpp>
 #include "Utils.h"
+#include "tile.h"
 
 #include <ResourceLoader.hpp>
 
 using namespace godot;
 
 bool GodotTile::_holding_one = false;
+
+Ref<Texture> GodotTile::blackTexture;
+Ref<Texture> GodotTile::whiteTexture;
+Ref<Texture> GodotTile::blueTexture;
+Ref<Texture> GodotTile::redTexture;
+Ref<Texture> GodotTile::yellowTexture;
+Ref<Texture> GodotTile::starterTexture;
+
+void GodotTile::set_color(int color)
+{
+	_color = color;
+	TextureRect* image = (TextureRect*)get_child(get_child_index(this, "Image"));
+	switch ((model::tile)color)
+	{
+	case model::tile::black:
+		image->set_texture(blackTexture);
+		break;
+	case model::tile::blue:
+		image->set_texture(blueTexture);
+		break;
+	case model::tile::red:
+		image->set_texture(redTexture);
+		break;
+	case model::tile::white:
+		image->set_texture(whiteTexture);
+		break;
+	case model::tile::yellow:
+		image->set_texture(yellowTexture);
+		break;
+	case model::tile::starter:
+		image->set_texture(starterTexture);
+		break;
+	case model::tile::empty:
+		image->set_texture(nullptr);
+		break;
+	}
+}
+
+int GodotTile::get_color()
+{
+	return _color;
+}
 
 void GodotTile::_register_methods()
 {
@@ -18,12 +61,26 @@ void GodotTile::_register_methods()
 	register_method("_on_mouse_entered", &GodotTile::_on_mouse_entered);
 	register_method("_on_mouse_exited", &GodotTile::_on_mouse_exited);
 	register_method("_area_input_event", &GodotTile::_area_input_event);
+
+	register_property("color", &GodotTile::set_color,&GodotTile::get_color, 0);
+	register_property("index", &GodotTile::_index, 0);
+	register_property("factory_index", &GodotTile::_factory_index, 0);
+	register_property("holding", &GodotTile::_holding, false);
+	register_property("original_position", &GodotTile::_original_position, Vector2(0, 0));
+	
+	register_signal<GodotTile>("mouse_entered", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("picked_up", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 }
 
 void GodotTile::_init()
 {
 	ResourceLoader* rl = ResourceLoader::get_singleton();
-	_texture = rl->load("res://Textures/red-tile.png");
+	blackTexture = rl->load("res://Textures/black-tile.png");
+	whiteTexture = rl->load("res://Textures/white-tile.png");
+	blueTexture = rl->load("res://Textures/blue-tile.png");
+	redTexture = rl->load("res://Textures/red-tile.png");
+	yellowTexture = rl->load("res://Textures/yellow-tile.png");
+	starterTexture = rl->load("res://Textures/starter-tile.png");
 }
 
 void GodotTile::_ready()
@@ -38,7 +95,7 @@ void GodotTile::_ready()
 
 void GodotTile::_process(float delta)
 {
-	if(_holding)
+	if(get("holding"))
 	{
 		Vector2 mouse_position = get_global_mouse_position();
 		Vector2 viewport_size = get_viewport_rect().size;
@@ -48,10 +105,10 @@ void GodotTile::_process(float delta)
 	}
 	if(_moving_back)
 	{
-		Vector2 shift = get_global_position() - _original_position;
+		Vector2 shift = get_global_position() - get("original_position");
 		if(shift.length() < 1.f)
 		{
-			set_global_position(_original_position);
+			set_global_position(get("original_position"));
 			_moving_back = false;
 		}
 		Vector2 speed = shift * delta * 10;
@@ -62,6 +119,7 @@ void GodotTile::_process(float delta)
 void GodotTile::_on_mouse_entered()
 {
 	_highlight->set_visible(true);
+	emit_signal("mouse_entered", _factory_index, _color);
 }
 
 void GodotTile::_on_mouse_exited()
@@ -76,13 +134,11 @@ void GodotTile::_area_input_event()
 	if(mouse_button_mask & 1) // left mouse button pressed
 	{
 		if (_holding_one) return;
-		_holding = true;
-		_original_position = get_global_position();
-		_holding_one = true;
+		emit_signal("picked_up", _factory_index, _color);
 	}
-	else if(_holding)
+	else if(get("holding"))
 	{
-		_holding = false;
+		set("holding", false);
 		_moving_back = true;
 		_holding_one = false;
 		
@@ -90,12 +146,15 @@ void GodotTile::_area_input_event()
 	
 }
 
-model::tile GodotTile::get_color() const
+bool GodotTile::pick_up(int factory, int color)
 {
-	return _color;
-}
-
-void GodotTile::set_color(model::tile color)
-{
-	_color = color;
+	_factory_index = get("factory_index");
+	_color = get("color");
+	if(_factory_index == factory && _color == color)
+	{
+		set("holding", true);
+		set("original_position", get_global_position());
+		return true;
+	}
+	return false;
 }

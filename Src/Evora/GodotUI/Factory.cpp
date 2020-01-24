@@ -15,7 +15,6 @@ void Factory::_init()
 void Factory::add_tile(GodotTile* tile)
 {
 	tiles.push_back(tile);
-	//tile->connect("")
 }
 
 Vector2 Factory::tile_position(int index, Vector2 tile_size)

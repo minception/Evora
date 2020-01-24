@@ -19,14 +19,25 @@ namespace godot
 		TextureRect* _image;
 		TextureRect* _highlight;
 		
-		bool _holding;
 		bool _moving_back;
 		Vector2 _speed;
 		Vector2 _original_position;
 		Input* _input;
 		Ref<Texture> _texture;
-		model::tile _color;
+		int _color;
+		
+		static Ref<Texture> blackTexture;
+		static Ref<Texture> whiteTexture;
+		static Ref<Texture> blueTexture;
+		static Ref<Texture> redTexture;
+		static Ref<Texture> yellowTexture;
+		static Ref<Texture> starterTexture;
 	public:
+		bool _holding;
+		int _factory_index;
+		int _index;
+		void set_color(int color);
+		int get_color();
 		static bool _holding_one;
 		static void _register_methods();
 		void _init();
@@ -35,7 +46,6 @@ namespace godot
 		void _on_mouse_entered();
 		void _on_mouse_exited();
 		void _area_input_event();
-		model::tile get_color() const;
-		void set_color(model::tile color);
+		bool pick_up(int factory, int color);
 	};
 }
