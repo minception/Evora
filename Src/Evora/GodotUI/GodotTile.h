@@ -25,7 +25,7 @@ namespace godot
 		Input* _input;
 		Ref<Texture> _texture;
 		int _color;
-		
+
 		static Ref<Texture> blackTexture;
 		static Ref<Texture> whiteTexture;
 		static Ref<Texture> blueTexture;
@@ -34,6 +34,8 @@ namespace godot
 		static Ref<Texture> starterTexture;
 	public:
 		bool _holding;
+		bool _moving_to_mouse;
+		bool _is_highlighted;
 		int _factory_index;
 		int _index;
 		void set_color(int color);
@@ -47,5 +49,7 @@ namespace godot
 		void _on_mouse_exited();
 		void _area_input_event();
 		bool pick_up(int factory, int color);
+		bool highlight(int factory, int color);
+		bool unhighlight(int factory, int color);
 	};
 }

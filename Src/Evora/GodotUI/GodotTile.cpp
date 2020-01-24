@@ -67,8 +67,11 @@ void GodotTile::_register_methods()
 	register_property("factory_index", &GodotTile::_factory_index, 0);
 	register_property("holding", &GodotTile::_holding, false);
 	register_property("original_position", &GodotTile::_original_position, Vector2(0, 0));
+	register_property("moving_to_mouse", &GodotTile::_moving_to_mouse, false);
+	register_property("highlight", &GodotTile::_is_highlighted, false);
 	
 	register_signal<GodotTile>("mouse_entered", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("mouse_exited", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("picked_up", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 }
 
@@ -95,13 +98,13 @@ void GodotTile::_ready()
 
 void GodotTile::_process(float delta)
 {
-	if(get("holding"))
+	Vector2 mouse_position = get_global_mouse_position() - _image->get_size() / 2;
+	if(_holding)
 	{
-		Vector2 mouse_position = get_global_mouse_position();
 		Vector2 viewport_size = get_viewport_rect().size;
 		if(mouse_position.x > 0 && mouse_position.y > 0 &&
 			mouse_position.x < viewport_size.x && mouse_position.y < viewport_size.y)
-			set_global_position(get_global_mouse_position());
+			set_global_position(mouse_position);
 	}
 	if(_moving_back)
 	{
@@ -114,18 +117,40 @@ void GodotTile::_process(float delta)
 		Vector2 speed = shift * delta * 10;
 		set_global_position(get_global_position() - speed);
 	}
+	if(_moving_to_mouse)
+	{
+
+		Vector2 shift = get_global_position() - mouse_position;
+		if (shift.length() < 1.f)
+		{
+			_holding = true;
+			_moving_to_mouse = false;
+		}
+		Vector2 speed = shift * delta * 10;
+		set_global_position(get_global_position() - speed);
+	}
+	if(_is_highlighted)
+	{
+		_highlight->set_visible(true);
+	}
+	else
+	{
+		_highlight->set_visible(false);
+	}
+	
 }
 
 void GodotTile::_on_mouse_entered()
 {
-	_highlight->set_visible(true);
 	emit_signal("mouse_entered", _factory_index, _color);
 }
 
 void GodotTile::_on_mouse_exited()
 {
-	_highlight->set_visible(false);
+	emit_signal("mouse_exited", _factory_index, _color);
 }
+
+
 
 void GodotTile::_area_input_event()
 {
@@ -152,8 +177,32 @@ bool GodotTile::pick_up(int factory, int color)
 	_color = get("color");
 	if(_factory_index == factory && _color == color)
 	{
-		set("holding", true);
+		set("moving_to_mouse", true);
 		set("original_position", get_global_position());
+		return true;
+	}
+	return false;
+}
+
+bool GodotTile::highlight(int factory, int color)
+{
+	_factory_index = get("factory_index");
+	_color = get("color");
+	if(_factory_index == factory && _color == color)
+	{
+		set("highlight", true);
+		return true;
+	}
+	return false;
+}
+
+bool GodotTile::unhighlight(int factory, int color)
+{
+	_factory_index = get("factory_index");
+	_color = get("color");
+	if (_factory_index == factory && _color == color)
+	{
+		set("highlight", false);
 		return true;
 	}
 	return false;
