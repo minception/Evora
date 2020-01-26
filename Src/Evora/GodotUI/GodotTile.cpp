@@ -108,10 +108,10 @@ void GodotTile::_process(float delta)
 	}
 	if(_moving_back)
 	{
-		Vector2 shift = get_global_position() - get("original_position");
+		Vector2 shift = get_global_position() - _original_position;
 		if(shift.length() < 1.f)
 		{
-			set_global_position(get("original_position"));
+			set_global_position(_original_position);
 			_moving_back = false;
 		}
 		Vector2 speed = shift * delta * 10;

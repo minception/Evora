@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Board.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/board-background.png" type="Texture" id=2]
 [ext_resource path="res://Aileron-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Textures/blue-tile.png" type="Texture" id=4]
+[ext_resource path="res://WallBgTile.gd" type="Script" id=5]
+[ext_resource path="res://Textures/yellow-tile.png" type="Texture" id=6]
+[ext_resource path="res://Textures/red-tile.png" type="Texture" id=7]
+[ext_resource path="res://Textures/black-tile.png" type="Texture" id=8]
+[ext_resource path="res://Textures/white-tile.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -10,34 +16,285 @@ outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="ImageTexture" id=2]
-
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Image" type="TextureRect" parent="."]
 margin_right = 385.0
-margin_bottom = 241.0
+margin_bottom = 282.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
 
 [node name="Score" type="Label" parent="Image"]
 margin_left = 13.3962
-margin_top = 1.43214
+margin_top = -3.56786
 margin_right = 47.3962
-margin_bottom = 62.4321
+margin_bottom = 57.4321
 custom_fonts/font = SubResource( 1 )
 text = "0"
 
 [node name="Wall" type="Control" parent="Image"]
-margin_left = 218.558
-margin_top = 80.7299
-margin_right = 366.558
-margin_bottom = 228.73
+editor/display_folded = true
+margin_left = 196.0
+margin_top = 55.0
+margin_right = 376.0
+margin_bottom = 235.0
 
-[node name="TextureRect" type="TextureRect" parent="Image/Wall"]
+[node name="Row1" type="Control" parent="Image/Wall"]
+editor/display_folded = true
+margin_right = 180.0
+margin_bottom = 32.0
+
+[node name="Tile1" type="TextureRect" parent="Image/Wall/Row1"]
 margin_right = 32.0
 margin_bottom = 32.0
-texture = SubResource( 2 )
+texture = ExtResource( 4 )
 expand = true
+script = ExtResource( 5 )
+
+[node name="Tile2" type="TextureRect" parent="Image/Wall/Row1"]
+margin_left = 37.0
+margin_right = 69.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile3" type="TextureRect" parent="Image/Wall/Row1"]
+margin_left = 74.0
+margin_right = 106.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile4" type="TextureRect" parent="Image/Wall/Row1"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile5" type="TextureRect" parent="Image/Wall/Row1"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Row2" type="Control" parent="Image/Wall"]
+editor/display_folded = true
+margin_top = 37.0
+margin_right = 180.0
+margin_bottom = 69.0
+
+[node name="Tile1" type="TextureRect" parent="Image/Wall/Row2"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile2" type="TextureRect" parent="Image/Wall/Row2"]
+margin_left = 37.0
+margin_right = 69.0
+margin_bottom = 32.0
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile3" type="TextureRect" parent="Image/Wall/Row2"]
+margin_left = 74.0
+margin_right = 106.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile4" type="TextureRect" parent="Image/Wall/Row2"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile5" type="TextureRect" parent="Image/Wall/Row2"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Row3" type="Control" parent="Image/Wall"]
+editor/display_folded = true
+margin_top = 74.0
+margin_right = 180.0
+margin_bottom = 106.0
+
+[node name="Tile1" type="TextureRect" parent="Image/Wall/Row3"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile2" type="TextureRect" parent="Image/Wall/Row3"]
+margin_left = 37.0
+margin_right = 69.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile3" type="TextureRect" parent="Image/Wall/Row3"]
+margin_left = 74.0
+margin_right = 106.0
+margin_bottom = 32.0
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile4" type="TextureRect" parent="Image/Wall/Row3"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile5" type="TextureRect" parent="Image/Wall/Row3"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Row4" type="Control" parent="Image/Wall"]
+editor/display_folded = true
+margin_top = 111.0
+margin_right = 180.0
+margin_bottom = 143.0
+
+[node name="Tile1" type="TextureRect" parent="Image/Wall/Row4"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile2" type="TextureRect" parent="Image/Wall/Row4"]
+margin_left = 37.0
+margin_right = 69.0
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile3" type="TextureRect" parent="Image/Wall/Row4"]
+margin_left = 74.0
+margin_right = 106.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile4" type="TextureRect" parent="Image/Wall/Row4"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile5" type="TextureRect" parent="Image/Wall/Row4"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Row5" type="Control" parent="Image/Wall"]
+editor/display_folded = true
+margin_top = 148.0
+margin_right = 180.0
+margin_bottom = 180.0
+
+[node name="Tile1" type="TextureRect" parent="Image/Wall/Row5"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile2" type="TextureRect" parent="Image/Wall/Row5"]
+margin_left = 37.0
+margin_right = 69.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile3" type="TextureRect" parent="Image/Wall/Row5"]
+margin_left = 74.0
+margin_right = 106.0
+margin_bottom = 32.0
+texture = ExtResource( 8 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile4" type="TextureRect" parent="Image/Wall/Row5"]
+margin_left = 111.0
+margin_right = 143.0
+margin_bottom = 32.0
+texture = ExtResource( 9 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Tile5" type="TextureRect" parent="Image/Wall/Row5"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Loading Lines" type="Control" parent="Image"]
+margin_left = 5.0
+margin_top = 55.0
+margin_right = 185.0
+margin_bottom = 235.0
+
+[node name="Line1" type="TextureRect" parent="Image/Loading Lines"]
+margin_left = 148.0
+margin_right = 180.0
+margin_bottom = 32.0
+
+[node name="Line2" type="TextureRect" parent="Image/Loading Lines"]
+margin_left = 113.0
+margin_top = 37.0
+margin_right = 180.0
+margin_bottom = 69.0
+
+[node name="Line3" type="TextureRect" parent="Image/Loading Lines"]
+margin_left = 78.0
+margin_top = 74.0
+margin_right = 180.0
+margin_bottom = 106.0
+
+[node name="Line4" type="TextureRect" parent="Image/Loading Lines"]
+margin_left = 43.0
+margin_top = 109.0
+margin_right = 180.0
+margin_bottom = 141.0
+
+[node name="Line5" type="TextureRect" parent="Image/Loading Lines"]
+margin_top = 148.0
+margin_right = 180.0
+margin_bottom = 180.0
