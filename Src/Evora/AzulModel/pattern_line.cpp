@@ -7,23 +7,22 @@ namespace model
 		return m_count == m_size;
 	}
 
-	bool pattern_line::add_tiles(int count, tile color, floor& floor, lid& lid, bool first_center)
+	std::tuple<int, int> pattern_line::add_tiles(int count, tile color)
 	{
-		if (m_color != tile::empty || m_color != color || is_full()) return false;
+		m_color = color;
 		m_count += count;
-		// when taking a first tile_wall from the center also add a starter tile_wall to the floor
-		if (first_center && !floor.is_full()) floor.add_tiles(tile::starter, 1, lid);
-		if(m_count > m_size)
+		if (m_count > m_size)
 		{
-			floor.add_tiles(color, m_count - m_size, lid);
+			int overflow = m_count - m_size;
 			m_count = m_size;
+			return { count - overflow, overflow };
 		}
-		return true;
+		return { count, 0 };
 	}
 
 	void pattern_line::clear(lid& lid)
 	{
-		lid.add_tiles(m_color, m_size - 1); // one tile_wall goes to wall
+		lid.add_tiles(m_size - 1, m_color); // one tile_wall goes to wall
 		m_count = 0;
 		m_color = tile::empty;
 	}

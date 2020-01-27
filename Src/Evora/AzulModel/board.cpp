@@ -15,11 +15,9 @@ namespace model
 		return m_wall.can_add_color(line, color) && m_pattern_lines[line].can_put_color(color);
 	}
 
-	bool board::add_tiles(int line, int count, tile color, lid& lid, bool first_center)
-	{
-		if (!can_put_color(line, color)) return false;
-		
-		return m_pattern_lines[line].add_tiles(count, color, m_floor, lid);
+	std::tuple<int, int> board::add_tiles(int line, int count, tile color)
+	{		
+		return m_pattern_lines[line].add_tiles(count, color);
 	}
 
 	bool board::tile_wall(lid& lid)
@@ -68,5 +66,10 @@ namespace model
 	std::vector<tile>::const_iterator board::floor_end() const
 	{
 		return m_floor.end();
+	}
+
+	int board::add_to_floor(int count, tile color)
+	{
+		return m_floor.add_tiles(count, color);
 	}
 }

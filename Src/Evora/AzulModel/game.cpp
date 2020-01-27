@@ -29,31 +29,6 @@ namespace model
 		return false;
 	}
 
-	bool game::factory_offer(int player, int factory, tile color, int line)
-	{
-		int count = m_factories[factory].offer(color);
-		if (count == 0) return false;
-		if(m_players[player].add_tiles(line, count, color, m_lid))
-		{
-			m_factories[factory].pick_color(color, m_center);
-			return true;
-		}
-		return false;
-	}
-
-	bool game::center_offer(int player, tile color, int line)
-	{
-		bool starter;
-		int count = m_center.offer(color, starter);
-		if (count == 0) return false;
-		if(m_players[player].add_tiles(line, count, color, m_lid, starter))
-		{
-			m_center.pick_color(color);
-			return true;
-		}
-		return false;
-	}
-
 	int game::factory_count() const
 	{
 		return m_factories.size();
@@ -110,6 +85,30 @@ namespace model
 	std::vector<tile>::const_iterator game::center_end() const
 	{
 		return m_center.end();
+	}
+
+	std::tuple<int, int> game::factory_to_pattern_line(int factory_index, int player_index,
+		int pattern_line_index, tile color)
+	{
+		int count = m_factories[factory_index].pick_color(color);
+		return m_players[player_index].add_tiles(pattern_line_index, count, color);
+	}
+
+	int game::add_to_floor(int player_index, int count, tile color)
+	{
+		return m_players[player_index].add_to_floor(count, color);
+	}
+
+	void game::add_to_lid(int count, tile color)
+	{
+		m_lid.add_tiles(count, color);
+	}
+
+	std::tuple<int, int, std::vector<int>> game::center_to_pattern_line(int player_index, int pattern_line_index, tile color)
+	{
+		auto [count, indices] = m_center.pick_color(color);
+		auto [added_to_pattern_line, overflow] = m_players[player_index].add_tiles(pattern_line_index, count, color);
+		return { added_to_pattern_line, overflow, indices };
 	}
 
 	bool game::tile_walls()

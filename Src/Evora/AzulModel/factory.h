@@ -17,7 +17,7 @@ namespace model
 	public:
 		bool fill(bag& bag);
 		int offer(tile color);
-		void pick_color(tile color, center& center);
+		int pick_color(tile color);
 		std::vector<tile> get_colors();
 		bool empty();
 

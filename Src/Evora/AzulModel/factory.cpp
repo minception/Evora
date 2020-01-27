@@ -23,13 +23,19 @@ namespace model
 		return res;
 	}
 
-	void factory::pick_color(tile color, center& center)
+	int factory::pick_color(tile color)
 	{
-		for (auto && tile : m_tiles)
+		int res(0);
+		std::remove_if(m_tiles.begin(), m_tiles.end(), [color, &res](tile t)
 		{
-			if (tile != color) center.add_tile(tile);
-		}
-		m_tiles.clear();
+			if (t == color)
+			{
+				++res;
+				return true;
+			}
+			return false;
+		});
+		return res;
 	}
 
 	std::vector<tile> factory::get_colors()

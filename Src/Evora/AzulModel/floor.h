@@ -14,7 +14,7 @@ namespace model
 		std::vector<tile> m_tiles;
 		
 	public:
-		void add_tiles(tile type, int count, lid& lid);
+		int add_tiles(int count, tile color);
 		bool empty(lid& lid);
 		bool is_full() const { return m_tiles.size() == FLOOR_SIZE; }
 		int score() const;

@@ -2,12 +2,11 @@
 
 namespace model
 {
-	void lid::add_tiles(tile type, int count)
+	void lid::add_tiles(int count, tile color)
 	{
-		// _ASSERT(type == tile_wall::starter, "starter tile_wall got into lid");
 		for (int i = 0; i < count; i++)
 		{
-			m_tiles.emplace_back(type);
+			m_tiles.emplace_back(color);
 		}
 	}
 

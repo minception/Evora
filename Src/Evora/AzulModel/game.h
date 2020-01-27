@@ -20,8 +20,6 @@ namespace model
 		game(int number_of_players);
 
 		// game control methods
-		virtual bool factory_offer(int player, int factory, tile color, int line);
-		virtual bool center_offer(int player, tile color, int line);
 		virtual bool tile_walls();
 
 		// game information retrieval methods
@@ -44,5 +42,11 @@ namespace model
 		std::vector<board>::const_iterator players_end() const;
 		std::vector<tile>::const_iterator center_begin() const;
 		std::vector<tile>::const_iterator center_end() const;
+
+		// control functions
+		virtual std::tuple<int, int> factory_to_pattern_line(int factory_index, int player_index, int pattern_line_index, tile color);
+		virtual int add_to_floor(int player_index, int count, tile color);
+		void add_to_lid(int count, tile color);
+		virtual std::tuple<int, int, std::vector<int>> center_to_pattern_line(int player_index, int pattern_line_index, tile color);
 	};
 }

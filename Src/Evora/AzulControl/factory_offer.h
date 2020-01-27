@@ -23,6 +23,7 @@ namespace control
 		model::tile m_color;
 		int m_moved_to_pattern_line;
 		int m_moved_to_center;
+		bool m_first_to_center;
 		int m_moved_to_floor;
 		int m_moved_to_lid;
 	};

@@ -3,6 +3,7 @@
 #include "floor.h"
 #include "lid.h"
 #include "tile.h"
+#include <tuple>
 
 namespace model
 {
@@ -14,7 +15,7 @@ namespace model
 	public:
 		pattern_line(int size) :m_size(size) {}
 		bool is_full() const;
-		bool add_tiles(int count, tile color, floor& floor, lid& lid, bool first_center = false);
+		std::tuple<int, int> add_tiles(int count, tile color);
 		void clear(lid& lid);
 		tile get_color() const { return m_color; }
 		int get_count() const { return m_count; }

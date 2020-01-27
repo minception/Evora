@@ -33,18 +33,24 @@ namespace model
 		first = first_pick;
 		return res;
 	}
-	void center::pick_color(tile color)
+	std::tuple<int, std::vector<int>> center::pick_color(tile color)
 	{
-		auto to_remove = std::find(m_tiles.begin(), m_tiles.end(), color);
-		while(to_remove != m_tiles.end())
+		std::vector<int> res;
+		int index = 0;
+		int count = 0;
+		std::remove_if(m_tiles.begin(), m_tiles.end(), [&res, &index, &count, color](tile tile)
 		{
-			m_tiles.erase(to_remove);
-			to_remove = std::find(m_tiles.begin(), m_tiles.end(), color);
-		}
-		if(first_pick)
-		{
-			first_pick = false;
-		}
+			if(tile == color)
+			{
+				res.push_back(index);
+				++count;
+				++index;
+				return true;
+			}
+			++index;
+			return false;
+		});
+		return { count, res };
 	}
 
 	std::vector<tile>::const_iterator center::begin() const

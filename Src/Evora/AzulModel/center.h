@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "tile.h"
+#include <tuple>
 
 namespace model
 {
@@ -16,7 +17,7 @@ namespace model
 		bool empty() const;
 		int offer(tile color);
 		int offer(tile color, bool& first);
-		void pick_color(tile color);
+		std::tuple<int, std::vector<int>> pick_color(tile color);
 
 		// iterator methods for display purposes
 		std::vector<tile>::const_iterator begin() const;

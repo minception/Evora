@@ -19,7 +19,7 @@ namespace model
 	public:
 		board();
 		bool can_put_color(int line, tile color);
-		bool add_tiles(int line, int count, tile color, lid& lid, bool first_center = false);
+		std::tuple<int, int> add_tiles(int line, int count, tile color);
 		bool tile_wall(lid& lid);
 		int get_score() const;
 
@@ -30,5 +30,6 @@ namespace model
 		std::vector<pattern_line>::const_iterator pattern_lines_end() const;
 		std::vector<tile>::const_iterator floor_begin() const;
 		std::vector<tile>::const_iterator floor_end() const;
+		int add_to_floor(int count, tile color);
 	};
 }
