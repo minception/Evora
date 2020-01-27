@@ -1,11 +1,16 @@
 ﻿#pragma once
 #include "game.h"
-namespace controller
+#include <memory>
+#include "command.h"
+#include <deque>
+
+namespace control
 {
-	class GameController
+	class game_controller
 	{
-		model::game m_model;
+		std::shared_ptr<model::game> m_model;
+		std::deque<std::unique_ptr<command>> commands;
 	public:
-		GameController();
+		game_controller();
 	};
 }
