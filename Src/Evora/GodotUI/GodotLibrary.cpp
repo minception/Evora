@@ -3,6 +3,7 @@
 #include "GodotTile.h"
 #include "Root.h"
 #include "Factory.h"
+#include "PatternLine.h"
 
 using namespace godot;
 
@@ -23,4 +24,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	register_class<TileLoader>();
 	register_class<GodotTile>();
 	register_class<Root>();
+	register_class<PatternLine>();
 }

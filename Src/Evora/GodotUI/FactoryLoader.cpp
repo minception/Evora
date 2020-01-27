@@ -36,9 +36,9 @@ std::vector<Factory*> FactoryLoader::load_factories(int count, Vector2 c, float 
 		String image_name("Image");
 		TextureRect* image = (TextureRect*)factory->get_child(get_child_index(factory, image_name));
 		Vector2 size = image->get_size();
-		float angle = Math_PI/2 + 2*Math_PI*i/count;
-		float posx = c.x - std::cos(angle) * r - size.x/2;
-		float posy = c.y - std::sin(angle) * r - size.y/2;
+		double angle = Math_PI/2 + 2*Math_PI*i/count;
+		double posx = c.x - std::cos(angle) * r - size.x/2;
+		double posy = c.y - std::sin(angle) * r - size.y/2;
 		factory->set_global_position(Vector2(posx, posy));
 		add_child(factory);
 		res.push_back(factory);

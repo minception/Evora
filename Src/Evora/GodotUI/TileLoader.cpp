@@ -17,6 +17,8 @@ void godot::TileLoader::_register_methods()
 	register_method("tile_picked_up", &TileLoader::tile_picked_up);
 }
 
+Root* TileLoader::p_root;
+
 void godot::TileLoader::_ready()
 {
 	ObjectLoader::tile_loader = this;

@@ -99,23 +99,13 @@ void GodotTile::_ready()
 void GodotTile::_process(float delta)
 {
 	Vector2 mouse_position = get_global_mouse_position() - _image->get_size() / 2;
-	if(_holding)
+	int64_t mouse_button_mask = _input->get_mouse_button_mask();
+	if(!(mouse_button_mask & 1) && _holding)
 	{
-		Vector2 viewport_size = get_viewport_rect().size;
-		if(mouse_position.x > 0 && mouse_position.y > 0 &&
-			mouse_position.x < viewport_size.x && mouse_position.y < viewport_size.y)
-			set_global_position(mouse_position);
-	}
-	if(_moving_back)
-	{
-		Vector2 shift = get_global_position() - _original_position;
-		if(shift.length() < 1.f)
-		{
-			set_global_position(_original_position);
-			_moving_back = false;
-		}
-		Vector2 speed = shift * delta * 10;
-		set_global_position(get_global_position() - speed);
+		_moving_back = true;
+		_holding = false;
+		_holding_one = false;
+		_moving_to_mouse = false;
 	}
 	if(_moving_to_mouse)
 	{
@@ -128,6 +118,24 @@ void GodotTile::_process(float delta)
 		}
 		Vector2 speed = shift * delta * 10;
 		set_global_position(get_global_position() - speed);
+	}
+	else if(_moving_back)
+	{
+		Vector2 shift = get_global_position() - _original_position;
+		if(shift.length() < 1.f)
+		{
+			set_global_position(_original_position);
+			_moving_back = false;
+		}
+		Vector2 speed = shift * delta * 10;
+		set_global_position(get_global_position() - speed);
+	}
+	else if(_holding)
+	{
+		Vector2 viewport_size = get_viewport_rect().size;
+		if(mouse_position.x > 0 && mouse_position.y > 0 &&
+			mouse_position.x < viewport_size.x && mouse_position.y < viewport_size.y)
+			set_global_position(mouse_position);
 	}
 	if(_is_highlighted)
 	{
@@ -161,9 +169,9 @@ void GodotTile::_area_input_event()
 		if (_holding_one) return;
 		emit_signal("picked_up", _factory_index, _color);
 	}
-	else if(get("holding"))
+	else if(_holding)
 	{
-		set("holding", false);
+		_holding = false;
 		_moving_back = true;
 		_holding_one = false;
 		
@@ -178,6 +186,7 @@ bool GodotTile::pick_up(int factory, int color)
 	if(_factory_index == factory && _color == color)
 	{
 		set("moving_to_mouse", true);
+		set("holding", true);
 		set("original_position", get_global_position());
 		return true;
 	}

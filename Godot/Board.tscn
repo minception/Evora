@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Board.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/board-background.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Textures/red-tile.png" type="Texture" id=7]
 [ext_resource path="res://Textures/black-tile.png" type="Texture" id=8]
 [ext_resource path="res://Textures/white-tile.png" type="Texture" id=9]
+[ext_resource path="res://Line.gdns" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -265,36 +266,41 @@ texture = ExtResource( 4 )
 expand = true
 script = ExtResource( 5 )
 
-[node name="Loading Lines" type="Control" parent="Image"]
+[node name="Pattern_Lines" type="Control" parent="Image"]
 margin_left = 5.0
 margin_top = 55.0
 margin_right = 185.0
 margin_bottom = 235.0
 
-[node name="Line1" type="TextureRect" parent="Image/Loading Lines"]
+[node name="Line1" type="TextureRect" parent="Image/Pattern_Lines"]
 margin_left = 148.0
 margin_right = 180.0
 margin_bottom = 32.0
+script = ExtResource( 10 )
 
-[node name="Line2" type="TextureRect" parent="Image/Loading Lines"]
+[node name="Line2" type="TextureRect" parent="Image/Pattern_Lines"]
 margin_left = 113.0
 margin_top = 37.0
 margin_right = 180.0
 margin_bottom = 69.0
+script = ExtResource( 10 )
 
-[node name="Line3" type="TextureRect" parent="Image/Loading Lines"]
+[node name="Line3" type="TextureRect" parent="Image/Pattern_Lines"]
 margin_left = 78.0
 margin_top = 74.0
 margin_right = 180.0
 margin_bottom = 106.0
+script = ExtResource( 10 )
 
-[node name="Line4" type="TextureRect" parent="Image/Loading Lines"]
+[node name="Line4" type="TextureRect" parent="Image/Pattern_Lines"]
 margin_left = 43.0
 margin_top = 109.0
 margin_right = 180.0
 margin_bottom = 141.0
+script = ExtResource( 10 )
 
-[node name="Line5" type="TextureRect" parent="Image/Loading Lines"]
+[node name="Line5" type="TextureRect" parent="Image/Pattern_Lines"]
 margin_top = 148.0
 margin_right = 180.0
 margin_bottom = 180.0
+script = ExtResource( 10 )

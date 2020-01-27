@@ -8,11 +8,12 @@
 
 namespace godot
 {
+	class Root;
 	class TileLoader :public Node2D
 	{
 		GODOT_CLASS(TileLoader, Node2D)
-	private:
 	public:
+		static Root* p_root;
 		static void _register_methods();
 		void _ready();
 		void _init();

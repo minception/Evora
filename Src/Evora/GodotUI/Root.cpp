@@ -22,12 +22,14 @@ void godot::Root::_init()
 
 void Root::_ready()
 {
+	TileLoader::p_root = this;
+	// Setting up window size to fit all the boards
 	Vector2 board_size = ((TextureRect*)(GodotScenes::board_example->get_child(get_child_index(GodotScenes::board_example, "Image"))))->get_size();
-	Vector2 tile_size = ((TextureRect*)(GodotScenes::tile_example->get_child(get_child_index(GodotScenes::tile_example, "Image"))))->get_size();
-	Vector2 factory_size = ((TextureRect*)(GodotScenes::factory_example->get_child(get_child_index(GodotScenes::factory_example, "Image"))))->get_size();
 	float width = board_size.x * number_of_players + 5 * (number_of_players + 1);
 	OS::get_singleton()->set_window_size(Vector2(width, 900));
 	OS::get_singleton()->center_window();
+	
+	// game init (maybe move this behavior over to a control class)
 	get_tree()->get_root()->set_size(Vector2(width, 900));
 	m_game = std::make_shared<GodotGame>(number_of_players);
 	m_game->shuffle_bag();
