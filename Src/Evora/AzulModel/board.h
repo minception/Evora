@@ -10,16 +10,13 @@ namespace model
 {
 	class board
 	{
-		bool starts;
 		int m_score{0};
 		std::vector<pattern_line> m_pattern_lines;
 		wall m_wall;
 		floor m_floor;
-		
+		bool m_has_starter_tile;
 	public:
 		board();
-		bool can_put_color(int line, tile color);
-		std::tuple<int, int> add_tiles(int line, int count, tile color);
 		bool tile_wall(lid& lid);
 		int get_score() const;
 
@@ -31,5 +28,7 @@ namespace model
 		std::vector<tile>::const_iterator floor_begin() const;
 		std::vector<tile>::const_iterator floor_end() const;
 		int add_to_floor(int count, tile color);
+		bool has_starter_tile();
+		void set_starter_tile(bool cond);
 	};
 }

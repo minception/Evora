@@ -21,12 +21,18 @@
     <ClInclude Include="RandomAI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RandomAI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

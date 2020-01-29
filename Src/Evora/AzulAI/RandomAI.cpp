@@ -11,5 +11,10 @@ namespace AI
 		std::random_device seed;
 		m_rng = std::mt19937{ seed() };
 	}
+
+	const char* RandomAI::get_name() const
+	{
+		return "RandomAI";
+	}
 }
 	

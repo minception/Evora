@@ -5,11 +5,6 @@
 
 using namespace godot;
 
-bool godot::GodotGame::tile_walls()
-{
-	return game::tile_walls();
-}
-
 void GodotGame::draw(Vector2 viewport_size)
 {
 	// draw factories

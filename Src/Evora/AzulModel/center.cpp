@@ -7,32 +7,7 @@ namespace model
 	{
 		m_tiles.emplace_back(type);
 	}
-
-	bool center::empty() const
-	{
-		return m_tiles.empty();
-	}
-
-	int center::offer(tile color)
-	{
-		int res = 0;
-		for (auto && tile : m_tiles)
-		{
-			if (tile == color) ++res;
-		}
-		return res;
-	}
-
-	int center::offer(tile color, bool& first)
-	{
-		int res = 0;
-		for (auto && tile : m_tiles)
-		{
-			if (tile == color) ++res;
-		}
-		first = first_pick;
-		return res;
-	}
+	
 	std::tuple<int, std::vector<int>> center::pick_color(tile color)
 	{
 		std::vector<int> res;

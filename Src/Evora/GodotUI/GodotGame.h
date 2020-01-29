@@ -15,7 +15,6 @@ namespace godot
 		std::vector<godot::Node2D> m_tiles;
 		std::vector<Factory*> m_factories_display;
 	public:
-		bool tile_walls() override;
 		void draw(Vector2 viewport_size);
 		GodotGame(int players) :game(players) {}
 	};

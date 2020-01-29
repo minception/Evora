@@ -10,29 +10,6 @@ namespace model
 		}
 	}
 
-	bool board::can_put_color(int line, tile color)
-	{
-		return m_wall.can_add_color(line, color) && m_pattern_lines[line].can_put_color(color);
-	}
-
-	std::tuple<int, int> board::add_tiles(int line, int count, tile color)
-	{		
-		return m_pattern_lines[line].add_tiles(count, color);
-	}
-
-	bool board::tile_wall(lid& lid)
-	{
-		bool res = false;
-		int line(0);
-		for (auto && pattern_line : m_pattern_lines)
-		{
-			m_score += m_wall.tile_wall(pattern_line, line, lid);
-			if (m_wall.full_line(line)) res = true;
-			++line;
-		}
-		return res;
-	}
-
 	int board::get_score() const
 	{
 		return m_score;
@@ -71,5 +48,10 @@ namespace model
 	int board::add_to_floor(int count, tile color)
 	{
 		return m_floor.add_tiles(count, color);
+	}
+
+	void board::set_starter_tile(bool cond)
+	{
+		m_has_starter_tile = cond;
 	}
 }

@@ -14,9 +14,6 @@ namespace model
 		
 	public:
 		void add_tile(tile type);
-		bool empty() const;
-		int offer(tile color);
-		int offer(tile color, bool& first);
 		std::tuple<int, std::vector<int>> pick_color(tile color);
 
 		// iterator methods for display purposes

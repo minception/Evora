@@ -187,6 +187,12 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AzulAI\AzulAI.vcxproj">
+      <Project>{dc4c4bee-6f5d-4bb5-b6a2-39fb8431a013}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\AzulControl\AzulControl.vcxproj">
+      <Project>{ed5322c7-4dc9-46a3-b335-67aef15f582c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\AzulModel\AzulModel.vcxproj">
       <Project>{bc90037e-326c-4bef-a6cb-eec9bbed8b26}</Project>
     </ProjectReference>

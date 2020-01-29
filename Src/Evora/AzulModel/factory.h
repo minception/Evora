@@ -15,14 +15,12 @@ namespace model
 		std::vector<tile> m_tiles;
 		
 	public:
-		bool fill(bag& bag);
-		int offer(tile color);
 		int pick_color(tile color);
 		std::vector<tile> get_colors();
-		bool empty();
 
 		// iterator methods for display purposes
 		std::vector<tile>::const_iterator begin() const;
 		std::vector<tile>::const_iterator end() const;
+		int add_to_center(center& center);
 	};
 }
