@@ -1,9 +1,10 @@
 #include "Board.h"
-#include "ObjectLoader.h"
-#include "GodotTile.h"
-#include "Root.h"
 #include "Factory.h"
+#include "GameData.h"
+#include "GodotTile.h"
+#include "ObjectLoader.h"
 #include "PatternLine.h"
+#include "Root.h"
 
 using namespace godot;
 
@@ -25,4 +26,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	register_class<GodotTile>();
 	register_class<Root>();
 	register_class<PatternLine>();
+	register_class<GameData>();
 }

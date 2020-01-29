@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{b15774fe-5e4b-4f9e-b2cb-1af448ce3989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\Header Files">
+      <UniqueIdentifier>{2694bb96-d14a-432a-adb8-007c0176e9f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\Source Files">
+      <UniqueIdentifier>{b5cf85f6-a9fd-4843-b96d-a2c96426a0b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp">
@@ -54,6 +63,18 @@
     <ClCompile Include="PatternLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanPlayer.cpp">
+      <Filter>Player\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIPlayer.cpp">
+      <Filter>Player\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -91,6 +112,18 @@
     </ClInclude>
     <ClInclude Include="PatternLine.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanPlayer.h">
+      <Filter>Player\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIPlayer.h">
+      <Filter>Player\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

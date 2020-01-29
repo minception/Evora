@@ -73,28 +73,28 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -158,14 +158,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIPlayer.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardLoader.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="PatternLine.cpp" />
     <ClCompile Include="FactoryLoader.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="GodotGame.cpp" />
     <ClCompile Include="GodotScenes.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="GodotTile.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
@@ -173,13 +177,17 @@
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIPlayer.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardLoader.h" />
     <ClInclude Include="Factory.h" />
+    <ClInclude Include="GameData.h" />
+    <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="PatternLine.h" />
     <ClInclude Include="FactoryLoader.h" />
     <ClInclude Include="GodotGame.h" />
     <ClInclude Include="GodotScenes.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Root.h" />
     <ClInclude Include="GodotTile.h" />
     <ClInclude Include="ObjectLoader.h" />

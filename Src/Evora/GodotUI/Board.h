@@ -10,25 +10,19 @@
 namespace godot {
 	class Board : public Node2D {
 		GODOT_CLASS(Board, Node2D)
+		void set_highlight(bool cond);
 	public:
+		int index;
+		bool player_select;
+		
 		static void _register_methods();
 		void _init();
 		void _process(float delta);
+		void connect_children();
 		void _ready();
-
-		Board();
+		void _hide_player_select();
+		void mouse_entered();
+		void mouse_exited();
+		void image_input();
 	};
-
-	inline void Board::_ready()
-	{
-		OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "Player"));
-		player_select->add_item("Human", 0);
-		auto ai_factories = AI::AIFactory::get_factories();
-		int64_t player_index = 1;
-		for (auto&& ai_factory : ai_factories)
-		{
-			player_select->add_item(ai_factory.first, player_index++);
-		}
-		
-	}
 }

@@ -19,9 +19,12 @@ namespace godot
 		std::shared_ptr<GodotGame> m_game;
 		
 		int m_number_of_players;
+
+		void add_start_button();
 	public:
 		static void _register_methods();
 		void _init();
 		void _ready();
+		void start_game();
 	};
 }

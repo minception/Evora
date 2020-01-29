@@ -2,7 +2,8 @@ shared_library('godot_ui',
 
     ['Board.cpp', 'BoardLoader.cpp', 'Factory.cpp', 'FactoryLoader.cpp', 'GodotGame.cpp',
      'GodotLibrary.cpp', 'GodotTile.cpp', 'ObjectLoader.cpp', 'Root.cpp', 'TileLoader.cpp',
-     'Utils.cpp','GodotScenes.cpp','PatternLine.cpp'],
+     'Utils.cpp','GodotScenes.cpp','PatternLine.cpp', 'Player.cpp', 'HumanPlayer.cpp',
+     'AIPlayer.cpp', 'GameData.cpp'],
 
     dependencies: godot_lib,
     include_directories: [ai_inc, control_inc, model_inc, godot_includes],
