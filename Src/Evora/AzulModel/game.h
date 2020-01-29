@@ -17,7 +17,6 @@ namespace model
 		std::vector<board> m_boards;
 		//TODO: set this variable when initializing round
 		bool m_starter_tile_handled; // keeps track of whether the starter tile has been handled this factory offer round
-		int m_current_player;
 	public:
 		game(int number_of_players);
 		int factory_count();

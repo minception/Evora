@@ -10,6 +10,7 @@ void Board::_register_methods() {
 
 void godot::Board::_init()
 {
+	
 }
 
 void godot::Board::_process(float delta)

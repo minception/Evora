@@ -73,28 +73,28 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

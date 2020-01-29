@@ -305,9 +305,8 @@ margin_right = 180.0
 margin_bottom = 180.0
 script = ExtResource( 10 )
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="Player" type="OptionButton" parent="."]
 margin_top = -28.0
 margin_right = 385.0
 margin_bottom = -8.0
 text = "Item 0"
-selected = 0
