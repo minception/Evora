@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Tile.gdns" type="Script" id=1]
 [ext_resource path="res://Aileron-Regular.otf" type="DynamicFontData" id=2]
-[ext_resource path="res://Textures/highlight.png" type="Texture" id=3]
+[ext_resource path="res://Textures/rounded_cyan_highlight.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25

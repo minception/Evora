@@ -29,6 +29,7 @@ void godot::BoardLoader::load_boards(int count, Vector2 viewport_size)
 	for (int i = 0; i < count; ++i)
 	{
 		Node2D* board = (Node2D*)m_board_scene->instance();
+		board->set("index", i);
 		String image_name("Image");
 		TextureRect* board_picture = (TextureRect*)board->get_child(get_child_index(board, image_name));
 		real_t posx = (viewport_size.x - 10.f - board_picture->get_size().x) / (count - 1) * i + 5.f;

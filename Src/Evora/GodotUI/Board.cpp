@@ -2,6 +2,7 @@
 #include "Utils.h"
 #include <TextureRect.hpp>
 #include <Control.hpp>
+#include <Input.hpp>
 
 using namespace godot;
 
@@ -22,6 +23,8 @@ void Board::_register_methods() {
 
 	register_property("index", &Board::index, 0);
 	register_property("player_select", &Board::player_select, false);
+
+	register_signal<Board>("selected", "index", GODOT_VARIANT_TYPE_INT);
 }
 
 void godot::Board::_init()
@@ -100,4 +103,21 @@ void Board::mouse_exited()
 
 void Board::image_input()
 {
+	if (get("player_select"))
+	{
+		Input* input = Input::get_singleton();
+		int64_t mouse_mask = input->get_mouse_button_mask();
+		if(mouse_mask&1)
+		{
+			emit_signal("selected", get("index"));
+			set_highlight(false);
+		}
+	}
+		
+}
+
+String Board::get_player_name()
+{
+	OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
+	return player_select->get_text();
 }

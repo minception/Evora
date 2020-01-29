@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Board.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/board-background.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Textures/black-tile.png" type="Texture" id=8]
 [ext_resource path="res://Textures/white-tile.png" type="Texture" id=9]
 [ext_resource path="res://Line.gdns" type="Script" id=10]
+[ext_resource path="res://Textures/cyan-highlight.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -28,15 +29,14 @@ expand = true
 stretch_mode = 2
 
 [node name="Score" type="Label" parent="Image"]
-margin_left = 13.3962
-margin_top = -3.56786
-margin_right = 47.3962
-margin_bottom = 57.4321
+margin_left = 14.0
+margin_top = -3.0
+margin_right = 233.0
+margin_bottom = 58.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
 
 [node name="Wall" type="Control" parent="Image"]
-editor/display_folded = true
 margin_left = 196.0
 margin_top = 55.0
 margin_right = 376.0
@@ -266,47 +266,60 @@ texture = ExtResource( 4 )
 expand = true
 script = ExtResource( 5 )
 
-[node name="Pattern_Lines" type="Control" parent="Image"]
+[node name="PatternLines" type="Control" parent="Image"]
 margin_left = 5.0
 margin_top = 55.0
 margin_right = 185.0
 margin_bottom = 235.0
 
-[node name="Line1" type="TextureRect" parent="Image/Pattern_Lines"]
+[node name="Line1" type="TextureRect" parent="Image/PatternLines"]
 margin_left = 148.0
 margin_right = 180.0
 margin_bottom = 32.0
 script = ExtResource( 10 )
 
-[node name="Line2" type="TextureRect" parent="Image/Pattern_Lines"]
+[node name="Line2" type="TextureRect" parent="Image/PatternLines"]
 margin_left = 113.0
 margin_top = 37.0
 margin_right = 180.0
 margin_bottom = 69.0
 script = ExtResource( 10 )
 
-[node name="Line3" type="TextureRect" parent="Image/Pattern_Lines"]
+[node name="Line3" type="TextureRect" parent="Image/PatternLines"]
 margin_left = 78.0
 margin_top = 74.0
 margin_right = 180.0
 margin_bottom = 106.0
 script = ExtResource( 10 )
 
-[node name="Line4" type="TextureRect" parent="Image/Pattern_Lines"]
+[node name="Line4" type="TextureRect" parent="Image/PatternLines"]
 margin_left = 43.0
 margin_top = 109.0
 margin_right = 180.0
 margin_bottom = 141.0
 script = ExtResource( 10 )
 
-[node name="Line5" type="TextureRect" parent="Image/Pattern_Lines"]
+[node name="Line5" type="TextureRect" parent="Image/PatternLines"]
 margin_top = 148.0
 margin_right = 180.0
 margin_bottom = 180.0
 script = ExtResource( 10 )
 
-[node name="Player" type="OptionButton" parent="."]
+[node name="Highlight" type="TextureRect" parent="Image"]
+visible = false
+show_behind_parent = true
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 389.0
+margin_bottom = 286.0
+texture = ExtResource( 11 )
+expand = true
+
+[node name="PlayerSelect" type="OptionButton" parent="."]
 margin_top = -28.0
 margin_right = 385.0
 margin_bottom = -8.0
 text = "Item 0"
+[connection signal="gui_input" from="Image" to="." method="image_input"]
+[connection signal="mouse_entered" from="Image" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="Image" to="." method="mouse_exited"]

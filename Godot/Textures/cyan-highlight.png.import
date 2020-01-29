@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/highlight.png-666da5bd112bd503be313a22f92037a9.stex"
+path="res://.import/cyan-highlight.png-f9394f0fed28fbd290361c68b4304fab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/highlight.png"
-dest_files=[ "res://.import/highlight.png-666da5bd112bd503be313a22f92037a9.stex" ]
+source_file="res://Textures/cyan-highlight.png"
+dest_files=[ "res://.import/cyan-highlight.png-f9394f0fed28fbd290361c68b4304fab.stex" ]
 
 [params]
 

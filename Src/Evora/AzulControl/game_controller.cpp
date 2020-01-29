@@ -1,6 +1,3 @@
 ﻿#include "game_controller.h"
 
-namespace controller
-{
-	
-}
+using namespace control;

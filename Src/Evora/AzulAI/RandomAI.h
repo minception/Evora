@@ -9,7 +9,7 @@ namespace AI
 		 std::mt19937 m_rng;
 	public:
 		void move() override;
-		RandomAI(std::shared_ptr<model::game> model);
+		RandomAI(std::shared_ptr<control::game_controller> controller);
 		const char* get_name() const override;
 	};
 }

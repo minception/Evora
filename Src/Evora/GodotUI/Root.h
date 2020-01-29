@@ -22,6 +22,7 @@ namespace godot
 
 		void add_start_button();
 	public:
+		void set_starting_player(int index);
 		static void _register_methods();
 		void _init();
 		void _ready();

@@ -6,6 +6,6 @@ namespace godot
 	class Player
 	{
 	public:
-		virtual void move(control::game_controller& controller) = 0;
+		virtual void move() = 0;
 	};
 }

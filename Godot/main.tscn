@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/wood.png" type="Texture" id=2]
 [ext_resource path="res://Factories.gdns" type="Script" id=3]
 [ext_resource path="res://Boards.gdns" type="Script" id=4]
 [ext_resource path="res://TileLoader.gdns" type="Script" id=5]
+[ext_resource path="res://GameData.gdns" type="Script" id=6]
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
-players = 3
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 3840.0
@@ -27,4 +27,6 @@ script = ExtResource( 4 )
 
 [node name="Tiles" type="Node2D" parent="."]
 script = ExtResource( 5 )
-[connection signal="item_rect_changed" from="." to="Background" method="_on_window_resize"]
+
+[node name="GameData" type="Node" parent="."]
+script = ExtResource( 6 )

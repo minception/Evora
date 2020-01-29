@@ -1,4 +1,5 @@
 ﻿#include "RandomAI.h"
+#include "../AzulControl/game_controller.h"
 
 namespace AI
 {
@@ -6,7 +7,7 @@ namespace AI
 	{
 	}
 
-	RandomAI::RandomAI(std::shared_ptr<model::game> model) : AI(model)
+	RandomAI::RandomAI(std::shared_ptr<control::game_controller> controller) : AI(controller)
 	{
 		std::random_device seed;
 		m_rng = std::mt19937{ seed() };

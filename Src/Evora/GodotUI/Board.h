@@ -24,5 +24,6 @@ namespace godot {
 		void mouse_entered();
 		void mouse_exited();
 		void image_input();
+		String get_player_name();
 	};
 }
