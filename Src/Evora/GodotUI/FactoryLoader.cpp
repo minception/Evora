@@ -27,9 +27,8 @@ void FactoryLoader::_process(float delta)
 {
 }
 
-std::vector<Factory*> FactoryLoader::load_factories(int count, Vector2 c, float r)
+void FactoryLoader::load_factories(int count, Vector2 c, float r)
 {
-	std::vector<Factory*> res;
 	for (int i = 0; i < count; ++i)
 	{
 		Factory* factory = (Factory*)m_factory_scene->instance();
@@ -41,9 +40,7 @@ std::vector<Factory*> FactoryLoader::load_factories(int count, Vector2 c, float 
 		double posy = c.y - std::sin(angle) * r - size.y/2;
 		factory->set_global_position(Vector2(posx, posy));
 		add_child(factory);
-		res.push_back(factory);
 	}
-	return res;
 }
 
 FactoryLoader::FactoryLoader()

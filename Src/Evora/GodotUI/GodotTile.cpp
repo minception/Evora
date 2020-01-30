@@ -63,7 +63,6 @@ void GodotTile::_register_methods()
 	register_method("_area_input_event", &GodotTile::_area_input_event);
 
 	register_property("color", &GodotTile::set_color,&GodotTile::get_color, 0);
-	register_property("index", &GodotTile::_index, 0);
 	register_property("factory_index", &GodotTile::_factory_index, 0);
 	register_property("holding", &GodotTile::_holding, false);
 	register_property("original_position", &GodotTile::_original_position, Vector2(0, 0));
@@ -111,12 +110,12 @@ void GodotTile::_process(float delta)
 	{
 
 		Vector2 shift = get_global_position() - mouse_position;
-		if (shift.length() < 1.f)
+		if (shift.length() < 5.f)
 		{
 			_holding = true;
 			_moving_to_mouse = false;
 		}
-		Vector2 speed = shift * delta * 10;
+		Vector2 speed = shift * delta * 20;
 		set_global_position(get_global_position() - speed);
 	}
 	else if(_moving_back)

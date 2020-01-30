@@ -14,7 +14,7 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void add_tile(GodotTile* tile);
-		Vector2 tile_position(int index, Vector2 tile_size);
+		Vector2 tile_position(int index);
 	};
 }
 

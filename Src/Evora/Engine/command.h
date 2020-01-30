@@ -1,7 +1,7 @@
 ﻿#pragma once
-#include "game.h"
 #include <memory>
 #include <utility>
+#include "game.h"
 
 namespace control
 {

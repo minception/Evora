@@ -21,5 +21,6 @@ namespace model
 		void shuffle();
 		bool draw_tile(tile& out);
 		bool refill(lid& lid);
+		bool empty();
 	};
 }

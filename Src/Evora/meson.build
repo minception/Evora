@@ -20,8 +20,6 @@ godot_includes = include_directories(
     godot_dir + '/include/core',
     godot_dir + '/include/gen')
 
-subdir('AzulModel')
-subdir('AzulControl')
-subdir('AzulAI')
+subdir('Engine')
 subdir('ConsoleUI')
 subdir('GodotUI')

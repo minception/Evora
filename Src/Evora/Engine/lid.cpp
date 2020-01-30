@@ -27,4 +27,11 @@ namespace model
 	{
 		return m_tiles.empty();
 	}
+
+	std::vector<tile> lid::get_state()
+	{
+		std::vector<tile> res;
+		// return std::copy(m_tiles.begin(), m_tiles.end(), res);
+		return res;
+	}
 }

@@ -11,10 +11,11 @@ namespace model
 {
 	class factory
 	{
-		static const int TILES = 4;
 		std::vector<tile> m_tiles;
 		
 	public:
+		static const int TILES = 4;
+		
 		int pick_color(tile color);
 		std::vector<tile> get_colors();
 
@@ -22,5 +23,6 @@ namespace model
 		std::vector<tile>::const_iterator begin() const;
 		std::vector<tile>::const_iterator end() const;
 		int add_to_center(center& center);
+		int fill(bag& bag);
 	};
 }

@@ -47,4 +47,23 @@ namespace model
 		m_tiles.clear();
 		return res;
 	}
+
+	int factory::fill(bag& bag)
+	{
+		int added = 0;
+		for(int i = m_tiles.size(); i < TILES; ++i)
+		{
+			tile temp;
+			if (bag.draw_tile(temp))
+			{
+				m_tiles.push_back(temp);
+				++added;
+			}
+			else
+			{
+				return added;
+			}
+		}
+		return added;
+	}
 }

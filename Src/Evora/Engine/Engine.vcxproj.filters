@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Model">
+      <UniqueIdentifier>{0486c83a-7a2d-46a4-aa76-de78efba9fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{8f5e2b64-782c-4071-adef-b505f232578d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{07ca6c11-ea49-444b-ba50-69775389c083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Header Files">
+      <UniqueIdentifier>{8938f5c7-af6a-4bd3-82cf-6de7dce59ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Source Files">
+      <UniqueIdentifier>{4ec2bbbc-fcc5-401b-9836-042ff87ab2cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Header Files">
+      <UniqueIdentifier>{67e89dd4-950f-41f8-8e06-7686e532422c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Source Files">
+      <UniqueIdentifier>{f83882af-b2f9-49eb-96fe-04035b3037be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Commands">
+      <UniqueIdentifier>{bfea7fde-9159-414a-982a-ce9f37d80dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Commands\Header Files">
+      <UniqueIdentifier>{59d81eb4-c1b3-4960-b8c2-b5ec5a991989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Commands\Source Files">
+      <UniqueIdentifier>{0ed7eee2-60da-4266-a093-5fdba33ba860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Header Files">
+      <UniqueIdentifier>{4bf3f69b-b6ab-4183-ace8-97d453d47aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Source Files">
+      <UniqueIdentifier>{a495ee3e-6e32-4683-99f4-34801d644702}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AI.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomAI.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_controller.h">
+      <Filter>Controller\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="center_offer.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="command.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="factory_offer.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="final_score.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="init_round.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tally_floor.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tile_wall.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bag.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="center.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="factory.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lid.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern_line.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AI.cpp">
+      <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
+      <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomAI.cpp">
+      <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_controller.cpp">
+      <Filter>Controller\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="center_offer.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factory_offer.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="final_score.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="init_round.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tally_floor.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tile_wall.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bag.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="board.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="center.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factory.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lid.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pattern_line.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wall.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

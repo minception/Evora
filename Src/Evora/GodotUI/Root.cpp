@@ -69,9 +69,10 @@ void Root::_ready()
 	get_tree()->get_root()->set_size(Vector2(width, height));
 
 	// game init
-	m_game = std::make_shared<GodotGame>(m_number_of_players);
-	ObjectLoader::board_loader->load_boards(m_game->player_count(), Vector2(width, height));
-	ObjectLoader::factory_loader->load_factories(m_game->factory_count(), Vector2(width / 2, 300), 200);
+	ObjectLoader::board_loader = cast_to<BoardLoader>(get_node("Boards"));
+	ObjectLoader::board_loader->load_boards(m_number_of_players, Vector2(width, height));
+	ObjectLoader::factory_loader = cast_to<FactoryLoader>(get_node("Factories"));
+	ObjectLoader::factory_loader->load_factories(m_number_of_players*2 + 1, Vector2(width / 2, 300), 200);
 
 	// connect signals necessito
 	for(int i = 0; i < m_number_of_players; i++)
@@ -86,8 +87,11 @@ void Root::start_game()
 {
 	Node2D* boards = (Node2D*)get_child(get_child_index(this, "Boards"));
 	int64_t boards_count = boards->get_child_count();
+	
 	GameData* game_data = cast_to<GameData>(get_node("GameData"));
 	game_data->set("number_of_players", m_number_of_players);
+	game_data->set_data();
+	
 	auto ai_factories = AI::AIFactory::get_factories();
 	// hide player selection and prepare for starting player select
 	for(int i = 0; i < boards_count; ++i)
@@ -110,4 +114,11 @@ void Root::start_game()
 	// hide start game button
 	Button* start_button = (Button*)get_child(get_child_index(this, "StartButton"));
 	start_button->set_visible(false);
+
+	// tell controller to start the game
+	game_data->controller->start_game();
+}
+
+void Root::animation_finished()
+{
 }

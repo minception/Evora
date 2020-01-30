@@ -1,4 +1,5 @@
 ﻿#include "floor.h"
+
 namespace model
 {
 	const std::vector<int> floor::FLOOR_SCORE = { -1, -1, -2, -2, -2, -3, -3 };

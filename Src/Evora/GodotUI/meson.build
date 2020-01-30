@@ -6,5 +6,5 @@ shared_library('godot_ui',
      'AIPlayer.cpp', 'GameData.cpp'],
 
     dependencies: godot_lib,
-    include_directories: [ai_inc, control_inc, model_inc, godot_includes],
-    link_with: [ai_lib, control_lib, model_lib])
+    include_directories: [engine_inc, godot_includes],
+    link_with: [engine_lib])

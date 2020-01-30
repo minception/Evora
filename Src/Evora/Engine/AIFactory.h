@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <map>
+#include <cstring>
 #include "AI.h"
 
 namespace AI

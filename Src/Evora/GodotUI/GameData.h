@@ -3,21 +3,22 @@
 #include <core/Godot.hpp>
 #include <Node.hpp>
 #include "Player.h"
+#include "GodotGame.h"
 
 namespace godot
 {
 	class GameData :public Node
 	{
 		GODOT_CLASS(GameData, Node)
-		std::shared_ptr<model::game> m_game;
-		std::vector<std::unique_ptr<Player>> players;
 	public:
+		std::vector<std::unique_ptr<Player>> players;
+		std::shared_ptr<GodotGame> m_game;
 		int current_player;
 		int number_of_players;
 		std::shared_ptr<control::game_controller> controller;
 		static void _register_methods();
 		void add_player(std::unique_ptr<Player> player);
 		void _init();
-	
+		void set_data();
 	};
 }

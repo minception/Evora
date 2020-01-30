@@ -5,27 +5,29 @@
 
 using namespace godot;
 
-void GodotGame::draw(Vector2 viewport_size)
+int GodotGame::bag_to_factories()
 {
-	// draw factories
-	m_factories_display = ObjectLoader::factory_loader->load_factories(factory_count(), Vector2(viewport_size.x / 2, 300), 200);
-	// draw tiles in factories
-	auto&& factory = factories_begin();
-	int factory_index = 0;
-	int tile_index = 0;
-	for(int i = 0; i<factory_count(); ++i)
+	int added = game::bag_to_factories();
+	if (!wait_for_refill && added < factory_count() * factory::TILES)
 	{
-		int index(0);
-		for (auto&& tile : *factory)
-		{
-			Vector2 tile_size = ((TextureRect*)GodotScenes::tile_example->get_child(get_child_index(GodotScenes::tile_example, "Image")))->get_size();
-			ObjectLoader::tile_loader->add_tile(m_factories_display[i]->tile_position(index, tile_size), tile, factory_index, tile_index);
-			++index;
-			++tile_index;
-		}
-		++factory;
-		++factory_index;
+		wait_for_refill = true;
 	}
-	// draw boards
-	ObjectLoader::board_loader->load_boards(player_count(), viewport_size);
+	else
+	{
+		int factory_index = 0;
+		for(auto&& factory= factories_begin(); factory!= factories_end(); ++factory)
+		{
+			int tile_index = 0;
+			for(auto&& tile:(*factory))
+			{
+				int factories_count = ObjectLoader::factory_loader->get_child_count();
+				Factory* factory_display = (Factory*)ObjectLoader::factory_loader->get_child(factory_index);
+				ObjectLoader::tile_loader->add_tile(factory_display->tile_position(tile_index), tile, factory_index);
+				++tile_index;
+			}
+			++factory_index;
+		}
+		wait_for_refill = false;
+	}
+	return added;
 }

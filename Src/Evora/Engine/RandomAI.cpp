@@ -1,5 +1,4 @@
 ﻿#include "RandomAI.h"
-#include "../AzulControl/game_controller.h"
 
 namespace AI
 {

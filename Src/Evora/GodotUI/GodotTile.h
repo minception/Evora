@@ -37,7 +37,6 @@ namespace godot
 		bool _moving_to_mouse;
 		bool _is_highlighted;
 		int _factory_index;
-		int _index;
 		void set_color(int color);
 		int get_color();
 		static bool _holding_one;

@@ -73,28 +73,28 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\Godot\</OutDir>
     <TargetName>Lib$(ProjectName)-$(Platform)-$(Configuration)</TargetName>
-    <IncludePath>..\AzulControl;..\AzulAI;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core;..\AzulModel;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\godot-cpp\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,6 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\Engine;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,6 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\Engine;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\Engine;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +151,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\Engine;..\..\..\godot-cpp\godot_headers;..\..\..\godot-cpp\include;..\..\..\godot-cpp\include\gen;..\..\..\godot-cpp\include\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -195,14 +199,8 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AzulAI\AzulAI.vcxproj">
-      <Project>{dc4c4bee-6f5d-4bb5-b6a2-39fb8431a013}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\AzulControl\AzulControl.vcxproj">
-      <Project>{ed5322c7-4dc9-46a3-b335-67aef15f582c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\AzulModel\AzulModel.vcxproj">
-      <Project>{bc90037e-326c-4bef-a6cb-eec9bbed8b26}</Project>
+    <ProjectReference Include="..\Engine\Engine.vcxproj">
+      <Project>{5bab058d-8e34-46b5-897c-591b35a2aa0e}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

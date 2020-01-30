@@ -1,6 +1,7 @@
 #include "Factory.h"
 #include <TextureRect.hpp>
 #include "Utils.h"
+#include "GodotScenes.h"
 
 using namespace godot;
 
@@ -17,10 +18,11 @@ void Factory::add_tile(GodotTile* tile)
 	tiles.push_back(tile);
 }
 
-Vector2 Factory::tile_position(int index, Vector2 tile_size)
+Vector2 Factory::tile_position(int index)
 {
-	TextureRect* image = (TextureRect*)get_child(get_child_index(this, "Image"));
+	TextureRect* image = cast_to<TextureRect>(get_node("Image"));
 	Vector2 factory_size = image->get_size();
+	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
 	int h_count = 2;
 	int v_count = 2;
 	float margin = 10.f;

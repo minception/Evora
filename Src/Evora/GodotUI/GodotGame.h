@@ -12,10 +12,9 @@ namespace godot
 	using namespace model;
 	class GodotGame : public game
 	{
-		std::vector<godot::Node2D> m_tiles;
-		std::vector<Factory*> m_factories_display;
+		bool wait_for_refill;
 	public:
-		void draw(Vector2 viewport_size);
 		GodotGame(int players) :game(players) {}
+		int bag_to_factories() override;
 	};
 }

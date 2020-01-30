@@ -46,4 +46,9 @@ namespace model
 		}
 		return false;
 	}
+
+	bool bag::empty()
+	{
+		return m_tiles.empty();
+	}
 }

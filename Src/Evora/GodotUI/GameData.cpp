@@ -13,9 +13,15 @@ void GameData::add_player(std::unique_ptr<Player> player)
 	players.push_back(std::move(player));
 }
 
+
+
 void GameData::_init()
 {
 	number_of_players = 2;
-	m_game = std::make_shared<model::game>(number_of_players);
+}
+
+void GameData::set_data()
+{
+	m_game = std::make_shared<GodotGame>(number_of_players);
 	controller = std::make_shared<control::game_controller>(m_game);
 }

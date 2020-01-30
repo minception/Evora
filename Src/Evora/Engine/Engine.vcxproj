@@ -18,21 +18,66 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="AIFactory.h" />
+    <ClInclude Include="bag.h" />
+    <ClInclude Include="board.h" />
+    <ClInclude Include="center.h" />
+    <ClInclude Include="center_offer.h" />
+    <ClInclude Include="command.h" />
+    <ClInclude Include="factory.h" />
+    <ClInclude Include="factory_offer.h" />
+    <ClInclude Include="final_score.h" />
+    <ClInclude Include="floor.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="game_controller.h" />
+    <ClInclude Include="init_round.h" />
+    <ClInclude Include="lid.h" />
+    <ClInclude Include="pattern_line.h" />
+    <ClInclude Include="RandomAI.h" />
+    <ClInclude Include="tally_floor.h" />
+    <ClInclude Include="tile.h" />
+    <ClInclude Include="tile_wall.h" />
+    <ClInclude Include="wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="bag.cpp" />
+    <ClCompile Include="board.cpp" />
+    <ClCompile Include="center.cpp" />
+    <ClCompile Include="center_offer.cpp" />
+    <ClCompile Include="command.cpp" />
+    <ClCompile Include="factory.cpp" />
+    <ClCompile Include="factory_offer.cpp" />
+    <ClCompile Include="final_score.cpp" />
+    <ClCompile Include="floor.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="game_controller.cpp" />
+    <ClCompile Include="init_round.cpp" />
+    <ClCompile Include="lid.cpp" />
+    <ClCompile Include="pattern_line.cpp" />
+    <ClCompile Include="RandomAI.cpp" />
+    <ClCompile Include="tally_floor.cpp" />
+    <ClCompile Include="tile_wall.cpp" />
+    <ClCompile Include="wall.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{ED5322C7-4DC9-46A3-B335-67AEF15F582C}</ProjectGuid>
-    <RootNamespace>AzulControl</RootNamespace>
+    <ProjectGuid>{5BAB058D-8E34-46B5-897C-591B35A2AA0E}</ProjectGuid>
+    <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -45,7 +90,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -87,8 +132,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AzulModel;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,8 +144,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AzulModel;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,8 +158,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AzulModel;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,8 +174,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AzulModel;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,31 +182,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="center_offer.h" />
-    <ClInclude Include="command.h" />
-    <ClInclude Include="factory_offer.h" />
-    <ClInclude Include="final_score.h" />
-    <ClInclude Include="game_controller.h" />
-    <ClInclude Include="init_round.h" />
-    <ClInclude Include="tally_floor.h" />
-    <ClInclude Include="tile_wall.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="center_offer.cpp" />
-    <ClCompile Include="command.cpp" />
-    <ClCompile Include="factory_offer.cpp" />
-    <ClCompile Include="final_score.cpp" />
-    <ClCompile Include="game_controller.cpp" />
-    <ClCompile Include="init_round.cpp" />
-    <ClCompile Include="tally_floor.cpp" />
-    <ClCompile Include="tile_wall.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AzulModel\AzulModel.vcxproj">
-      <Project>{bc90037e-326c-4bef-a6cb-eec9bbed8b26}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

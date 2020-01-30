@@ -30,5 +30,11 @@ namespace model
 		std::vector<tile>::const_iterator center_begin() const;
 		std::vector<tile>::const_iterator center_end() const;
 
+		void shuffle_bag();
+		std::vector<tile> get_lid_state();
+		void refill_bag();
+
+		// functions affecting gui
+		virtual int bag_to_factories();
 	};
 }

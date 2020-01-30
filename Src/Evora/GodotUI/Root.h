@@ -16,7 +16,6 @@ namespace godot
 	class Root :public Node2D
 	{
 		GODOT_CLASS(Root, Node2D)
-		std::shared_ptr<GodotGame> m_game;
 		
 		int m_number_of_players;
 
@@ -27,5 +26,6 @@ namespace godot
 		void _init();
 		void _ready();
 		void start_game();
+		void animation_finished();
 	};
 }

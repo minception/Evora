@@ -19,7 +19,7 @@ namespace godot
 		void _ready();
 		static void _init();
 		static void _process(float delta);
-		std::vector<Factory*> load_factories(int count, Vector2 c, float r);
+		void load_factories(int count, Vector2 c, float r);
 
 		FactoryLoader();
 	};
