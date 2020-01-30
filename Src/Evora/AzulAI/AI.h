@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "game.h"
 #include <memory>
-#include "../AzulControl/game_controller.h"
+#include "game_controller.h"
 
 namespace AI
 {

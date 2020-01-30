@@ -43,7 +43,7 @@ void TileLoader::add_tile(Vector2 position, tile color, int factory, int index)
 
 void TileLoader::tile_mouse_entered(int factory, int color)
 {
-	int child_count = get_child_count();
+	int64_t child_count = get_child_count();
 	for (int i = 0; i < child_count; ++i)
 	{
 		GodotTile* tile = (GodotTile*)get_child(i);
@@ -53,7 +53,7 @@ void TileLoader::tile_mouse_entered(int factory, int color)
 
 void TileLoader::tile_mouse_exited(int factory, int color)
 {
-	int child_count = get_child_count();
+	int64_t child_count = get_child_count();
 	for (int i = 0; i < child_count; ++i)
 	{
 		GodotTile* tile = (GodotTile*)get_child(i);
@@ -63,7 +63,7 @@ void TileLoader::tile_mouse_exited(int factory, int color)
 
 void TileLoader::tile_picked_up(int factory, int color)
 {
-	int child_count = get_child_count();
+	int64_t child_count = get_child_count();
 	for (int i = 0; i < child_count; ++i)
 	{
 		GodotTile* tile = (GodotTile*)get_child(i);
