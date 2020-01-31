@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://main.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/wood.png" type="Texture" id=2]
@@ -6,6 +6,13 @@
 [ext_resource path="res://Boards.gdns" type="Script" id=4]
 [ext_resource path="res://TileLoader.gdns" type="Script" id=5]
 [ext_resource path="res://GameData.gdns" type="Script" id=6]
+[ext_resource path="res://Textures/cyan-highlight.png" type="Texture" id=7]
+[ext_resource path="res://Aileron-Regular.otf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+outline_size = 3
+font_data = ExtResource( 8 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,8 +26,42 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
 
+[node name="HighlightAnimation" type="AnimationPlayer" parent="."]
+
+[node name="PlayerHighlight" type="TextureRect" parent="."]
+visible = false
+margin_right = 393.0
+margin_bottom = 290.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Factories" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="Shade" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0.490196 )
+margin_right = 3840.0
+margin_bottom = 2160.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectPlayerPrompt" type="Label" parent="."]
+visible = false
+margin_right = 1461.0
+margin_bottom = 377.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Select starting player"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Boards" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -30,3 +71,5 @@ script = ExtResource( 5 )
 
 [node name="GameData" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="PlayerChangeAnimations" type="Node" parent="."]

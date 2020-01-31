@@ -43,7 +43,6 @@ margin_right = 376.0
 margin_bottom = 235.0
 
 [node name="Row1" type="Control" parent="Image/Wall"]
-editor/display_folded = true
 margin_right = 180.0
 margin_bottom = 32.0
 
@@ -87,7 +86,6 @@ expand = true
 script = ExtResource( 5 )
 
 [node name="Row2" type="Control" parent="Image/Wall"]
-editor/display_folded = true
 margin_top = 37.0
 margin_right = 180.0
 margin_bottom = 69.0
@@ -132,7 +130,6 @@ expand = true
 script = ExtResource( 5 )
 
 [node name="Row3" type="Control" parent="Image/Wall"]
-editor/display_folded = true
 margin_top = 74.0
 margin_right = 180.0
 margin_bottom = 106.0
@@ -177,7 +174,6 @@ expand = true
 script = ExtResource( 5 )
 
 [node name="Row4" type="Control" parent="Image/Wall"]
-editor/display_folded = true
 margin_top = 111.0
 margin_right = 180.0
 margin_bottom = 143.0
@@ -222,7 +218,6 @@ expand = true
 script = ExtResource( 5 )
 
 [node name="Row5" type="Control" parent="Image/Wall"]
-editor/display_folded = true
 margin_top = 148.0
 margin_right = 180.0
 margin_bottom = 180.0

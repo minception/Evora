@@ -4,6 +4,8 @@
 #include <SceneTree.hpp>
 #include <Viewport.hpp>
 #include <Button.hpp>
+#include <AnimationPlayer.hpp>
+#include <Animation.hpp>
 
 #include "GodotScenes.h"
 #include "TextureRect.hpp"
@@ -28,11 +30,27 @@ void Root::set_starting_player(int index)
 {
 	GameData* game_data= cast_to<GameData>(get_node("GameData"));
 	game_data->set("current_player", index);
-	
+
+	// hide gui aspects of player select
 	for (int i = 0; i < m_number_of_players; i++)
 	{
 		ObjectLoader::board_loader->get_child(i)->set("player_select", false);
 	}
+	cast_to<Control>(get_node("Shade"))->set_visible(false);
+	cast_to<Control>(get_node("SelectPlayerPrompt"))->set_visible(false);
+	
+	game_data->controller->start_game();
+	
+	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
+	AnimationPlayer* highlightAnimation = cast_to<AnimationPlayer>(get_node("HighlightAnimation"));
+	Animation* playerTransfer = Animation::_new();
+	highlightAnimation->add_animation("animation", playerTransfer);
+	highlightAnimation->set_current_animation("animation");
+	playerTransfer->add_track(Animation::TrackType::TYPE_VALUE);
+	playerTransfer->track_set_path(0, "PlayerHighlight:rect_position");
+	playerTransfer->track_insert_key(0, 0.0, Vector2(100.0, 100.0));
+	playerTransfer->track_insert_key(0, 1.0, Vector2(50.0, 50.0));
+	highlightAnimation->play("animation");
 }
 
 void godot::Root::_register_methods()
@@ -69,9 +87,7 @@ void Root::_ready()
 	get_tree()->get_root()->set_size(Vector2(width, height));
 
 	// game init
-	ObjectLoader::board_loader = cast_to<BoardLoader>(get_node("Boards"));
 	ObjectLoader::board_loader->load_boards(m_number_of_players, Vector2(width, height));
-	ObjectLoader::factory_loader = cast_to<FactoryLoader>(get_node("Factories"));
 	ObjectLoader::factory_loader->load_factories(m_number_of_players*2 + 1, Vector2(width / 2, 300), 200);
 
 	// connect signals necessito
@@ -115,8 +131,12 @@ void Root::start_game()
 	Button* start_button = (Button*)get_child(get_child_index(this, "StartButton"));
 	start_button->set_visible(false);
 
-	// tell controller to start the game
-	game_data->controller->start_game();
+	// show prompt to select starting player
+	cast_to<Control>(get_node("Shade"))->set_visible(true);
+	Control* prompt = cast_to<Control>(get_node("SelectPlayerPrompt"));
+	Vector2 viewport_size = get_viewport_rect().size;
+	prompt->set_global_position(Vector2((viewport_size.x - prompt->get_size().x) / 2, 300 - prompt->get_size().y / 2));
+	prompt->set_visible(true);
 }
 
 void Root::animation_finished()
