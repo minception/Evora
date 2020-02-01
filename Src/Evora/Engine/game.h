@@ -36,5 +36,10 @@ namespace model
 
 		// functions affecting gui
 		virtual int bag_to_factories();
+		int factory_to_pattern_line(int factory_index, int player_index, int pattern_line_index, tile color);
+		int factory_to_floor(int factory_index, int player_index, tile color);
+		int factory_to_lid(int factory_index, tile color);
+		int factory_to_center(int factory_index);
+		bool handle_first_tile(int m_player_index);
 	};
 }

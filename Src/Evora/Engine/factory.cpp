@@ -2,19 +2,17 @@
 
 namespace model
 {
-	int factory::pick_color(tile color)
+	bool factory::pick_color_tile(tile color)
 	{
-		int res(0);
-		std::remove_if(m_tiles.begin(), m_tiles.end(), [color, &res](tile t)
+		for (int i = 0; i < m_tiles.size(); ++i)
 		{
-			if (t == color)
+			if(m_tiles[i] == color)
 			{
-				++res;
+				m_tiles.erase(m_tiles.begin() + i);
 				return true;
 			}
-			return false;
-		});
-		return res;
+		}
+		return false;
 	}
 
 	std::vector<tile> factory::get_colors()

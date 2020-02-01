@@ -71,6 +71,9 @@
     <ClCompile Include="AIPlayer.cpp">
       <Filter>Player\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PatternLineLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -120,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="AIPlayer.h">
       <Filter>Player\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternLineLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

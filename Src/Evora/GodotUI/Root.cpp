@@ -115,6 +115,7 @@ void Root::start_game()
 		Board* board = (Board*)boards->get_child(i);
 		board->_hide_player_select();
 		String player_name = board->get_player_name();
+		cast_to<Label>(board->get_node("PlayerName"))->set_text(player_name);
 		if(player_name == "Human")
 		{
 			std::unique_ptr<Player> player = std::make_unique<HumanPlayer>();

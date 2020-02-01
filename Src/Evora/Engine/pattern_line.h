@@ -14,5 +14,7 @@ namespace model
 		int m_count{ 0 };
 	public:
 		pattern_line(int size) :m_size(size) {}
+		bool full();
+		void add(tile tile);
 	};
 }

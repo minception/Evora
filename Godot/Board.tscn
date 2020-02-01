@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Board.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/board-background.png" type="Texture" id=2]
@@ -9,13 +9,16 @@
 [ext_resource path="res://Textures/red-tile.png" type="Texture" id=7]
 [ext_resource path="res://Textures/black-tile.png" type="Texture" id=8]
 [ext_resource path="res://Textures/white-tile.png" type="Texture" id=9]
-[ext_resource path="res://Line.gdns" type="Script" id=10]
+[ext_resource path="res://PatternLines.gdns" type="Script" id=10]
 [ext_resource path="res://Textures/cyan-highlight.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
 [node name="Board" type="Node2D"]
@@ -27,6 +30,9 @@ margin_bottom = 282.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Score" type="Label" parent="Image"]
 margin_left = 14.0
@@ -41,6 +47,9 @@ margin_left = 196.0
 margin_top = 55.0
 margin_right = 376.0
 margin_bottom = 235.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Row1" type="Control" parent="Image/Wall"]
 margin_right = 180.0
@@ -266,39 +275,10 @@ margin_left = 5.0
 margin_top = 55.0
 margin_right = 185.0
 margin_bottom = 235.0
-
-[node name="Line1" type="TextureRect" parent="Image/PatternLines"]
-margin_left = 148.0
-margin_right = 180.0
-margin_bottom = 32.0
 script = ExtResource( 10 )
-
-[node name="Line2" type="TextureRect" parent="Image/PatternLines"]
-margin_left = 113.0
-margin_top = 37.0
-margin_right = 180.0
-margin_bottom = 69.0
-script = ExtResource( 10 )
-
-[node name="Line3" type="TextureRect" parent="Image/PatternLines"]
-margin_left = 78.0
-margin_top = 74.0
-margin_right = 180.0
-margin_bottom = 106.0
-script = ExtResource( 10 )
-
-[node name="Line4" type="TextureRect" parent="Image/PatternLines"]
-margin_left = 43.0
-margin_top = 109.0
-margin_right = 180.0
-margin_bottom = 141.0
-script = ExtResource( 10 )
-
-[node name="Line5" type="TextureRect" parent="Image/PatternLines"]
-margin_top = 148.0
-margin_right = 180.0
-margin_bottom = 180.0
-script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Highlight" type="TextureRect" parent="Image"]
 visible = false
@@ -315,6 +295,12 @@ margin_top = -28.0
 margin_right = 385.0
 margin_bottom = -8.0
 text = "Item 0"
-[connection signal="gui_input" from="Image" to="." method="image_input"]
-[connection signal="mouse_entered" from="Image" to="." method="mouse_entered"]
-[connection signal="mouse_exited" from="Image" to="." method="mouse_exited"]
+
+[node name="PlayerName" type="Label" parent="."]
+margin_top = -28.0
+margin_right = 40.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -14,10 +14,10 @@ namespace model
 		std::vector<tile> m_tiles;
 		
 	public:
-		int add_tiles(int count, tile color);
-
 		// iterator methods for display purposes
 		std::vector<tile>::const_iterator begin() const;
 		std::vector<tile>::const_iterator end() const;
+		void add_tile(tile color);
+		bool full();
 	};
 }

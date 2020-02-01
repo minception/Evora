@@ -45,13 +45,28 @@ namespace model
 		return m_floor.end();
 	}
 
-	int board::add_to_floor(int count, tile color)
+	void board::add_to_floor(tile color)
 	{
-		return m_floor.add_tiles(count, color);
+		m_floor.add_tile(color);
 	}
 
 	void board::set_starter_tile(bool cond)
 	{
 		m_has_starter_tile = cond;
+	}
+
+	bool board::pattern_line_full(int pattern_line_index)
+	{
+		return m_pattern_lines[pattern_line_index].full();
+	}
+
+	void board::add_to_pattern_line(int pattern_line_index, tile tile)
+	{
+		m_pattern_lines[pattern_line_index].add(tile);
+	}
+
+	bool board::floor_full()
+	{
+		return m_floor.full();
 	}
 }

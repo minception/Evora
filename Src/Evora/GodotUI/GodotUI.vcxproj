@@ -173,6 +173,7 @@
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="GodotGame.cpp" />
     <ClCompile Include="GodotScenes.cpp" />
+    <ClCompile Include="PatternLineLoader.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="GodotTile.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="FactoryLoader.h" />
     <ClInclude Include="GodotGame.h" />
     <ClInclude Include="GodotScenes.h" />
+    <ClInclude Include="PatternLineLoader.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Root.h" />
     <ClInclude Include="GodotTile.h" />

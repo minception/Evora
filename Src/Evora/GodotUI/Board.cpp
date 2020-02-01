@@ -3,6 +3,7 @@
 #include <TextureRect.hpp>
 #include <Control.hpp>
 #include <Input.hpp>
+#include "PatternLine.h"
 
 using namespace godot;
 
@@ -56,7 +57,7 @@ void Board::connect_children()
 	children.push_back(pattern_lines);
 	for (int i = 0; i < pattern_lines->get_child_count(); ++i)
 	{
-		children.push_back((Control*)pattern_lines->get_child(i));
+		children.push_back((Control*)pattern_lines->get_child(i)->get_child(0));
 	}
 	for(auto&& child:children)
 	{

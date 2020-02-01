@@ -16,7 +16,7 @@ namespace model
 	public:
 		static const int TILES = 4;
 		
-		int pick_color(tile color);
+		bool pick_color_tile(tile color);
 		std::vector<tile> get_colors();
 
 		// iterator methods for display purposes

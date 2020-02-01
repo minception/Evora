@@ -1,16 +1,22 @@
 ﻿#pragma once
 #include <core/Godot.hpp>
 #include <TextureRect.hpp>
+#include <Node2D.hpp>
 
 namespace godot
 {
-	class PatternLine :public TextureRect
+	class PatternLine :public Node2D
 	{
-		GODOT_CLASS(PatternLine, TextureRect)
+		GODOT_CLASS(PatternLine, Node2D)
+		int m_index;
 	public:
-		int index;
+		void set_index(int index) { m_index = index;}
+		int get_index() const { return m_index; }
 		static void _register_methods();
 		void _init();
+		void _ready();
+		void mouse_entered();
+		void mouse_exited();
 	
 	};
 }
