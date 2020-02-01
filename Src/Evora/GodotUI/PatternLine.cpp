@@ -7,7 +7,6 @@ void PatternLine::mouse_entered()
 	TextureRect* image = (TextureRect*)get_node("Image");
 	image->set_self_modulate(Color(0, 1, 1));
 	int index = get("index");
-	printf("entered pattern line %d\n", index);
 	emit_signal("mouse_entered_pattern_line", index);
 }
 
@@ -16,7 +15,6 @@ void PatternLine::mouse_exited()
 	TextureRect* image = (TextureRect*)get_node("Image");
 	image->set_self_modulate(Color(1, 1, 1));
 	int index = get("index");
-	printf("exited pattern line %d\n", index);
 	emit_signal("mouse_exited_pattern_line", index);
 }
 

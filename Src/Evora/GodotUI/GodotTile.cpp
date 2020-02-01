@@ -10,8 +10,6 @@
 
 using namespace godot;
 
-bool GodotTile::_holding_one = false;
-
 Ref<Texture> GodotTile::blackTexture;
 Ref<Texture> GodotTile::whiteTexture;
 Ref<Texture> GodotTile::blueTexture;
@@ -54,6 +52,16 @@ int GodotTile::get_color()
 	return _color;
 }
 
+void GodotTile::set_interactive(bool cond)
+{
+	_interactive = cond;
+}
+
+bool GodotTile::get_interactive()
+{
+	return _interactive;
+}
+
 void GodotTile::_register_methods()
 {
 	register_method("_process", &GodotTile::_process);
@@ -64,14 +72,14 @@ void GodotTile::_register_methods()
 
 	register_property("color", &GodotTile::set_color,&GodotTile::get_color, 0);
 	register_property("factory_index", &GodotTile::_factory_index, 0);
-	register_property("holding", &GodotTile::_holding, false);
-	register_property("original_position", &GodotTile::_original_position, Vector2(0, 0));
-	register_property("moving_to_mouse", &GodotTile::_moving_to_mouse, false);
-	register_property("highlight", &GodotTile::_is_highlighted, false);
+	register_property("interactive", &GodotTile::set_interactive, &GodotTile::get_interactive, false);
+	register_property("follow_mouse", &GodotTile::m_follow_mouse, false);
 	
 	register_signal<GodotTile>("mouse_entered", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("mouse_exited", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
-	register_signal<GodotTile>("picked_up", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("selected", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("following", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("dropped", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 }
 
 void GodotTile::_init()
@@ -87,64 +95,32 @@ void GodotTile::_init()
 
 void GodotTile::_ready()
 {
-	int image_index = get_child_index(this, "Image");
-	_image = (TextureRect*)get_child(image_index);
+	_image = cast_to<TextureRect>(get_node("Image"));
 	
-	_label = (Label*)_image->get_child(get_child_index(_image, "Text"));
-	_highlight = (TextureRect*)_image->get_child(get_child_index(_image, "Highlight"));
+	_label = cast_to<Label>(_image->get_node("Text"));
+	_highlight = cast_to<TextureRect>(_image->get_node("Highlight"));
 	_input = Input::get_singleton();
+	
 }
 
 void GodotTile::_process(float delta)
 {
-	Vector2 mouse_position = get_global_mouse_position() - _image->get_size() / 2;
-	int64_t mouse_button_mask = _input->get_mouse_button_mask();
-	if(!(mouse_button_mask & 1) && _holding)
+	Vector2 mouse_position = get_global_mouse_position();
+	printf("current mouse position : (%d,%d)\n", mouse_position.x, mouse_position.y);
+	if(m_follow_mouse)
 	{
-		_moving_back = true;
-		_holding = false;
-		_holding_one = false;
-		_moving_to_mouse = false;
-	}
-	if(_moving_to_mouse)
-	{
-
-		Vector2 shift = get_global_position() - mouse_position;
-		if (shift.length() < 5.f)
+		Vector2 target_location = get_global_mouse_position() - _image->get_size() / 2;
+		Vector2 starting_location = get_global_position();
+		Vector2 speed = target_location - starting_location;
+		if(speed.length() < 3)
 		{
-			_holding = true;
-			_moving_to_mouse = false;
+			set_global_position(target_location);
 		}
-		Vector2 speed = shift * delta * 20;
-		set_global_position(get_global_position() - speed);
-	}
-	else if(_moving_back)
-	{
-		Vector2 shift = get_global_position() - _original_position;
-		if(shift.length() < 1.f)
+		else
 		{
-			set_global_position(_original_position);
-			_moving_back = false;
+			set_global_position(starting_location + speed * delta * 20);
 		}
-		Vector2 speed = shift * delta * 10;
-		set_global_position(get_global_position() - speed);
 	}
-	else if(_holding)
-	{
-		Vector2 viewport_size = get_viewport_rect().size;
-		if(mouse_position.x > 0 && mouse_position.y > 0 &&
-			mouse_position.x < viewport_size.x && mouse_position.y < viewport_size.y)
-			set_global_position(mouse_position);
-	}
-	if(_is_highlighted)
-	{
-		_highlight->set_visible(true);
-	}
-	else
-	{
-		_highlight->set_visible(false);
-	}
-	
 }
 
 void GodotTile::_on_mouse_entered()
@@ -157,61 +133,78 @@ void GodotTile::_on_mouse_exited()
 	emit_signal("mouse_exited", _factory_index, _color);
 }
 
-
-
 void GodotTile::_area_input_event()
 {
-	if (_moving_back) return; // no input when animating
+	if (!_interactive) return;
 	int64_t mouse_button_mask = _input->get_mouse_button_mask();
-	if(mouse_button_mask & 1) // left mouse button pressed
+	printf("color: %d, factory_index: %d, clicked on: (%d,%d), clicked: %d\n", _color, _factory_index, m_clicked_on.x, m_clicked_on.y, m_clicked);
+	if(m_follow_mouse)
 	{
-		if (_holding_one) return;
-		emit_signal("picked_up", _factory_index, _color);
+		if(!(mouse_button_mask&1))
+		{
+			emit_signal("dropped", _factory_index, _color);
+		}
+		return;
 	}
-	else if(_holding)
+	if (mouse_button_mask & 1)
 	{
-		_holding = false;
-		_moving_back = true;
-		_holding_one = false;
-		
+		Vector2 mouse_position = get_global_mouse_position();
+		if(m_clicked)
+		{
+			if(m_clicked_on != mouse_position)
+			{
+				emit_signal("following", _factory_index, _color);
+			}
+		}
+		else
+		{
+			m_clicked = true;
+			m_clicked_on = mouse_position;
+		}
 	}
-	
+	else
+	{
+		if(m_clicked)
+		{
+			emit_signal("selected", _factory_index, _color);
+			m_clicked = false;
+		}
+	}
 }
 
-bool GodotTile::pick_up(int factory, int color)
+void GodotTile::set_select(int factory, int color, bool cond)
 {
-	_factory_index = get("factory_index");
-	_color = get("color");
-	if(_factory_index == factory && _color == color)
+	int factory_index = get("factory_index");
+	int tile_color = get("color");
+	if (factory_index == factory && tile_color == color)
 	{
-		set("moving_to_mouse", true);
-		set("holding", true);
-		set("original_position", get_global_position());
-		return true;
+		TextureRect* highlight = cast_to<TextureRect>(get_node("Image/Highlight"));
+		highlight->set_visible(cond);
 	}
-	return false;
 }
 
-bool GodotTile::highlight(int factory, int color)
+void GodotTile::set_highlight(int factory, int color, bool cond)
 {
-	_factory_index = get("factory_index");
-	_color = get("color");
-	if(_factory_index == factory && _color == color)
+	int factory_index = get("factory_index");
+	int tile_color = get("color");
+	if (factory_index == factory && tile_color == color)
 	{
-		set("highlight", true);
-		return true;
+		TextureRect* highlight = cast_to<TextureRect>(get_node("Image/Highlight"));
+		highlight->set_visible(cond);
 	}
-	return false;
 }
 
-bool GodotTile::unhighlight(int factory, int color)
+void GodotTile::set_follow(int factory, int color, bool cond)
 {
-	_factory_index = get("factory_index");
-	_color = get("color");
-	if (_factory_index == factory && _color == color)
+	int factory_index = get("factory_index");
+	int tile_color = get("color");
+	if (factory_index == factory && tile_color == color)
 	{
-		set("highlight", false);
-		return true;
+		m_follow_mouse = cond;
 	}
-	return false;
+	else
+	{
+		set("interactive", false);
+	}
 }
+

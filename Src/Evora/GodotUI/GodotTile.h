@@ -18,13 +18,15 @@ namespace godot
 		Label* _label;
 		TextureRect* _image;
 		TextureRect* _highlight;
-		
-		bool _moving_back;
-		Vector2 _speed;
-		Vector2 _original_position;
 		Input* _input;
-		Ref<Texture> _texture;
+		
 		int _color;
+
+		bool m_clicked;
+		Vector2 m_clicked_on;
+		bool m_selected;
+		bool _interactive;
+		bool m_follow_mouse;
 
 		static Ref<Texture> blackTexture;
 		static Ref<Texture> whiteTexture;
@@ -33,13 +35,14 @@ namespace godot
 		static Ref<Texture> yellowTexture;
 		static Ref<Texture> starterTexture;
 	public:
-		bool _holding;
-		bool _moving_to_mouse;
-		bool _is_highlighted;
 		int _factory_index;
+		
 		void set_color(int color);
 		int get_color();
-		static bool _holding_one;
+
+		void set_interactive(bool cond);
+		bool get_interactive();
+		
 		static void _register_methods();
 		void _init();
 		void _ready();
@@ -47,8 +50,8 @@ namespace godot
 		void _on_mouse_entered();
 		void _on_mouse_exited();
 		void _area_input_event();
-		bool pick_up(int factory, int color);
-		bool highlight(int factory, int color);
-		bool unhighlight(int factory, int color);
+		void set_select(int factory, int color, bool cond);
+		void set_highlight(int factory, int color, bool cond);
+		void set_follow(int factory, int color, bool cond);
 	};
 }

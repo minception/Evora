@@ -6,6 +6,7 @@
 #include <Button.hpp>
 #include <AnimationPlayer.hpp>
 #include <Animation.hpp>
+#include <CanvasItem.hpp>
 
 #include "GodotScenes.h"
 #include "TextureRect.hpp"
