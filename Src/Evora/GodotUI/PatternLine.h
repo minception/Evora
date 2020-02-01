@@ -17,6 +17,9 @@ namespace godot
 		void _ready();
 		void mouse_entered();
 		void mouse_exited();
+		void set_highlight(bool cond);
+		void tile_moved(Vector2 position, int color);
+		void input();
 	
 	};
 }

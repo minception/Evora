@@ -63,6 +63,7 @@ void godot::Root::_register_methods()
 	register_method("start_game", &Root::start_game);
 	register_method("set_starting_player", &Root::set_starting_player);
 	register_method("pattern_line_entered", &Root::pattern_line_entered);
+	register_method("tile_over", &Root::tile_over);
 	
 	register_property<Root, int>("players", &Root::m_number_of_players, 2);
 }
@@ -101,6 +102,8 @@ void Root::_ready()
 		Board* board = cast_to<Board>(ObjectLoader::board_loader->get_child(i));
 		board->connect("selected", this, "set_starting_player");
 		board->connect("pattern_line_entered", this, "pattern_line_entered");
+		board->connect("tile_over", this, "tile_over");
+		ObjectLoader::tile_loader->connect("tile_moved", board, "tile_moved");
 	}
 	
 	add_start_button();
@@ -151,7 +154,7 @@ void Root::animation_finished()
 {
 }
 
-void Root::pattern_line_entered(int pattern_line_index, int board_index)
+void Root::pattern_line_entered(int board_index, int pattern_line_index)
 {
 	int holding_color = ObjectLoader::tile_loader->get("holding_color");
 	if(holding_color != -1)
@@ -160,5 +163,12 @@ void Root::pattern_line_entered(int pattern_line_index, int board_index)
 		{
 			cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_pattern_line_highlight(pattern_line_index, true);
 		}
+	}
+}
+void Root::tile_over(int board_index, int pattern_line_index, int color)
+{
+	if (GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
+	{
+		cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_pattern_line_highlight(pattern_line_index, true);
 	}
 }

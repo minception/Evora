@@ -22,6 +22,7 @@ namespace godot
 		void add_tile(Vector2 position, model::tile color, int factory);
 		void tile_following(int factory, int color);
 		void tile_dropped(int factory, int color);
+		void tile_moved(Vector2 position, int color);
 		void tile_mouse_entered(int factory, int color);
 		void tile_mouse_exited(int factory, int color);
 	};

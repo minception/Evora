@@ -21,12 +21,16 @@ void Board::_register_methods() {
 	register_method("mouse_exited", &Board::mouse_exited);
 	register_method("image_input", &Board::image_input);
 	register_method("pattern_line_entered", &Board::pattern_line_entered);
+	register_method("tile_moved", &Board::tile_moved);
+	register_method("tile_over", &Board::tile_over);
 
 	register_property("index", &Board::index, 0);
 	register_property("player_select", &Board::player_select, false);
 
 	register_signal<Board>("selected", "index", GODOT_VARIANT_TYPE_INT);
 	register_signal<Board>("pattern_line_entered", "pattern_line_index", GODOT_VARIANT_TYPE_INT, "board_index", GODOT_VARIANT_TYPE_INT);
+	register_signal<Board>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<Board>("tile_over","pattern_line_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT, "board_index", GODOT_VARIANT_TYPE_INT);
 }
 
 void godot::Board::_init()
@@ -69,6 +73,8 @@ void Board::connect_children()
 	{
 		children.push_back((Control*)pattern_lines->get_child(i)->get_child(0));
 		pattern_lines->get_child(i)->connect("mouse_entered_pattern_line", this, "pattern_line_entered");
+		pattern_lines->get_child(i)->connect("tile_over", this, "tile_over");
+		connect("tile_moved", pattern_lines->get_child(i), "tile_moved");
 	}
 	for(auto&& child:children)
 	{
@@ -103,7 +109,18 @@ void Board::mouse_exited()
 void Board::pattern_line_entered(int pattern_line_index)
 {
 	int index = get("index");
-	emit_signal("pattern_line_entered", pattern_line_index, index);
+	emit_signal("pattern_line_entered", index, pattern_line_index);
+}
+
+void Board::tile_moved(Vector2 position, int color)
+{
+	emit_signal("tile_moved", position, color);
+}
+
+void Board::tile_over(int pattern_line_index, int color)
+{
+	int index = get("index");
+	emit_signal("tile_over", index, pattern_line_index, color);
 }
 
 void Board::image_input()
@@ -123,7 +140,7 @@ void Board::image_input()
 
 void Board::set_pattern_line_highlight(int index, bool cond)
 {
-	cast_to<TextureRect>(get_node("Image/PatternLines")->get_child(index)->get_node("Image"))->set_self_modulate(Color(0, 1, 1));
+	cast_to<PatternLine>(get_node("Image/PatternLines")->get_child(index))->set_highlight(cond);
 }
 
 String Board::get_player_name()

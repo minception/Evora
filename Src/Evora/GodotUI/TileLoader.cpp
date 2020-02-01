@@ -9,6 +9,8 @@
 
 using namespace godot;
 
+Root* TileLoader::p_root;
+
 void godot::TileLoader::_register_methods()
 {
 	register_method("_ready", &TileLoader::_ready);
@@ -16,11 +18,13 @@ void godot::TileLoader::_register_methods()
 	register_method("tile_mouse_exited", &TileLoader::tile_mouse_exited);
 	register_method("tile_following", &TileLoader::tile_following);
 	register_method("tile_dropped", &TileLoader::tile_dropped);
+	register_method("tile_moved", &TileLoader::tile_moved);
 
 	register_property("holding_color", &TileLoader::holding_color, -1);
+
+	register_signal<TileLoader>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
 }
 
-Root* TileLoader::p_root;
 
 void godot::TileLoader::_ready()
 {
@@ -41,6 +45,7 @@ void TileLoader::add_tile(Vector2 position, tile color, int factory)
 	to_add->connect("mouse_exited", this, "tile_mouse_exited");
 	to_add->connect("following", this, "tile_following");
 	to_add->connect("dropped", this, "tile_dropped");
+	to_add->connect("tile_moved", this, "tile_moved");
 	
 	to_add->set("color", (int)color);
 	to_add->set("factory_index", factory);
@@ -71,6 +76,11 @@ void TileLoader::tile_dropped(int factory, int color)
 		tile->set_follow(factory, color, false);
 		tile->set_move_back(factory, color, true);
 	}
+}
+
+void TileLoader::tile_moved(Vector2 position, int color)
+{
+	emit_signal("tile_moved", position, color);
 }
 
 void TileLoader::tile_mouse_entered(int factory, int color)

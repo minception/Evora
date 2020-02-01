@@ -82,6 +82,7 @@ void GodotTile::_register_methods()
 	register_signal<GodotTile>("selected", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("following", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("dropped", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
 }
 
 void GodotTile::_init()
@@ -125,7 +126,6 @@ void GodotTile::_process(float delta)
 		}
 		return;
 	}
-	Vector2 mouse_position = get_global_mouse_position();
 	if(m_follow_mouse)
 	{
 		Vector2 target_location = get_global_mouse_position() - _image->get_size() / 2;
@@ -139,6 +139,7 @@ void GodotTile::_process(float delta)
 		{
 			set_global_position(starting_location + speed * delta * 20);
 		}
+		emit_signal("tile_moved", get_global_mouse_position(), _color);
 	}
 }
 
@@ -164,7 +165,6 @@ void GodotTile::_area_input_event()
 		return;
 	}
 	if (!_interactive) return;
-	printf("color: %d, factory_index: %d, clicked on: (%f,%f), clicked: %d\n", _color, _factory_index, m_clicked_on.x, m_clicked_on.y, m_clicked);
 	if (mouse_button_mask & 1)
 	{
 		Vector2 mouse_position = get_global_mouse_position();

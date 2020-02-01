@@ -25,6 +25,8 @@ namespace godot
 		void mouse_entered();
 		void mouse_exited();
 		void pattern_line_entered(int pattern_line_index);
+		void tile_moved(Vector2 position, int color);
+		void tile_over(int pattern_line_index, int color);
 		void image_input();
 		void set_pattern_line_highlight(int index, bool cond);
 		String get_player_name();

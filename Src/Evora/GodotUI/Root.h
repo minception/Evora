@@ -28,5 +28,6 @@ namespace godot
 		void start_game();
 		void animation_finished();
 		void pattern_line_entered(int pattern_line_index, int board_index);
+		void tile_over(int board_index, int pattern_line_index, int color);
 	};
 }
