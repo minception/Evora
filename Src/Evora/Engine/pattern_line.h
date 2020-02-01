@@ -16,5 +16,6 @@ namespace model
 		pattern_line(int size) :m_size(size) {}
 		bool full();
 		void add(tile tile);
+		bool can_add(tile tile);
 	};
 }

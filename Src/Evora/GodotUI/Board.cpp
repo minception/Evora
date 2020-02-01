@@ -15,17 +15,18 @@ void Board::set_highlight(bool cond)
 }
 
 void Board::_register_methods() {
-	register_method("_process", &Board::_process);
 	register_method("_ready", &Board::_ready);
 
 	register_method("mouse_entered", &Board::mouse_entered);
 	register_method("mouse_exited", &Board::mouse_exited);
 	register_method("image_input", &Board::image_input);
+	register_method("pattern_line_entered", &Board::pattern_line_entered);
 
 	register_property("index", &Board::index, 0);
 	register_property("player_select", &Board::player_select, false);
 
 	register_signal<Board>("selected", "index", GODOT_VARIANT_TYPE_INT);
+	register_signal<Board>("pattern_line_entered", "pattern_line_index", GODOT_VARIANT_TYPE_INT, "board_index", GODOT_VARIANT_TYPE_INT);
 }
 
 void godot::Board::_init()
@@ -33,8 +34,17 @@ void godot::Board::_init()
 	
 }
 
-void godot::Board::_process(float delta)
+void godot::Board::_ready()
 {
+	OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
+	player_select->add_item("Human", 0);
+	auto ai_factories = AI::AIFactory::get_factories();
+	int64_t player_index = 1;
+	for (auto&& ai_factory : ai_factories)
+	{
+		player_select->add_item(ai_factory.first, player_index++);
+	}
+	connect_children();
 }
 
 void Board::connect_children()
@@ -58,6 +68,7 @@ void Board::connect_children()
 	for (int i = 0; i < pattern_lines->get_child_count(); ++i)
 	{
 		children.push_back((Control*)pattern_lines->get_child(i)->get_child(0));
+		pattern_lines->get_child(i)->connect("mouse_entered_pattern_line", this, "pattern_line_entered");
 	}
 	for(auto&& child:children)
 	{
@@ -65,19 +76,6 @@ void Board::connect_children()
 		child->connect("mouse_exited", this, "mouse_exited");
 		child->connect("gui_input", this, "image_input");
 	}
-}
-
-void godot::Board::_ready()
-{
-	OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
-	player_select->add_item("Human", 0);
-	auto ai_factories = AI::AIFactory::get_factories();
-	int64_t player_index = 1;
-	for (auto&& ai_factory : ai_factories)
-	{
-		player_select->add_item(ai_factory.first, player_index++);
-	}
-	connect_children();
 }
 
 void Board::_hide_player_select()
@@ -102,6 +100,12 @@ void Board::mouse_exited()
 	}
 }
 
+void Board::pattern_line_entered(int pattern_line_index)
+{
+	int index = get("index");
+	emit_signal("pattern_line_entered", pattern_line_index, index);
+}
+
 void Board::image_input()
 {
 	if (get("player_select"))
@@ -115,6 +119,11 @@ void Board::image_input()
 		}
 	}
 		
+}
+
+void Board::set_pattern_line_highlight(int index, bool cond)
+{
+	cast_to<TextureRect>(get_node("Image/PatternLines")->get_child(index)->get_node("Image"))->set_self_modulate(Color(0, 1, 1));
 }
 
 String Board::get_player_name()

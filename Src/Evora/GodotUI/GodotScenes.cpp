@@ -3,6 +3,7 @@
 #include "Board.h"
 #include "Factory.h"
 #include "GodotTile.h"
+#include "GameData.h"
 
 using namespace godot;
 
@@ -14,6 +15,7 @@ Board* GodotScenes::board_example;
 Factory* GodotScenes::factory_example;
 GodotTile* GodotScenes::tile_example;
 Button* GodotScenes::start_button_example;
+GameData* GodotScenes::game_data;
 bool GodotScenes::scenes_loaded = false;
 
 void GodotScenes::load_scenes()

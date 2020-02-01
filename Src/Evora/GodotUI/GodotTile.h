@@ -24,9 +24,11 @@ namespace godot
 
 		bool m_clicked;
 		Vector2 m_clicked_on;
+		Vector2 m_original_position;
 		bool m_selected;
 		bool _interactive;
 		bool m_follow_mouse;
+		bool m_move_back;
 
 		static Ref<Texture> blackTexture;
 		static Ref<Texture> whiteTexture;
@@ -53,5 +55,6 @@ namespace godot
 		void set_select(int factory, int color, bool cond);
 		void set_highlight(int factory, int color, bool cond);
 		void set_follow(int factory, int color, bool cond);
+		void set_move_back(int factory, int color, bool cond);
 	};
 }

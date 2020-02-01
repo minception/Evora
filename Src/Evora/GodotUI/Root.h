@@ -27,5 +27,6 @@ namespace godot
 		void _ready();
 		void start_game();
 		void animation_finished();
+		void pattern_line_entered(int pattern_line_index, int board_index);
 	};
 }

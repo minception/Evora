@@ -118,7 +118,7 @@ namespace model
 		return m_factories[factory_index].add_to_center(m_center);
 	}
 
-	bool game::handle_first_tile(int m_player_index)
+	bool game::handle_first_tile(int player_index)
 	{
 		if(m_starter_tile_handled)
 		{
@@ -126,6 +126,11 @@ namespace model
 		}
 		m_center.add_tile(tile::starter);
 		return true;
+	}
+
+	bool game::can_add_to_pattern_line(int player_index, int pattern_line_index, tile color)
+	{
+		return m_boards[player_index].can_add_to_pattern_line(pattern_line_index, color);
 	}
 
 	std::vector<tile> game::get_lid_state()

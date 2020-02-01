@@ -74,6 +74,8 @@ void GodotTile::_register_methods()
 	register_property("factory_index", &GodotTile::_factory_index, 0);
 	register_property("interactive", &GodotTile::set_interactive, &GodotTile::get_interactive, false);
 	register_property("follow_mouse", &GodotTile::m_follow_mouse, false);
+	register_property("original_position", &GodotTile::m_original_position, Vector2(0, 0));
+	register_property("move_back", &GodotTile::m_move_back, false);
 	
 	register_signal<GodotTile>("mouse_entered", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("mouse_exited", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
@@ -105,8 +107,25 @@ void GodotTile::_ready()
 
 void GodotTile::_process(float delta)
 {
+	if(m_move_back)
+	{
+		Vector2 target_location = m_original_position;
+		Vector2 starting_location = get_global_position();
+		Vector2 speed = target_location - starting_location;
+		if (speed.length() < 3)
+		{
+			set_global_position(target_location);
+			m_move_back = false;
+			_interactive = true;
+			set_z_index(0);
+		}
+		else
+		{
+			set_global_position(starting_location + speed * delta * 10);
+		}
+		return;
+	}
 	Vector2 mouse_position = get_global_mouse_position();
-	printf("current mouse position : (%d,%d)\n", mouse_position.x, mouse_position.y);
 	if(m_follow_mouse)
 	{
 		Vector2 target_location = get_global_mouse_position() - _image->get_size() / 2;
@@ -135,9 +154,7 @@ void GodotTile::_on_mouse_exited()
 
 void GodotTile::_area_input_event()
 {
-	if (!_interactive) return;
 	int64_t mouse_button_mask = _input->get_mouse_button_mask();
-	printf("color: %d, factory_index: %d, clicked on: (%d,%d), clicked: %d\n", _color, _factory_index, m_clicked_on.x, m_clicked_on.y, m_clicked);
 	if(m_follow_mouse)
 	{
 		if(!(mouse_button_mask&1))
@@ -146,12 +163,14 @@ void GodotTile::_area_input_event()
 		}
 		return;
 	}
+	if (!_interactive) return;
+	printf("color: %d, factory_index: %d, clicked on: (%f,%f), clicked: %d\n", _color, _factory_index, m_clicked_on.x, m_clicked_on.y, m_clicked);
 	if (mouse_button_mask & 1)
 	{
 		Vector2 mouse_position = get_global_mouse_position();
 		if(m_clicked)
 		{
-			if(m_clicked_on != mouse_position)
+			if(m_clicked_on.distance_to(mouse_position) > 0)
 			{
 				emit_signal("following", _factory_index, _color);
 			}
@@ -196,14 +215,24 @@ void GodotTile::set_highlight(int factory, int color, bool cond)
 
 void GodotTile::set_follow(int factory, int color, bool cond)
 {
+	set("interactive", !cond);
 	int factory_index = get("factory_index");
 	int tile_color = get("color");
 	if (factory_index == factory && tile_color == color)
 	{
-		m_follow_mouse = cond;
+		if(cond) set("original_position", get_global_position());
+		set("follow_mouse", cond);
+		set_z_index(5);
 	}
-	else
+}
+
+void GodotTile::set_move_back(int factory, int color, bool cond)
+{
+	int factory_index = get("factory_index");
+	int tile_color = get("color");
+	if (factory_index == factory && tile_color == color)
 	{
+		set("move_back", cond);
 		set("interactive", false);
 	}
 }

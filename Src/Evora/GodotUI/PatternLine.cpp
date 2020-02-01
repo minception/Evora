@@ -4,17 +4,14 @@ using namespace godot;
 
 void PatternLine::mouse_entered()
 {
-	TextureRect* image = (TextureRect*)get_node("Image");
-	image->set_self_modulate(Color(0, 1, 1));
 	int index = get("index");
 	emit_signal("mouse_entered_pattern_line", index);
 }
 
 void PatternLine::mouse_exited()
 {
-	TextureRect* image = (TextureRect*)get_node("Image");
-	image->set_self_modulate(Color(1, 1, 1));
 	int index = get("index");
+	cast_to<TextureRect>(get_node("Image"))->set_self_modulate(Color(1, 1, 1));
 	emit_signal("mouse_exited_pattern_line", index);
 }
 

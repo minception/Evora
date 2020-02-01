@@ -33,5 +33,6 @@ namespace model
 		bool pattern_line_full(int pattern_line_index);
 		void add_to_pattern_line(int pattern_line_index, tile tile);
 		bool floor_full();
+		bool can_add_to_pattern_line(int pattern_line_index, tile tile);
 	};
 }

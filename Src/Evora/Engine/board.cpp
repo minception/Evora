@@ -69,4 +69,9 @@ namespace model
 	{
 		return m_floor.full();
 	}
+
+	bool board::can_add_to_pattern_line(int pattern_line_index, tile tile)
+	{
+		return m_pattern_lines[pattern_line_index].can_add(tile);
+	}
 }

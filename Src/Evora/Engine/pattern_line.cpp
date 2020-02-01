@@ -12,4 +12,17 @@ namespace model
 		m_color = tile;
 		m_count++;
 	}
+
+	bool pattern_line::can_add(tile tile)
+	{
+		if(m_color == tile::empty)
+		{
+			return true;
+		}
+		if(full() || m_color != tile)
+		{
+			return false;
+		}
+		return true;
+	}
 }

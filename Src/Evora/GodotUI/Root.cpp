@@ -43,15 +43,18 @@ void Root::set_starting_player(int index)
 	game_data->controller->start_game();
 	
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
-	AnimationPlayer* highlightAnimation = cast_to<AnimationPlayer>(get_node("HighlightAnimation"));
-	Animation* playerTransfer = Animation::_new();
-	highlightAnimation->add_animation("animation", playerTransfer);
-	highlightAnimation->set_current_animation("animation");
-	playerTransfer->add_track(Animation::TrackType::TYPE_VALUE);
-	playerTransfer->track_set_path(0, "PlayerHighlight:rect_position");
-	playerTransfer->track_insert_key(0, 0.0, Vector2(100.0, 100.0));
-	playerTransfer->track_insert_key(0, 1.0, Vector2(50.0, 50.0));
-	highlightAnimation->play("animation");
+	TextureRect* player_highlight = cast_to<TextureRect>(get_node("PlayerHighlight"));
+	player_highlight->set_global_position(highlighted->get_global_position() - Vector2(3, 3));
+	player_highlight->set_visible(true);
+	//AnimationPlayer* highlightAnimation = cast_to<AnimationPlayer>(get_node("HighlightAnimation"));
+	//Animation* playerTransfer = Animation::_new();
+	//highlightAnimation->add_animation("animation", playerTransfer);
+	//highlightAnimation->set_current_animation("animation");
+	//playerTransfer->add_track(Animation::TrackType::TYPE_VALUE);
+	//playerTransfer->track_set_path(0, "PlayerHighlight:rect_position");
+	//playerTransfer->track_insert_key(0, 0.0, Vector2(100.0, 100.0));
+	//playerTransfer->track_insert_key(0, 1.0, Vector2(50.0, 50.0));
+	//highlightAnimation->play("animation");
 }
 
 void godot::Root::_register_methods()
@@ -59,6 +62,7 @@ void godot::Root::_register_methods()
 	register_method("_ready", &Root::_ready);
 	register_method("start_game", &Root::start_game);
 	register_method("set_starting_player", &Root::set_starting_player);
+	register_method("pattern_line_entered", &Root::pattern_line_entered);
 	
 	register_property<Root, int>("players", &Root::m_number_of_players, 2);
 }
@@ -82,8 +86,8 @@ void Root::_ready()
 	OS::get_singleton()->center_window();
 
 	// set values in game data
-	GameData* game_data = cast_to<GameData>(get_node("GameData"));
-	game_data->set("number_of_players", m_number_of_players);
+	GodotScenes::game_data = cast_to<GameData>(get_node("GameData"));
+	GodotScenes::game_data->set("number_of_players", m_number_of_players);
 	
 	get_tree()->get_root()->set_size(Vector2(width, height));
 
@@ -94,7 +98,9 @@ void Root::_ready()
 	// connect signals necessito
 	for(int i = 0; i < m_number_of_players; i++)
 	{
-		ObjectLoader::board_loader->get_child(i)->connect("selected", this, "set_starting_player");
+		Board* board = cast_to<Board>(ObjectLoader::board_loader->get_child(i));
+		board->connect("selected", this, "set_starting_player");
+		board->connect("pattern_line_entered", this, "pattern_line_entered");
 	}
 	
 	add_start_button();
@@ -143,4 +149,16 @@ void Root::start_game()
 
 void Root::animation_finished()
 {
+}
+
+void Root::pattern_line_entered(int pattern_line_index, int board_index)
+{
+	int holding_color = ObjectLoader::tile_loader->get("holding_color");
+	if(holding_color != -1)
+	{
+		if(GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(holding_color)))
+		{
+			cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_pattern_line_highlight(pattern_line_index, true);
+		}
+	}
 }
