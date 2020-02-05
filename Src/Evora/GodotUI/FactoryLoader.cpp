@@ -6,6 +6,7 @@
 #include "TextureRect.hpp"
 #include "Utils.h"
 #include "ObjectLoader.h"
+#include "GodotScenes.h"
 
 using namespace godot;
 
@@ -31,7 +32,7 @@ void FactoryLoader::load_factories(int count, Vector2 c, float r)
 {
 	for (int i = 0; i < count; ++i)
 	{
-		Factory* factory = (Factory*)m_factory_scene->instance();
+		Factory* factory = (Factory*)GodotScenes::factory_scene->instance();
 		String image_name("Image");
 		TextureRect* image = (TextureRect*)factory->get_child(get_child_index(factory, image_name));
 		Vector2 size = image->get_size();
@@ -41,10 +42,4 @@ void FactoryLoader::load_factories(int count, Vector2 c, float r)
 		factory->set_global_position(Vector2(posx, posy));
 		add_child(factory);
 	}
-}
-
-FactoryLoader::FactoryLoader()
-{
-	ResourceLoader* rl = ResourceLoader::get_singleton();
-	m_factory_scene = rl->load("res://Factory.tscn");
 }

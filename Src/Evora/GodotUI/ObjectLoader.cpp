@@ -1,4 +1,5 @@
 #include "ObjectLoader.h"
+#include "Center.h"
 
 using namespace godot;
 

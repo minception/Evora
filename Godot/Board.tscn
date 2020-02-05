@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Board.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/board-background.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Textures/white-tile.png" type="Texture" id=9]
 [ext_resource path="res://PatternLines.gdns" type="Script" id=10]
 [ext_resource path="res://Textures/cyan-highlight.png" type="Texture" id=11]
+[ext_resource path="res://Floor.gdns" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -25,8 +26,8 @@ font_data = ExtResource( 3 )
 script = ExtResource( 1 )
 
 [node name="Image" type="TextureRect" parent="."]
-margin_right = 385.0
-margin_bottom = 282.0
+margin_right = 375.0
+margin_bottom = 277.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
@@ -41,11 +42,14 @@ margin_right = 233.0
 margin_bottom = 58.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Wall" type="Control" parent="Image"]
-margin_left = 196.0
+margin_left = 190.0
 margin_top = 55.0
-margin_right = 376.0
+margin_right = 370.0
 margin_bottom = 235.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -285,10 +289,21 @@ visible = false
 show_behind_parent = true
 margin_left = -4.0
 margin_top = -4.0
-margin_right = 389.0
-margin_bottom = 286.0
+margin_right = 379.0
+margin_bottom = 281.0
 texture = ExtResource( 11 )
 expand = true
+
+[node name="Floor" type="Node2D" parent="Image"]
+position = Vector2( 5, 240 )
+script = ExtResource( 12 )
+
+[node name="Image" type="Control" parent="Image/Floor"]
+margin_right = 254.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayerSelect" type="OptionButton" parent="."]
 margin_top = -28.0

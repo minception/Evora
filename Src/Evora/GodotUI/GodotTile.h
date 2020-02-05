@@ -29,6 +29,9 @@ namespace godot
 		bool _interactive;
 		bool m_follow_mouse;
 		bool m_move_back;
+		
+		bool m_animating;
+		Vector2 m_animating_to;
 
 		static Ref<Texture> blackTexture;
 		static Ref<Texture> whiteTexture;
@@ -52,9 +55,10 @@ namespace godot
 		void _on_mouse_entered();
 		void _on_mouse_exited();
 		void _area_input_event();
-		void set_select(int factory, int color, bool cond);
-		void set_highlight(int factory, int color, bool cond);
-		void set_follow(int factory, int color, bool cond);
-		void set_move_back(int factory, int color, bool cond);
+		void set_select(bool cond);
+		void set_highlight(bool cond);
+		void set_follow(bool cond);
+		void set_move_back(bool cond);
+		void animate_to(Vector2 position);
 	};
 }

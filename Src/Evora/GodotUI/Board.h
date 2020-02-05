@@ -30,5 +30,8 @@ namespace godot
 		void image_input();
 		void set_pattern_line_highlight(int index, bool cond);
 		String get_player_name();
+		int get_pattern_line_hover_index();
+		std::vector<Vector2> get_pattern_line_positions(int pattern_line_index, int count);
+		std::vector<Vector2> get_floor_positions(int count);
 	};
 }

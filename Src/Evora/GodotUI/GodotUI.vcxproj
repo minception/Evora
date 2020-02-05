@@ -165,7 +165,9 @@
     <ClCompile Include="AIPlayer.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardLoader.cpp" />
+    <ClCompile Include="Center.cpp" />
     <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="PatternLine.cpp" />
@@ -185,7 +187,9 @@
     <ClInclude Include="AIPlayer.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardLoader.h" />
+    <ClInclude Include="Center.h" />
     <ClInclude Include="Factory.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="PatternLine.h" />

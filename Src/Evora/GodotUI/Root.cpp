@@ -14,6 +14,8 @@
 #include "GameData.h"
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
+#include "factory_offer.h"
+#include "Center.h"
 
 using namespace godot;
 
@@ -29,7 +31,7 @@ void Root::add_start_button()
 
 void Root::set_starting_player(int index)
 {
-	GameData* game_data= cast_to<GameData>(get_node("GameData"));
+	GameData* game_data = cast_to<GameData>(get_node("GameData"));
 	game_data->set("current_player", index);
 
 	// hide gui aspects of player select
@@ -39,9 +41,9 @@ void Root::set_starting_player(int index)
 	}
 	cast_to<Control>(get_node("Shade"))->set_visible(false);
 	cast_to<Control>(get_node("SelectPlayerPrompt"))->set_visible(false);
-	
+
 	game_data->controller->start_game();
-	
+
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
 	TextureRect* player_highlight = cast_to<TextureRect>(get_node("PlayerHighlight"));
 	player_highlight->set_global_position(highlighted->get_global_position() - Vector2(3, 3));
@@ -64,22 +66,22 @@ void godot::Root::_register_methods()
 	register_method("set_starting_player", &Root::set_starting_player);
 	register_method("pattern_line_entered", &Root::pattern_line_entered);
 	register_method("tile_over", &Root::tile_over);
-	
-	register_property<Root, int>("players", &Root::m_number_of_players, 2);
+	register_method("tile_dropped", &Root::tile_dropped);
+
+	register_property("players", &Root::m_number_of_players, 2);
 }
 
 void godot::Root::_init()
 {
 	m_number_of_players = 2;
 	GodotScenes::load_scenes();
-	
 }
 
 void Root::_ready()
 {
-	TileLoader::p_root = this;
 	// Setting up window size to fit all the boards
-	Vector2 board_size = ((TextureRect*)(GodotScenes::board_example->get_child(get_child_index(GodotScenes::board_example, "Image"))))->get_size();
+	Vector2 board_size = ((TextureRect*)(GodotScenes::board_example->get_child(
+		get_child_index(GodotScenes::board_example, "Image"))))->get_size();
 	const int boards_margin = 10;
 	float width = board_size.x * m_number_of_players + boards_margin * (m_number_of_players + 1);
 	float height = 900.f;
@@ -89,15 +91,20 @@ void Root::_ready()
 	// set values in game data
 	GodotScenes::game_data = cast_to<GameData>(get_node("GameData"));
 	GodotScenes::game_data->set("number_of_players", m_number_of_players);
-	
+
 	get_tree()->get_root()->set_size(Vector2(width, height));
 
 	// game init
 	ObjectLoader::board_loader->load_boards(m_number_of_players, Vector2(width, height));
-	ObjectLoader::factory_loader->load_factories(m_number_of_players*2 + 1, Vector2(width / 2, 300), 200);
+	ObjectLoader::factory_loader->load_factories(m_number_of_players * 2 + 1, Vector2(width / 2, 300), 220);
+	
+	Center* center = (Center*)GodotScenes::center_scene->instance();
+	Vector2 center_size = cast_to<Control>(center->get_node("Image"))->get_size();
+	center->set_global_position(Vector2((width - center_size.x) / 2, 300 - center_size.y / 2));
+	add_child(center);
 
 	// connect signals necessito
-	for(int i = 0; i < m_number_of_players; i++)
+	for (int i = 0; i < m_number_of_players; i++)
 	{
 		Board* board = cast_to<Board>(ObjectLoader::board_loader->get_child(i));
 		board->connect("selected", this, "set_starting_player");
@@ -105,35 +112,39 @@ void Root::_ready()
 		board->connect("tile_over", this, "tile_over");
 		ObjectLoader::tile_loader->connect("tile_moved", board, "tile_moved");
 	}
-	
+	ObjectLoader::tile_loader->connect("tile_dropped", this, "tile_dropped");
 	add_start_button();
+
+	// add root to godot scenes to be accessed from elsewhere
+	GodotScenes::root = this;
 }
 
 void Root::start_game()
 {
 	Node2D* boards = (Node2D*)get_child(get_child_index(this, "Boards"));
 	int64_t boards_count = boards->get_child_count();
-	
+
 	GameData* game_data = cast_to<GameData>(get_node("GameData"));
 	game_data->set("number_of_players", m_number_of_players);
 	game_data->set_data();
-	
+
 	auto ai_factories = AI::AIFactory::get_factories();
 	// hide player selection and prepare for starting player select
-	for(int i = 0; i < boards_count; ++i)
+	for (int i = 0; i < boards_count; ++i)
 	{
 		Board* board = (Board*)boards->get_child(i);
 		board->_hide_player_select();
 		String player_name = board->get_player_name();
 		cast_to<Label>(board->get_node("PlayerName"))->set_text(player_name);
-		if(player_name == "Human")
+		if (player_name == "Human")
 		{
 			std::unique_ptr<Player> player = std::make_unique<HumanPlayer>();
 			game_data->add_player(std::move(player));
 		}
 		else
 		{
-			std::unique_ptr<Player> player = std::make_unique<AIPlayer>(ai_factories.at(player_name.alloc_c_string())->get(game_data->controller));
+			std::unique_ptr<Player> player = std::make_unique<AIPlayer>(
+				ai_factories.at(player_name.alloc_c_string())->get(game_data->controller));
 			game_data->add_player(std::move(player));
 		}
 		board->set("player_select", true);
@@ -156,19 +167,42 @@ void Root::animation_finished()
 
 void Root::pattern_line_entered(int board_index, int pattern_line_index)
 {
-	int holding_color = ObjectLoader::tile_loader->get("holding_color");
-	if(holding_color != -1)
-	{
-		if(GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(holding_color)))
-		{
-			cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_pattern_line_highlight(pattern_line_index, true);
-		}
-	}
 }
+
 void Root::tile_over(int board_index, int pattern_line_index, int color)
 {
-	if (GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
+	if (board_index == GodotScenes::game_data->current_player &&
+		GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
-		cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_pattern_line_highlight(pattern_line_index, true);
+		set("tile_over_pattern_line", pattern_line_index);
+		cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_pattern_line_highlight(
+			pattern_line_index, true);
+	}
+}
+
+void Root::tile_dropped(int factory_index, int color)
+{
+	printf("tile dropped\n");
+	int board_index = GodotScenes::game_data->current_player;
+	Board* board = cast_to<Board>(get_node("Boards")->get_child(board_index));
+	int pattern_line_index = board->get_pattern_line_hover_index();
+	if(pattern_line_index != -1
+		&& GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
+	{
+		GodotScenes::game_data->controller->add_command(
+			std::move(
+				std::make_unique<control::factory_offer>(
+					GodotScenes::game_data->m_game, factory_index,
+					board_index, 
+					pattern_line_index, 
+					(model::tile)color)
+			)
+		);
+		board->set_pattern_line_highlight(pattern_line_index, false);
+		GodotScenes::game_data->controller->step();
+	}
+	else
+	{
+		ObjectLoader::tile_loader->snap_back(factory_index, color);
 	}
 }

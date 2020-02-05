@@ -15,6 +15,7 @@ namespace control
 		game_controller(std::shared_ptr<model::game> model):m_model(model){}
 		void start_game();
 		std::vector<std::unique_ptr<command>> get_possible_moves();
+		void add_command(std::unique_ptr<command> command);
 		bool step();
 		
 	};

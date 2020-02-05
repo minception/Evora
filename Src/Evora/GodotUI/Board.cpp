@@ -4,6 +4,7 @@
 #include <Control.hpp>
 #include <Input.hpp>
 #include "PatternLine.h"
+#include "Floor.h"
 
 using namespace godot;
 
@@ -147,4 +148,28 @@ String Board::get_player_name()
 {
 	OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
 	return player_select->get_text();
+}
+
+int Board::get_pattern_line_hover_index()
+{
+	Node* pattern_lines = get_node("Image/PatternLines");
+	int pattern_line_count = get_node("Image/PatternLines")->get_child_count();
+	for(int i = 0; i < pattern_line_count; ++i)
+	{
+		PatternLine* pattern_line = cast_to<PatternLine>(pattern_lines->get_child(i));
+		if (pattern_line->is_mouse_over()) return i;
+	}
+	return -1;
+}
+
+std::vector<Vector2> Board::get_pattern_line_positions(int pattern_line_index, int count)
+{
+	PatternLine* pattern_line = cast_to<PatternLine>(get_node("Image/PatternLines")->get_child(pattern_line_index));
+	return pattern_line->get_n_positions(count);
+}
+
+std::vector<Vector2> Board::get_floor_positions(int count)
+{
+	Floor* floor = (Floor*)get_node("Image/Floor");
+	return floor->get_n_positions(count);
 }

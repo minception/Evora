@@ -12,15 +12,11 @@ namespace godot
 	class FactoryLoader :public Node2D
 	{
 		GODOT_CLASS(FactoryLoader, KinematicBody2D)
-		Ref<PackedScene> m_factory_scene;
-		std::vector<Node2D> m_factories;
 	public:
 		static void _register_methods();
 		void _ready();
 		static void _init();
 		static void _process(float delta);
 		void load_factories(int count, Vector2 c, float r);
-
-		FactoryLoader();
 	};
 }

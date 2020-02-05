@@ -18,7 +18,8 @@ margin_right = 32.0
 margin_bottom = 32.0
 expand = true
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": false
 }
 
 [node name="Text" type="Label" parent="Image"]

@@ -74,6 +74,12 @@
     <ClCompile Include="PatternLineLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Center.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -125,6 +131,12 @@
       <Filter>Player\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PatternLineLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Center.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

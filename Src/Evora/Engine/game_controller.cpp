@@ -9,6 +9,11 @@ void game_controller::start_game()
 	step();
 }
 
+void game_controller::add_command(std::unique_ptr<command> command)
+{
+	m_commands.push_back(std::move(command));
+}
+
 bool game_controller::step()
 {
 	if(current_command == m_commands.size())

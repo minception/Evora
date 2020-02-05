@@ -30,8 +30,8 @@ stretch_mode = 2
 
 [node name="PlayerHighlight" type="TextureRect" parent="."]
 visible = false
-margin_right = 393.0
-margin_bottom = 290.0
+margin_right = 381.0
+margin_bottom = 283.0
 texture = ExtResource( 7 )
 expand = true
 __meta__ = {

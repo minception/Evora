@@ -18,6 +18,7 @@ namespace godot
 		GODOT_CLASS(Root, Node2D)
 		
 		int m_number_of_players;
+		int tile_over_pattern_line;
 
 		void add_start_button();
 	public:
@@ -27,7 +28,8 @@ namespace godot
 		void _ready();
 		void start_game();
 		void animation_finished();
-		void pattern_line_entered(int pattern_line_index, int board_index);
+		void pattern_line_entered(int board_index, int pattern_line_index);
 		void tile_over(int board_index, int pattern_line_index, int color);
+		void tile_dropped(int factory_index, int color);
 	};
 }

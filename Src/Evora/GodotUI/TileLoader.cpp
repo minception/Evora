@@ -9,8 +9,6 @@
 
 using namespace godot;
 
-Root* TileLoader::p_root;
-
 void godot::TileLoader::_register_methods()
 {
 	register_method("_ready", &TileLoader::_ready);
@@ -19,10 +17,11 @@ void godot::TileLoader::_register_methods()
 	register_method("tile_following", &TileLoader::tile_following);
 	register_method("tile_dropped", &TileLoader::tile_dropped);
 	register_method("tile_moved", &TileLoader::tile_moved);
-
-	register_property("holding_color", &TileLoader::holding_color, -1);
+	register_method("animation_finished", &TileLoader::animation_finished);
 
 	register_signal<TileLoader>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<TileLoader>("tile_dropped", "factory", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<TileLoader>("animation_finished", Dictionary());
 }
 
 
@@ -33,7 +32,6 @@ void godot::TileLoader::_ready()
 
 void godot::TileLoader::_init()
 {
-	holding_color = -1;
 }
 
 void TileLoader::add_tile(Vector2 position, tile color, int factory)
@@ -46,6 +44,7 @@ void TileLoader::add_tile(Vector2 position, tile color, int factory)
 	to_add->connect("following", this, "tile_following");
 	to_add->connect("dropped", this, "tile_dropped");
 	to_add->connect("tile_moved", this, "tile_moved");
+	to_add->connect("animation_finished", this, "animation_finished");
 	
 	to_add->set("color", (int)color);
 	to_add->set("factory_index", factory);
@@ -62,19 +61,22 @@ void TileLoader::tile_following(int factory, int color)
 	for (int i = 0; i < child_count; ++i)
 	{
 		GodotTile* tile = (GodotTile*)get_child(i);
-		tile->set_follow(factory, color, true);
+		int tile_factory = tile->get("factory_index");
+		int tile_color = tile->get("color");
+		if (tile_factory == factory && tile_color == color)
+		{
+			tile->set_follow(true);
+			++holding_count;
+		}
 	}
 	set("holding_color", color);
 }
 
 void TileLoader::tile_dropped(int factory, int color)
 {
-	int64_t child_count = get_child_count();
-	for (int i = 0; i < child_count; ++i)
+	if(--holding_count == 0)
 	{
-		GodotTile* tile = (GodotTile*)get_child(i);
-		tile->set_follow(factory, color, false);
-		tile->set_move_back(factory, color, true);
+		emit_signal("tile_dropped", factory, color);
 	}
 }
 
@@ -89,7 +91,12 @@ void TileLoader::tile_mouse_entered(int factory, int color)
 	for (int i = 0; i < child_count; ++i)
 	{
 		GodotTile* tile = (GodotTile*)get_child(i);
-		tile->set_highlight(factory, color, true);
+		int tile_factory = tile->get("factory_index");
+		int tile_color = tile->get("color");
+		if (tile_factory == factory && tile_color == color)
+		{
+			tile->set_highlight(true);
+		}
 	}
 }
 
@@ -99,7 +106,63 @@ void TileLoader::tile_mouse_exited(int factory, int color)
 	for (int i = 0; i < child_count; ++i)
 	{
 		GodotTile* tile = (GodotTile*)get_child(i);
-		tile->set_highlight(factory, color, false);
+		int tile_factory = tile->get("factory_index");
+		int tile_color = tile->get("color");
+		if (tile_factory == factory && tile_color == color)
+		{
+			tile->set_highlight(false);
+		}
 	}
 }
 
+void TileLoader::snap_back(int factory, int color)
+{
+	int64_t child_count = get_child_count();
+	for (int i = 0; i < child_count; ++i)
+	{
+		GodotTile* tile = (GodotTile*)get_child(i);
+		int tile_factory = tile->get("factory_index");
+		int tile_color = tile->get("color");
+		if (tile_factory == factory && tile_color == color)
+		{
+			tile->set_follow(false);
+			tile->set_move_back(true);
+		}
+	}
+}
+
+void TileLoader::remove_from_game(int factory_index, int color)
+{
+}
+
+void TileLoader::move_to_center(int factory_index)
+{
+}
+
+void TileLoader::move_tiles(int factory_index, int color, const std::vector<Vector2>& positions)
+{
+	int64_t child_count = get_child_count();
+	int position_index = 0;
+	for (int i = 0; i < child_count; ++i)
+	{
+		if (position_index == positions.size()) break;
+		GodotTile* tile = (GodotTile*)get_child(i);
+		int tile_factory = tile->get("factory_index");
+		int tile_color = tile->get("color");
+		if(tile_factory == factory_index && tile_color == color)
+		{
+			tile->set_follow(false);
+			tile->set("factory_index", -1);
+			tile->animate_to(positions[position_index++]);
+			++animating_count;
+		}
+	}
+}
+
+void TileLoader::animation_finished()
+{
+	if (--animating_count == 0)
+	{
+		emit_signal("animation_finished");
+	}
+}

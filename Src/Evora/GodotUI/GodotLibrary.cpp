@@ -6,6 +6,8 @@
 #include "PatternLine.h"
 #include "Root.h"
 #include "PatternLineLoader.h"
+#include "Floor.h"
+#include "Center.h"
 
 using namespace godot;
 
@@ -29,4 +31,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	register_class<PatternLine>();
 	register_class<PatternLineLoader>();
 	register_class<GameData>();
+	register_class<Floor>();
+	register_class<Center>();
 }

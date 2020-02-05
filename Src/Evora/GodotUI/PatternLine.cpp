@@ -1,4 +1,5 @@
 ﻿#include "PatternLine.h"
+#include "GodotScenes.h"
 
 using namespace godot;
 
@@ -39,7 +40,6 @@ void PatternLine::tile_moved(Vector2 position, int color)
 	&& position.y > pattern_line_position.y
 	&& position.y < pattern_line_position.y + pattern_line_size.y)
 	{
-		printf("tile is over pattern line\n");
 		int index = get("index");
 		emit_signal("tile_over", index, color);
 	}
@@ -53,6 +53,39 @@ void PatternLine::input()
 {
 	int index = get("index");
 	emit_signal("mouse_entered_pattern_line", index);
+}
+
+bool PatternLine::is_mouse_over()
+{
+	Vector2 position = get_global_mouse_position();
+	TextureRect* image = cast_to<TextureRect>(get_node("Image"));
+	Vector2 pattern_line_size = image->get_size();
+	Vector2 pattern_line_position = get_global_position();
+	if (position.x > pattern_line_position.x
+		&& position.x < pattern_line_position.x + pattern_line_size.x
+		&& position.y > pattern_line_position.y
+		&& position.y < pattern_line_position.y + pattern_line_size.y)
+	{
+		return true;
+	}
+	return false;
+}
+
+std::vector<Vector2> PatternLine::get_n_positions(int n)
+{
+	std::vector<Vector2> positions;
+	TextureRect* image = cast_to<TextureRect>(get_node("Image"));
+	Vector2 pattern_line_size = image->get_size();
+	Vector2 pattern_line_position = get_global_position();
+	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
+	float margin = 5;
+	for (int i = 0; i < n; ++i)
+	{
+		int xpos = pattern_line_position.x + pattern_line_size.x - (m_tile_count + i + 1) * tile_size.x - (m_tile_count + i) * margin;
+		positions.push_back(Vector2(xpos, pattern_line_position.y));
+	}
+	m_tile_count += n;
+	return positions;
 }
 
 void PatternLine::_register_methods()
@@ -69,10 +102,12 @@ void PatternLine::_register_methods()
 	register_method("input", &PatternLine::input);
 	
 	register_property("index", &PatternLine::set_index, &PatternLine::get_index, 0);
+	register_property("tile_count", &PatternLine::m_tile_count, 0);
 }
 
 void PatternLine::_init()
 {
+	m_tile_count = 0;
 }
 
 void PatternLine::_ready()
