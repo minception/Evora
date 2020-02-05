@@ -27,8 +27,8 @@ namespace godot
 		void tile_mouse_exited(int factory, int color);
 		void snap_back(int factory, int color);
 		void remove_from_game(int factory_index, int color);
-		void move_to_center(int factory_index);
 		void move_tiles(int factory_index, int color, const std::vector<Vector2>& positions);
+		void animation_started();
 		void animation_finished();
 	};
 }

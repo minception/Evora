@@ -26,8 +26,6 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
 
-[node name="HighlightAnimation" type="AnimationPlayer" parent="."]
-
 [node name="PlayerHighlight" type="TextureRect" parent="."]
 visible = false
 margin_right = 381.0

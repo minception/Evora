@@ -85,6 +85,7 @@ void GodotTile::_register_methods()
 	register_signal<GodotTile>("following", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("dropped", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
+	register_signal<GodotTile>("animation_started", Dictionary());
 	register_signal<GodotTile>("animation_finished", Dictionary());
 }
 
@@ -245,5 +246,6 @@ void GodotTile::animate_to(Vector2 position)
 {
 	set("animating", true);
 	set("animating_to", position);
+	emit_signal("animation_started");
 }
 

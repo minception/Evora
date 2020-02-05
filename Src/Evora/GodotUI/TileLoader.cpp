@@ -18,6 +18,7 @@ void godot::TileLoader::_register_methods()
 	register_method("tile_dropped", &TileLoader::tile_dropped);
 	register_method("tile_moved", &TileLoader::tile_moved);
 	register_method("animation_finished", &TileLoader::animation_finished);
+	register_method("animation_started", &TileLoader::animation_started);
 
 	register_signal<TileLoader>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<TileLoader>("tile_dropped", "factory", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
@@ -44,6 +45,7 @@ void TileLoader::add_tile(Vector2 position, tile color, int factory)
 	to_add->connect("following", this, "tile_following");
 	to_add->connect("dropped", this, "tile_dropped");
 	to_add->connect("tile_moved", this, "tile_moved");
+	to_add->connect("animation_started", this, "animation_started");
 	to_add->connect("animation_finished", this, "animation_finished");
 	
 	to_add->set("color", (int)color);
@@ -135,10 +137,6 @@ void TileLoader::remove_from_game(int factory_index, int color)
 {
 }
 
-void TileLoader::move_to_center(int factory_index)
-{
-}
-
 void TileLoader::move_tiles(int factory_index, int color, const std::vector<Vector2>& positions)
 {
 	int64_t child_count = get_child_count();
@@ -154,9 +152,13 @@ void TileLoader::move_tiles(int factory_index, int color, const std::vector<Vect
 			tile->set_follow(false);
 			tile->set("factory_index", -1);
 			tile->animate_to(positions[position_index++]);
-			++animating_count;
 		}
 	}
+}
+
+void TileLoader::animation_started()
+{
+	++animating_count;
 }
 
 void TileLoader::animation_finished()

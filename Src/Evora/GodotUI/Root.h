@@ -26,7 +26,9 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		void _ready();
+		void create_player_change_animations();
 		void start_game();
+		void switch_to_next_player();
 		void animation_finished();
 		void pattern_line_entered(int board_index, int pattern_line_index);
 		void tile_over(int board_index, int pattern_line_index, int color);

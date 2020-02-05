@@ -77,6 +77,5 @@ int GodotGame::factory_to_center(int factory_index)
 			tile->set("factory_index", factory_count());
 		}
 	}
-	ObjectLoader::tile_loader->move_to_center(factory_index);
 	return count;
 }

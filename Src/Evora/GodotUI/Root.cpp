@@ -48,15 +48,6 @@ void Root::set_starting_player(int index)
 	TextureRect* player_highlight = cast_to<TextureRect>(get_node("PlayerHighlight"));
 	player_highlight->set_global_position(highlighted->get_global_position() - Vector2(3, 3));
 	player_highlight->set_visible(true);
-	//AnimationPlayer* highlightAnimation = cast_to<AnimationPlayer>(get_node("HighlightAnimation"));
-	//Animation* playerTransfer = Animation::_new();
-	//highlightAnimation->add_animation("animation", playerTransfer);
-	//highlightAnimation->set_current_animation("animation");
-	//playerTransfer->add_track(Animation::TrackType::TYPE_VALUE);
-	//playerTransfer->track_set_path(0, "PlayerHighlight:rect_position");
-	//playerTransfer->track_insert_key(0, 0.0, Vector2(100.0, 100.0));
-	//playerTransfer->track_insert_key(0, 1.0, Vector2(50.0, 50.0));
-	//highlightAnimation->play("animation");
 }
 
 void godot::Root::_register_methods()
@@ -67,6 +58,7 @@ void godot::Root::_register_methods()
 	register_method("pattern_line_entered", &Root::pattern_line_entered);
 	register_method("tile_over", &Root::tile_over);
 	register_method("tile_dropped", &Root::tile_dropped);
+	register_method("animation_finished", &Root::animation_finished);
 
 	register_property("players", &Root::m_number_of_players, 2);
 }
@@ -113,10 +105,33 @@ void Root::_ready()
 		ObjectLoader::tile_loader->connect("tile_moved", board, "tile_moved");
 	}
 	ObjectLoader::tile_loader->connect("tile_dropped", this, "tile_dropped");
+	ObjectLoader::tile_loader->connect("animation_finished", this, "animation_finished");
 	add_start_button();
 
 	// add root to godot scenes to be accessed from elsewhere
 	GodotScenes::root = this;
+}
+
+void Root::create_player_change_animations()
+{
+	Board* previous_player = (Board*)ObjectLoader::board_loader->get_child(m_number_of_players - 1);
+	Node* animations_owner = get_node("PlayerChangeAnimations");
+	for (int i = 0; i < m_number_of_players; ++i)
+	{
+		Board* next_player = (Board*)ObjectLoader::board_loader->get_child(i);
+		AnimationPlayer* animationPlayer = AnimationPlayer::_new();
+		Animation* animation = Animation::_new();
+		animationPlayer->add_animation("animation", animation);
+		animationPlayer->set_current_animation("animation");
+		animation->add_track(Animation::TrackType::TYPE_VALUE);
+		animation->track_set_path(0, "../PlayerHighlight:rect_position");
+		animation->track_insert_key(0, 0.0, previous_player->get_global_position() - Vector2(3.0, 3.0));
+		animation->track_insert_key(0, 0.2, next_player->get_global_position() - Vector2(3.0, 3.0));
+		animation->track_set_interpolation_type(0, Animation::InterpolationType::INTERPOLATION_CUBIC);
+		animations_owner->add_child(animationPlayer);
+		previous_player = next_player;
+	}
+
 }
 
 void Root::start_game()
@@ -159,10 +174,23 @@ void Root::start_game()
 	Vector2 viewport_size = get_viewport_rect().size;
 	prompt->set_global_position(Vector2((viewport_size.x - prompt->get_size().x) / 2, 300 - prompt->get_size().y / 2));
 	prompt->set_visible(true);
+
+	create_player_change_animations();
+}
+
+void Root::switch_to_next_player()
+{
+	GodotScenes::game_data->current_player = (GodotScenes::game_data->current_player + 1) % m_number_of_players;
+	AnimationPlayer* animation = (AnimationPlayer*)get_node("PlayerChangeAnimations")->get_child(GodotScenes::game_data->current_player);
+	animation->play();	
 }
 
 void Root::animation_finished()
 {
+	if(!GodotScenes::game_data->controller->step())
+	{
+		switch_to_next_player();
+	}
 }
 
 void Root::pattern_line_entered(int board_index, int pattern_line_index)
