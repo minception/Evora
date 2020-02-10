@@ -10,6 +10,11 @@ namespace model
 		}
 	}
 
+	void board::tile_wall(int pattern_line_index, tile color)
+	{
+		m_wall.add_tile(pattern_line_index, color);
+	}
+
 	int board::get_score() const
 	{
 		return m_score;
@@ -50,6 +55,11 @@ namespace model
 		m_floor.add_tile(color);
 	}
 
+	bool board::has_starter_tile()
+	{
+		return m_has_starter_tile;
+	}
+
 	void board::set_starter_tile(bool cond)
 	{
 		m_has_starter_tile = cond;
@@ -73,5 +83,30 @@ namespace model
 	bool board::can_add_to_pattern_line(int pattern_line_index, tile tile)
 	{
 		return m_pattern_lines[pattern_line_index].can_add(tile);
+	}
+
+	void board::take_starter_tile()
+	{
+		m_has_starter_tile = false;
+	}
+
+	void board::set_starter_player()
+	{
+		m_has_starter_tile = true;
+	}
+
+	tile board::pattern_line_color(int pattern_line_index)
+	{
+		return m_pattern_lines[pattern_line_index].get_color();
+	}
+
+	void board::clear_pattern_line(int pattern_line_index)
+	{
+		m_pattern_lines[pattern_line_index].clear();
+	}
+
+	int board::score_wall_tile(int pattern_line_index, tile tile)
+	{
+		return m_wall.score_tile(pattern_line_index, tile);
 	}
 }

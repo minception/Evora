@@ -15,6 +15,7 @@
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
 #include "factory_offer.h"
+#include "center_offer.h"
 #include "Center.h"
 
 using namespace godot;
@@ -93,7 +94,7 @@ void Root::_ready()
 	Center* center = (Center*)GodotScenes::center_scene->instance();
 	Vector2 center_size = cast_to<Control>(center->get_node("Image"))->get_size();
 	center->set_global_position(Vector2((width - center_size.x) / 2, 300 - center_size.y / 2));
-	add_child(center);
+	add_child_below_node(get_node("Boards"), center);
 
 	// connect signals necessito
 	for (int i = 0; i < m_number_of_players; i++)
@@ -217,15 +218,31 @@ void Root::tile_dropped(int factory_index, int color)
 	if(pattern_line_index != -1
 		&& GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
-		GodotScenes::game_data->controller->add_command(
-			std::move(
-				std::make_unique<control::factory_offer>(
-					GodotScenes::game_data->m_game, factory_index,
-					board_index, 
-					pattern_line_index, 
-					(model::tile)color)
-			)
-		);
+
+		if(factory_index == ObjectLoader::factory_loader->get_child_count())
+		{
+			GodotScenes::game_data->controller->add_command(
+				std::move(
+					std::make_unique<control::center_offer>(
+						GodotScenes::game_data->m_game,
+						board_index,
+						pattern_line_index,
+						(model::tile)color)
+				)
+			);
+		}
+		else
+		{
+			GodotScenes::game_data->controller->add_command(
+				std::move(
+					std::make_unique<control::factory_offer>(
+						GodotScenes::game_data->m_game, factory_index,
+						board_index,
+						pattern_line_index,
+						(model::tile)color)
+				)
+			);
+		}
 		board->set_pattern_line_highlight(pattern_line_index, false);
 		GodotScenes::game_data->controller->step();
 	}

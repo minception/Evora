@@ -23,5 +23,7 @@ namespace model
 		// iterator methods for display purposes
 		std::vector<std::vector<tile>>::const_iterator begin() const;
 		std::vector<std::vector<tile>>::const_iterator end() const;
+		void add_tile(int pattern_line_index, tile tile);
+		int score_tile(int pattern_line_index, tile tile);
 	};
 }

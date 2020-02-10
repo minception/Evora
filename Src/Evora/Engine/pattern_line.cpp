@@ -25,4 +25,15 @@ namespace model
 		}
 		return true;
 	}
+
+	tile pattern_line::get_color()
+	{
+		return m_color;
+	}
+
+	void pattern_line::clear()
+	{
+		m_color = tile::empty;
+		m_count = 0;
+	}
 }

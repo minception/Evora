@@ -17,7 +17,7 @@ namespace model
 		bool m_has_starter_tile;
 	public:
 		board();
-		bool tile_wall(lid& lid);
+		void tile_wall(int pattern_line_index, tile color);
 		int get_score() const;
 
 		// iterator methods for display purposes
@@ -34,5 +34,10 @@ namespace model
 		void add_to_pattern_line(int pattern_line_index, tile tile);
 		bool floor_full();
 		bool can_add_to_pattern_line(int pattern_line_index, tile tile);
+		void take_starter_tile();
+		void set_starter_player();
+		tile pattern_line_color(int pattern_line_index);
+		void clear_pattern_line(int pattern_line_index);
+		int score_wall_tile(int pattern_line_index, tile tile);
 	};
 }

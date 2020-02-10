@@ -21,5 +21,12 @@ namespace godot
 		int factory_to_floor(int factory_index, int player_index, tile color) override;
 		int factory_to_lid(int factory_index, tile color) override;
 		int factory_to_center(int factory_index) override;
+		// bool handle_first_tile(int player_index) override;
+		int center_to_pattern_line(int player_index, int pattern_line_index, tile color) override;
+		int center_to_floor(int player_index, tile color) override;
+		int center_to_lid(tile color) override;
+		bool handle_center_starter_tile(int player_index) override;
+		tile tile_wall(int player_index, int pattern_line_index) override;
+		int score_wall_tile(int player_index, int pattern_line_index, tile tile) override;
 	};
 }

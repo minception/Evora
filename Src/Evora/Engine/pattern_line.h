@@ -17,5 +17,7 @@ namespace model
 		bool full();
 		void add(tile tile);
 		bool can_add(tile tile);
+		tile get_color();
+		void clear();
 	};
 }

@@ -3,6 +3,7 @@
 void control::init_round::Execute()
 {
 	m_game->shuffle_bag();
+	m_game->starter_tile_unhandled();
 	m_added_before_refill = m_game->bag_to_factories();
 	if(m_added_before_refill < m_game->factory_count()*FACTORY_SIZE)
 	{

@@ -60,4 +60,16 @@ namespace model
 	{
 		return m_tiles.cend();
 	}
+
+	void wall::add_tile(int pattern_line_index, tile tile)
+	{
+		int row = ((int)tile + pattern_line_index) % COLORS;
+		m_tiles[pattern_line_index][row] = tile;
+	}
+
+	int wall::score_tile(int pattern_line_index, tile tile)
+	{
+		int row = ((int)tile + pattern_line_index) % COLORS;
+		return score(pattern_line_index, row);
+	}
 }

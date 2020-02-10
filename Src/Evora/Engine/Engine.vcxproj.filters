@@ -102,6 +102,9 @@
     <ClInclude Include="wall.h">
       <Filter>Model\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="score_wall_tile.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="wall.cpp">
       <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="score_wall_tile.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -239,7 +239,6 @@ void GodotTile::set_follow(bool cond)
 void GodotTile::set_move_back(bool cond)
 {
 	set("move_back", cond);
-	set("interactive", false);
 }
 
 void GodotTile::animate_to(Vector2 position)

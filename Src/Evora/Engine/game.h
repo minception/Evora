@@ -40,7 +40,20 @@ namespace model
 		virtual int factory_to_floor(int factory_index, int player_index, tile color);
 		virtual int factory_to_lid(int factory_index, tile color);
 		virtual int factory_to_center(int factory_index);
-		bool handle_first_tile(int player_index);
+		virtual bool handle_first_tile(int player_index);
 		bool can_add_to_pattern_line(int player_index, int pattern_line_index, tile color);
+		std::vector<int> get_center_tile_indices(tile color);
+		virtual int center_to_pattern_line(int player_index, int pattern_line_index, tile color);
+		virtual int center_to_floor(int player_index, tile color);
+		virtual int center_to_lid(tile color);
+		virtual bool handle_center_starter_tile(int player_index);
+		void set_first_player(int player_index);
+		int get_first_player();
+		void starter_tile_unhandled();
+		bool round_finished();
+		virtual tile tile_wall(int player_index, int pattern_line_index);
+		virtual int score_wall_tile(int player_index, int pattern_line_index, tile tile);
+		tile pattern_line_color(int player_index, int pattern_line_index);
+		bool pattern_line_full(int player_index, int pattern_line_index);
 	};
 }

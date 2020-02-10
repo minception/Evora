@@ -35,6 +35,11 @@ namespace model
 		return m_tiles.cend();
 	}
 
+	bool factory::empty()
+	{
+		return m_tiles.empty();
+	}
+
 	int factory::add_to_center(center& center)
 	{
 		int res = m_tiles.size();

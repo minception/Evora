@@ -21,6 +21,7 @@ namespace godot
 		Input* _input;
 		
 		int _color;
+		int _factory_index;
 
 		bool m_clicked;
 		Vector2 m_clicked_on;
@@ -40,7 +41,6 @@ namespace godot
 		static Ref<Texture> yellowTexture;
 		static Ref<Texture> starterTexture;
 	public:
-		int _factory_index;
 		
 		void set_color(int color);
 		int get_color();

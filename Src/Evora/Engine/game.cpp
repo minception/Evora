@@ -120,17 +120,133 @@ namespace model
 
 	bool game::handle_first_tile(int player_index)
 	{
-		if(m_starter_tile_handled)
+		if(!m_starter_tile_handled
+			&& m_boards[player_index].has_starter_tile())
 		{
-			return false;
+			m_center.add_tile(tile::starter);
+			m_boards[player_index].take_starter_tile();
+			m_starter_tile_handled = true;
+			return true;
 		}
-		m_center.add_tile(tile::starter);
-		return true;
+		return false;
 	}
 
 	bool game::can_add_to_pattern_line(int player_index, int pattern_line_index, tile color)
 	{
 		return m_boards[player_index].can_add_to_pattern_line(pattern_line_index, color);
+	}
+
+	std::vector<int> game::get_center_tile_indices(tile color)
+	{
+		return m_center.get_tile_indices(color);
+	}
+
+	int game::center_to_pattern_line(int player_index, int pattern_line_index, tile color)
+	{
+		int res(0);
+		while (!m_boards[player_index].pattern_line_full(pattern_line_index))
+		{
+			if (m_center.pick_color_tile(color))
+			{
+				m_boards[player_index].add_to_pattern_line(pattern_line_index, color);
+				++res;
+			}
+			else break;
+		}
+		return res;
+	}
+
+	int game::center_to_floor(int player_index, tile color)
+	{
+		int res(0);
+		while (!m_boards[player_index].floor_full())
+		{
+			if (m_center.pick_color_tile(color))
+			{
+				m_boards[player_index].add_to_floor(color);
+				++res;
+			}
+			else break;
+		}
+		return res;
+	}
+
+	int game::center_to_lid(tile color)
+	{
+		int res(0);
+		while (m_center.pick_color_tile(color))
+		{
+			m_lid.add_tile(color);
+			++res;
+		}
+		return res;
+	}
+
+	bool game::handle_center_starter_tile(int player_index)
+	{
+		if (m_center.pick_starter_tile())
+		{
+			m_boards[player_index].set_starter_player();
+			m_boards[player_index].add_to_floor(tile::starter);
+			return true;
+		}
+		return false;
+	}
+
+	void game::set_first_player(int player_index)
+	{
+		m_boards[player_index].set_starter_player();
+	}
+
+	int game::get_first_player()
+	{
+		for(int i = 0; i < player_count(); ++i)
+		{
+			if (m_boards[i].has_starter_tile()) return i;
+		}
+		return -1;
+	}
+
+	void game::starter_tile_unhandled()
+	{
+		m_starter_tile_handled = false;
+	}
+
+	bool game::round_finished()
+	{
+		if (!m_center.empty()) return false;
+		for(auto&& factory: m_factories)
+		{
+			if(!factory.empty())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	tile game::tile_wall(int player_index, int pattern_line_index)
+	{
+		tile color = m_boards[player_index].pattern_line_color(pattern_line_index);
+		m_boards[player_index].clear_pattern_line(pattern_line_index);
+		m_boards[player_index].tile_wall(pattern_line_index, color);
+		m_lid.add_tiles(pattern_line_index, color);
+		return color;
+	}
+
+	int game::score_wall_tile(int player_index, int pattern_line_index, tile tile)
+	{
+		return m_boards[player_index].score_wall_tile(pattern_line_index, tile);
+	}
+
+	tile game::pattern_line_color(int player_index, int pattern_line_index)
+	{
+		return m_boards[player_index].pattern_line_color(pattern_line_index);
+	}
+
+	bool game::pattern_line_full(int player_index, int pattern_line_index)
+	{
+		return m_boards[player_index].pattern_line_full(pattern_line_index);
 	}
 
 	std::vector<tile> game::get_lid_state()

@@ -37,4 +37,45 @@ namespace model
 	{
 		return m_tiles.cend();
 	}
+
+	std::vector<int> center::get_tile_indices(tile color)
+	{
+		std::vector<int> res;
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			if(m_tiles[i]== color)
+			{
+				res.push_back(i);
+			}
+		}
+		return res;
+	}
+
+	bool center::pick_color_tile(tile color)
+	{
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			if (m_tiles[i] == color)
+			{
+				m_tiles.erase(m_tiles.begin() + i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool center::pick_starter_tile()
+	{
+		if (m_tiles[0] == tile::starter)
+		{
+			m_tiles.erase(m_tiles.begin());
+			return true;
+		}
+		return false;
+	}
+
+	bool center::empty()
+	{
+		return m_tiles.empty();
+	}
 }
