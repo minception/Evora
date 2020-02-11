@@ -12,22 +12,13 @@ void PatternLine::mouse_entered()
 void PatternLine::mouse_exited()
 {
 	int index = get("index");
-	cast_to<TextureRect>(get_node("Image"))->set_self_modulate(Color(1, 1, 1));
+	cast_to<TextureRect>(get_node("Image"))->set_visible(false);
 	emit_signal("mouse_exited_pattern_line", index);
 }
 
 void PatternLine::set_highlight(bool cond)
 {
-	Color modulation;
-	if(cond)
-	{
-		modulation = Color(0, 1, 1);
-	}
-	else
-	{
-		modulation = Color(1, 1, 1);
-	}
-	cast_to<TextureRect>(get_node("Image"))->set_self_modulate(modulation);
+	cast_to<TextureRect>(get_node("Image"))->set_visible(cond);
 }
 
 void PatternLine::tile_moved(Vector2 position, int color)

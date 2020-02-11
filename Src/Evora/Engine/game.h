@@ -53,6 +53,7 @@ namespace model
 		bool round_finished();
 		virtual tile tile_wall(int player_index, int pattern_line_index);
 		virtual int score_wall_tile(int player_index, int pattern_line_index, tile tile);
+		std::vector<int> get_score_indices(int player_index, int pattern_line_index, tile tile);
 		tile pattern_line_color(int player_index, int pattern_line_index);
 		bool pattern_line_full(int player_index, int pattern_line_index);
 	};

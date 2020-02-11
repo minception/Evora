@@ -22,7 +22,9 @@ namespace godot
 		
 		int _color;
 		int _factory_index;
-
+		int _pattern_line_index;
+		int _board_index;
+		
 		bool m_clicked;
 		Vector2 m_clicked_on;
 		Vector2 m_original_position;
@@ -47,6 +49,9 @@ namespace godot
 
 		void set_interactive(bool cond);
 		bool get_interactive();
+
+		void set_pattern_line_index(int value);
+		int get_pattern_line_index();
 		
 		static void _register_methods();
 		void _init();

@@ -5,6 +5,9 @@
 #include <Input.hpp>
 #include "PatternLine.h"
 #include "Floor.h"
+#include <Label.hpp>
+#include <string>
+#include "GodotScenes.h"
 
 using namespace godot;
 
@@ -32,6 +35,7 @@ void Board::_register_methods() {
 	register_signal<Board>("pattern_line_entered", "pattern_line_index", GODOT_VARIANT_TYPE_INT, "board_index", GODOT_VARIANT_TYPE_INT);
 	register_signal<Board>("tile_moved", "position", GODOT_VARIANT_TYPE_VECTOR2, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<Board>("tile_over","pattern_line_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT, "board_index", GODOT_VARIANT_TYPE_INT);
+	register_signal<Board>("animation_finished", Dictionary());
 }
 
 void godot::Board::_init()
@@ -173,3 +177,28 @@ std::vector<Vector2> Board::get_floor_positions(int count)
 	Floor* floor = (Floor*)get_node("Image/Floor");
 	return floor->get_n_positions(count);
 }
+
+Vector2 Board::get_wall_position(int line, int color)
+{
+	int row = (color + line) % 5;
+	return cast_to<TextureRect>(get_node("Image/Wall")->get_child(line)->get_child(row))->get_global_position();
+}
+
+void Board::display_score(const std::vector<int>& score_indices, int line, int color, int score)
+{
+	const int H_FIRST(0), H_LAST(1), V_FIRST(2), V_LAST(3);
+	int row = (color + line) % 5;
+	TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/HScoreHighlight"));
+	TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/VScoreHighlight"));
+	Vector2 h_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(score_indices[H_FIRST])->get_child(row))->get_global_position();
+	Vector2 v_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(line)->get_child(score_indices[V_FIRST]))->get_global_position();
+	int h_count = score_indices[H_LAST] - score_indices[H_FIRST] + 1;
+	int v_count = score_indices[V_LAST] - score_indices[V_FIRST] + 1;
+	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
+	Label* score_label = cast_to<Label>(get_node("Image/Score"));
+	int current_score = std::stoi(score_label->get_text().alloc_c_string());
+	current_score += score;
+	score_label->set_text(std::to_string(current_score).c_str());
+	emit_signal("animation_finished");
+}
+

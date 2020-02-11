@@ -239,6 +239,11 @@ namespace model
 		return m_boards[player_index].score_wall_tile(pattern_line_index, tile);
 	}
 
+	std::vector<int> game::get_score_indices(int player_index, int pattern_line_index, tile tile)
+	{
+		return m_boards[player_index].get_score_indices(pattern_line_index, tile);
+	}
+
 	tile game::pattern_line_color(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].pattern_line_color(pattern_line_index);

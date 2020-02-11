@@ -62,6 +62,17 @@ bool GodotTile::get_interactive()
 	return _interactive;
 }
 
+void GodotTile::set_pattern_line_index(int value)
+{
+	_pattern_line_index = value;
+	_interactive = false;
+}
+
+int GodotTile::get_pattern_line_index()
+{
+	return _pattern_line_index;
+}
+
 void GodotTile::_register_methods()
 {
 	register_method("_process", &GodotTile::_process);
@@ -78,6 +89,8 @@ void GodotTile::_register_methods()
 	register_property("move_back", &GodotTile::m_move_back, false);
 	register_property("animating", &GodotTile::m_animating, false);
 	register_property("animating_to", &GodotTile::m_animating_to, Vector2(0, 0));
+	register_property("pattern_line_index", &GodotTile::set_pattern_line_index, &GodotTile::get_pattern_line_index, -1);
+	register_property("board_index", &GodotTile::_board_index, -1);
 	
 	register_signal<GodotTile>("mouse_entered", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("mouse_exited", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
@@ -166,7 +179,8 @@ void GodotTile::_process(float delta)
 
 void GodotTile::_on_mouse_entered()
 {
-	emit_signal("mouse_entered", _factory_index, _color);
+	if(_interactive)
+		emit_signal("mouse_entered", _factory_index, _color);
 }
 
 void GodotTile::_on_mouse_exited()

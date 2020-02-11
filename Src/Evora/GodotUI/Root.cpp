@@ -103,6 +103,7 @@ void Root::_ready()
 		board->connect("selected", this, "set_starting_player");
 		board->connect("pattern_line_entered", this, "pattern_line_entered");
 		board->connect("tile_over", this, "tile_over");
+		board->connect("animation_finished", this, "animation_finished");
 		ObjectLoader::tile_loader->connect("tile_moved", board, "tile_moved");
 	}
 	ObjectLoader::tile_loader->connect("tile_dropped", this, "tile_dropped");
@@ -211,7 +212,6 @@ void Root::tile_over(int board_index, int pattern_line_index, int color)
 
 void Root::tile_dropped(int factory_index, int color)
 {
-	printf("tile dropped\n");
 	int board_index = GodotScenes::game_data->current_player;
 	Board* board = cast_to<Board>(get_node("Boards")->get_child(board_index));
 	int pattern_line_index = board->get_pattern_line_hover_index();

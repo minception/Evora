@@ -107,6 +107,13 @@ namespace model
 
 	int board::score_wall_tile(int pattern_line_index, tile tile)
 	{
-		return m_wall.score_tile(pattern_line_index, tile);
+		int score = m_wall.score_tile(pattern_line_index, tile);
+		m_score += score;
+		return score;
+	}
+
+	std::vector<int> board::get_score_indices(int pattern_line_index, tile tile)
+	{
+		return m_wall.get_score_indices(pattern_line_index, tile);
 	}
 }

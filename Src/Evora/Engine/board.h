@@ -39,5 +39,6 @@ namespace model
 		tile pattern_line_color(int pattern_line_index);
 		void clear_pattern_line(int pattern_line_index);
 		int score_wall_tile(int pattern_line_index, tile tile);
+		std::vector<int> get_score_indices(int pattern_line_index, tile tile);
 	};
 }
