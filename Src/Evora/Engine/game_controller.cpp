@@ -20,6 +20,7 @@ void game_controller::add_wall_tiling_faze()
 			}
 		}
 	}
+	m_commands.emplace_back(std::make_unique<init_round>(m_model));
 }
 
 void game_controller::start_game()

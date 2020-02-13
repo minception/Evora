@@ -43,12 +43,17 @@ void Root::set_starting_player(int index)
 	cast_to<Control>(get_node("Shade"))->set_visible(false);
 	cast_to<Control>(get_node("SelectPlayerPrompt"))->set_visible(false);
 
+	GodotTile* starter_tile = cast_to<GodotTile>(get_node("StarterTile"));
+	starter_tile->set_color((int)tile::starter);
+	
+	game_data->controller->set_first_player(index);
 	game_data->controller->start_game();
 
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
 	TextureRect* player_highlight = cast_to<TextureRect>(get_node("PlayerHighlight"));
 	player_highlight->set_global_position(highlighted->get_global_position() - Vector2(3, 3));
 	player_highlight->set_visible(true);
+	
 }
 
 void godot::Root::_register_methods()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/wood.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://GameData.gdns" type="Script" id=6]
 [ext_resource path="res://Textures/cyan-highlight.png" type="Texture" id=7]
 [ext_resource path="res://Aileron-Regular.otf" type="DynamicFontData" id=8]
+[ext_resource path="res://Tile.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -25,6 +26,9 @@ grow_vertical = 2
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayerHighlight" type="TextureRect" parent="."]
 visible = false
@@ -71,3 +75,6 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 
 [node name="PlayerChangeAnimations" type="Node" parent="."]
+
+[node name="StarterTile" parent="." instance=ExtResource( 9 )]
+position = Vector2( 42, 62 )

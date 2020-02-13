@@ -20,6 +20,7 @@ void Board::set_highlight(bool cond)
 
 void Board::_register_methods() {
 	register_method("_ready", &Board::_ready);
+	register_method("_process", &Board::_process);
 
 	register_method("mouse_entered", &Board::mouse_entered);
 	register_method("mouse_exited", &Board::mouse_exited);
@@ -30,6 +31,7 @@ void Board::_register_methods() {
 
 	register_property("index", &Board::index, 0);
 	register_property("player_select", &Board::player_select, false);
+	register_property("time_remaining", &Board::time_remaining, 0.f);
 
 	register_signal<Board>("selected", "index", GODOT_VARIANT_TYPE_INT);
 	register_signal<Board>("pattern_line_entered", "pattern_line_index", GODOT_VARIANT_TYPE_INT, "board_index", GODOT_VARIANT_TYPE_INT);
@@ -54,6 +56,22 @@ void godot::Board::_ready()
 		player_select->add_item(ai_factory.first, player_index++);
 	}
 	connect_children();
+}
+
+void Board::_process(float delta)
+{
+	if(time_remaining > 0)
+	{
+		time_remaining -= delta;
+		if(time_remaining <= 0)
+		{
+			TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/HScoreHighlight"));
+			TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/VScoreHighlight"));
+			h_highlight->set_visible(false);
+			v_highlight->set_visible(false);
+			emit_signal("animation_finished");
+		}
+	}
 }
 
 void Board::connect_children()
@@ -184,6 +202,15 @@ Vector2 Board::get_wall_position(int line, int color)
 	return cast_to<TextureRect>(get_node("Image/Wall")->get_child(line)->get_child(row))->get_global_position();
 }
 
+Vector2 godot::Board::get_starter_tile_position()
+{
+	Vector2 position = get_global_position();
+	Vector2 size = cast_to<TextureRect>(get_node("Image"))->get_size();
+	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
+	float margin = 5.f;
+	return Vector2(position.x + size.x - margin - tile_size.x, position.y + margin);
+}
+
 void Board::display_score(const std::vector<int>& score_indices, int line, int color, int score)
 {
 	const int H_FIRST(0), H_LAST(1), V_FIRST(2), V_LAST(3);
@@ -195,10 +222,22 @@ void Board::display_score(const std::vector<int>& score_indices, int line, int c
 	int h_count = score_indices[H_LAST] - score_indices[H_FIRST] + 1;
 	int v_count = score_indices[V_LAST] - score_indices[V_FIRST] + 1;
 	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
+	float margin = 5.f;
+	Vector2 h_highlight_size = Vector2(tile_size.x * h_count + margin * (h_count - 1), tile_size.y);
+	Vector2 v_highlight_size = Vector2(tile_size.x, tile_size.y * v_count + margin * (v_count - 1));
+
+	h_highlight->set_global_position(h_highlight_position);
+	h_highlight->set_size(h_highlight_size);
+	h_highlight->set_visible(true);
+	v_highlight->set_global_position(v_highlight_position);
+	v_highlight->set_size(v_highlight_size);
+	v_highlight->set_visible(true);
+	
 	Label* score_label = cast_to<Label>(get_node("Image/Score"));
 	int current_score = std::stoi(score_label->get_text().alloc_c_string());
 	current_score += score;
 	score_label->set_text(std::to_string(current_score).c_str());
-	emit_signal("animation_finished");
+	
+	set("time_remaining", 1.f);
 }
 

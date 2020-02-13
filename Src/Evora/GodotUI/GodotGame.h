@@ -26,6 +26,7 @@ namespace godot
 		int center_to_floor(int player_index, tile color) override;
 		int center_to_lid(tile color) override;
 		bool handle_center_starter_tile(int player_index) override;
+		void starter_tile_unhandled() override;
 		tile tile_wall(int player_index, int pattern_line_index) override;
 		int score_wall_tile(int player_index, int pattern_line_index, tile tile) override;
 	};

@@ -49,7 +49,7 @@ namespace model
 		virtual bool handle_center_starter_tile(int player_index);
 		void set_first_player(int player_index);
 		int get_first_player();
-		void starter_tile_unhandled();
+		virtual void starter_tile_unhandled();
 		bool round_finished();
 		virtual tile tile_wall(int player_index, int pattern_line_index);
 		virtual int score_wall_tile(int player_index, int pattern_line_index, tile tile);

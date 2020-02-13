@@ -218,6 +218,17 @@ bool GodotGame::handle_center_starter_tile(int player_index)
 	return false;
 }
 
+void godot::GodotGame::starter_tile_unhandled()
+{
+	game::starter_tile_unhandled();
+	GodotTile* starter_tile = (GodotTile*)GodotScenes::root->get_node("StarterTile");
+	int starter_player_index = game::get_first_player();
+	GodotScenes::game_data->current_player = starter_player_index;
+	Board* board = (Board*)ObjectLoader::board_loader->get_child(starter_player_index);
+	Vector2 position = board->get_starter_tile_position();
+	starter_tile->animate_to(position);
+}
+
 tile GodotGame::tile_wall(int player_index, int pattern_line_index)
 {
 	tile color = game::tile_wall(player_index, pattern_line_index);

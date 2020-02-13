@@ -14,7 +14,7 @@ namespace model
 		std::vector<pattern_line> m_pattern_lines;
 		wall m_wall;
 		floor m_floor;
-		bool m_has_starter_tile;
+		bool m_has_starter_tile{false};
 	public:
 		board();
 		void tile_wall(int pattern_line_index, tile color);
