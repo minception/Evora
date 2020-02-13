@@ -167,6 +167,7 @@ int GodotGame::center_to_pattern_line(int player_index, int pattern_line_index, 
 			godot_tile->animate_to(positions[positionIndex++]);
 		}
 	}
+	center->take_n_tiles(count);
 	return count;
 }
 
@@ -196,13 +197,13 @@ int GodotGame::center_to_floor(int player_index, tile color)
 			godot_tile->set("factory_index", center_index);
 		}
 	}
+	center->take_n_tiles(count);
 	return count;
 }
 
 int GodotGame::center_to_lid(tile color)
 {
 	int count = game::center_to_lid(color);
-	if (count == 0) return count;
 	int tile_count = ObjectLoader::tile_loader->get_child_count();
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -216,7 +217,21 @@ int GodotGame::center_to_lid(tile color)
 			Vector2 tile_position = godot_tile->get_global_position();
 			godot_tile->set("factory_index", -1);
 			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y - 1000));
-			ObjectLoader::tile_loader->remove_child(godot_tile);
+			// ObjectLoader::tile_loader->remove_child(godot_tile);
+		}
+	}
+	Center* center = (Center*)GodotScenes::root->get_node("Center");
+	center->take_n_tiles(count);
+	std::vector<Vector2> positions = center->get_rearrange_positions();
+	int position_index = 0;
+	for (int i = 0; i < tile_count; ++i)
+	{
+		if (position_index == positions.size()) break;
+		GodotTile* godot_tile = (GodotTile*)ObjectLoader::tile_loader->get_child(i);
+		int tile_factory_index = godot_tile->get("factory_index");
+		if (tile_factory_index == factory_count())
+		{
+			godot_tile->animate_to(positions[position_index++]);
 		}
 	}
 	return count;
@@ -230,6 +245,8 @@ bool GodotGame::handle_center_starter_tile(int player_index)
 		GodotTile* starter_tile = (GodotTile*)GodotScenes::root->get_node("StarterTile");
 		Vector2 position = board->get_floor_positions(1)[0];
 		starter_tile->animate_to(position);
+		Center* center = (Center*)GodotScenes::root->get_node("Center");
+		center->take_n_tiles(1);
 		return true;
 	}
 	return false;

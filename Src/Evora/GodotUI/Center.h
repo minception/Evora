@@ -15,5 +15,7 @@ namespace godot
 		static void _register_methods();
 		void _init();
 		std::vector<Vector2> get_n_positions(int n);
+		std::vector<Vector2> get_rearrange_positions();
+		void take_n_tiles(int n);
 	};
 }
