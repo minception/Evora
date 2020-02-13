@@ -217,8 +217,8 @@ void Board::display_score(const std::vector<int>& score_indices, int line, int c
 	int row = (color + line) % 5;
 	TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/HScoreHighlight"));
 	TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/VScoreHighlight"));
-	Vector2 h_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(score_indices[H_FIRST])->get_child(row))->get_global_position();
-	Vector2 v_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(line)->get_child(score_indices[V_FIRST]))->get_global_position();
+	Vector2 h_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(line)->get_child(score_indices[H_FIRST]))->get_global_position();
+	Vector2 v_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(score_indices[V_FIRST])->get_child(row))->get_global_position();
 	int h_count = score_indices[H_LAST] - score_indices[H_FIRST] + 1;
 	int v_count = score_indices[V_LAST] - score_indices[V_FIRST] + 1;
 	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();

@@ -40,5 +40,8 @@ namespace model
 		void clear_pattern_line(int pattern_line_index);
 		int score_wall_tile(int pattern_line_index, tile tile);
 		std::vector<int> get_score_indices(int pattern_line_index, tile tile);
+		int score_floor();
+		int floor_to_lid(lid& lid);
+		int handle_floor_starter_tile();
 	};
 }

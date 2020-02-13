@@ -130,6 +130,19 @@ int GodotGame::factory_to_center(int factory_index)
 	return count;
 }
 
+bool GodotGame::handle_starter_tile(int player_index)
+{
+	if (game::handle_starter_tile(player_index))
+	{
+		Center* center = (Center*)GodotScenes::root->get_node("Center");
+		GodotTile* starter_tile = (GodotTile*)GodotScenes::root->get_node("StarterTile");
+		Vector2 position = center->get_n_positions(1)[0];
+		starter_tile->animate_to(position);
+		return true;
+	}
+	return false;
+}
+
 int GodotGame::center_to_pattern_line(int player_index, int pattern_line_index, tile color)
 {
 	int count = game::center_to_pattern_line(player_index, pattern_line_index, color);
@@ -213,6 +226,10 @@ bool GodotGame::handle_center_starter_tile(int player_index)
 {
 	if(game::handle_center_starter_tile(player_index))
 	{
+		Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
+		GodotTile* starter_tile = (GodotTile*)GodotScenes::root->get_node("StarterTile");
+		Vector2 position = board->get_floor_positions(1)[0];
+		starter_tile->animate_to(position);
 		return true;
 	}
 	return false;

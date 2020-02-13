@@ -116,4 +116,21 @@ namespace model
 	{
 		return m_wall.get_score_indices(pattern_line_index, tile);
 	}
+
+	int board::score_floor()
+	{
+		int score = m_floor.score();
+		m_score += score;
+		return score;
+	}
+
+	int board::floor_to_lid(lid& lid)
+	{
+		return m_floor.move_to_lid(lid);
+	}
+
+	int board::handle_floor_starter_tile()
+	{
+		return m_floor.handle_starter_tile();
+	}
 }

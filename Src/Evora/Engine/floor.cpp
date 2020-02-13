@@ -23,4 +23,39 @@ namespace model
 	{
 		return m_tiles.size() == FLOOR_SIZE;
 	}
+
+	int floor::score()
+	{
+		int score = 0;
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			score += FLOOR_SCORE[i];
+		}
+		return score;
+	}
+
+	int floor::move_to_lid(lid& lid)
+	{
+		int size = m_tiles.size();
+		for (auto tile : m_tiles)
+		{
+			lid.add_tile(tile);
+		}
+		m_tiles.clear();
+		return size;
+	}
+
+	int floor::handle_starter_tile()
+	{
+		auto p_starter = std::find(m_tiles.begin(), m_tiles.end(), tile::starter);
+		if(p_starter == m_tiles.end())
+		{
+			return -1;
+		}
+		else
+		{
+			m_tiles.erase(p_starter);
+			return p_starter - m_tiles.begin();
+		}
+	}
 }
