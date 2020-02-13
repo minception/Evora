@@ -107,6 +107,30 @@ namespace model
 
 	int board::score_wall_tile(int pattern_line_index, tile tile)
 	{
-		return m_wall.score_tile(pattern_line_index, tile);
+		int score = m_wall.score_tile(pattern_line_index, tile);
+		m_score += score;
+		return score;
+	}
+
+	std::vector<int> board::get_score_indices(int pattern_line_index, tile tile)
+	{
+		return m_wall.get_score_indices(pattern_line_index, tile);
+	}
+
+	int board::score_floor()
+	{
+		int score = m_floor.score();
+		m_score += score;
+		return score;
+	}
+
+	int board::floor_to_lid(lid& lid)
+	{
+		return m_floor.move_to_lid(lid);
+	}
+
+	int board::handle_floor_starter_tile()
+	{
+		return m_floor.handle_starter_tile();
 	}
 }

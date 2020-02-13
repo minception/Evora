@@ -72,4 +72,18 @@ namespace model
 		int row = ((int)tile + pattern_line_index) % COLORS;
 		return score(pattern_line_index, row);
 	}
+
+	std::vector<int> wall::get_score_indices(int pattern_line_index, tile tile)
+	{
+		int row = ((int)tile + pattern_line_index) % COLORS;
+		int h_first = row;
+		int h_last = row;
+		int v_first = pattern_line_index;
+		int v_last = pattern_line_index;
+		while (h_first > 0 && m_tiles[pattern_line_index][h_first - 1l] != tile::empty) h_first--;
+		while (h_last < COLORS - 1 && m_tiles[pattern_line_index][h_last + 1l] != tile::empty) h_last++;
+		while (v_first > 0 && m_tiles[v_first - 1][row] != tile::empty) v_first--;
+		while (v_last < COLORS - 1 && m_tiles[v_last + 1][row] != tile::empty) v_last++;
+		return { h_first, h_last, v_first, v_last };
+	}
 }

@@ -16,10 +16,12 @@ namespace godot
 	public:
 		int index;
 		bool player_select;
+		float time_remaining;
 
-		static void _register_methods();
+	static void _register_methods();
 		void _init();
 		void _ready();
+		void _process(float delta);
 		void connect_children();
 		void _hide_player_select();
 		void mouse_entered();
@@ -33,5 +35,8 @@ namespace godot
 		int get_pattern_line_hover_index();
 		std::vector<Vector2> get_pattern_line_positions(int pattern_line_index, int count);
 		std::vector<Vector2> get_floor_positions(int count);
+		Vector2 get_wall_position(int line, int color);
+		Vector2 get_starter_tile_position();
+		void display_score(const std::vector<int>& score_indices, int line, int color, int score);
 	};
 }

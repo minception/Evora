@@ -65,6 +65,9 @@ margin_bottom = 32.0
 texture = ExtResource( 4 )
 expand = true
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tile2" type="TextureRect" parent="Image/Wall/Row1"]
 margin_left = 37.0
@@ -304,6 +307,29 @@ margin_bottom = 32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HScoreHighlight" type="TextureRect" parent="Image"]
+visible = false
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 98.1
+margin_top = 142.35
+margin_right = 139.1
+margin_bottom = 184.35
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 2
+
+[node name="VScoreHighlight" type="TextureRect" parent="Image"]
+visible = false
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 52.2501
+margin_top = 85.5001
+margin_right = 92.2501
+margin_bottom = 125.5
+rect_pivot_offset = Vector2( -203.15, 136.25 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 2
 
 [node name="PlayerSelect" type="OptionButton" parent="."]
 margin_top = -28.0

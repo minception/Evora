@@ -19,5 +19,8 @@ namespace model
 		std::vector<tile>::const_iterator end() const;
 		void add_tile(tile color);
 		bool full();
+		int score();
+		int move_to_lid(lid& lid);
+		int handle_starter_tile();
 	};
 }

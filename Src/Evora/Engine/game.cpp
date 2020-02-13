@@ -118,7 +118,7 @@ namespace model
 		return m_factories[factory_index].add_to_center(m_center);
 	}
 
-	bool game::handle_first_tile(int player_index)
+	bool game::handle_starter_tile(int player_index)
 	{
 		if(!m_starter_tile_handled
 			&& m_boards[player_index].has_starter_tile())
@@ -239,6 +239,11 @@ namespace model
 		return m_boards[player_index].score_wall_tile(pattern_line_index, tile);
 	}
 
+	std::vector<int> game::get_score_indices(int player_index, int pattern_line_index, tile tile)
+	{
+		return m_boards[player_index].get_score_indices(pattern_line_index, tile);
+	}
+
 	tile game::pattern_line_color(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].pattern_line_color(pattern_line_index);
@@ -247,6 +252,21 @@ namespace model
 	bool game::pattern_line_full(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].pattern_line_full(pattern_line_index);
+	}
+
+	int game::score_floor(int player_index)
+	{
+		return m_boards[player_index].score_floor();
+	}
+
+	int game::floor_to_lid(int player_index)
+	{
+		return m_boards[player_index].floor_to_lid(m_lid);
+	}
+
+	int game::handle_floor_starter_tile(int player_index)
+	{
+		return m_boards[player_index].handle_floor_starter_tile();
 	}
 
 	std::vector<tile> game::get_lid_state()
