@@ -301,12 +301,12 @@ expand = true
 position = Vector2( 5, 240 )
 script = ExtResource( 12 )
 
-[node name="Image" type="Control" parent="Image/Floor"]
+[node name="Image" type="TextureRect" parent="Image/Floor"]
+visible = false
 margin_right = 254.0
 margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 11 )
+expand = true
 
 [node name="HScoreHighlight" type="TextureRect" parent="Image"]
 visible = false
