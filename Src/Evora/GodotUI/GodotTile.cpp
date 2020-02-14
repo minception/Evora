@@ -65,7 +65,7 @@ bool GodotTile::get_interactive()
 void GodotTile::set_pattern_line_index(int value)
 {
 	_pattern_line_index = value;
-	_interactive = false;
+	set("interactive", false);
 }
 
 int GodotTile::get_pattern_line_index()

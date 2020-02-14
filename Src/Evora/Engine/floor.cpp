@@ -47,15 +47,14 @@ namespace model
 
 	int floor::handle_starter_tile()
 	{
-		auto p_starter = std::find(m_tiles.begin(), m_tiles.end(), tile::starter);
-		if(p_starter == m_tiles.end())
+		for(int i = 0; i < m_tiles.size(); ++i)
 		{
-			return -1;
+			if(m_tiles[i] == tile::starter)
+			{
+				m_tiles.erase(m_tiles.begin() + i);
+				return i;
+			}
 		}
-		else
-		{
-			m_tiles.erase(p_starter);
-			return p_starter - m_tiles.begin();
-		}
+		return -1;
 	}
 }

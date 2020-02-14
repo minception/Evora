@@ -2,6 +2,7 @@
 #include "init_round.h"
 #include "tile_wall.h"
 #include "score_wall_tile.h"
+#include "tally_floor.h"
 
 using namespace control;
 
@@ -16,9 +17,9 @@ void game_controller::add_wall_tiling_faze()
 				model::tile color = m_model->pattern_line_color(i, j);
 				m_commands.emplace_back(std::make_unique<tile_wall>(m_model, i, j));
 				m_commands.emplace_back(std::make_unique<score_wall_tile>(m_model, i, j, color));
-				
 			}
 		}
+		m_commands.emplace_back(std::make_unique<tally_floor>(m_model, i));
 	}
 	m_commands.emplace_back(std::make_unique<init_round>(m_model));
 }
@@ -43,13 +44,14 @@ bool game_controller::step()
 {
 	if(current_command == m_commands.size())
 	{
+		if (m_model->round_finished())
+		{
+			add_wall_tiling_faze();
+			return step();
+		}
 		return false;
 	}
 	m_commands[current_command]->Execute();
-	if(m_model->round_finished())
-	{
-		add_wall_tiling_faze();
-	}
 	current_command++;
 	return true;
 }

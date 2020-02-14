@@ -56,8 +56,8 @@ namespace model
 		std::vector<int> get_score_indices(int player_index, int pattern_line_index, tile tile);
 		tile pattern_line_color(int player_index, int pattern_line_index);
 		bool pattern_line_full(int player_index, int pattern_line_index);
-		int score_floor(int player_index);
-		int floor_to_lid(int player_index);
+		virtual int score_floor(int player_index);
+		virtual int floor_to_lid(int player_index);
 		int handle_floor_starter_tile(int player_index);
 	};
 }

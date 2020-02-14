@@ -13,6 +13,9 @@ namespace godot
 		int m_tile_count;
 		static void _register_methods();
 		void _init();
+		bool is_mouse_over();
+		void set_highlight(bool cond);
+		void tile_moved(Vector2 position, int color);
 		std::vector<Vector2> get_n_positions(int n);
 	};
 }

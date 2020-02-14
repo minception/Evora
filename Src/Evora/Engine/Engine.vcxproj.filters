@@ -105,6 +105,12 @@
     <ClInclude Include="score_wall_tile.h">
       <Filter>Controller\Commands\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="drop_center.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="drop_factory.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -168,6 +174,12 @@
       <Filter>Model\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="score_wall_tile.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="drop_center.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="drop_factory.cpp">
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -120,7 +120,16 @@ namespace model
 	int board::score_floor()
 	{
 		int score = m_floor.score();
-		m_score += score;
+		// score cannot drop below 0
+		if(m_score + score < 0)
+		{
+			score = -m_score;
+			m_score = 0;
+		}
+		else
+		{
+			m_score += score;
+		}
 		return score;
 	}
 

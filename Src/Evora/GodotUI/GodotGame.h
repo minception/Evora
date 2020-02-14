@@ -8,10 +8,12 @@
 
 namespace godot
 {
+	static const int COLORS = 5;
 	class ObjectLoader;
 	using namespace model;
 	
 	class GodotGame : public game
+
 	{
 		bool wait_for_refill;
 	public:
@@ -29,5 +31,7 @@ namespace godot
 		void starter_tile_unhandled() override;
 		tile tile_wall(int player_index, int pattern_line_index) override;
 		int score_wall_tile(int player_index, int pattern_line_index, tile tile) override;
+		int score_floor(int player_index) override;
+		int floor_to_lid(int player_index) override;
 	};
 }

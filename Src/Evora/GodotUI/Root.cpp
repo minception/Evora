@@ -17,6 +17,8 @@
 #include "factory_offer.h"
 #include "center_offer.h"
 #include "Center.h"
+#include "drop_center.h"
+#include "drop_factory.h"
 
 using namespace godot;
 
@@ -206,7 +208,13 @@ void Root::pattern_line_entered(int board_index, int pattern_line_index)
 
 void Root::tile_over(int board_index, int pattern_line_index, int color)
 {
-	if (board_index == GodotScenes::game_data->current_player &&
+	// tile is over current player's floor
+	if(board_index == GodotScenes::game_data->current_player && pattern_line_index == COLORS)
+	{
+		cast_to<Board>(ObjectLoader::board_loader->get_child(board_index))->set_floor_highlight(true);
+	}
+	// tile is over current player's pattern line
+	else if (board_index == GodotScenes::game_data->current_player &&
 		GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
 		set("tile_over_pattern_line", pattern_line_index);
@@ -220,7 +228,34 @@ void Root::tile_dropped(int factory_index, int color)
 	int board_index = GodotScenes::game_data->current_player;
 	Board* board = cast_to<Board>(get_node("Boards")->get_child(board_index));
 	int pattern_line_index = board->get_pattern_line_hover_index();
-	if(pattern_line_index != -1
+	if(pattern_line_index == COLORS)
+	{
+		if(factory_index == ObjectLoader::factory_loader->get_child_count())
+		{
+			GodotScenes::game_data->controller->add_command(
+				std::move(
+					std::make_unique<control::drop_center>(
+						GodotScenes::game_data->m_game,
+						board_index,
+						(model::tile)color)
+				)
+			);
+		}
+		else
+		{
+			GodotScenes::game_data->controller->add_command(
+				std::move(
+					std::make_unique<control::drop_factory>(
+						GodotScenes::game_data->m_game, factory_index,
+						board_index,
+						(model::tile)color)
+				)
+			);
+		}
+		board->set_floor_highlight(false);
+		GodotScenes::game_data->controller->step();
+	}
+	else if(pattern_line_index != -1
 		&& GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
 

@@ -26,6 +26,8 @@
     <ClInclude Include="center.h" />
     <ClInclude Include="center_offer.h" />
     <ClInclude Include="command.h" />
+    <ClInclude Include="drop_center.h" />
+    <ClInclude Include="drop_factory.h" />
     <ClInclude Include="factory.h" />
     <ClInclude Include="factory_offer.h" />
     <ClInclude Include="final_score.h" />
@@ -50,6 +52,8 @@
     <ClCompile Include="center.cpp" />
     <ClCompile Include="center_offer.cpp" />
     <ClCompile Include="command.cpp" />
+    <ClCompile Include="drop_center.cpp" />
+    <ClCompile Include="drop_factory.cpp" />
     <ClCompile Include="factory.cpp" />
     <ClCompile Include="factory_offer.cpp" />
     <ClCompile Include="final_score.cpp" />

@@ -37,6 +37,8 @@ namespace godot
 		std::vector<Vector2> get_floor_positions(int count);
 		Vector2 get_wall_position(int line, int color);
 		Vector2 get_starter_tile_position();
-		void display_score(const std::vector<int>& score_indices, int line, int color, int score);
+		void display_wall_score(const std::vector<int>& score_indices, int line, int color, int score);
+		void set_floor_highlight(bool cond);
+		void display_floor_score(int score);
 	};
 }

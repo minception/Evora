@@ -90,15 +90,19 @@ void Board::connect_children()
 			children.push_back((Control*)wall->get_child(i)->get_child(j));
 		}
 	}
-	Control* pattern_lines = (Control*)image->get_child(get_child_index(image, "PatternLines"));
+	Control* pattern_lines = (Control*)image->get_node("PatternLines");
 	children.push_back(pattern_lines);
 	for (int i = 0; i < pattern_lines->get_child_count(); ++i)
 	{
-		children.push_back((Control*)pattern_lines->get_child(i)->get_child(0));
+		children.push_back((Control*)pattern_lines->get_child(i)->get_node("Image"));
 		pattern_lines->get_child(i)->connect("mouse_entered_pattern_line", this, "pattern_line_entered");
 		pattern_lines->get_child(i)->connect("tile_over", this, "tile_over");
 		connect("tile_moved", pattern_lines->get_child(i), "tile_moved");
 	}
+	children.push_back((Control*)image->get_node("Floor/Image"));
+	image->get_node("Floor")->connect("tile_over", this, "tile_over");
+	connect("tile_moved", image->get_node("Floor"), "tile_moved");
+
 	for(auto&& child:children)
 	{
 		child->connect("mouse_entered", this, "mouse_entered");
@@ -181,6 +185,8 @@ int Board::get_pattern_line_hover_index()
 		PatternLine* pattern_line = cast_to<PatternLine>(pattern_lines->get_child(i));
 		if (pattern_line->is_mouse_over()) return i;
 	}
+	Floor* floor = cast_to<Floor>(get_node("Image/Floor"));
+	if (floor->is_mouse_over()) return 5;
 	return -1;
 }
 
@@ -211,7 +217,7 @@ Vector2 godot::Board::get_starter_tile_position()
 	return Vector2(position.x + size.x - margin - tile_size.x, position.y + margin);
 }
 
-void Board::display_score(const std::vector<int>& score_indices, int line, int color, int score)
+void Board::display_wall_score(const std::vector<int>& score_indices, int line, int color, int score)
 {
 	const int H_FIRST(0), H_LAST(1), V_FIRST(2), V_LAST(3);
 	int row = (color + line) % 5;
@@ -239,5 +245,19 @@ void Board::display_score(const std::vector<int>& score_indices, int line, int c
 	score_label->set_text(std::to_string(current_score).c_str());
 	
 	set("time_remaining", 1.f);
+}
+
+void Board::set_floor_highlight(bool cond)
+{
+	Floor* floor = (Floor*)get_node("Image/Floor");
+	floor->set_highlight(cond);
+}
+
+void Board::display_floor_score(int score)
+{
+	Label* score_label = cast_to<Label>(get_node("Image/Score"));
+	int current_score = std::stoi(score_label->get_text().alloc_c_string());
+	current_score += score;
+	score_label->set_text(std::to_string(current_score).c_str());
 }
 

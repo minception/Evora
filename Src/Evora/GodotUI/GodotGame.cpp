@@ -78,6 +78,7 @@ int GodotGame::factory_to_floor(int factory_index, int player_index, tile color)
 			godot_tile->set_follow(false);
 			godot_tile->set("factory_index", -1);
 			godot_tile->set("board_index", player_index);
+			godot_tile->set("pattern_line_index", COLORS);
 			godot_tile->animate_to(positions[positionIndex++]);
 		}
 	}
@@ -99,8 +100,8 @@ int GodotGame::factory_to_lid(int factory_index, tile color)
 			godot_tile->set_follow(false);
 			Vector2 tile_position = godot_tile->get_global_position();
 			godot_tile->set("factory_index", -1);
-			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y - 1000));
-			ObjectLoader::tile_loader->remove_child(godot_tile);
+			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 1000));
+			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
 	return count;
@@ -191,10 +192,8 @@ int GodotGame::center_to_floor(int player_index, tile color)
 			godot_tile->set_follow(false);
 			godot_tile->set("factory_index", -1);
 			godot_tile->set("board_index", player_index);
+			godot_tile->set("pattern_line_index", COLORS);
 			godot_tile->animate_to(positions[positionIndex++]);
-			// factory index of tiles in center is one bigger than a biggest factory index
-			int center_index = factory_count();
-			godot_tile->set("factory_index", center_index);
 		}
 	}
 	center->take_n_tiles(count);
@@ -216,7 +215,7 @@ int GodotGame::center_to_lid(tile color)
 			godot_tile->set_follow(false);
 			Vector2 tile_position = godot_tile->get_global_position();
 			godot_tile->set("factory_index", -1);
-			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y - 1000));
+			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 1000));
 			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
@@ -297,6 +296,34 @@ int GodotGame::score_wall_tile(int player_index, int pattern_line_index, tile ti
 	int score = game::score_wall_tile(player_index, pattern_line_index, tile);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<int> score_indices = get_score_indices(player_index, pattern_line_index, tile);
-	board->display_score(score_indices, pattern_line_index, (int)tile, score);
+	board->display_wall_score(score_indices, pattern_line_index, (int)tile, score);
 	return score;
+}
+
+int GodotGame::score_floor(int player_index)
+{
+	int score = game::score_floor(player_index);
+	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
+	board->display_floor_score(score);
+	return score;
+}
+
+int GodotGame::floor_to_lid(int player_index)
+{
+	int count = game::floor_to_lid(player_index);
+	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	for (int i = 0; i < tile_count; ++i)
+	{
+		GodotTile* godot_tile = (GodotTile*)ObjectLoader::tile_loader->get_child(i);
+		int tile_board_index = godot_tile->get("board_index");
+		int tile_pattern_line_index = godot_tile->get("pattern_line_index");
+		if (player_index == tile_board_index && tile_pattern_line_index == COLORS)
+		{
+			godot_tile->set("pattern_line_index", -1);
+			Vector2 tile_position = godot_tile->get_global_position();
+			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 1000));
+			// ObjectLoader::tile_loader->remove_child(godot_tile);
+		}
+	}
+	return count;
 }
