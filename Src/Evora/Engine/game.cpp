@@ -269,6 +269,33 @@ namespace model
 		return m_boards[player_index].handle_floor_starter_tile();
 	}
 
+	bool game::game_over()
+	{
+		for(auto&& board:m_boards)
+		{
+			if(board.game_finished())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	int game::score_wall_color(int player_index, tile color)
+	{
+		return m_boards[player_index].score_wall_color(color);
+	}
+
+	int game::score_wall_line(int player_index, int line)
+	{
+		return m_boards[player_index].score_wall_line(line);
+	}
+
+	int game::score_wall_row(int player_index, int row)
+	{
+		return m_boards[player_index].score_wall_row(row);
+	}
+
 	std::vector<tile> game::get_lid_state()
 	{
 		return m_lid.get_state();

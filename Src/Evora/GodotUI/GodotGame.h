@@ -33,5 +33,8 @@ namespace godot
 		int score_wall_tile(int player_index, int pattern_line_index, tile tile) override;
 		int score_floor(int player_index) override;
 		int floor_to_lid(int player_index) override;
+		int score_wall_color(int player_index, tile color) override;
+		int score_wall_line(int player_index, int line) override;
+		int score_wall_row(int player_index, int row) override;
 	};
 }

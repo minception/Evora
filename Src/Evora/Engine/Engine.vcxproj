@@ -38,6 +38,9 @@
     <ClInclude Include="lid.h" />
     <ClInclude Include="pattern_line.h" />
     <ClInclude Include="RandomAI.h" />
+    <ClInclude Include="score_color.h" />
+    <ClInclude Include="score_line.h" />
+    <ClInclude Include="score_row.h" />
     <ClInclude Include="score_wall_tile.h" />
     <ClInclude Include="tally_floor.h" />
     <ClInclude Include="tile.h" />
@@ -64,6 +67,9 @@
     <ClCompile Include="lid.cpp" />
     <ClCompile Include="pattern_line.cpp" />
     <ClCompile Include="RandomAI.cpp" />
+    <ClCompile Include="score_color.cpp" />
+    <ClCompile Include="score_line.cpp" />
+    <ClCompile Include="score_row.cpp" />
     <ClCompile Include="score_wall_tile.cpp" />
     <ClCompile Include="tally_floor.cpp" />
     <ClCompile Include="tile_wall.cpp" />

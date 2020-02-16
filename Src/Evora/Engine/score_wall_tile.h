@@ -18,8 +18,8 @@ namespace control
 	private:
 		int m_player_index;
 		int m_line;
-		model::tile m_color;
-		int m_score;
+		model::tile m_color = model::tile::empty;
+		int m_score = 0;
 	};
 }
 

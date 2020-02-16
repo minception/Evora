@@ -86,4 +86,66 @@ namespace model
 		while (v_last < COLORS - 1 && m_tiles[v_last + 1][row] != tile::empty) v_last++;
 		return { h_first, h_last, v_first, v_last };
 	}
+
+	bool wall::game_finished()
+	{
+		for(auto&& line: m_tiles)
+		{
+			int filled = 0;
+			for(auto&& tile: line)
+			{
+				if(tile == tile::empty)
+				{
+					break;
+				}
+				++filled;
+			}
+			if (filled == COLORS) return true;
+		}
+		return false;
+	}
+
+	int wall::score_color(tile color)
+	{
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			int row = ((int)color + i) % COLORS;
+			if(m_tiles[i][row] == tile::empty)
+			{
+				return 0;
+			}
+		}
+		return COLOR_SCORE;
+	}
+
+	int wall::score_row(int row)
+	{
+
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			if (m_tiles[i][row] == tile::empty)
+			{
+				return 0;
+			}
+		}
+		return ROW_SCORE;
+	}
+
+	int wall::score_line(int line)
+	{
+		for (int i = 0; i < m_tiles[line].size(); ++i)
+		{
+			if (m_tiles[line][i] == tile::empty)
+			{
+				return 0;
+			}
+		}
+		return LINE_SCORE;
+	}
+
+	bool wall::empty(int pattern_line_index, tile tile)
+	{
+		int row = ((int)tile + pattern_line_index) % COLORS;
+		return m_tiles[pattern_line_index][(int)tile] == tile::empty;
+	}
 }

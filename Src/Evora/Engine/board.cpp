@@ -82,6 +82,10 @@ namespace model
 
 	bool board::can_add_to_pattern_line(int pattern_line_index, tile tile)
 	{
+		if(!m_wall.empty(pattern_line_index, tile))
+		{
+			return false;
+		}
 		return m_pattern_lines[pattern_line_index].can_add(tile);
 	}
 
@@ -141,5 +145,25 @@ namespace model
 	int board::handle_floor_starter_tile()
 	{
 		return m_floor.handle_starter_tile();
+	}
+
+	bool board::game_finished()
+	{
+		return m_wall.game_finished();
+	}
+
+	int board::score_wall_color(tile tile)
+	{
+		return m_wall.score_color(tile);
+	}
+
+	int board::score_wall_line(int line)
+	{
+		return m_wall.score_line(line);
+	}
+
+	int board::score_wall_row(int row)
+	{
+		return m_wall.score_row(row);
 	}
 }

@@ -59,5 +59,9 @@ namespace model
 		virtual int score_floor(int player_index);
 		virtual int floor_to_lid(int player_index);
 		int handle_floor_starter_tile(int player_index);
+		bool game_over();
+		virtual int score_wall_color(int player_index, tile color);
+		virtual int score_wall_line(int player_index, int line);
+		virtual int score_wall_row(int player_index, int row);
 	};
 }

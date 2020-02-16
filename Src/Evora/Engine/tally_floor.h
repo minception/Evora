@@ -15,9 +15,9 @@ namespace control
 		void Unexecute() override;
 	private:
 		int m_player_index;
-		int m_score;
-		int m_starter_tile_position;
+		int m_score = 0;
+		int m_starter_tile_position = 0;
 		// the floor size here won't include the starter tile
-		int m_floor_size;
+		int m_floor_size = 0;
 	};
 }

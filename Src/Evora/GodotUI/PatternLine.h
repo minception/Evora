@@ -24,5 +24,6 @@ namespace godot
 		void tile_moved(Vector2 position, int color);
 		void input();
 		bool is_mouse_over();
+		virtual ~PatternLine() = default;
 	};
 }

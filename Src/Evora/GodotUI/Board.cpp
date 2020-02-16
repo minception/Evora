@@ -65,8 +65,8 @@ void Board::_process(float delta)
 		time_remaining -= delta;
 		if(time_remaining <= 0)
 		{
-			TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/HScoreHighlight"));
-			TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/VScoreHighlight"));
+			TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/HScoreHighlight"));
+			TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/VScoreHighlight"));
 			h_highlight->set_visible(false);
 			v_highlight->set_visible(false);
 			emit_signal("animation_finished");
@@ -221,8 +221,8 @@ void Board::display_wall_score(const std::vector<int>& score_indices, int line, 
 {
 	const int H_FIRST(0), H_LAST(1), V_FIRST(2), V_LAST(3);
 	int row = (color + line) % 5;
-	TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/HScoreHighlight"));
-	TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/VScoreHighlight"));
+	TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/HScoreHighlight"));
+	TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/VScoreHighlight"));
 	Vector2 h_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(line)->get_child(score_indices[H_FIRST]))->get_global_position();
 	Vector2 v_highlight_position = cast_to<TextureRect>(get_node("Image/Wall")->get_child(score_indices[V_FIRST])->get_child(row))->get_global_position();
 	int h_count = score_indices[H_LAST] - score_indices[H_FIRST] + 1;

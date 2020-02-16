@@ -18,6 +18,7 @@ namespace control
 		std::vector<std::unique_ptr<command>> get_possible_moves();
 		void add_command(std::unique_ptr<command> command);
 		void set_first_player(int player_index);
+		void add_game_end();
 		bool step();
 	};
 }

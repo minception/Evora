@@ -14,9 +14,9 @@ namespace control
 		void Unexecute() override;
 	private:
 		static const int FACTORY_SIZE = 4;
-		int m_added_before_refill;
-		int m_added_after_refill;
-		bool m_bag_refilled;
+		int m_added_before_refill = 0;
+		int m_added_after_refill = 0;
+		bool m_bag_refilled = false;
 		std::vector<model::tile> m_lid_state;
 	};
 }

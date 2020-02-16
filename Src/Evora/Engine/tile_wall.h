@@ -17,6 +17,6 @@ namespace control
 	private:
 		int m_player_index;
 		int m_pattern_line_index; // here moved to lid would be always equal to pattern line index
-		model::tile m_color;
+		model::tile m_color = model::tile::empty;
 	};
 }

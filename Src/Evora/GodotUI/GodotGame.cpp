@@ -3,6 +3,8 @@
 #include "GodotScenes.h"
 #include <core/Godot.hpp>
 #include "Center.h"
+#include "PatternLine.h"
+#include "Floor.h"
 
 using namespace godot;
 
@@ -288,6 +290,8 @@ tile GodotGame::tile_wall(int player_index, int pattern_line_index)
 			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
+	PatternLine* pattern_line = (PatternLine*)board->get_node("Image/PatternLines")->get_child(pattern_line_index);
+	pattern_line->set("tile_count", 0);
 	return color;
 }
 
@@ -311,6 +315,7 @@ int GodotGame::score_floor(int player_index)
 int GodotGame::floor_to_lid(int player_index)
 {
 	int count = game::floor_to_lid(player_index);
+	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	int tile_count = ObjectLoader::tile_loader->get_child_count();
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -325,5 +330,27 @@ int GodotGame::floor_to_lid(int player_index)
 			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
+	Floor* floor = (Floor*)ObjectLoader::board_loader->get_child(player_index)->get_node("Image/Floor");
+	floor->set("tile_count", 0);
+	// when the floor is empty, no animation occurs, this only serves to move to the next step
+	if (count == 0) GodotScenes::root->animation_finished();
 	return count;
+}
+
+int GodotGame::score_wall_color(int player_index, tile color)
+{
+	int score = game::score_wall_color(player_index, color);
+	return score;
+}
+
+int GodotGame::score_wall_line(int player_index, int line)
+{
+	int score = game::score_wall_line(player_index, line);
+	return score;
+}
+
+int GodotGame::score_wall_row(int player_index, int row)
+{
+	int score = game::score_wall_row(player_index, row);
+	return score;
 }

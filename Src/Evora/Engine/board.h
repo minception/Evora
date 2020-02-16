@@ -43,5 +43,9 @@ namespace model
 		int score_floor();
 		int floor_to_lid(lid& lid);
 		int handle_floor_starter_tile();
+		bool game_finished();
+		int score_wall_color(tile tile);
+		int score_wall_line(int line);
+		int score_wall_row(int row);
 	};
 }

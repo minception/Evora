@@ -111,6 +111,15 @@
     <ClInclude Include="drop_factory.h">
       <Filter>Controller\Commands\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="score_line.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="score_row.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="score_color.h">
+      <Filter>Controller\Commands\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -180,6 +189,15 @@
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="drop_factory.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="score_color.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="score_line.cpp">
+      <Filter>Controller\Commands\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="score_row.cpp">
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

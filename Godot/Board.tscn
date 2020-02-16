@@ -308,24 +308,28 @@ margin_bottom = 32.0
 texture = ExtResource( 11 )
 expand = true
 
-[node name="HScoreHighlight" type="TextureRect" parent="Image"]
+[node name="ScoreHighlights" type="Node2D" parent="Image"]
+z_index = 10
+
+[node name="HScoreHighlight" type="TextureRect" parent="Image/ScoreHighlights"]
 visible = false
-modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 98.1
-margin_top = 142.35
-margin_right = 139.1
-margin_bottom = 184.35
+margin_left = 65.0623
+margin_top = 81.465
+margin_right = 100.062
+margin_bottom = 116.465
 texture = ExtResource( 11 )
 expand = true
 stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VScoreHighlight" type="TextureRect" parent="Image"]
+[node name="VScoreHighlight" type="TextureRect" parent="Image/ScoreHighlights"]
 visible = false
-modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 52.2501
-margin_top = 85.5001
-margin_right = 92.2501
-margin_bottom = 125.5
+margin_left = 119.938
+margin_top = 105.355
+margin_right = 159.938
+margin_bottom = 145.355
 rect_pivot_offset = Vector2( -203.15, 136.25 )
 texture = ExtResource( 11 )
 expand = true
