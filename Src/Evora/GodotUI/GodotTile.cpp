@@ -162,6 +162,11 @@ void GodotTile::_process(float delta)
 	}
 	if(m_follow_mouse)
 	{
+		int64_t mouse_button_mask = _input->get_mouse_button_mask();
+		if (!(mouse_button_mask & 1)) {
+			emit_signal("dropped", _factory_index, _color);
+			m_follow_mouse = false;
+		}
 		Vector2 target_location = get_global_mouse_position() - _image->get_size() / 2;
 		Vector2 starting_location = get_global_position();
 		Vector2 speed = target_location - starting_location;

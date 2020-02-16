@@ -3,6 +3,7 @@
 
 void godot::Center::_register_methods()
 {
+	register_property("tile_count", &Center::m_tile_count, 0);
 }
 
 void godot::Center::_init()
@@ -16,7 +17,7 @@ std::vector<godot::Vector2> godot::Center::get_n_positions(int n)
 	Control* image = cast_to<Control>(get_node("Image"));
 	Vector2 center_position = get_global_position();
 	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
-	float margin = 5;
+	float margin = 5.f;
 	for (int i = 0; i < n; ++i)
 	{
 		int line = (m_tile_count + i) / 5;
