@@ -78,4 +78,15 @@ namespace model
 	{
 		return m_tiles.empty();
 	}
+
+	std::vector<tile> center::get_colors()
+	{
+		std::vector<tile> res;
+		for (auto&& tile : m_tiles)
+		{
+			if (tile == tile::starter) continue;
+			if (std::find(res.begin(), res.end(), tile) == res.end()) res.push_back(tile);
+		}
+		return res;
+	}
 }

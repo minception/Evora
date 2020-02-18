@@ -54,7 +54,10 @@ int GodotTile::get_color()
 
 void GodotTile::set_interactive(bool cond)
 {
-	_interactive = cond;
+	if(_factory_index >= 0)
+	{
+		_interactive = cond;		
+	}
 }
 
 bool GodotTile::get_interactive()

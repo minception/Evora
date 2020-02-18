@@ -168,3 +168,13 @@ void TileLoader::animation_finished()
 		emit_signal("animation_finished");
 	}
 }
+
+void TileLoader::interactive(bool cond)
+{
+	int64_t child_count = get_child_count();
+	for (int i = 0; i < child_count; ++i)
+	{
+		GodotTile* tile = (GodotTile*)get_child(i);
+		tile->set("interactive", cond);
+	}
+}

@@ -63,5 +63,7 @@ namespace model
 		virtual int score_wall_color(int player_index, tile color);
 		virtual int score_wall_line(int player_index, int line);
 		virtual int score_wall_row(int player_index, int row);
+		std::vector<model::tile> get_center_colors();
+		std::vector<model::tile> get_factory_colors(int factory_index);
 	};
 }

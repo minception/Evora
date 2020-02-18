@@ -11,7 +11,7 @@ std::map<const char*, std::unique_ptr<AIFactory>, RawPointerComparison> AIFactor
 	return res;
 }
 
-std::unique_ptr<::AI::AI> RandomAIFactory::get(std::shared_ptr<control::game_controller> controller)
+std::unique_ptr<::AI::AI> RandomAIFactory::get(std::shared_ptr<control::game_controller> controller, int board_index)
 {
-	return std::move(std::make_unique<RandomAI>(controller));
+	return std::move(std::make_unique<RandomAI>(controller, board_index));
 }

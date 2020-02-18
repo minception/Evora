@@ -24,5 +24,6 @@ namespace model
 		bool pick_color_tile(tile color);
 		bool pick_starter_tile();
 		bool empty();
+		std::vector<tile> get_colors();
 	};
 }

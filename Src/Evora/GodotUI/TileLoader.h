@@ -30,5 +30,6 @@ namespace godot
 		void move_tiles(int factory_index, int color, const std::vector<Vector2>& positions);
 		void animation_started();
 		void animation_finished();
+		void interactive(bool cond);
 	};
 }

@@ -6,6 +6,10 @@
 #include "score_color.h"
 #include "score_line.h"
 #include "score_row.h"
+#include "factory_offer.h"
+#include "drop_factory.h"
+#include "center_offer.h"
+#include "drop_center.h"
 
 using namespace control;
 
@@ -61,6 +65,45 @@ void game_controller::add_game_end()
 			m_commands.emplace_back(std::make_unique<score_color>(m_model, i, color));
 		}
 	}
+}
+
+std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int player_index)
+{
+	std::vector<std::unique_ptr<command>> commands;
+	std::vector<model::tile> center_colors = m_model->get_center_colors();
+	for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+	{
+		for (auto&& color : center_colors)
+		{
+			if (m_model->can_add_to_pattern_line(player_index, pattern_line_index, color))
+			{
+				commands.push_back(std::move(std::make_unique<center_offer>(m_model, player_index, pattern_line_index, color)));
+			}
+		}
+	}
+	for (auto&& color : center_colors)
+	{
+		commands.push_back(std::move(std::make_unique<drop_center>(m_model, player_index, color)));
+	}
+	for (int factory_index = 0; factory_index < m_model->factory_count(); ++factory_index)
+	{
+		std::vector<model::tile> factory_colors = m_model->get_factory_colors(factory_index);
+		for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+		{
+			for (auto&& color: factory_colors)
+			{
+				if(m_model->can_add_to_pattern_line(player_index, pattern_line_index, color))
+				{
+					commands.push_back(std::move(std::make_unique<factory_offer>(m_model, factory_index, player_index, pattern_line_index, color)));
+				}
+			}
+		}
+		for(auto&& color: factory_colors)
+		{
+			commands.push_back(std::move(std::make_unique<drop_factory>(m_model, factory_index, player_index, color)));
+		}
+	}
+	return commands;
 }
 
 bool game_controller::step()

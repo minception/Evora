@@ -168,7 +168,7 @@ void Root::start_game()
 		else
 		{
 			std::unique_ptr<Player> player = std::make_unique<AIPlayer>(
-				ai_factories.at(player_name.alloc_c_string())->get(game_data->controller));
+				ai_factories.at(player_name.alloc_c_string())->get(game_data->controller, i));
 			game_data->add_player(std::move(player));
 		}
 		board->set("player_select", true);
@@ -199,6 +199,7 @@ void Root::animation_finished()
 	if(!GodotScenes::game_data->controller->step())
 	{
 		switch_to_next_player();
+		GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
 	}
 }
 

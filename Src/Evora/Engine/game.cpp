@@ -296,6 +296,16 @@ namespace model
 		return m_boards[player_index].score_wall_row(row);
 	}
 
+	std::vector<model::tile> game::get_center_colors()
+	{
+		return m_center.get_colors();
+	}
+
+	std::vector<model::tile> game::get_factory_colors(int factory_index)
+	{
+		return m_factories[factory_index].get_colors();
+	}
+
 	std::vector<tile> game::get_lid_state()
 	{
 		return m_lid.get_state();
