@@ -8,6 +8,7 @@
 #include "PatternLineLoader.h"
 #include "Floor.h"
 #include "Center.h"
+#include "ColorHighlight.h"
 
 using namespace godot;
 
@@ -33,4 +34,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle) {
 	register_class<GameData>();
 	register_class<Floor>();
 	register_class<Center>();
+	register_class<ColorHighlight>();
 }

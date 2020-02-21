@@ -35,9 +35,14 @@ namespace godot
 		int get_pattern_line_hover_index();
 		std::vector<Vector2> get_pattern_line_positions(int pattern_line_index, int count);
 		std::vector<Vector2> get_floor_positions(int count);
+		std::vector<Vector2> get_wall_color_positions(int color);
 		Vector2 get_wall_position(int line, int color);
 		Vector2 get_starter_tile_position();
-		void display_wall_score(const std::vector<int>& score_indices, int line, int color, int score);
+		void display_wall_tile_score(const std::vector<int>& score_indices, int line, int color, int score);
+		void display_wall_color_score(int color, int score);
+		void display_wall_line_score(int line, int score);
+		void display_wall_row_score(int row, int score);
+		void increase_score(int score);
 		void set_floor_highlight(bool cond);
 		void display_floor_score(int score);
 	};

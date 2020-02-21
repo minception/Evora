@@ -18,7 +18,7 @@ namespace model
 	bool lid::get_tiles(std::vector<tile>& out)
 	{
 		if (empty()) return false;
-		std::copy(m_tiles.begin(), m_tiles.end(), out.begin());
+		out = m_tiles;
 		m_tiles.clear();
 		return true;
 	}

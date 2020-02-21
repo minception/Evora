@@ -19,6 +19,7 @@
 #include "Center.h"
 #include "drop_center.h"
 #include "drop_factory.h"
+#include <string>
 
 using namespace godot;
 
@@ -50,6 +51,7 @@ void Root::set_starting_player(int index)
 	
 	game_data->controller->set_first_player(index);
 	game_data->controller->start_game();
+	game_data->players[index]->move();
 
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
 	TextureRect* player_highlight = cast_to<TextureRect>(get_node("PlayerHighlight"));
@@ -194,10 +196,26 @@ void Root::switch_to_next_player()
 	animation->play();	
 }
 
+void Root::announce_winner()
+{
+	String winner = std::to_string(GodotScenes::game_data->m_game->get_winner() + 1).c_str();
+	String text = "The winner is player number " + winner;
+	cast_to<Control>(get_node("Shade"))->set_visible(true);
+	Label* winner_label = cast_to<Label>(get_node("AnnounceWinner"));
+	winner_label->set_text(text);
+	Vector2 viewport_size = get_viewport_rect().size;
+	winner_label->set_global_position(Vector2((viewport_size.x - winner_label->get_size().x) / 2, 300 - winner_label->get_size().y / 2));
+	winner_label->set_visible(true);
+}
+
 void Root::animation_finished()
 {
 	if(!GodotScenes::game_data->controller->step())
 	{
+		if (GodotScenes::game_data->m_game->game_over())
+		{
+			announce_winner();
+		}
 		switch_to_next_player();
 		GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
 	}

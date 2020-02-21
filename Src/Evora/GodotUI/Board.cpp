@@ -8,6 +8,7 @@
 #include <Label.hpp>
 #include <string>
 #include "GodotScenes.h"
+#include "ColorHighlight.h"
 
 using namespace godot;
 
@@ -67,8 +68,10 @@ void Board::_process(float delta)
 		{
 			TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/HScoreHighlight"));
 			TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/VScoreHighlight"));
+			ColorHighlight* color_highlight = cast_to<ColorHighlight>(get_node("Image/ScoreHighlights/ColorHighlight"));
 			h_highlight->set_visible(false);
 			v_highlight->set_visible(false);
+			color_highlight->unhighlight();
 			emit_signal("animation_finished");
 		}
 	}
@@ -101,6 +104,8 @@ void Board::connect_children()
 	}
 	children.push_back((Control*)image->get_node("Floor/Image"));
 	image->get_node("Floor")->connect("tile_over", this, "tile_over");
+	ColorHighlight* colorHighlight = cast_to<ColorHighlight>(image->get_node("ScoreHighlight/ColorHighlight"));
+	
 	connect("tile_moved", image->get_node("Floor"), "tile_moved");
 
 	for(auto&& child:children)
@@ -158,7 +163,8 @@ void Board::image_input()
 		int64_t mouse_mask = input->get_mouse_button_mask();
 		if(mouse_mask&1)
 		{
-			emit_signal("selected", get("index"));
+			int index = get("index");
+			emit_signal("selected", index);
 			set_highlight(false);
 		}
 	}
@@ -202,6 +208,18 @@ std::vector<Vector2> Board::get_floor_positions(int count)
 	return floor->get_n_positions(count);
 }
 
+std::vector<Vector2> Board::get_wall_color_positions(int color)
+{
+	std::vector<Vector2> positions;
+	Node* wall = get_node("Image/Wall");// ->get_child(line)->get_child(row))->get_global_position();
+	for (int line = 0; line < COLORS; ++line)
+	{
+		int row = (line + color) % COLORS;
+		positions.push_back(cast_to<TextureRect>(wall->get_child(line)->get_child(row))->get_global_position());
+	}
+	return positions;
+}
+
 Vector2 Board::get_wall_position(int line, int color)
 {
 	int row = (color + line) % 5;
@@ -217,7 +235,7 @@ Vector2 godot::Board::get_starter_tile_position()
 	return Vector2(position.x + size.x - margin - tile_size.x, position.y + margin);
 }
 
-void Board::display_wall_score(const std::vector<int>& score_indices, int line, int color, int score)
+void Board::display_wall_tile_score(const std::vector<int>& score_indices, int line, int color, int score)
 {
 	const int H_FIRST(0), H_LAST(1), V_FIRST(2), V_LAST(3);
 	int row = (color + line) % 5;
@@ -239,12 +257,54 @@ void Board::display_wall_score(const std::vector<int>& score_indices, int line, 
 	v_highlight->set_size(v_highlight_size);
 	v_highlight->set_visible(true);
 	
+	increase_score(score);
+	
+	set("time_remaining", 1.f);
+}
+
+void Board::display_wall_color_score(int color, int score)
+{
+	ColorHighlight* color_highlight = cast_to<ColorHighlight>(get_node("Image/ScoreHighlights/ColorHighlight"));
+	color_highlight->highlight(get_wall_color_positions(color));
+	
+	increase_score(score);
+	
+	set("time_remaining", 1.f);
+}
+
+void Board::display_wall_line_score(int line, int score)
+{
+	TextureRect* h_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/HScoreHighlight"));
+	Control* line_display = cast_to<Control>(get_node("Image/Wall")->get_child(line));
+	h_highlight->set_global_position(line_display->get_global_position());
+	h_highlight->set_size(line_display->get_size());
+	h_highlight->set_visible(true);
+
+	increase_score(score);
+	
+	set("time_remaining", 1.f);
+}
+
+void Board::display_wall_row_score(int row, int score)
+{
+	TextureRect* v_highlight = cast_to<TextureRect>(get_node("Image/ScoreHighlights/VScoreHighlight"));
+	
+	Control* line_display = cast_to<Control>(get_node("Image/Wall")->get_child(0));
+	Control* tile_display = cast_to<Control>(line_display->get_child(row));
+	v_highlight->set_global_position(tile_display->get_global_position());
+	v_highlight->set_size(Vector2(tile_display->get_size().x, line_display->get_size().x));
+	
+	increase_score(score);
+	
+	set("time_remaining", 1.f);
+}
+
+void Board::increase_score(int score)
+{
 	Label* score_label = cast_to<Label>(get_node("Image/Score"));
 	int current_score = std::stoi(score_label->get_text().alloc_c_string());
 	current_score += score;
 	score_label->set_text(std::to_string(current_score).c_str());
-	
-	set("time_remaining", 1.f);
 }
 
 void Board::set_floor_highlight(bool cond)
@@ -255,9 +315,6 @@ void Board::set_floor_highlight(bool cond)
 
 void Board::display_floor_score(int score)
 {
-	Label* score_label = cast_to<Label>(get_node("Image/Score"));
-	int current_score = std::stoi(score_label->get_text().alloc_c_string());
-	current_score += score;
-	score_label->set_text(std::to_string(current_score).c_str());
+	increase_score(score);
 }
 

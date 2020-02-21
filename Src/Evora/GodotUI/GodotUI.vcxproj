@@ -166,6 +166,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardLoader.cpp" />
     <ClCompile Include="Center.cpp" />
+    <ClCompile Include="ColorHighlight.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameData.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardLoader.h" />
     <ClInclude Include="Center.h" />
+    <ClInclude Include="ColorHighlight.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="GameData.h" />

@@ -306,6 +306,20 @@ namespace model
 		return m_factories[factory_index].get_colors();
 	}
 
+	int game::get_winner()
+	{
+		int max_score = 0;
+		int winner_index = 0;
+		for (int i = 0; i < m_boards.size(); ++i)
+		{
+			if(m_boards[i].get_score() > max_score)
+			{
+				winner_index = i;
+			}
+		}
+		return winner_index;
+	}
+
 	std::vector<tile> game::get_lid_state()
 	{
 		return m_lid.get_state();

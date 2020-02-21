@@ -41,7 +41,7 @@ namespace model
 		std::vector<tile> to_refill;
 		if(lid.get_tiles(to_refill))
 		{
-			std::copy(to_refill.begin(), to_refill.end(), m_tiles.end());
+			m_tiles.insert(m_tiles.end(), to_refill.begin(), to_refill.end());
 			return true;
 		}
 		return false;

@@ -31,6 +31,7 @@ int GodotGame::bag_to_factories()
 			++factory_index;
 		}
 		wait_for_refill = false;
+		GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
 	}
 	return added;
 }
@@ -300,7 +301,7 @@ int GodotGame::score_wall_tile(int player_index, int pattern_line_index, tile ti
 	int score = game::score_wall_tile(player_index, pattern_line_index, tile);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<int> score_indices = get_score_indices(player_index, pattern_line_index, tile);
-	board->display_wall_score(score_indices, pattern_line_index, (int)tile, score);
+	board->display_wall_tile_score(score_indices, pattern_line_index, (int)tile, score);
 	return score;
 }
 
@@ -340,17 +341,44 @@ int GodotGame::floor_to_lid(int player_index)
 int GodotGame::score_wall_color(int player_index, tile color)
 {
 	int score = game::score_wall_color(player_index, color);
+	if(score > 0)
+	{
+		Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
+		board->display_wall_color_score((int)color, score);
+	}
+	else
+	{
+		GodotScenes::game_data->controller->step();
+	}
 	return score;
 }
 
 int GodotGame::score_wall_line(int player_index, int line)
 {
 	int score = game::score_wall_line(player_index, line);
+	if (score > 0)
+	{
+		Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
+		board->display_wall_line_score(line, score);
+	}
+	else
+	{
+		GodotScenes::game_data->controller->step();
+	}
 	return score;
 }
 
 int GodotGame::score_wall_row(int player_index, int row)
 {
 	int score = game::score_wall_row(player_index, row);
+	if (score > 0)
+	{
+		Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
+		board->display_wall_row_score(row, score);
+	}
+	else
+	{
+		GodotScenes::game_data->controller->step();
+	}
 	return score;
 }

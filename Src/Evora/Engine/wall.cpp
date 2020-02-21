@@ -70,7 +70,7 @@ namespace model
 	int wall::score_tile(int pattern_line_index, tile tile)
 	{
 		int row = ((int)tile + pattern_line_index) % COLORS;
-		return score(pattern_line_index, row);
+		return score(row, pattern_line_index);
 	}
 
 	std::vector<int> wall::get_score_indices(int pattern_line_index, tile tile)
@@ -146,6 +146,6 @@ namespace model
 	bool wall::empty(int pattern_line_index, tile tile)
 	{
 		int row = ((int)tile + pattern_line_index) % COLORS;
-		return m_tiles[pattern_line_index][(int)tile] == tile::empty;
+		return m_tiles[pattern_line_index][row] == tile::empty;
 	}
 }
