@@ -32,7 +32,7 @@ __meta__ = {
 
 [node name="PlayerHighlight" type="TextureRect" parent="."]
 visible = false
-margin_right = 381.0
+margin_right = 425.0
 margin_bottom = 283.0
 texture = ExtResource( 7 )
 expand = true
@@ -53,6 +53,19 @@ __meta__ = {
 }
 
 [node name="SelectPlayerPrompt" type="Label" parent="."]
+visible = false
+margin_right = 1461.0
+margin_bottom = 377.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Select starting player"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnnounceWinner" type="Label" parent="."]
 visible = false
 margin_right = 1461.0
 margin_bottom = 377.0
