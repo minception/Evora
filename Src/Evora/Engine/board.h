@@ -47,5 +47,6 @@ namespace model
 		int score_wall_color(tile tile);
 		int score_wall_line(int line);
 		int score_wall_row(int row);
+		int wall_line_count(int line);
 	};
 }

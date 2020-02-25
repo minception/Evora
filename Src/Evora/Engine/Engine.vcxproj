@@ -34,6 +34,7 @@
     <ClInclude Include="floor.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_controller.h" />
+    <ClInclude Include="GreedyAI.h" />
     <ClInclude Include="init_round.h" />
     <ClInclude Include="lid.h" />
     <ClInclude Include="pattern_line.h" />
@@ -63,6 +64,7 @@
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_controller.cpp" />
+    <ClCompile Include="GreedyAI.cpp" />
     <ClCompile Include="init_round.cpp" />
     <ClCompile Include="lid.cpp" />
     <ClCompile Include="pattern_line.cpp" />

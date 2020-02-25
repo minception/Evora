@@ -148,4 +148,14 @@ namespace model
 		int row = ((int)tile + pattern_line_index) % COLORS;
 		return m_tiles[pattern_line_index][row] == tile::empty;
 	}
+
+	int wall::line_count(int line)
+	{
+		int count = 0;
+		for (auto && tile : m_tiles[line])
+		{
+			if (tile != tile::empty) count++;
+		}
+		return count;
+	}
 }

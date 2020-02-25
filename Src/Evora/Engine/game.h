@@ -66,5 +66,6 @@ namespace model
 		std::vector<model::tile> get_center_colors();
 		std::vector<model::tile> get_factory_colors(int factory_index);
 		int get_winner();
+		int wall_line_count(int player_index, int line);
 	};
 }

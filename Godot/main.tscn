@@ -32,8 +32,8 @@ __meta__ = {
 
 [node name="PlayerHighlight" type="TextureRect" parent="."]
 visible = false
-margin_right = 425.0
-margin_bottom = 283.0
+margin_right = 424.0
+margin_bottom = 296.0
 texture = ExtResource( 7 )
 expand = true
 __meta__ = {
@@ -90,4 +90,4 @@ script = ExtResource( 6 )
 [node name="PlayerChangeAnimations" type="Node" parent="."]
 
 [node name="StarterTile" parent="." instance=ExtResource( 9 )]
-position = Vector2( 42, 62 )
+position = Vector2( 4.05222, 8.87311 )

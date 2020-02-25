@@ -26,4 +26,9 @@ namespace AI
 	public:
 		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int player_index) override;
 	};
+	class GreedyAIFactory :public AIFactory
+	{
+	public:
+		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int player_index) override;
+	};
 }

@@ -166,4 +166,9 @@ namespace model
 	{
 		return m_wall.score_row(row);
 	}
+
+	int board::wall_line_count(int line)
+	{
+		return m_wall.line_count(line);
+	}
 }

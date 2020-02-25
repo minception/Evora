@@ -320,6 +320,11 @@ namespace model
 		return winner_index;
 	}
 
+	int game::wall_line_count(int player_index, int line)
+	{
+		return m_boards[player_index].wall_line_count(line);
+	}
+
 	std::vector<tile> game::get_lid_state()
 	{
 		return m_lid.get_state();

@@ -51,7 +51,7 @@ void Root::set_starting_player(int index)
 	
 	game_data->controller->set_first_player(index);
 	game_data->controller->start_game();
-	game_data->players[index]->move();
+	//game_data->players[index]->move();
 
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
 	TextureRect* player_highlight = cast_to<TextureRect>(get_node("PlayerHighlight"));
@@ -216,8 +216,11 @@ void Root::animation_finished()
 		{
 			announce_winner();
 		}
-		switch_to_next_player();
-		GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+		else
+		{
+			switch_to_next_player();
+			GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+		}
 	}
 }
 

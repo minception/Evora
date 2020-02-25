@@ -15,20 +15,28 @@ using namespace control;
 
 void game_controller::add_wall_tiling_faze()
 {
-	for (int i = 0; i < m_model->player_count(); ++i)
+	bool final_wall_tiling = false;
+	for (int player_index = 0; player_index < m_model->player_count(); ++player_index)
 	{
-		for (int j = 0; j < model::COLORS; ++j)
+		for (int pattern_line = 0; pattern_line < model::COLORS; ++pattern_line)
 		{
-			if(m_model->pattern_line_full(i, j))
+			if(m_model->pattern_line_full(player_index, pattern_line))
 			{
-				model::tile color = m_model->pattern_line_color(i, j);
-				m_commands.emplace_back(std::make_unique<tile_wall>(m_model, i, j));
-				m_commands.emplace_back(std::make_unique<score_wall_tile>(m_model, i, j, color));
+				model::tile color = m_model->pattern_line_color(player_index, pattern_line);
+				m_commands.emplace_back(std::make_unique<tile_wall>(m_model, player_index, pattern_line));
+				m_commands.emplace_back(std::make_unique<score_wall_tile>(m_model, player_index, pattern_line, color));
+				if(m_model->wall_line_count(player_index, pattern_line) == model::COLORS - 1)
+				{
+					final_wall_tiling = true;
+				}
 			}
 		}
-		m_commands.emplace_back(std::make_unique<tally_floor>(m_model, i));
+		m_commands.emplace_back(std::make_unique<tally_floor>(m_model, player_index));
 	}
-	m_commands.emplace_back(std::make_unique<init_round>(m_model));
+	if(!final_wall_tiling)
+	{
+		m_commands.emplace_back(std::make_unique<init_round>(m_model));
+	}
 }
 
 void game_controller::start_game()

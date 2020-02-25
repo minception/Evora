@@ -83,6 +83,8 @@ void Board::connect_children()
 	std::vector<Control*> children;
 	Control* image = (Control*)get_child(get_child_index(this, "Image"));
 	children.push_back(image);
+	children.push_back((Control*)image->get_node("WallBackground"));
+	children.push_back((Control*)image->get_node("Separator"));
 	Control* wall = (Control*)image->get_child(get_child_index(image, "Wall"));
 	children.push_back(wall);
 	for(int i = 0; i < wall->get_child_count(); ++i)
@@ -104,7 +106,6 @@ void Board::connect_children()
 	}
 	children.push_back((Control*)image->get_node("Floor/Image"));
 	image->get_node("Floor")->connect("tile_over", this, "tile_over");
-	ColorHighlight* colorHighlight = cast_to<ColorHighlight>(image->get_node("ScoreHighlight/ColorHighlight"));
 	
 	connect("tile_moved", image->get_node("Floor"), "tile_moved");
 

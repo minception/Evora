@@ -120,6 +120,9 @@
     <ClInclude Include="score_color.h">
       <Filter>Controller\Commands\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GreedyAI.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -200,5 +203,6 @@
     <ClCompile Include="score_row.cpp">
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GreedyAI.cpp" />
   </ItemGroup>
 </Project>
