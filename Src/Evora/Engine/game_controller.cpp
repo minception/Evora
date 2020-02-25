@@ -116,9 +116,9 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 
 bool game_controller::step()
 {
-	if (m_game_over) return false;
 	if(m_current_command == m_commands.size())
 	{
+		if (m_game_over) return false;
 		if(m_model->game_over())
 		{
 			add_game_end();

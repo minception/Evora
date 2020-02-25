@@ -9,6 +9,7 @@ void godot::Center::_register_methods()
 void godot::Center::_init()
 {
 	m_tiles_per_line = 5;
+	m_tile_count = 0;
 }
 
 std::vector<godot::Vector2> godot::Center::get_n_positions(int n)
@@ -38,7 +39,8 @@ std::vector<Vector2> Center::get_rearrange_positions()
 	Vector2 center_position = get_global_position();
 	Vector2 tile_size = cast_to<TextureRect>(GodotScenes::tile_example->get_node("Image"))->get_size();
 	float margin = 5.f;
-	for (int i = 0; i < m_tile_count; ++i)
+	int tile_count = get("tile_count");
+	for (int i = 0; i < tile_count; ++i)
 	{
 		int line = i / 5;
 		int row = i % 5;
@@ -51,5 +53,6 @@ std::vector<Vector2> Center::get_rearrange_positions()
 
 void Center::take_n_tiles(int n)
 {
-	m_tile_count -= n;
+	int tile_count = get("tile_count");
+	set("tile_count", tile_count - n);
 }

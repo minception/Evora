@@ -349,7 +349,7 @@ int GodotGame::score_wall_color(int player_index, tile color)
 	}
 	else
 	{
-		GodotScenes::game_data->controller->step();
+		GodotScenes::root->animation_finished();
 	}
 	return score;
 }
@@ -364,7 +364,7 @@ int GodotGame::score_wall_line(int player_index, int line)
 	}
 	else
 	{
-		GodotScenes::game_data->controller->step();
+		GodotScenes::root->animation_finished();
 	}
 	return score;
 }
@@ -379,7 +379,7 @@ int GodotGame::score_wall_row(int player_index, int row)
 	}
 	else
 	{
-		GodotScenes::game_data->controller->step();
+		GodotScenes::root->animation_finished();
 	}
 	return score;
 }
