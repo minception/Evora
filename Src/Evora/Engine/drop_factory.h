@@ -8,15 +8,15 @@ namespace control
 	class drop_factory :public command
 	{
 	public:
-		drop_factory(std::shared_ptr<model::game> game, int factory_index, int player_index, model::tile color)
-			: control::command(game),
-			  m_factory_index(factory_index),
+		drop_factory(int factory_index, int player_index, model::tile color)
+			: m_factory_index(factory_index),
 			  m_player_index(player_index),
 			  m_color(color)
 		{}
 
-		void Execute() override;
-		void Unexecute() override;
+		void Execute(std::shared_ptr<model::game> game) override;
+		void Unexecute(std::shared_ptr<model::game> game) override;
+		std::unique_ptr<command> clone() override;
 	private:
 		int m_factory_index;
 		int m_player_index;

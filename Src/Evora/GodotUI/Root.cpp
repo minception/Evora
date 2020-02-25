@@ -257,7 +257,6 @@ void Root::tile_dropped(int factory_index, int color)
 			GodotScenes::game_data->controller->add_command(
 				std::move(
 					std::make_unique<control::drop_center>(
-						GodotScenes::game_data->m_game,
 						board_index,
 						(model::tile)color)
 				)
@@ -268,7 +267,7 @@ void Root::tile_dropped(int factory_index, int color)
 			GodotScenes::game_data->controller->add_command(
 				std::move(
 					std::make_unique<control::drop_factory>(
-						GodotScenes::game_data->m_game, factory_index,
+						factory_index,
 						board_index,
 						(model::tile)color)
 				)
@@ -286,7 +285,6 @@ void Root::tile_dropped(int factory_index, int color)
 			GodotScenes::game_data->controller->add_command(
 				std::move(
 					std::make_unique<control::center_offer>(
-						GodotScenes::game_data->m_game,
 						board_index,
 						pattern_line_index,
 						(model::tile)color)
@@ -298,7 +296,7 @@ void Root::tile_dropped(int factory_index, int color)
 			GodotScenes::game_data->controller->add_command(
 				std::move(
 					std::make_unique<control::factory_offer>(
-						GodotScenes::game_data->m_game, factory_index,
+						factory_index,
 						board_index,
 						pattern_line_index,
 						(model::tile)color)

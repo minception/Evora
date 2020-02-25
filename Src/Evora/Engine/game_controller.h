@@ -15,11 +15,13 @@ namespace control
 		void add_wall_tiling_faze();
 	public:
 		game_controller(std::shared_ptr<model::game> model):m_model(model){}
+		game_controller(const game_controller& other);
 		void start_game();
 		void add_command(std::unique_ptr<command> command);
 		void set_first_player(int player_index);
 		void add_game_end();
 		std::vector<std::unique_ptr<command>> get_possible_moves(int player_index);
 		bool step();
+		int evaluate_state(int player_index);
 	};
 }

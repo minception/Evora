@@ -7,15 +7,15 @@ namespace control
 	{
 		
 	public:
-		score_row(std::shared_ptr<model::game> game, int player_index, int row)
-			: command(game),
-			  m_player_index(player_index),
+		score_row(int player_index, int row)
+			: m_player_index(player_index),
 			  m_row(row)
 		{
 		}
 
-		void Execute() override;
-		void Unexecute() override;
+		void Execute(std::shared_ptr<model::game> game) override;
+		void Unexecute(std::shared_ptr<model::game> game) override;
+		std::unique_ptr<command> clone() override;
 	private:
 		int m_player_index;
 		int m_row;

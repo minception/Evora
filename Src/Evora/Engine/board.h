@@ -48,5 +48,7 @@ namespace model
 		int score_wall_line(int line);
 		int score_wall_row(int row);
 		int wall_line_count(int line);
+		int get_floor_score();
+		int get_pattern_line_score(int pattern_line_index);
 	};
 }

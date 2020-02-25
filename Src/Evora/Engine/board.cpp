@@ -171,4 +171,14 @@ namespace model
 	{
 		return m_wall.line_count(line);
 	}
+
+	int board::get_floor_score()
+	{
+		return m_floor.score();
+	}
+
+	int board::get_pattern_line_score(int pattern_line_index)
+	{
+		return m_wall.score_tile(pattern_line_index, m_pattern_lines[pattern_line_index].get_color());
+	}
 }

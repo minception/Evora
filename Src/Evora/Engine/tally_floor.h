@@ -6,13 +6,13 @@ namespace control
 	class tally_floor :public command
 	{
 	public:
-		tally_floor(std::shared_ptr<model::game> game, int player_index)
-			: command(game),
-			  m_player_index(player_index)
+		tally_floor(int player_index)
+			: m_player_index(player_index)
 		{}
 
-		void Execute() override;
-		void Unexecute() override;
+		void Execute(std::shared_ptr<model::game> game) override;
+		void Unexecute(std::shared_ptr<model::game> game) override;
+		std::unique_ptr<command> clone() override;
 	private:
 		int m_player_index;
 		int m_score = 0;

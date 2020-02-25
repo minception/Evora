@@ -5,6 +5,7 @@
 #include "center.h"
 #include "factory.h"
 #include "lid.h"
+#include <memory>
 
 namespace model
 {
@@ -67,5 +68,8 @@ namespace model
 		std::vector<model::tile> get_factory_colors(int factory_index);
 		int get_winner();
 		int wall_line_count(int player_index, int line);
+		int get_floor_score(int player_index);
+		int get_pattern_line_score(int player_index, int pattern_line_index);
+		std::unique_ptr<game> clone();
 	};
 }

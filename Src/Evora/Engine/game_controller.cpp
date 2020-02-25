@@ -23,25 +23,30 @@ void game_controller::add_wall_tiling_faze()
 			if(m_model->pattern_line_full(player_index, pattern_line))
 			{
 				model::tile color = m_model->pattern_line_color(player_index, pattern_line);
-				m_commands.emplace_back(std::make_unique<tile_wall>(m_model, player_index, pattern_line));
-				m_commands.emplace_back(std::make_unique<score_wall_tile>(m_model, player_index, pattern_line, color));
+				m_commands.emplace_back(std::make_unique<tile_wall>(player_index, pattern_line));
+				m_commands.emplace_back(std::make_unique<score_wall_tile>(player_index, pattern_line, color));
 				if(m_model->wall_line_count(player_index, pattern_line) == model::COLORS - 1)
 				{
 					final_wall_tiling = true;
 				}
 			}
 		}
-		m_commands.emplace_back(std::make_unique<tally_floor>(m_model, player_index));
+		m_commands.emplace_back(std::make_unique<tally_floor>(player_index));
 	}
 	if(!final_wall_tiling)
 	{
-		m_commands.emplace_back(std::make_unique<init_round>(m_model));
+		m_commands.emplace_back(std::make_unique<init_round>());
 	}
+}
+
+game_controller::game_controller(const game_controller& other)
+{
+	m_model = std::make_unique<model::game>(*other.m_model);
 }
 
 void game_controller::start_game()
 {
-	m_commands.emplace_back(std::make_unique<init_round>(m_model));
+	m_commands.emplace_back(std::make_unique<init_round>());
 	step();
 }
 
@@ -57,20 +62,20 @@ void game_controller::set_first_player(int player_index)
 
 void game_controller::add_game_end()
 {
-	for (int i = 0; i < m_model->player_count(); ++i)
+	for (int player_index = 0; player_index < m_model->player_count(); ++player_index)
 	{
 		for (int line = 0; line < model::COLORS; ++line)
 		{
-			m_commands.emplace_back(std::make_unique<score_line>(m_model, i, line));
+			m_commands.emplace_back(std::make_unique<score_line>(player_index, line));
 		}
 		for (int row = 0; row < model::COLORS; ++row)
 		{
-			m_commands.emplace_back(std::make_unique<score_row>(m_model, i, row));
+			m_commands.emplace_back(std::make_unique<score_row>(player_index, row));
 		}
 		for (int j = 0; j < model::COLORS; ++j)
 		{
 			model::tile color = (model::tile)j;
-			m_commands.emplace_back(std::make_unique<score_color>(m_model, i, color));
+			m_commands.emplace_back(std::make_unique<score_color>(player_index, color));
 		}
 	}
 }
@@ -85,13 +90,13 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 		{
 			if (m_model->can_add_to_pattern_line(player_index, pattern_line_index, color))
 			{
-				commands.push_back(std::move(std::make_unique<center_offer>(m_model, player_index, pattern_line_index, color)));
+				commands.push_back(std::move(std::make_unique<center_offer>(player_index, pattern_line_index, color)));
 			}
 		}
 	}
 	for (auto&& color : center_colors)
 	{
-		commands.push_back(std::move(std::make_unique<drop_center>(m_model, player_index, color)));
+		commands.push_back(std::move(std::make_unique<drop_center>(player_index, color)));
 	}
 	for (int factory_index = 0; factory_index < m_model->factory_count(); ++factory_index)
 	{
@@ -102,13 +107,13 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 			{
 				if(m_model->can_add_to_pattern_line(player_index, pattern_line_index, color))
 				{
-					commands.push_back(std::move(std::make_unique<factory_offer>(m_model, factory_index, player_index, pattern_line_index, color)));
+					commands.push_back(std::move(std::make_unique<factory_offer>(factory_index, player_index, pattern_line_index, color)));
 				}
 			}
 		}
 		for(auto&& color: factory_colors)
 		{
-			commands.push_back(std::move(std::make_unique<drop_factory>(m_model, factory_index, player_index, color)));
+			commands.push_back(std::move(std::make_unique<drop_factory>(factory_index, player_index, color)));
 		}
 	}
 	return commands;
@@ -132,6 +137,20 @@ bool game_controller::step()
 		}
 		return false;
 	}
-	m_commands[m_current_command++]->Execute();
+	m_commands[m_current_command++]->Execute(m_model);
 	return true;
+}
+
+int game_controller::evaluate_state(int player_index)
+{
+	int score = 0;
+	for (int i = 0; i < model::COLORS; ++i)
+	{
+		if(m_model->pattern_line_full(player_index, i))
+		{
+			score += m_model->get_pattern_line_score(player_index, i);
+		}
+	}
+	score += m_model->get_floor_score(player_index);
+	return score;
 }

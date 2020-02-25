@@ -2,14 +2,19 @@
 
 using namespace control;
 
-void drop_center::Execute()
+void drop_center::Execute(std::shared_ptr<model::game> game)
 {
-	m_starter_tile = m_game->handle_center_starter_tile(m_player_index);
-	m_tile_indices = m_game->get_center_tile_indices(m_color);
-	m_moved_to_floor = m_game->center_to_floor(m_player_index, m_color);
-	m_moved_to_lid = m_game->center_to_lid(m_color);
+	m_starter_tile = game->handle_center_starter_tile(m_player_index);
+	m_tile_indices = game->get_center_tile_indices(m_color);
+	m_moved_to_floor = game->center_to_floor(m_player_index, m_color);
+	m_moved_to_lid = game->center_to_lid(m_color);
 }
 
-void drop_center::Unexecute()
+void drop_center::Unexecute(std::shared_ptr<model::game> game)
 {
+}
+
+std::unique_ptr<command> drop_center::clone()
+{
+	return std::make_unique<drop_center>(*this);
 }

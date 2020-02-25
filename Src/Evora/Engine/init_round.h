@@ -6,12 +6,9 @@ namespace control
 	class init_round :public command
 	{
 	public:
-		init_round(std::shared_ptr<model::game> game)
-			: command(game)
-		{}
-
-		void Execute() override;
-		void Unexecute() override;
+		void Execute(std::shared_ptr<model::game> game) override;
+		void Unexecute(std::shared_ptr<model::game> game) override;
+		std::unique_ptr<command> clone() override;
 	private:
 		static const int FACTORY_SIZE = 4;
 		int m_added_before_refill = 0;

@@ -325,6 +325,21 @@ namespace model
 		return m_boards[player_index].wall_line_count(line);
 	}
 
+	int game::get_floor_score(int player_index)
+	{
+		return m_boards[player_index].get_floor_score();
+	}
+
+	int game::get_pattern_line_score(int player_index, int pattern_line_index)
+	{
+		return m_boards[player_index].get_pattern_line_score(pattern_line_index);
+	}
+
+	std::unique_ptr<game> game::clone()
+	{
+		return std::unique_ptr<game>(new game(*this));
+	}
+
 	std::vector<tile> game::get_lid_state()
 	{
 		return m_lid.get_state();

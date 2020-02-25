@@ -6,14 +6,14 @@ namespace control
 	class drop_center :public command
 	{
 	public:
-		drop_center(std::shared_ptr<model::game> game, int player_index, model::tile color)
-			: command(game),
-			m_player_index(player_index),
-			m_color(color)
+		drop_center(int player_index, model::tile color)
+			: m_player_index(player_index),
+			  m_color(color)
 		{}
 
-		void Execute() override;
-		void Unexecute() override;
+		void Execute(std::shared_ptr<model::game> game) override;
+		void Unexecute(std::shared_ptr<model::game> game) override;
+		std::unique_ptr<command> clone() override;
 	private:
 		int m_player_index;
 		model::tile m_color;

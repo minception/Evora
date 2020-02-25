@@ -60,9 +60,6 @@
     <ClInclude Include="factory_offer.h">
       <Filter>Controller\Commands\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="final_score.h">
-      <Filter>Controller\Commands\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="init_round.h">
       <Filter>Controller\Commands\Header Files</Filter>
     </ClInclude>
@@ -146,9 +143,6 @@
     <ClCompile Include="factory_offer.cpp">
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="final_score.cpp">
-      <Filter>Controller\Commands\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="init_round.cpp">
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
@@ -203,6 +197,8 @@
     <ClCompile Include="score_row.cpp">
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GreedyAI.cpp" />
+    <ClCompile Include="GreedyAI.cpp">
+      <Filter>AI\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

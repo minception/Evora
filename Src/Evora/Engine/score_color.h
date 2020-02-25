@@ -6,14 +6,14 @@ namespace control
 	class score_color :public command
 	{
 	public:
-		score_color(std::shared_ptr<model::game> game, int player, model::tile tile)
-			: command(game),
-			  m_player_index(player),
+		score_color(int player, model::tile tile)
+			: m_player_index(player),
 			  m_color(tile)
 		{}
 
-		void Execute() override;
-		void Unexecute() override;
+		void Execute(std::shared_ptr<model::game> game) override;
+		void Unexecute(std::shared_ptr<model::game> game) override;
+		std::unique_ptr<command> clone() override;
 	private:
 		int m_player_index;
 		model::tile m_color;
