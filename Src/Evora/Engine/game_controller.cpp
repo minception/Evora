@@ -154,3 +154,13 @@ int game_controller::evaluate_state(int player_index)
 	score += m_model->get_floor_score(player_index);
 	return score;
 }
+
+bool game_controller::game_over()
+{
+	return m_game_over;
+}
+
+int game_controller::get_winner()
+{
+	return m_model->get_winner();
+}

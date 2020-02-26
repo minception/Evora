@@ -23,5 +23,7 @@ namespace control
 		std::vector<std::unique_ptr<command>> get_possible_moves(int player_index);
 		bool step();
 		int evaluate_state(int player_index);
+		bool game_over();
+		int get_winner();
 	};
 }

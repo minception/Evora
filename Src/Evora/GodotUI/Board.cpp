@@ -294,6 +294,7 @@ void Board::display_wall_row_score(int row, int score)
 	Control* tile_display = cast_to<Control>(line_display->get_child(row));
 	v_highlight->set_global_position(tile_display->get_global_position());
 	v_highlight->set_size(Vector2(tile_display->get_size().x, line_display->get_size().x));
+	v_highlight->set_visible(true);
 	
 	increase_score(score);
 	

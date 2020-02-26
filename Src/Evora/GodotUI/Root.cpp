@@ -58,6 +58,16 @@ void Root::set_starting_player(int index)
 	player_highlight->set_global_position(highlighted->get_global_position() - Vector2(3, 3));
 	player_highlight->set_visible(true);
 	
+	// show step button
+	if (m_stepping)
+	{
+		add_child(GodotScenes::step_button_example);
+		Vector2 viewport_size = get_viewport_rect().size;
+		Vector2 step_button_size = GodotScenes::step_button_example->get_size();
+		GodotScenes::step_button_example->set_position(Vector2(viewport_size.x - step_button_size.x - 5.f, 5.f));
+		GodotScenes::step_button_example->connect("pressed", this, "step");
+	}
+	
 }
 
 void godot::Root::_register_methods()
@@ -69,6 +79,7 @@ void godot::Root::_register_methods()
 	register_method("tile_over", &Root::tile_over);
 	register_method("tile_dropped", &Root::tile_dropped);
 	register_method("animation_finished", &Root::animation_finished);
+	register_method("step", &Root::step);
 
 	register_property("players", &Root::m_number_of_players, 2);
 }
@@ -166,6 +177,7 @@ void Root::start_game()
 		{
 			std::unique_ptr<Player> player = std::make_unique<HumanPlayer>();
 			game_data->add_player(std::move(player));
+			m_stepping = false;
 		}
 		else
 		{
@@ -179,6 +191,7 @@ void Root::start_game()
 	Button* start_button = (Button*)get_child(get_child_index(this, "StartButton"));
 	start_button->set_visible(false);
 
+
 	// show prompt to select starting player
 	cast_to<Control>(get_node("Shade"))->set_visible(true);
 	Control* prompt = cast_to<Control>(get_node("SelectPlayerPrompt"));
@@ -187,6 +200,12 @@ void Root::start_game()
 	prompt->set_visible(true);
 
 	create_player_change_animations();
+}
+
+void Root::step()
+{
+	GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+	GodotScenes::step_button_example->set_disabled(true);
 }
 
 void Root::switch_to_next_player()
@@ -206,6 +225,8 @@ void Root::announce_winner()
 	Vector2 viewport_size = get_viewport_rect().size;
 	winner_label->set_global_position(Vector2((viewport_size.x - winner_label->get_size().x) / 2, 300 - winner_label->get_size().y / 2));
 	winner_label->set_visible(true);
+	Button* start_button = (Button*)get_node("StartButton");
+	start_button->set_visible(true);
 }
 
 void Root::animation_finished()
@@ -219,7 +240,14 @@ void Root::animation_finished()
 		else
 		{
 			switch_to_next_player();
-			GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+			if(!m_stepping)
+			{
+				GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+			}
+			else
+			{
+				GodotScenes::step_button_example->set_disabled(false);
+			}
 		}
 	}
 }
@@ -250,6 +278,7 @@ void Root::tile_dropped(int factory_index, int color)
 	int board_index = GodotScenes::game_data->current_player;
 	Board* board = cast_to<Board>(get_node("Boards")->get_child(board_index));
 	int pattern_line_index = board->get_pattern_line_hover_index();
+	board->set_pattern_line_highlight(pattern_line_index, false);
 	if(pattern_line_index == COLORS)
 	{
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())

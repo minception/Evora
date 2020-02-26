@@ -18,7 +18,7 @@ namespace godot
 		GODOT_CLASS(Root, Node2D)
 		
 		int m_number_of_players;
-		int tile_over_pattern_line;
+		bool m_stepping = true;
 
 		void add_start_button();
 	public:
@@ -28,6 +28,7 @@ namespace godot
 		void _ready();
 		void create_player_change_animations();
 		void start_game();
+		void step();
 		void switch_to_next_player();
 		void announce_winner();
 		void animation_finished();

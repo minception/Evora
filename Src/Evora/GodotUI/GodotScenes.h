@@ -16,11 +16,13 @@ struct GodotScenes
 	static Ref<PackedScene> tile_scene;
 	static Ref<PackedScene> factory_scene;
 	static Ref<PackedScene> start_button_scene;
+	static Ref<PackedScene> step_button_scene;
 	static Ref<PackedScene> center_scene;
 	static Board* board_example;
 	static Factory* factory_example;
 	static GodotTile* tile_example;
 	static Button* start_button_example;
+	static Button* step_button_example;
 	static GameData* game_data;
 	static Root* root;
 	static void load_scenes();
