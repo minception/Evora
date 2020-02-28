@@ -497,6 +497,7 @@ namespace model
 			if(m_boards[i].get_score() > max_score)
 			{
 				winner_index = i;
+				max_score = m_boards[i].get_score();
 			}
 		}
 		return winner_index;
