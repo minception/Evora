@@ -49,6 +49,7 @@ namespace model
 		virtual int center_to_lid(tile color);
 		virtual bool handle_center_starter_tile(int player_index);
 		std::vector<int> get_center_tile_indices(tile color);
+		std::vector<int> get_score_indices(int player_index, int pattern_line_index, tile tile);
 		
 		virtual bool handle_starter_tile(int player_index);
 
@@ -57,19 +58,19 @@ namespace model
 		virtual int score_wall_color(int player_index, tile color);
 		virtual int score_wall_line(int player_index, int line);
 		virtual int score_wall_row(int player_index, int row);
-		virtual int score_floor(int player_index);
 		
-		bool can_add_to_pattern_line(int player_index, int pattern_line_index, tile color);
-		void set_first_player(int player_index);
-		int get_first_player();
-		virtual void starter_tile_unhandled();
-		bool round_finished();
-		std::vector<int> get_score_indices(int player_index, int pattern_line_index, tile tile);
-		tile pattern_line_color(int player_index, int pattern_line_index);
-		bool pattern_line_full(int player_index, int pattern_line_index);
 		virtual int floor_to_lid(int player_index);
+		virtual int score_floor(int player_index);
 		int handle_floor_starter_tile(int player_index);
 
+		virtual void starter_tile_unhandled();
+
+		tile pattern_line_color(int player_index, int pattern_line_index);
+		bool pattern_line_full(int player_index, int pattern_line_index);
+		bool can_add_to_pattern_line(int player_index, int pattern_line_index, tile color);
+		bool round_finished();
+		void set_first_player(int player_index);
+		int get_first_player();
 		bool game_over();
 		std::vector<model::tile> get_center_colors();
 		std::vector<model::tile> get_factory_colors(int factory_index);
@@ -78,6 +79,5 @@ namespace model
 		int wall_line_count(int player_index, int line);
 		int get_floor_score(int player_index);
 		int get_pattern_line_score(int player_index, int pattern_line_index);
-		std::unique_ptr<game> clone();
 	};
 }

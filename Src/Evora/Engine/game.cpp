@@ -2,6 +2,10 @@
 
 namespace model
 {
+	/**
+	 * \brief Creates a game instance with a given number of players
+	 * \param number_of_players Number of players in game
+	 */
 	game::game(int number_of_players)
 	{
 		const int number_of_factories = number_of_players * 2 + 1;
@@ -16,11 +20,19 @@ namespace model
 		m_starter_tile_handled = false;
 	}
 
+	/**
+	 * \brief Number of factories in the game instance
+	 * \return Number of factories
+	 */
 	int game::factory_count()
 	{
 		return static_cast<int>(m_factories.size());
 	}
 
+	/**
+	 * \brief Number of players in the game instance
+	 * \return Number of players
+	 */
 	int game::player_count()
 	{
 		return static_cast<int>(m_boards.size());
@@ -56,11 +68,18 @@ namespace model
 		return m_center.end();
 	}
 
+	/**
+	 * \brief Randomly shuffles the content of the bag
+	 */
 	void game::shuffle_bag()
 	{
 		m_bag.shuffle();
 	}
 
+	/**
+	 * \brief Moves the tiles from bag to factories
+	 * \return Number of tiles moved from bag to factories
+	 */
 	int game::bag_to_factories()
 	{
 		int res = 0;
@@ -72,6 +91,14 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief Moves tiles of a given color from a chosen factory to a chosen pattern line
+	 * \param factory_index Factory index
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index
+	 * \param color Color of tiles to move
+	 * \return Number of tiles moved from factory to pattern line
+	 */
 	int game::factory_to_pattern_line(int factory_index, int player_index, int pattern_line_index, tile color)
 	{
 		int res(0);
@@ -87,6 +114,13 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief Moves tiles of a given color from a chosen factory to the floor of a chosen player
+	 * \param factory_index Factory index
+	 * \param player_index Player index
+	 * \param color Color of tiles to move
+	 * \return Number of tiles moved to the floor
+	 */
 	int game::factory_to_floor(int factory_index, int player_index, tile color)
 	{
 		int res(0);
@@ -102,6 +136,12 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief Moves tiles of a given color from chosen factory to the lid
+	 * \param factory_index Factory index
+	 * \param color Color of tiles to move
+	 * \return Number of tiles moved to the lid
+	 */
 	int game::factory_to_lid(int factory_index, tile color)
 	{
 		int res(0);
@@ -113,11 +153,21 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief Moves all the tiles from a given factory to the center
+	 * \param factory_index Factory index
+	 * \return Number of tiles moved to a center
+	 */
 	int game::factory_to_center(int factory_index)
 	{
 		return m_factories[factory_index].add_to_center(m_center);
 	}
 
+	/**
+	 * \brief If the tile was not handled yet in the current round, it is given to an appropriate player
+	 * \param player_index Player index
+	 * \return Whether or not the tile was handled
+	 */
 	bool game::handle_starter_tile(int player_index)
 	{
 		if(!m_starter_tile_handled
@@ -131,16 +181,35 @@ namespace model
 		return false;
 	}
 
+	/**
+	 * \brief Checks whether pattern line can accept a tile of a given color
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index
+	 * \param color Tile color
+	 * \return Returns true if tiles can be added, false otherwise
+	 */
 	bool game::can_add_to_pattern_line(int player_index, int pattern_line_index, tile color)
 	{
 		return m_boards[player_index].can_add_to_pattern_line(pattern_line_index, color);
 	}
 
+	/**
+	 * \brief Indices of tiles of given color in center
+	 * \param color Tile color
+	 * \return Indices of tiles of given color
+	 */
 	std::vector<int> game::get_center_tile_indices(tile color)
 	{
 		return m_center.get_tile_indices(color);
 	}
 
+	/**
+	 * \brief Move tiles from center to a chosen pattern line
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index
+	 * \param color Color of tiles to move
+	 * \return Number of tiles moved
+	 */
 	int game::center_to_pattern_line(int player_index, int pattern_line_index, tile color)
 	{
 		int res(0);
@@ -156,6 +225,12 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief Move maximum amount of tiles of a given color from center to floor of a chosen player
+	 * \param player_index Player index
+	 * \param color Color of tiles to move
+	 * \return Number of tiles moved from center to floor
+	 */
 	int game::center_to_floor(int player_index, tile color)
 	{
 		int res(0);
@@ -171,6 +246,11 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief Move all the tiles of a given color from center to lid
+	 * \param color Color of tiles to move
+	 * \return Number of tiles moved to the lid
+	 */
 	int game::center_to_lid(tile color)
 	{
 		int res(0);
@@ -182,6 +262,11 @@ namespace model
 		return res;
 	}
 
+	/**
+	 * \brief When a player is first to draw from center, he receives a starter tile
+	 * \param player_index Player index
+	 * \return Returns true if a starter tile was handled, false otherwise
+	 */
 	bool game::handle_center_starter_tile(int player_index)
 	{
 		if (m_center.pick_starter_tile())
@@ -193,11 +278,19 @@ namespace model
 		return false;
 	}
 
+	/**
+	 * \brief Sets a starter player at the beginning of the game
+	 * \param player_index Player index
+	 */
 	void game::set_first_player(int player_index)
 	{
 		m_boards[player_index].set_starter_player();
 	}
 
+	/**
+	 * \brief Get an index of the player currently holding the starter tile
+	 * \return Index of the player
+	 */
 	int game::get_first_player()
 	{
 		for(int i = 0; i < player_count(); ++i)
@@ -207,11 +300,18 @@ namespace model
 		return -1;
 	}
 
+	/**
+	 * \brief Make starter tile unhandled in the current round
+	 */
 	void game::starter_tile_unhandled()
 	{
 		m_starter_tile_handled = false;
 	}
 
+	/**
+	 * \brief Check whether all the factories and the center are empty
+	 * \return True if round is finished false otherwise
+	 */
 	bool game::round_finished()
 	{
 		if (!m_center.empty()) return false;
@@ -225,6 +325,12 @@ namespace model
 		return true;
 	}
 
+	/**
+	 * \brief Moves a single tile to the wall and remaining tiles to the lid, should only be called once the pattern line is full
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index and wall line index
+	 * \return Color of tile moved to wall
+	 */
 	tile game::tile_wall(int player_index, int pattern_line_index)
 	{
 		tile color = m_boards[player_index].pattern_line_color(pattern_line_index);
@@ -234,41 +340,86 @@ namespace model
 		return color;
 	}
 
+	/**
+	 * \brief Calculate score for a given tile on the wall and ads it to a player total
+	 * \param player_index Player index
+	 * \param pattern_line_index Wall line index
+	 * \param tile Tile color
+	 * \return Score increase after adding a tile to wall
+	 */
 	int game::score_wall_tile(int player_index, int pattern_line_index, tile tile)
 	{
 		return m_boards[player_index].score_wall_tile(pattern_line_index, tile);
 	}
 
+	/**
+	 * \brief A function to see what is the span of tiles filled around a given tiles
+	 * \param player_index Player index
+	 * \param pattern_line_index Wall line index
+	 * \param tile Tile color
+	 * \return A vector containing indices representing span of filled tiles around a given tile. Respecively: horizontal start, horizontal end, vertical start, vertical end
+	 */
 	std::vector<int> game::get_score_indices(int player_index, int pattern_line_index, tile tile)
 	{
 		return m_boards[player_index].get_score_indices(pattern_line_index, tile);
 	}
 
+	/**
+	 * \brief Get a color of tiles in the given pattern line
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index
+	 * \return A color of tiles in a pattern line
+	 */
 	tile game::pattern_line_color(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].pattern_line_color(pattern_line_index);
 	}
 
+	/**
+	 * \brief Checks whether a pattern line is fully filled
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index
+	 * \return True if a pattern line is full
+	 */
 	bool game::pattern_line_full(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].pattern_line_full(pattern_line_index);
 	}
 
+	/**
+	 * \brief Calculate a score increase from a given player floor and add the score to the player score total
+	 * \param player_index Player index
+	 * \return Score increase from the floor (will always be either zero or negative number)
+	 */
 	int game::score_floor(int player_index)
 	{
 		return m_boards[player_index].score_floor();
 	}
 
+	/**
+	 * \brief Move all the tiles (excluding the starter tile) from the player floor to the lid
+	 * \param player_index Player index
+	 * \return Number of tiles moved
+	 */
 	int game::floor_to_lid(int player_index)
 	{
 		return m_boards[player_index].floor_to_lid(m_lid);
 	}
 
+	/**
+	 * \brief Removes the starter tile from the player's floor
+	 * \param player_index Player index
+	 * \return A position of the starter tile on the floor, if not present, returns -1
+	 */
 	int game::handle_floor_starter_tile(int player_index)
 	{
 		return m_boards[player_index].handle_floor_starter_tile();
 	}
 
+	/**
+	 * \brief Checks whether any of the players has filled a full row of tiles on the wall
+	 * \return True if the game is over
+	 */
 	bool game::game_over()
 	{
 		for(auto&& board:m_boards)
@@ -281,31 +432,62 @@ namespace model
 		return false;
 	}
 
+	/**
+	 * \brief Adds an end game score for a given color to the player total
+	 * \param player_index Player index
+	 * \param color Tile color
+	 * \return A score increase
+	 */
 	int game::score_wall_color(int player_index, tile color)
 	{
 		return m_boards[player_index].score_wall_color(color);
 	}
 
+	/**
+	 * \brief Adds an end game score of a given wall line to the player total
+	 * \param player_index Player index
+	 * \param line Wall line index
+	 * \return A score increase
+	 */
 	int game::score_wall_line(int player_index, int line)
 	{
 		return m_boards[player_index].score_wall_line(line);
 	}
 
+	/**
+	 * \brief Adds an end game score of a given wall row to the player total
+	 * \param player_index Player index
+	 * \param row Wall row index
+	 * \return A score increase
+	 */
 	int game::score_wall_row(int player_index, int row)
 	{
 		return m_boards[player_index].score_wall_row(row);
 	}
 
+	/**
+	 * \brief Get all the colors present in the center
+	 * \return Vector containing colors
+	 */
 	std::vector<model::tile> game::get_center_colors()
 	{
 		return m_center.get_colors();
 	}
 
+	/**
+	 * \brief Get all the colors present in the given factory
+	 * \param factory_index Factory index
+	 * \return Vector containing colors
+	 */
 	std::vector<model::tile> game::get_factory_colors(int factory_index)
 	{
 		return m_factories[factory_index].get_colors();
 	}
 
+	/**
+	 * \brief Get an index of a winning player
+	 * \return Winner player index
+	 */
 	int game::get_winner()
 	{
 		int max_score = 0;
@@ -320,31 +502,50 @@ namespace model
 		return winner_index;
 	}
 
+	/**
+	 * \brief Get a number of filled tiles in a given wall line
+	 * \param player_index Player index
+	 * \param line Wall line index
+	 * \return Number of filled tiles
+	 */
 	int game::wall_line_count(int player_index, int line)
 	{
 		return m_boards[player_index].wall_line_count(line);
 	}
 
+	/**
+	 * \brief Get a floor score of a given player
+	 * \param player_index Player index
+	 * \return Score increase
+	 */
 	int game::get_floor_score(int player_index)
 	{
 		return m_boards[player_index].get_floor_score();
 	}
 
+	/**
+	 * \brief get a score a given pattern line will add in the wall tiling phase
+	 * \param player_index Player index
+	 * \param pattern_line_index Pattern line index
+	 * \return Score increase
+	 */
 	int game::get_pattern_line_score(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].get_pattern_line_score(pattern_line_index);
 	}
 
-	std::unique_ptr<game> game::clone()
-	{
-		return std::unique_ptr<game>(new game(*this));
-	}
-
+	/**
+	 * \brief Get a copy of a current lid state
+	 * \return Vector representing tiles in the lid
+	 */
 	std::vector<tile> game::get_lid_state()
 	{
 		return m_lid.get_state();
 	}
 
+	/**
+	 * \brief Refills a bag from the lid
+	 */
 	void game::refill_bag()
 	{
 		m_bag.refill(m_lid); 

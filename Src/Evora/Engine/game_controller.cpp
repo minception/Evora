@@ -119,6 +119,10 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 	return commands;
 }
 
+/**
+ * \brief Performs a single step from a command queue, if either a round is over or the game is over, adds appropriate commands to the queue
+ * \return True if a step occured
+ */
 bool game_controller::step()
 {
 	if(m_current_command == m_commands.size())
