@@ -20,6 +20,7 @@
 #include "drop_center.h"
 #include "drop_factory.h"
 #include <string>
+#include <Label.hpp>
 
 using namespace godot;
 
@@ -66,8 +67,26 @@ void Root::set_starting_player(int index)
 		Vector2 step_button_size = GodotScenes::step_button_example->get_size();
 		GodotScenes::step_button_example->set_position(Vector2(viewport_size.x - step_button_size.x - 5.f, 5.f));
 		GodotScenes::step_button_example->connect("pressed", this, "step");
+		ObjectLoader::tile_loader->interactive(false);
 	}
 	
+}
+
+void Root::move_highlight(int player_index)
+{
+	Node* animations_owner = get_node("PlayerChangeAnimations");
+	Board* next_player = (Board*)ObjectLoader::board_loader->get_child(player_index);
+	AnimationPlayer* animationPlayer = AnimationPlayer::_new();
+	Animation* animation = Animation::_new();
+	animationPlayer->add_animation("animation", animation);
+	animationPlayer->set_current_animation("animation");
+	animation->add_track(Animation::TrackType::TYPE_VALUE);
+	animation->track_set_path(0, "../PlayerHighlight:rect_position");
+	animation->track_insert_key(0, 0.0, ((Control*)get_node("PlayerHighlight"))->get_global_position());
+	animation->track_insert_key(0, 0.2, next_player->get_global_position() - Vector2(3.0, 3.0));
+	animation->track_set_interpolation_type(0, Animation::InterpolationType::INTERPOLATION_CUBIC);
+	animations_owner->add_child(animationPlayer);
+	animationPlayer->play();
 }
 
 void godot::Root::_register_methods()
@@ -225,8 +244,8 @@ void Root::announce_winner()
 	Vector2 viewport_size = get_viewport_rect().size;
 	winner_label->set_global_position(Vector2((viewport_size.x - winner_label->get_size().x) / 2, 300 - winner_label->get_size().y / 2));
 	winner_label->set_visible(true);
-	Button* start_button = (Button*)get_node("StartButton");
-	start_button->set_visible(true);
+	//Button* start_button = (Button*)get_node("StartButton");
+	//start_button->set_visible(true);
 }
 
 void Root::animation_finished()

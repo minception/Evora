@@ -5,6 +5,9 @@
 
 namespace AI
 {
+	/**
+	 * \brief A parent class for all the AI
+	 */
 	class AI
 	{
 	protected:

@@ -42,7 +42,7 @@ namespace model
 
 	int factory::add_to_center(center& center)
 	{
-		int res = m_tiles.size();
+		int res = static_cast<int>(m_tiles.size());
 		for(auto&& tile: m_tiles)
 		{
 			center.add_tile(tile);
@@ -54,7 +54,7 @@ namespace model
 	int factory::fill(bag& bag)
 	{
 		int added = 0;
-		for(int i = m_tiles.size(); i < TILES; ++i)
+		for(size_t i = m_tiles.size(); i < TILES; ++i)
 		{
 			tile temp;
 			if (bag.draw_tile(temp))

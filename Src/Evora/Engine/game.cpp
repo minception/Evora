@@ -18,12 +18,12 @@ namespace model
 
 	int game::factory_count()
 	{
-		return m_factories.size();
+		return static_cast<int>(m_factories.size());
 	}
 
 	int game::player_count()
 	{
-		return m_boards.size();
+		return static_cast<int>(m_boards.size());
 	}
 
 	std::vector<factory>::const_iterator game::factories_begin() const

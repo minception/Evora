@@ -13,6 +13,9 @@ namespace AI
 		}
 	};
 	
+	/**
+	 * \brief A factory class for creating AI instances
+	 */
 	class AIFactory
 	{
 		static char** ai_names;

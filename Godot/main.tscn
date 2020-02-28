@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main.gdns" type="Script" id=1]
-[ext_resource path="res://Textures/wood.png" type="Texture" id=2]
+[ext_resource path="res://Textures/wood.jpg" type="Texture" id=2]
 [ext_resource path="res://Factories.gdns" type="Script" id=3]
 [ext_resource path="res://Boards.gdns" type="Script" id=4]
 [ext_resource path="res://TileLoader.gdns" type="Script" id=5]
@@ -24,7 +24,6 @@ margin_bottom = 2160.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 2 )
-expand = true
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false

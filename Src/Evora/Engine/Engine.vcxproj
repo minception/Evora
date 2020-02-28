@@ -30,7 +30,6 @@
     <ClInclude Include="drop_factory.h" />
     <ClInclude Include="factory.h" />
     <ClInclude Include="factory_offer.h" />
-    <ClInclude Include="final_score.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_controller.h" />
@@ -60,7 +59,6 @@
     <ClCompile Include="drop_factory.cpp" />
     <ClCompile Include="factory.cpp" />
     <ClCompile Include="factory_offer.cpp" />
-    <ClCompile Include="final_score.cpp" />
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_controller.cpp" />

@@ -18,11 +18,12 @@ namespace godot
 		GODOT_CLASS(Root, Node2D)
 		
 		int m_number_of_players;
-		bool m_stepping = true;
 
 		void add_start_button();
 	public:
+		bool m_stepping = true;
 		void set_starting_player(int index);
+		void move_highlight(int player_index);
 		static void _register_methods();
 		void _init();
 		void _ready();

@@ -72,7 +72,7 @@ void Board::_process(float delta)
 			h_highlight->set_visible(false);
 			v_highlight->set_visible(false);
 			color_highlight->unhighlight();
-			emit_signal("animation_finished");
+			auto signal = emit_signal("animation_finished");
 		}
 	}
 }
@@ -142,18 +142,18 @@ void Board::mouse_exited()
 void Board::pattern_line_entered(int pattern_line_index)
 {
 	int index = get("index");
-	emit_signal("pattern_line_entered", index, pattern_line_index);
+	auto signal = emit_signal("pattern_line_entered", index, pattern_line_index);
 }
 
 void Board::tile_moved(Vector2 position, int color)
 {
-	emit_signal("tile_moved", position, color);
+	auto signal = emit_signal("tile_moved", position, color);
 }
 
 void Board::tile_over(int pattern_line_index, int color)
 {
 	int index = get("index");
-	emit_signal("tile_over", index, pattern_line_index, color);
+	auto signal = emit_signal("tile_over", index, pattern_line_index, color);
 }
 
 void Board::image_input()
@@ -165,7 +165,7 @@ void Board::image_input()
 		if(mouse_mask&1)
 		{
 			int index = get("index");
-			emit_signal("selected", index);
+			auto signal = emit_signal("selected", index);
 			set_highlight(false);
 		}
 	}
@@ -186,7 +186,7 @@ String Board::get_player_name()
 int Board::get_pattern_line_hover_index()
 {
 	Node* pattern_lines = get_node("Image/PatternLines");
-	int pattern_line_count = get_node("Image/PatternLines")->get_child_count();
+	int64_t pattern_line_count = get_node("Image/PatternLines")->get_child_count();
 	for(int i = 0; i < pattern_line_count; ++i)
 	{
 		PatternLine* pattern_line = cast_to<PatternLine>(pattern_lines->get_child(i));

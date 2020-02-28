@@ -5,7 +5,6 @@
 #include <OptionButton.hpp>
 
 #include "AIFactory.h"
-#include "Utils.h"
 
 namespace godot
 {

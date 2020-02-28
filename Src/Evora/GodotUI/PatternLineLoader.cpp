@@ -23,8 +23,8 @@ void godot::PatternLineLoader::_ready()
 	{
 		PatternLine* pattern_line = (PatternLine*)pattern_line_scene->instance();
 		TextureRect* image = (TextureRect*)pattern_line->get_node("Image");
-		image->set_size(Vector2(32 * (i + 1) + 5 * i, 32));
-		pattern_line->set_position(Vector2(180 - 32 * (i + 1) - 5 * i, 37 * i));
+		image->set_size(Vector2(32.f * (i + 1) + 5.f * i, 32.f));
+		pattern_line->set_position(Vector2(180.f - 32.f * (i + 1) - 5.f * i, 37.f * i));
 		pattern_line->set("index", i);
 		add_child(pattern_line);
 	}

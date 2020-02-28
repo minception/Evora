@@ -23,7 +23,7 @@ int GodotGame::bag_to_factories()
 			int tile_index = 0;
 			for(auto&& tile:(*factory))
 			{
-				int factories_count = ObjectLoader::factory_loader->get_child_count();
+				int64_t factories_count = ObjectLoader::factory_loader->get_child_count();
 				Factory* factory_display = (Factory*)ObjectLoader::factory_loader->get_child(factory_index);
 				ObjectLoader::tile_loader->add_tile(factory_display->tile_position(tile_index), tile, factory_index);
 				++tile_index;
@@ -31,7 +31,15 @@ int GodotGame::bag_to_factories()
 			++factory_index;
 		}
 		wait_for_refill = false;
-		GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+		if(!GodotScenes::root->m_stepping)
+		{
+			GodotScenes::game_data->players[GodotScenes::game_data->current_player]->move();
+		}
+		else
+		{
+			GodotScenes::step_button_example->set_disabled(false);
+		}
+		GodotScenes::root->move_highlight(get_first_player());
 	}
 	return added;
 }
@@ -42,7 +50,7 @@ int GodotGame::factory_to_pattern_line(int factory_index, int player_index, int 
 	int count = game::factory_to_pattern_line(factory_index, player_index, pattern_line_index, color);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<Vector2> positions = board->get_pattern_line_positions(pattern_line_index, count);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	int positionIndex = 0;
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -68,7 +76,7 @@ int GodotGame::factory_to_floor(int factory_index, int player_index, tile color)
 	int count = game::factory_to_floor(factory_index, player_index, color);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<Vector2> positions = board->get_floor_positions(count);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	int positionIndex = 0;
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -92,7 +100,7 @@ int GodotGame::factory_to_floor(int factory_index, int player_index, tile color)
 int GodotGame::factory_to_lid(int factory_index, tile color)
 {
 	int count = game::factory_to_lid(factory_index, color);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	for (int i = 0; i < tile_count; ++i)
 	{
 		GodotTile* godot_tile = (GodotTile*)ObjectLoader::tile_loader->get_child(i);
@@ -116,7 +124,7 @@ int GodotGame::factory_to_center(int factory_index)
 	int count = game::factory_to_center(factory_index);
 	Center* center = (Center*)GodotScenes::root->get_node("Center");
 	std::vector<Vector2> positions = center->get_n_positions(count);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	int positionIndex = 0;
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -154,7 +162,7 @@ int GodotGame::center_to_pattern_line(int player_index, int pattern_line_index, 
 	Center* center = (Center*)GodotScenes::root->get_node("Center");
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<Vector2> positions = board->get_pattern_line_positions(pattern_line_index, count);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	int positionIndex = 0;
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -182,7 +190,7 @@ int GodotGame::center_to_floor(int player_index, tile color)
 	Center* center = (Center*)GodotScenes::root->get_node("Center");
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<Vector2> positions = board->get_floor_positions(count);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	int positionIndex = 0;
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -207,7 +215,7 @@ int GodotGame::center_to_floor(int player_index, tile color)
 int GodotGame::center_to_lid(tile color)
 {
 	int count = game::center_to_lid(color);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	for (int i = 0; i < tile_count; ++i)
 	{
 		GodotTile* godot_tile = (GodotTile*)ObjectLoader::tile_loader->get_child(i);
@@ -270,7 +278,7 @@ tile GodotGame::tile_wall(int player_index, int pattern_line_index)
 {
 	tile color = game::tile_wall(player_index, pattern_line_index);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	bool transfered = false;
 	for (int i = 0; i < tile_count; ++i)
 	{
@@ -318,7 +326,7 @@ int GodotGame::floor_to_lid(int player_index)
 {
 	int count = game::floor_to_lid(player_index);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
-	int tile_count = ObjectLoader::tile_loader->get_child_count();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
 	for (int i = 0; i < tile_count; ++i)
 	{
 		GodotTile* godot_tile = (GodotTile*)ObjectLoader::tile_loader->get_child(i);

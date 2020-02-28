@@ -24,8 +24,8 @@ std::vector<godot::Vector2> godot::Center::get_n_positions(int n)
 	{
 		int line = (tile_count + i) / 5;
 		int row = (tile_count + i) % 5;
-		int xpos = center_position.x + (tile_size.x + margin) * row;
-		int ypos = center_position.y + (tile_size.y + margin) * line;
+		float xpos = center_position.x + (tile_size.x + margin) * row;
+		float ypos = center_position.y + (tile_size.y + margin) * line;
 		positions.push_back(Vector2(xpos, ypos));
 	}
 	set("tile_count", tile_count + n);
@@ -44,8 +44,8 @@ std::vector<Vector2> Center::get_rearrange_positions()
 	{
 		int line = i / 5;
 		int row = i % 5;
-		int xpos = center_position.x + (tile_size.x + margin) * row;
-		int ypos = center_position.y + (tile_size.y + margin) * line;
+		float xpos = center_position.x + (tile_size.x + margin) * row;
+		float ypos = center_position.y + (tile_size.y + margin) * line;
 		positions.push_back(Vector2(xpos, ypos));
 	}
 	return positions;

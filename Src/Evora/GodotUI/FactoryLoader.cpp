@@ -24,10 +24,6 @@ void FactoryLoader::_init()
 {
 }
 
-void FactoryLoader::_process(float delta)
-{
-}
-
 void FactoryLoader::load_factories(int count, Vector2 c, float r)
 {
 	for (int i = 0; i < count; ++i)
@@ -36,9 +32,9 @@ void FactoryLoader::load_factories(int count, Vector2 c, float r)
 		String image_name("Image");
 		TextureRect* image = (TextureRect*)factory->get_child(get_child_index(factory, image_name));
 		Vector2 size = image->get_size();
-		double angle = Math_PI/2 + 2*Math_PI*i/count;
-		double posx = c.x - std::cos(angle) * r - size.x/2;
-		double posy = c.y - std::sin(angle) * r - size.y/2;
+		float angle = Math_PI/2.f + 2.f*Math_PI*i/count;
+		float posx = c.x - std::cos(angle) * r - size.x/2.f;
+		float posy = c.y - std::sin(angle) * r - size.y/2.f;
 		factory->set_global_position(Vector2(posx, posy));
 		add_child(factory);
 	}

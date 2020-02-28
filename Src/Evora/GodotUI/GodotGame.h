@@ -15,7 +15,7 @@ namespace godot
 	class GodotGame : public game
 
 	{
-		bool wait_for_refill;
+		bool wait_for_refill = false;
 	public:
 		GodotGame(int players) :game(players) {}
 		int bag_to_factories() override;
