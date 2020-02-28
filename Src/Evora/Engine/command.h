@@ -7,12 +7,10 @@ namespace control
 {
 	class command
 	{
-	protected:
-		std::shared_ptr<model::game> m_game;
 	public:
 		virtual ~command() = default;
-		virtual void Execute() = 0;
-		virtual void Unexecute() = 0;
-		command(std::shared_ptr<model::game> game) :m_game(std::move(game)) {}
+		virtual void Execute(std::shared_ptr<model::game> game) = 0;
+		virtual void Unexecute(std::shared_ptr<model::game> game) = 0;
+		virtual std::unique_ptr<command> clone() = 0;
 	};
 }

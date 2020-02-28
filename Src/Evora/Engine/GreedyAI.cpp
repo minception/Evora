@@ -1,12 +1,14 @@
 ﻿#include "GreedyAI.h"
 
+#include <limits>
+
 using namespace AI;
 
 void GreedyAI::move()
 {
 	std::vector<std::unique_ptr<control::command>> moves = m_controller->get_possible_moves(m_board_index);
 	int to_execute = 0;
-	int max_move_score = INT_MIN;
+	int max_move_score = std::numeric_limits<int>::min();
 	for (int i = 0; i < moves.size(); ++i)
 	{
 		control::game_controller mockup{ *m_controller };
