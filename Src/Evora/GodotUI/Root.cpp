@@ -236,7 +236,6 @@ void Root::switch_to_next_player()
 
 void Root::announce_winner()
 {
-	_ASSERT(false);
 	String winner = std::to_string(GodotScenes::game_data->m_game->get_winner() + 1).c_str();
 	String text = "The winner is player number " + winner;
 	cast_to<Control>(get_node("Shade"))->set_visible(true);
