@@ -39,7 +39,7 @@ int GodotGame::bag_to_factories()
 		{
 			GodotScenes::step_button_example->set_disabled(false);
 		}
-		GodotScenes::root->move_highlight(get_first_player());
+		GodotScenes::root->move_highlight(GodotScenes::game_data->current_player);
 	}
 	return added;
 }

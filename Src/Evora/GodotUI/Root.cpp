@@ -37,7 +37,7 @@ void Root::add_start_button()
 void Root::set_starting_player(int index)
 {
 	GameData* game_data = cast_to<GameData>(get_node("GameData"));
-	game_data->set("current_player", index);
+	game_data->current_player = index;
 
 	// hide gui aspects of player select
 	for (int i = 0; i < m_number_of_players; i++)
@@ -49,7 +49,7 @@ void Root::set_starting_player(int index)
 
 	GodotTile* starter_tile = cast_to<GodotTile>(get_node("StarterTile"));
 	starter_tile->set_color((int)tile::starter);
-	
+
 	game_data->controller->set_first_player(index);
 	game_data->controller->start_game();
 	//game_data->players[index]->move();
@@ -297,9 +297,9 @@ void Root::tile_dropped(int factory_index, int color)
 	int board_index = GodotScenes::game_data->current_player;
 	Board* board = cast_to<Board>(get_node("Boards")->get_child(board_index));
 	int pattern_line_index = board->get_pattern_line_hover_index();
-	board->set_pattern_line_highlight(pattern_line_index, false);
 	if(pattern_line_index == COLORS)
 	{
+		board->set_floor_highlight(false);
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())
 		{
 			GodotScenes::game_data->controller->add_command(
@@ -327,7 +327,7 @@ void Root::tile_dropped(int factory_index, int color)
 	else if(pattern_line_index != -1
 		&& GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
-
+		board->set_pattern_line_highlight(pattern_line_index, false);
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())
 		{
 			GodotScenes::game_data->controller->add_command(
