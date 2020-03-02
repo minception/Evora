@@ -6,7 +6,7 @@ namespace AI
 	{
 		std::vector<std::unique_ptr<control::command>> moves = m_controller->get_possible_moves(m_board_index);
 		auto start = moves.begin();
-		std::uniform_int_distribution<> dis(0, std::distance(start, moves.end()) - 1);
+		std::uniform_int_distribution<> dis(0, (int)std::distance(start, moves.end()) - 1);
 		std::advance(start, dis(m_rng));
 		m_controller->add_command(std::move(*start));
 		m_controller->step();

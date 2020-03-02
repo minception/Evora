@@ -13,6 +13,7 @@ void center_offer::Execute(std::shared_ptr<model::game> game)
 
 void center_offer::Unexecute(std::shared_ptr<model::game> game)
 {
+
 }
 
 std::unique_ptr<command> center_offer::clone()

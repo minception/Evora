@@ -494,12 +494,13 @@ namespace model
 		int winner_index = 0;
 		for (int i = 0; i < m_boards.size(); ++i)
 		{
-			if(m_boards[i].get_score() > max_score)
+			int player_score = m_boards[i].get_score();
+			if(player_score > max_score)
 			{
 				winner_index = i;
-				max_score = m_boards[i].get_score();
+				max_score = player_score;
 			}
-		}
+	}
 		return winner_index;
 	}
 

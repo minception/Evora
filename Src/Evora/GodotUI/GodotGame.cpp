@@ -68,6 +68,7 @@ int GodotGame::factory_to_pattern_line(int factory_index, int player_index, int 
 			godot_tile->animate_to(positions[positionIndex++]);
 		}
 	}
+	board->set_pattern_line_highlight(pattern_line_index, false);
 	return count;
 }
 
@@ -94,6 +95,7 @@ int GodotGame::factory_to_floor(int factory_index, int player_index, tile color)
 			godot_tile->animate_to(positions[positionIndex++]);
 		}
 	}
+	board->set_floor_highlight(false);
 	return count;
 }
 
@@ -181,6 +183,7 @@ int GodotGame::center_to_pattern_line(int player_index, int pattern_line_index, 
 		}
 	}
 	center->take_n_tiles(count);
+	board->set_pattern_line_highlight(pattern_line_index, false);
 	return count;
 }
 
@@ -209,6 +212,7 @@ int GodotGame::center_to_floor(int player_index, tile color)
 		}
 	}
 	center->take_n_tiles(count);
+	board->set_floor_highlight(false);
 	return count;
 }
 

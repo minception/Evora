@@ -1,6 +1,7 @@
 ﻿#include "PatternLineLoader.h"
 #include <ResourceLoader.hpp>
 #include "PatternLine.h"
+#include <TextureRect.hpp>
 
 using namespace godot;
 

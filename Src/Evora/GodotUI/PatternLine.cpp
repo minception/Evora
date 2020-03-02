@@ -1,5 +1,6 @@
 ﻿#include "PatternLine.h"
 #include "GodotScenes.h"
+#include <TextureRect.hpp>
 
 using namespace godot;
 

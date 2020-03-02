@@ -174,6 +174,7 @@ void GodotTile::_process(float delta)
 		if (!(mouse_button_mask & 1)) {
 			emit_signal("dropped", _factory_index, _color);
 			m_follow_mouse = false;
+			return;
 		}
 		Vector2 target_location = get_global_mouse_position() - _image->get_size() / 2;
 		Vector2 starting_location = get_global_position();
@@ -204,6 +205,7 @@ void GodotTile::_on_mouse_exited()
 void GodotTile::_area_input_event()
 {
 	int64_t mouse_button_mask = _input->get_mouse_button_mask();
+	if (!_interactive) return;
 	if(m_follow_mouse)
 	{
 		if(!(mouse_button_mask&1))
@@ -212,7 +214,6 @@ void GodotTile::_area_input_event()
 		}
 		return;
 	}
-	if (!_interactive) return;
 	if (mouse_button_mask & 1)
 	{
 		Vector2 mouse_position = get_global_mouse_position();
@@ -259,6 +260,7 @@ void GodotTile::set_follow(bool cond)
 	{
 		set("original_position", get_global_position());
 		set_z_index(5);
+		set("interactive", false);
 	}
 	set("follow_mouse", cond);
 }
@@ -266,6 +268,7 @@ void GodotTile::set_follow(bool cond)
 void GodotTile::set_move_back(bool cond)
 {
 	set("move_back", cond);
+	set("interactive", false);
 }
 
 void GodotTile::animate_to(Vector2 position)

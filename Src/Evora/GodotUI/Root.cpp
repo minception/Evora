@@ -299,7 +299,6 @@ void Root::tile_dropped(int factory_index, int color)
 	int pattern_line_index = board->get_pattern_line_hover_index();
 	if(pattern_line_index == COLORS)
 	{
-		board->set_floor_highlight(false);
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())
 		{
 			GodotScenes::game_data->controller->add_command(
@@ -327,7 +326,6 @@ void Root::tile_dropped(int factory_index, int color)
 	else if(pattern_line_index != -1
 		&& GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
-		board->set_pattern_line_highlight(pattern_line_index, false);
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())
 		{
 			GodotScenes::game_data->controller->add_command(

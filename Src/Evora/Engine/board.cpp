@@ -154,17 +154,23 @@ namespace model
 
 	int board::score_wall_color(tile tile)
 	{
-		return m_wall.score_color(tile);
+		int score = m_wall.score_color(tile);
+		m_score += score;
+		return score;
 	}
 
 	int board::score_wall_line(int line)
 	{
-		return m_wall.score_line(line);
+		int score = m_wall.score_line(line);
+		m_score += score;
+		return score;
 	}
 
 	int board::score_wall_row(int row)
 	{
-		return m_wall.score_row(row);
+		int score = m_wall.score_row(row);
+		m_score += score;
+		return score;
 	}
 
 	int board::wall_line_count(int line)

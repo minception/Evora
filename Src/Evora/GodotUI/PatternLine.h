@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <core/Godot.hpp>
-#include <TextureRect.hpp>
 #include <Node2D.hpp>
 #include <vector>
 
