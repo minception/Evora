@@ -81,6 +81,12 @@ int GodotTile::get_pattern_line_index()
 	return _pattern_line_index;
 }
 
+void GodotTile::set_text(String text)
+{
+	Label* label = (Label*)get_node("Image/Text");
+	label->set_text(text);
+}
+
 void GodotTile::_register_methods()
 {
 	register_method("_process", &GodotTile::_process);
@@ -173,6 +179,7 @@ void GodotTile::_process(float delta)
 		int64_t mouse_button_mask = _input->get_mouse_button_mask();
 		if (!(mouse_button_mask & 1)) {
 			emit_signal("dropped", _factory_index, _color);
+			set_text("");
 			m_follow_mouse = false;
 			return;
 		}

@@ -52,7 +52,8 @@ namespace godot
 
 		void set_pattern_line_index(int value);
 		int get_pattern_line_index();
-		
+		void set_text(String text);
+
 		static void _register_methods();
 		void _init();
 		void _ready();

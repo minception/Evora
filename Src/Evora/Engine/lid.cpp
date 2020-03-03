@@ -34,4 +34,19 @@ namespace model
 		// return std::copy(m_tiles.begin(), m_tiles.end(), res);
 		return res;
 	}
+
+	void lid::remove_tiles(int count)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			m_tiles.pop_back();
+		}
+	}
+
+	tile lid::take_tile()
+	{
+		tile res = m_tiles.back();
+		m_tiles.pop_back();
+		return res;
+	}
 }

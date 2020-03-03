@@ -492,6 +492,7 @@ namespace model
 	{
 		int max_score = 0;
 		int winner_index = 0;
+		int max_horizontal_lines = 0;
 		for (int i = 0; i < m_boards.size(); ++i)
 		{
 			int player_score = m_boards[i].get_score();
@@ -499,6 +500,17 @@ namespace model
 			{
 				winner_index = i;
 				max_score = player_score;
+				max_horizontal_lines = m_boards[i].horizontal_lines();
+			}
+			// when the score is the same, the winner is the player with higher amount of horizontal lines
+			else if(player_score == max_score)
+			{
+				int horizontal_lines = m_boards[i].horizontal_lines();
+				if(horizontal_lines > max_horizontal_lines)
+				{
+					winner_index = i;
+					max_horizontal_lines = horizontal_lines;
+				}
 			}
 	}
 		return winner_index;
@@ -534,6 +546,87 @@ namespace model
 	int game::get_pattern_line_score(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].get_pattern_line_score(pattern_line_index);
+	}
+
+	void game::pattern_line_to_center(int player_index, int pattern_line_index, tile color, int count, std::vector<int>& is)
+	{
+		m_boards[player_index].remove_from_pattern_line(pattern_line_index, count);
+		m_center.return_tiles(color, count, is);
+	}
+
+	void game::floor_to_center(int player_index, tile color, int count, std::vector<int>& is)
+	{
+		m_boards[player_index].remove_from_floor(count);
+		m_center.return_tiles(color, count, is);
+	}
+
+	void game::lid_to_center(tile color, int count, std::vector<int>& is)
+	{
+		m_lid.remove_tiles(count);
+		m_center.return_tiles(color, count, is);
+	}
+
+	void game::starter_tile_to_center(int player_index)
+	{
+		m_boards[player_index].take_starter_tile();
+		m_center.add_starter_tile();
+	}
+
+	void game::floor_to_factory(int factory_index, int player_index, tile color, int count)
+	{
+		m_boards[player_index].remove_from_floor(count);
+		m_factories[factory_index].add_tiles(color, count);
+	}
+
+	void game::lid_to_factory(int factory_index, tile color, int count)
+	{
+		m_lid.remove_tiles(count);
+		m_factories[factory_index].add_tiles(color, count);
+	}
+
+	void game::center_to_factory(int factory_index, int count)
+	{
+		m_factories[factory_index].add_from_center(m_center, count);
+	}
+
+	void game::remove_center_starter_tile()
+	{
+		m_center.pick_starter_tile();
+	}
+
+	void game::pattern_line_to_factory(int factory_index, int player_index, int pattern_line_index, tile color,	int count)
+	{
+		m_boards[player_index].remove_from_pattern_line(pattern_line_index, count);
+		m_factories[factory_index].add_tiles(color, count);
+	}
+
+	void game::factories_to_bag()
+	{
+		for (auto && factory : m_factories)
+		{
+			factory.return_to_bag(m_bag);
+		}
+	}
+
+	void game::take_score(int player_index, int score)
+	{
+		m_boards[player_index].take_score(score);
+	}
+
+	void game::lid_to_floor(int player_index, int count)
+	{
+		m_boards[player_index].lid_to_floor(m_lid, count);
+	}
+
+	void game::add_starter_to_floor(int player_index, int position)
+	{
+		m_boards[player_index].add_starter_to_floor(position);
+	}
+
+	void game::wall_to_pattern_line(int player_index, int pattern_line_index, tile tile)
+	{
+		m_boards[player_index].wall_to_pattern_line(pattern_line_index, tile);
+		m_lid.remove_tiles(pattern_line_index);
 	}
 
 	/**

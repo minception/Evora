@@ -9,6 +9,7 @@ void score_row::Execute(std::shared_ptr<model::game> game)
 
 void score_row::Unexecute(std::shared_ptr<model::game> game)
 {
+	game->take_score(m_player_index, m_score);
 }
 
 std::unique_ptr<command> score_row::clone()

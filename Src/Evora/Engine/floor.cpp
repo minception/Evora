@@ -57,4 +57,26 @@ namespace model
 		}
 		return -1;
 	}
+
+	void floor::remove_tiles(int count)
+	{
+		m_tiles.erase(m_tiles.end() - count, m_tiles.end());
+	}
+
+	void floor::take_starter_tile()
+	{
+		for (int i = 0; i < m_tiles.size(); ++i)
+		{
+			if(m_tiles[i] == tile::starter)
+			{
+				m_tiles.erase(m_tiles.begin() + i);
+				return;
+			}
+		}
+	}
+
+	void floor::add_starter(int position)
+	{
+		m_tiles.insert(m_tiles.begin() + position, tile::starter);
+	}
 }

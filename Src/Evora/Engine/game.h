@@ -79,5 +79,19 @@ namespace model
 		int wall_line_count(int player_index, int line);
 		int get_floor_score(int player_index);
 		int get_pattern_line_score(int player_index, int pattern_line_index);
+		void pattern_line_to_center(int player_index, int pattern_line_index, tile color, int count, std::vector<int>& is);
+		void floor_to_center(int player_index, tile color, int count, std::vector<int>& is);
+		void lid_to_center(tile color, int count, std::vector<int>& is);
+		void starter_tile_to_center(int player_index);
+		void floor_to_factory(int factory_index, int player_index, tile color, int count);
+		void lid_to_factory(int factory_index, tile color, int count);
+		void center_to_factory(int factory_index, int count);
+		void remove_center_starter_tile();
+		void pattern_line_to_factory(int factory_index, int player_index, int pattern_line_index, tile color, int count);
+		void factories_to_bag();
+		void take_score(int player_index, int score);
+		void lid_to_floor(int player_index, int count);
+		void add_starter_to_floor(int player_index, int position);
+		void wall_to_pattern_line(int player_index, int pattern_line_index, tile tile);
 	};
 }

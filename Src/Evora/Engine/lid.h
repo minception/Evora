@@ -14,5 +14,7 @@ namespace model
 		bool get_tiles(std::vector<tile>& out);
 		bool empty() const;
 		std::vector<tile> get_state();
+		void remove_tiles(int count);
+		tile take_tile();
 	};
 }

@@ -11,6 +11,12 @@ void tally_floor::Execute(std::shared_ptr<model::game> game)
 
 void tally_floor::Unexecute(std::shared_ptr<model::game> game)
 {
+	game->lid_to_floor(m_player_index, m_floor_size);
+	if(m_starter_tile_position != -1)
+	{
+		game->add_starter_to_floor(m_player_index, m_starter_tile_position);
+	}
+	game->take_score(m_player_index, m_score);
 }
 
 std::unique_ptr<command> tally_floor::clone()

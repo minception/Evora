@@ -69,4 +69,30 @@ namespace model
 		}
 		return added;
 	}
+
+	void factory::add_tiles(tile color, int count)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			m_tiles.push_back(color);
+		}
+	}
+
+	void factory::add_from_center(center& center, int count)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			tile color = center.pop_tile();
+			m_tiles.push_back(color);
+		}
+	}
+
+	void factory::return_to_bag(bag& bag)
+	{
+		for (auto && tile : m_tiles)
+		{
+			bag.return_tile(tile);
+		}
+		m_tiles.clear();
+	}
 }

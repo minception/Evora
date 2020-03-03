@@ -22,5 +22,8 @@ namespace model
 		int score();
 		int move_to_lid(lid& lid);
 		int handle_starter_tile();
+		void remove_tiles(int count);
+		void take_starter_tile();
+		void add_starter(int position);
 	};
 }

@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 window/size/width=920
 window/size/height=922
 window/size/resizable=false
+window/stretch/aspect="keep"
 
 [layer_names]
 

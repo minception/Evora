@@ -9,10 +9,10 @@ void score_color::Execute(std::shared_ptr<model::game> game)
 
 void score_color::Unexecute(std::shared_ptr<model::game> game)
 {
+	game->take_score(m_player_index, m_score);
 }
 
 std::unique_ptr<command> score_color::clone()
 {
 	return std::make_unique<score_color>(*this);
-
 }

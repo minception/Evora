@@ -158,4 +158,29 @@ namespace model
 		}
 		return count;
 	}
+
+	int wall::horizontal_lines()
+	{
+		int res = 0;
+		for (auto && line : m_tiles)
+		{
+			int filled = 0;
+			for (auto && tile : line)
+			{
+				if (tile == tile::empty) break;
+				++filled;
+			}
+			if(filled == COLORS)
+			{
+				++res;
+			}
+		}
+		return res;
+	}
+
+	void wall::remove_tile(int pattern_line_index, tile tile)
+	{
+		int row = ((int)tile + pattern_line_index) % COLORS;
+		m_tiles[pattern_line_index][row] = tile::empty;
+	}
 }

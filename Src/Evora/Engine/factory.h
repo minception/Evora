@@ -26,5 +26,8 @@ namespace model
 		bool pick_color_tile(tile color);
 		int add_to_center(center& center);
 		int fill(bag& bag);
+		void add_tiles(tile color, int count);
+		void add_from_center(center& center, int count);
+		void return_to_bag(bag& bag);
 	};
 }

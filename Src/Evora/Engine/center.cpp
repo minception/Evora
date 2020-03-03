@@ -69,4 +69,34 @@ namespace model
 		}
 		return res;
 	}
+
+	void center::return_tiles(tile color, int count, std::vector<int>& is)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			int position = is.front();
+			is.erase(is.begin());
+			m_tiles.insert(m_tiles.begin() + position, color);
+		}
+	}
+
+	void center::add_starter_tile()
+	{
+		m_tiles.insert(m_tiles.begin(), tile::starter);
+	}
+
+	void center::remove_tiles(int count)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			m_tiles.pop_back();
+		}
+	}
+
+	tile center::pop_tile()
+	{
+		tile color = m_tiles.back();
+		m_tiles.pop_back();
+		return color;
+	}
 }

@@ -25,5 +25,9 @@ namespace model
 		bool pick_starter_tile();
 		bool empty();
 		std::vector<tile> get_colors();
+		void return_tiles(tile color, int count, std::vector<int>& is);
+		void add_starter_tile();
+		void remove_tiles(int count);
+		tile pop_tile();
 	};
 }

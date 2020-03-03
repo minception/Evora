@@ -36,4 +36,19 @@ namespace model
 		m_color = tile::empty;
 		m_count = 0;
 	}
+
+	void pattern_line::remove_tiles(int count)
+	{
+		m_count -= count;
+		if(m_count == 0)
+		{
+			m_color = tile::empty;
+		}
+	}
+
+	void pattern_line::fill(tile tile)
+	{
+		m_count = m_size;
+		m_color = tile;
+	}
 }

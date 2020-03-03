@@ -91,6 +91,7 @@ namespace model
 
 	void board::take_starter_tile()
 	{
+		m_floor.take_starter_tile();
 		m_has_starter_tile = false;
 	}
 
@@ -186,5 +187,45 @@ namespace model
 	int board::get_pattern_line_score(int pattern_line_index)
 	{
 		return m_wall.score_tile(pattern_line_index, m_pattern_lines[pattern_line_index].get_color());
+	}
+
+	void board::remove_from_pattern_line(int pattern_line_index, int count)
+	{
+		m_pattern_lines[pattern_line_index].remove_tiles(count);
+	}
+
+	void board::remove_from_floor(int count)
+	{
+		m_floor.remove_tiles(count);
+	}
+
+	int board::horizontal_lines()
+	{
+		return m_wall.horizontal_lines();
+	}
+
+	void board::take_score(int score)
+	{
+		m_score -= score;
+	}
+
+	void board::lid_to_floor(lid& lid, int count)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			tile temp = lid.take_tile();
+			m_floor.add_tile(temp);
+		}
+	}
+
+	void board::add_starter_to_floor(int position)
+	{
+		m_floor.add_starter(position);
+	}
+
+	void board::wall_to_pattern_line(int pattern_line_index, tile tile)
+	{
+		m_wall.remove_tile(pattern_line_index, tile);
+		m_pattern_lines[pattern_line_index].fill(tile);
 	}
 }

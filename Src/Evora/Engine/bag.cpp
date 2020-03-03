@@ -51,4 +51,9 @@ namespace model
 	{
 		return m_tiles.empty();
 	}
+
+	void bag::return_tile(tile tile)
+	{
+		m_tiles.push_back(tile);
+	}
 }

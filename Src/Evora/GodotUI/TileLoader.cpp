@@ -6,6 +6,7 @@
 #include <TextureRect.hpp>
 #include "Utils.h"
 #include "GodotScenes.h"
+#include <string>
 
 using namespace godot;
 
@@ -69,6 +70,16 @@ void TileLoader::tile_following(int factory, int color)
 		{
 			tile->set_follow(true);
 			++holding_count;
+		}
+	}
+	for (int i = 0; i < child_count; ++i)
+	{
+		GodotTile* tile = (GodotTile*)get_child(i);
+		int tile_factory = tile->get("factory_index");
+		int tile_color = tile->get("color");
+		if (tile_factory == factory && tile_color == color)
+		{
+			tile->set_text(std::to_string(holding_count).c_str());
 		}
 	}
 	set("holding_color", color);

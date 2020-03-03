@@ -23,7 +23,7 @@ void control::init_round::Execute(std::shared_ptr<model::game> game)
 
 void control::init_round::Unexecute(std::shared_ptr<model::game> game)
 {
-	
+	game->factories_to_bag();
 }
 
 std::unique_ptr<control::command> control::init_round::clone()

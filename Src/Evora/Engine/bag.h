@@ -22,5 +22,6 @@ namespace model
 		bool draw_tile(tile& out);
 		bool refill(lid& lid);
 		bool empty();
+		void return_tile(tile tile);
 	};
 }

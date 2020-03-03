@@ -9,6 +9,7 @@ void control::score_wall_tile::Execute(std::shared_ptr<model::game> game)
 
 void score_wall_tile::Unexecute(std::shared_ptr<model::game> game)
 {
+	game->take_score(m_player_index, m_score);
 }
 
 std::unique_ptr<command> score_wall_tile::clone()

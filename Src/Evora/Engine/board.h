@@ -50,5 +50,12 @@ namespace model
 		int wall_line_count(int line);
 		int get_floor_score();
 		int get_pattern_line_score(int pattern_line_index);
+		void remove_from_pattern_line(int pattern_line_index, int count);
+		void remove_from_floor(int count);
+		int horizontal_lines();
+		void take_score(int score);
+		void lid_to_floor(lid& lid, int count);
+		void add_starter_to_floor(int position);
+		void wall_to_pattern_line(int pattern_line_index, tile tile);
 	};
 }

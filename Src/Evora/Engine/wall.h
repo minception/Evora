@@ -33,5 +33,7 @@ namespace model
 		int score_line(int line);
 		bool empty(int pattern_line_index, tile tile);
 		int line_count(int line);
+		int horizontal_lines();
+		void remove_tile(int pattern_line_index, tile tile);
 	};
 }
