@@ -120,6 +120,9 @@
     <ClInclude Include="GreedyAI.h">
       <Filter>AI\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MinimaxAI.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -198,6 +201,9 @@
       <Filter>Controller\Commands\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GreedyAI.cpp">
+      <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MinimaxAI.cpp">
       <Filter>AI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

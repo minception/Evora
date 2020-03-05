@@ -24,14 +24,22 @@ namespace AI
 		virtual std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int player_index) = 0;
 		static std::map<const char*, std::unique_ptr<AIFactory>, RawPointerComparison> get_factories();
 	};
+	
 	class RandomAIFactory :public AIFactory
 	{
 	public:
 		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int player_index) override;
 	};
+	
 	class GreedyAIFactory :public AIFactory
 	{
 	public:
 		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int player_index) override;
+	};
+
+	class MinimaxAIFactory :public AIFactory
+	{
+	public:
+		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int board_index) override;
 	};
 }

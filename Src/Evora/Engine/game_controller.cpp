@@ -145,6 +145,17 @@ bool game_controller::step()
 	return true;
 }
 
+bool game_controller::is_round_over()
+{
+	return m_model->round_finished();
+}
+
+void game_controller::step_back()
+{
+	m_commands[--m_current_command]->Unexecute(m_model);
+	m_commands.erase(m_commands.begin() + m_current_command, m_commands.end());
+}
+
 int game_controller::evaluate_state(int player_index)
 {
 	int score = 0;
@@ -167,4 +178,9 @@ bool game_controller::game_over()
 int game_controller::get_winner()
 {
 	return m_model->get_winner();
+}
+
+int game_controller::get_first_player()
+{
+	return m_model->get_first_player();
 }

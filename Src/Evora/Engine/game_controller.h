@@ -22,8 +22,11 @@ namespace control
 		void add_game_end();
 		std::vector<std::unique_ptr<command>> get_possible_moves(int player_index);
 		bool step();
+		bool is_round_over();
+		void step_back();
 		int evaluate_state(int player_index);
 		bool game_over();
 		int get_winner();
+		int get_first_player();
 	};
 }

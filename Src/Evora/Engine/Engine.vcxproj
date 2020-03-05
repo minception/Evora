@@ -36,6 +36,7 @@
     <ClInclude Include="GreedyAI.h" />
     <ClInclude Include="init_round.h" />
     <ClInclude Include="lid.h" />
+    <ClInclude Include="MinimaxAI.h" />
     <ClInclude Include="pattern_line.h" />
     <ClInclude Include="RandomAI.h" />
     <ClInclude Include="score_color.h" />
@@ -65,6 +66,7 @@
     <ClCompile Include="GreedyAI.cpp" />
     <ClCompile Include="init_round.cpp" />
     <ClCompile Include="lid.cpp" />
+    <ClCompile Include="MinimaxAI.cpp" />
     <ClCompile Include="pattern_line.cpp" />
     <ClCompile Include="RandomAI.cpp" />
     <ClCompile Include="score_color.cpp" />
