@@ -28,5 +28,6 @@ namespace control
 		bool game_over();
 		int get_winner();
 		int get_first_player();
+		std::shared_ptr<model::game> get_model();
 	};
 }

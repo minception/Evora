@@ -84,6 +84,7 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 {
 	std::vector<std::unique_ptr<command>> commands;
 	std::vector<model::tile> center_colors = m_model->get_center_colors();
+	// all center to pattern line moves
 	for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
 	{
 		for (auto&& color : center_colors)
@@ -94,6 +95,7 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 			}
 		}
 	}
+	// all center to floor moves
 	for (auto&& color : center_colors)
 	{
 		commands.push_back(std::move(std::make_unique<drop_center>(player_index, color)));
@@ -101,6 +103,7 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 	for (int factory_index = 0; factory_index < m_model->factory_count(); ++factory_index)
 	{
 		std::vector<model::tile> factory_colors = m_model->get_factory_colors(factory_index);
+		//all factory to pattern line moves
 		for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
 		{
 			for (auto&& color: factory_colors)
@@ -111,6 +114,7 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 				}
 			}
 		}
+		// all factory to floor moves
 		for(auto&& color: factory_colors)
 		{
 			commands.push_back(std::move(std::make_unique<drop_factory>(factory_index, player_index, color)));
@@ -183,4 +187,9 @@ int game_controller::get_winner()
 int game_controller::get_first_player()
 {
 	return m_model->get_first_player();
+}
+
+std::shared_ptr<model::game> game_controller::get_model()
+{
+	return m_model;
 }
