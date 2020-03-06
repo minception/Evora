@@ -10,6 +10,17 @@
 #include <chrono>
 
 
+void display_usage()
+{
+	std::cout << "Usage : evora <AI name> <AI name> <number of games>" << std::endl;
+	std::cout << "Available AIs:" << std::endl;
+	auto ai_factories = AI::AIFactory::get_factories();
+	for (auto&& ai_factory : ai_factories)
+	{
+		std::cout << '\t' << ai_factory.first << std::endl;
+	}
+}
+
 int main(int argc, const char** argv)
 {
 	if(argc == 4)
@@ -21,11 +32,13 @@ int main(int argc, const char** argv)
 		if (!ai_factories.count(AI1name.c_str()))
 		{
 			std::cout << "Unknown AI " << AI1name << std::endl;
+			display_usage();
 			return 1;
 		}
 		if(!ai_factories.count(AI2name.c_str()))
 		{
 			std::cout << "Unknown AI " << AI2name << std::endl;
+			display_usage();
 			return 1;
 		}
 		int number_of_games = std::stoi(arg_list[2]);
@@ -79,8 +92,9 @@ int main(int argc, const char** argv)
 	}
 	else
 	{
-		std::cout << "Usage : evora <AI name> <AI name> <number of games>" << std::endl;
+		display_usage();
 	}
     return 0;
 }
+
 
