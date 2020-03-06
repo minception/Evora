@@ -18,6 +18,16 @@ int main(int argc, const char** argv)
 		auto ai_factories = AI::AIFactory::get_factories();
 		std::string AI1name = arg_list[0];
 		std::string AI2name = arg_list[1];
+		if (!ai_factories.count(AI1name.c_str()))
+		{
+			std::cout << "Unknown AI " << AI1name << std::endl;
+			return 1;
+		}
+		if(!ai_factories.count(AI2name.c_str()))
+		{
+			std::cout << "Unknown AI " << AI2name << std::endl;
+			return 1;
+		}
 		int number_of_games = std::stoi(arg_list[2]);
 		std::vector<int> wins{ 0,0 };
 
