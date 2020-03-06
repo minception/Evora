@@ -66,5 +66,6 @@ namespace godot
 		void set_follow(bool cond);
 		void set_move_back(bool cond);
 		void animate_to(Vector2 position);
+		Vector2 get_size();
 	};
 }

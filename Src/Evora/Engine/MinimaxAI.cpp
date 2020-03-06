@@ -3,6 +3,45 @@
 
 int AI::MinimaxAI::evaluate_move(int player_index, int depth, std::shared_ptr<control::game_controller> controller)
 {
+	std::shared_ptr<model::game> game = controller->get_model();
+	std::vector<model::tile> center_colors = game->get_center_colors();
+
+	// all center to pattern line moves
+	for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+	{
+		for (auto&& color : center_colors)
+		{
+			if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
+			{
+				//commands.push_back(std::move(std::make_unique<center_offer>(player_index, pattern_line_index, color)));
+			}
+		}
+	}
+	// all center to floor moves
+	for (auto&& color : center_colors)
+	{
+		//commands.push_back(std::move(std::make_unique<drop_center>(player_index, color)));
+	}
+	for (int factory_index = 0; factory_index < game->factory_count(); ++factory_index)
+	{
+		std::vector<model::tile> factory_colors = game->get_factory_colors(factory_index);
+		//all factory to pattern line moves
+		for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+		{
+			for (auto&& color : factory_colors)
+			{
+				if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
+				{
+					//commands.push_back(std::move(std::make_unique<factory_offer>(factory_index, player_index, pattern_line_index, color)));
+				}
+			}
+		}
+		// all factory to floor moves
+		for (auto&& color : factory_colors)
+		{
+			//commands.push_back(std::move(std::make_unique<drop_factory>(factory_index, player_index, color)));
+		}
+	}
 	return 0;
 }
 

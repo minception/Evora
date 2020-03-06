@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Board.gdns" type="Script" id=1]
 [ext_resource path="res://Textures/board-background.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Textures/cyan-highlight.png" type="Texture" id=11]
 [ext_resource path="res://Floor.gdns" type="Script" id=12]
 [ext_resource path="res://ColorHighlight.gdns" type="Script" id=13]
+[ext_resource path="res://Textures/rounded_cyan_highlight.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -319,8 +320,9 @@ script = ExtResource( 12 )
 visible = false
 margin_right = 254.0
 margin_bottom = 32.0
-texture = ExtResource( 11 )
+texture = ExtResource( 14 )
 expand = true
+stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

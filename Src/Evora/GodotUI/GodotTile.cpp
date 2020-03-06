@@ -285,3 +285,8 @@ void GodotTile::animate_to(Vector2 position)
 	emit_signal("animation_started");
 }
 
+Vector2 GodotTile::get_size()
+{
+	return 	cast_to<TextureRect>(get_node("Image"))->get_size();
+}
+
