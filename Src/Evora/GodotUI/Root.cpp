@@ -67,6 +67,7 @@ void Root::set_starting_player(int index)
 		Vector2 step_button_size = GodotScenes::step_button_example->get_size();
 		GodotScenes::step_button_example->set_position(Vector2(viewport_size.x - step_button_size.x - 5.f, 5.f));
 		GodotScenes::step_button_example->connect("pressed", this, "step");
+		GodotScenes::step_button_example->grab_focus();
 		ObjectLoader::tile_loader->interactive(false);
 	}
 	
