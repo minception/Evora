@@ -64,7 +64,8 @@ int main(int argc, const char** argv)
 					{
 						int winner = controller->get_winner();
 						wins[winner]++;
-						std::cout << "Player " << players[winner]->get_name() << " won game number " << i << std::endl;
+						std::cout << "Player " << winner << " : " << players[winner]->get_name() << " won game number " << i << std::endl;
+						std::cout << "Score: " << controller->get_score(0) << ":" << controller->get_score(1) << std::endl;
 						break;
 					}
 					if(round_over)

@@ -79,6 +79,7 @@ namespace model
 		int wall_line_count(int player_index, int line);
 		int get_floor_score(int player_index);
 		int get_pattern_line_score(int player_index, int pattern_line_index);
+		int get_board_score(int player_index);
 		void pattern_line_to_center(int player_index, int pattern_line_index, tile color, int count, std::vector<int>& is);
 		void floor_to_center(int player_index, tile color, int count, std::vector<int>& is);
 		void lid_to_center(tile color, int count, std::vector<int>& is);

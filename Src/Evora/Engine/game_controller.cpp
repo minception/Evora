@@ -13,9 +13,9 @@
 
 using namespace control;
 
-void game_controller::add_wall_tiling_faze()
+int game_controller::add_wall_tiling_faze()
 {
-	bool final_wall_tiling = false;
+	int count = 0;
 	for (int player_index = 0; player_index < m_model->player_count(); ++player_index)
 	{
 		for (int pattern_line = 0; pattern_line < model::COLORS; ++pattern_line)
@@ -25,18 +25,17 @@ void game_controller::add_wall_tiling_faze()
 				model::tile color = m_model->pattern_line_color(player_index, pattern_line);
 				m_commands.emplace_back(std::make_unique<tile_wall>(player_index, pattern_line));
 				m_commands.emplace_back(std::make_unique<score_wall_tile>(player_index, pattern_line, color));
+				count += 2;
 				if(m_model->wall_line_count(player_index, pattern_line) == model::COLORS - 1)
 				{
-					final_wall_tiling = true;
+					m_game_over = true;
 				}
 			}
 		}
 		m_commands.emplace_back(std::make_unique<tally_floor>(player_index));
+		++count;
 	}
-	if(!final_wall_tiling)
-	{
-		m_commands.emplace_back(std::make_unique<init_round>());
-	}
+	return count;
 }
 
 game_controller::game_controller(const game_controller& other)
@@ -123,6 +122,49 @@ std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int pl
 	return commands;
 }
 
+int game_controller::possible_moves_count(int player_index)
+{
+	int res = 0;
+	std::vector<model::tile> center_colors = m_model->get_center_colors();
+	// all center to pattern line moves
+	for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+	{
+		for (auto&& color : center_colors)
+		{
+			if (m_model->can_add_to_pattern_line(player_index, pattern_line_index, color))
+			{
+				++res;
+			}
+		}
+	}
+	// all center to floor moves
+	for (auto&& color : center_colors)
+	{
+		++res;
+	}
+	for (int factory_index = 0; factory_index < m_model->factory_count(); ++factory_index)
+	{
+		std::vector<model::tile> factory_colors = m_model->get_factory_colors(factory_index);
+		//all factory to pattern line moves
+		for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+		{
+			for (auto&& color : factory_colors)
+			{
+				if (m_model->can_add_to_pattern_line(player_index, pattern_line_index, color))
+				{
+					++res;
+				}
+			}
+		}
+		// all factory to floor moves
+		for (auto&& color : factory_colors)
+		{
+			++res;
+		}
+	}
+	return res;
+}
+
 /**
  * \brief Performs a single step from a command queue, if either a round is over or the game is over, adds appropriate commands to the queue
  * \return True if a step occured
@@ -132,15 +174,18 @@ bool game_controller::step()
 	if(m_current_command == m_commands.size())
 	{
 		if (m_game_over) return false;
-		if(m_model->game_over())
-		{
-			add_game_end();
-			m_game_over = true;
-			return step();
-		}
 		if (m_model->round_finished())
 		{
 			add_wall_tiling_faze();
+			if(m_game_over)
+			{
+				add_game_end();
+				m_game_over = true;
+			}
+			else
+			{
+				m_commands.emplace_back(std::make_unique<init_round>());
+			}
 			return step();
 		}
 		return false;
@@ -182,6 +227,11 @@ bool game_controller::game_over()
 int game_controller::get_winner()
 {
 	return m_model->get_winner();
+}
+
+int game_controller::get_score(int player_index)
+{
+	return m_model->get_board_score(player_index);
 }
 
 int game_controller::get_first_player()

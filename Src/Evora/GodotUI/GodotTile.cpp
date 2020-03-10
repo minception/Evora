@@ -152,7 +152,7 @@ void GodotTile::_process(float delta)
 		}
 		else
 		{
-			set_global_position(starting_location + speed * delta * 10);
+			set_global_position(starting_location + speed * delta * 2);
 		}
 		return;
 	}
@@ -280,6 +280,8 @@ void GodotTile::set_move_back(bool cond)
 
 void GodotTile::animate_to(Vector2 position)
 {
+	Vector2 tile_position = get_global_position();
+	printf("position:(%f,%f)\n", tile_position.x, tile_position.y);
 	set("animating", true);
 	set("animating_to", position);
 	emit_signal("animation_started");

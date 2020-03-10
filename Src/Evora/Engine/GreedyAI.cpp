@@ -7,6 +7,7 @@ using namespace AI;
 void GreedyAI::move()
 {
 	std::vector<std::unique_ptr<control::command>> moves = m_controller->get_possible_moves(m_board_index);
+	//printf("Width: %d\n", moves.size());
 	int to_execute = 0;
 	int max_move_score = std::numeric_limits<int>::min();
 	control::game_controller mockup{ *m_controller };

@@ -272,7 +272,10 @@ namespace model
 		if (m_center.pick_starter_tile())
 		{
 			m_boards[player_index].set_starter_player();
-			m_boards[player_index].add_to_floor(tile::starter);
+			if(!m_boards[player_index].floor_full())
+			{
+				m_boards[player_index].add_to_floor(tile::starter);
+			}
 			return true;
 		}
 		return false;
@@ -546,6 +549,11 @@ namespace model
 	int game::get_pattern_line_score(int player_index, int pattern_line_index)
 	{
 		return m_boards[player_index].get_pattern_line_score(pattern_line_index);
+	}
+
+	int game::get_board_score(int player_index)
+	{
+		return m_boards[player_index].get_score();
 	}
 
 	void game::pattern_line_to_center(int player_index, int pattern_line_index, tile color, int count, std::vector<int>& is)
