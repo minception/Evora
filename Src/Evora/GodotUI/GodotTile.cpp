@@ -3,7 +3,6 @@
 #include <Label.hpp>
 #include <string>
 #include <Sprite.hpp>
-#include "Utils.h"
 #include "tile.h"
 
 #include <ResourceLoader.hpp>
