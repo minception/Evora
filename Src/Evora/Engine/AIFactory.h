@@ -42,4 +42,16 @@ namespace AI
 	public:
 		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int board_index) override;
 	};
+
+	class StrategyAIFactory :public AIFactory
+	{
+	public:
+		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int board_index) override;
+	};
+
+	class MonteCarloAIFactory :public AIFactory
+	{
+	public:
+		std::unique_ptr<AI> get(std::shared_ptr<control::game_controller> controller, int board_index) override;
+	};
 }

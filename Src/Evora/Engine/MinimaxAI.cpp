@@ -4,6 +4,7 @@
 #include "drop_center.h"
 #include "factory_offer.h"
 #include "drop_factory.h"
+#include "utils.h"
 
 int AI::MinimaxAI::evaluate(std::shared_ptr<control::game_controller>& controller)
 {
@@ -37,7 +38,7 @@ int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control:
 	std::shared_ptr<model::game> game = controller->get_model();
 	if(depth == m_max_depth || game->round_finished())
 	{
-		return evaluate(controller);
+		return utils::evaluate(controller, m_board_index);
 	}
 	int next_player = (player_index + 1) % game->player_count();
 	int best_score = player_index == m_board_index ? std::numeric_limits<int>::min() : std::numeric_limits<int>::max();

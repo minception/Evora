@@ -135,6 +135,12 @@
     <ClInclude Include="utils.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StrategyAI.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonteCarloAI.h">
+      <Filter>AI\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -220,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="utils.cpp">
       <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonteCarloAI.cpp">
+      <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StrategyAI.cpp">
+      <Filter>AI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

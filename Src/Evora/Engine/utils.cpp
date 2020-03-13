@@ -27,4 +27,30 @@ namespace utils
 			}
 		}
 	}
+	int evaluate(std::shared_ptr<control::game_controller>& controller, int player_index)
+	{
+		int moves = controller->add_wall_tiling_faze();
+		for (int i = 0; i < moves; ++i)
+		{
+			controller->step();
+		}
+		int score = 0;
+		for (int player_index = 0; player_index < controller->get_model()->player_count(); ++player_index)
+		{
+			if (player_index == player_index)
+			{
+				score += controller->get_score(player_index);
+			}
+			else
+			{
+				score -= controller->get_score(player_index);
+			}
+		}
+		for (int i = 0; i < moves; ++i)
+		{
+			controller->step_back();
+		}
+		return score;
+	}
 }
+
