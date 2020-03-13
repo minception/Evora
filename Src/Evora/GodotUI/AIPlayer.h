@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "AI.h"
+#include <thread>
 
 namespace godot
 {

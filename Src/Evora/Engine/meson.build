@@ -5,4 +5,4 @@ engine_lib = static_library('engine',
     'center_offer.cpp','command.cpp','drop_center.cpp','drop_factory.cpp','factory.cpp',
     'factory_offer.cpp','floor.cpp','game.cpp','game_controller.cpp',
     'init_round.cpp','lid.cpp','pattern_line.cpp','score_color.cpp','score_line.cpp',
-    'score_row.cpp','score_wall_tile.cpp','tally_floor.cpp','tile_wall.cpp','wall.cpp'])
+    'score_row.cpp','score_wall_tile.cpp','tally_floor.cpp','tile_wall.cpp','wall.cpp','utils.cpp'])

@@ -46,6 +46,7 @@
     <ClInclude Include="tally_floor.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tile_wall.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="wall.h" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +76,7 @@
     <ClCompile Include="score_wall_tile.cpp" />
     <ClCompile Include="tally_floor.cpp" />
     <ClCompile Include="tile_wall.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="wall.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

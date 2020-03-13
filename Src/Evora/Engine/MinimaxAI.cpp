@@ -186,8 +186,8 @@ void AI::MinimaxAI::move()
 {
 	int max_move_score = std::numeric_limits<int>::min();
 	int possible_moves = m_controller->possible_moves_count(m_board_index);
-	printf("possible moves = %d\n", possible_moves);
-	if (possible_moves > 80) m_max_depth = 4;
+	//printf("possible moves = %d\n", possible_moves);
+	if (possible_moves > 80) m_max_depth = 2;
 	else if (possible_moves > 40) m_max_depth = 3;
 	else if (possible_moves > 20) m_max_depth = 4;
 	else if (possible_moves > 10) m_max_depth = 5;

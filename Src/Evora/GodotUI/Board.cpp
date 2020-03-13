@@ -1,5 +1,4 @@
 #include "Board.h"
-#include "Utils.h"
 #include <TextureRect.hpp>
 #include <Control.hpp>
 #include <Input.hpp>
@@ -14,8 +13,8 @@ using namespace godot;
 
 void Board::set_highlight(bool cond)
 {
-	TextureRect* image = (TextureRect*)get_child(get_child_index(this, "Image"));
-	TextureRect* highlight = (TextureRect*)image->get_child(get_child_index(image, "Highlight"));
+	TextureRect* image = (TextureRect*)get_node("Image");
+	TextureRect* highlight = (TextureRect*)image->get_node("Highlight");
 	highlight->set_visible(cond);
 }
 
@@ -48,7 +47,7 @@ void godot::Board::_init()
 
 void godot::Board::_ready()
 {
-	OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
+	OptionButton* player_select = (OptionButton*)get_node("PlayerSelect");
 	player_select->add_item("Human", 0);
 	auto ai_factories = AI::AIFactory::get_factories();
 	int64_t player_index = 1;
@@ -81,11 +80,11 @@ void Board::connect_children()
 {
 	// I had to put this here, because children kept stealing focus from the board itself
 	std::vector<Control*> children;
-	Control* image = (Control*)get_child(get_child_index(this, "Image"));
+	Control* image = (Control*)get_node("Image");
 	children.push_back(image);
 	children.push_back((Control*)image->get_node("WallBackground"));
 	children.push_back((Control*)image->get_node("Separator"));
-	Control* wall = (Control*)image->get_child(get_child_index(image, "Wall"));
+	Control* wall = (Control*)image->get_node("Wall");
 	children.push_back(wall);
 	for(int i = 0; i < wall->get_child_count(); ++i)
 	{
@@ -119,7 +118,7 @@ void Board::connect_children()
 
 void Board::_hide_player_select()
 {
-	OptionButton* selector = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
+	OptionButton* selector = (OptionButton*)get_node("PlayerSelect");
 	selector->set_visible(false);
 }
 
@@ -179,7 +178,7 @@ void Board::set_pattern_line_highlight(int index, bool cond)
 
 String Board::get_player_name()
 {
-	OptionButton* player_select = (OptionButton*)get_child(get_child_index(this, "PlayerSelect"));
+	OptionButton* player_select = (OptionButton*)get_node("PlayerSelect");
 	return player_select->get_text();
 }
 

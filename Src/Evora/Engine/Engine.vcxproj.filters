@@ -37,6 +37,15 @@
     <Filter Include="Model\Source Files">
       <UniqueIdentifier>{a495ee3e-6e32-4683-99f4-34801d644702}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{df3aadeb-d817-4a83-afa3-10746c95d153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source Files">
+      <UniqueIdentifier>{593a33ee-97e6-4491-8019-516c27240267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header Files">
+      <UniqueIdentifier>{cf471f19-52ef-43ef-8b35-7bf2d6ef3d3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h">
@@ -123,6 +132,9 @@
     <ClInclude Include="MinimaxAI.h">
       <Filter>AI\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -205,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="MinimaxAI.cpp">
       <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Common\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

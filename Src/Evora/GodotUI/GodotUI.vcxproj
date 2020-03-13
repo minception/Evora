@@ -182,7 +182,6 @@
     <ClCompile Include="GodotTile.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="TileLoader.cpp" />
-    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPlayer.h" />
@@ -204,7 +203,6 @@
     <ClInclude Include="GodotTile.h" />
     <ClInclude Include="ObjectLoader.h" />
     <ClInclude Include="TileLoader.h" />
-    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

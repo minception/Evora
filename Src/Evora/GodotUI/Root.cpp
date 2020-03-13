@@ -113,8 +113,7 @@ void godot::Root::_init()
 void Root::_ready()
 {
 	// Setting up window size to fit all the boards
-	Vector2 board_size = ((TextureRect*)(GodotScenes::board_example->get_child(
-		get_child_index(GodotScenes::board_example, "Image"))))->get_size();
+	Vector2 board_size = ((TextureRect*)GodotScenes::board_example->get_node("Image"))->get_size();
 	const int boards_margin = 10;
 	float width = board_size.x * m_number_of_players + boards_margin * (m_number_of_players + 1);
 	float height = 900.f;
@@ -178,7 +177,7 @@ void Root::create_player_change_animations()
 
 void Root::start_game()
 {
-	Node2D* boards = (Node2D*)get_child(get_child_index(this, "Boards"));
+	Node2D* boards = (Node2D*)get_node("Boards");
 	int64_t boards_count = boards->get_child_count();
 
 	GameData* game_data = cast_to<GameData>(get_node("GameData"));
@@ -208,7 +207,7 @@ void Root::start_game()
 		board->set("player_select", true);
 	}
 	// hide start game button
-	Button* start_button = (Button*)get_child(get_child_index(this, "StartButton"));
+	Button* start_button = (Button*)get_node("StartButton");
 	start_button->set_visible(false);
 
 

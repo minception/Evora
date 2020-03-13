@@ -1,16 +1,16 @@
-[entry]
-
-Windows.64="res://LibGodotUI-x64-Debug.dll"
-X11.64="res://../Src/Evora/build/GodotUI/libgodot_ui.so"
-
-[dependencies]
-
-Windows.64=[  ]
-X11.64=[  ]
-
 [general]
 
 singleton=false
 load_once=true
 symbol_prefix="godot_"
 reloadable=true
+
+[entry]
+
+Windows.64="res://LibGodotUI-x64-Release.dll"
+X11.64="res://../Src/Evora/build/GodotUI/libgodot_ui.so"
+
+[dependencies]
+
+Windows.64=[  ]
+X11.64=[  ]

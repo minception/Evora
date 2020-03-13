@@ -114,7 +114,7 @@ int GodotGame::factory_to_lid(int factory_index, tile color)
 			godot_tile->set_follow(false);
 			Vector2 tile_position = godot_tile->get_global_position();
 			godot_tile->set("factory_index", -1);
-			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 500));
+			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 800));
 			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
@@ -231,7 +231,7 @@ int GodotGame::center_to_lid(tile color)
 			godot_tile->set_follow(false);
 			Vector2 tile_position = godot_tile->get_global_position();
 			godot_tile->set("factory_index", -1);
-			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 500));
+			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 800));
 			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
@@ -340,7 +340,7 @@ int GodotGame::floor_to_lid(int player_index)
 		{
 			godot_tile->set("pattern_line_index", -1);
 			Vector2 tile_position = godot_tile->get_global_position();
-			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 500));
+			godot_tile->animate_to(Vector2(tile_position.x, tile_position.y + 300));
 			// ObjectLoader::tile_loader->remove_child(godot_tile);
 		}
 	}
