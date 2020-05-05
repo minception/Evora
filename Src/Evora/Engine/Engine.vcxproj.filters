@@ -46,6 +46,15 @@
     <Filter Include="Common\Header Files">
       <UniqueIdentifier>{cf471f19-52ef-43ef-8b35-7bf2d6ef3d3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI\MonteCarloAI">
+      <UniqueIdentifier>{a327c41d-d584-4595-ab53-ac601f3bd49f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\MonteCarloAI\Header Files">
+      <UniqueIdentifier>{95e3df07-020c-4aa3-89a0-991239621e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\MonteCarloAI\Source Files">
+      <UniqueIdentifier>{25e84d73-a28f-4a94-8f55-6db8bfdb73e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h">
@@ -139,7 +148,28 @@
       <Filter>AI\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MonteCarloAI.h">
-      <Filter>AI\Header Files</Filter>
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AzulGameMove.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AzulGameState.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNode.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MCTSAlgorithm.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNodeCreator.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMove.h">
+      <Filter>AI\MonteCarloAI\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,11 +257,32 @@
     <ClCompile Include="utils.cpp">
       <Filter>Common\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MonteCarloAI.cpp">
-      <Filter>AI\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StrategyAI.cpp">
       <Filter>AI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MonteCarloAI.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AzulGameMove.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AzulGameState.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MCTSAlgorithm.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeNode.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeNodeCreator.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMove.cpp">
+      <Filter>AI\MonteCarloAI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleUI", "ConsoleUI\Cons
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{5BAB058D-8E34-46B5-897C-591B35A2AA0E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mcts-cpp", "..\..\..\mcts-cpp\mcts-cpp\mcts-cpp.vcxproj", "{23F4D735-C4E5-490E-A7BA-9E1D53750527}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{5BAB058D-8E34-46B5-897C-591B35A2AA0E}.Release|x64.Build.0 = Release|x64
 		{5BAB058D-8E34-46B5-897C-591B35A2AA0E}.Release|x86.ActiveCfg = Release|Win32
 		{5BAB058D-8E34-46B5-897C-591B35A2AA0E}.Release|x86.Build.0 = Release|Win32
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Debug|x64.ActiveCfg = Debug|x64
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Debug|x64.Build.0 = Debug|x64
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Debug|x86.ActiveCfg = Debug|Win32
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Debug|x86.Build.0 = Debug|Win32
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Release|x64.ActiveCfg = Release|x64
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Release|x64.Build.0 = Release|x64
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Release|x86.ActiveCfg = Release|Win32
+		{23F4D735-C4E5-490E-A7BA-9E1D53750527}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
