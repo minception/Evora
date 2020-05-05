@@ -59,7 +59,7 @@ void game_controller::set_first_player(int player_index)
 	m_model->set_first_player(player_index);
 }
 
-void game_controller::add_game_end()
+int game_controller::add_game_end()
 {
 	for (int player_index = 0; player_index < m_model->player_count(); ++player_index)
 	{
@@ -77,6 +77,7 @@ void game_controller::add_game_end()
 			m_commands.emplace_back(std::make_unique<score_color>(player_index, color));
 		}
 	}
+	return 3 * model::COLORS;
 }
 
 std::vector<std::unique_ptr<command>> game_controller::get_possible_moves(int player_index)

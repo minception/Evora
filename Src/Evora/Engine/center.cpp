@@ -46,7 +46,7 @@ namespace model
 
 	bool center::pick_starter_tile()
 	{
-		if (m_tiles[0] == tile::starter)
+		if (!m_tiles.empty() && m_tiles[0] == tile::starter)
 		{
 			m_tiles.erase(m_tiles.begin());
 			return true;
