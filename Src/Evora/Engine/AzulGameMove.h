@@ -2,7 +2,6 @@
 #include "GameMove.h"
 #include "command.h"
 
-using namespace mcts;
 
 class AzulGameMove : public GameMove
 {
@@ -13,7 +12,6 @@ public:
 	friend bool operator== (const AzulGameMove& lhs, const AzulGameMove& rhs);
 	std::shared_ptr<control::command> generateCommand();
 private:
-	virtual ostream& ToString(ostream& ostr) const override;
 	int mMove;
 	int mFactoryId;
 	int mPatternLine;
