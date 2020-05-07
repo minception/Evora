@@ -1,13 +1,14 @@
 #pragma once
 #include "GameMove.h";
+#include <vector>
 #include <memory>
-#include <string>
 
 class GameState
 {
 public:
 	virtual ~GameState() = 0;
 	virtual std::shared_ptr<GameState> Clone() const = 0;
+	virtual std::vector<std::shared_ptr<const GameMove>> GetMoves() const = 0;
 	virtual void DoMove(const GameMove& move) = 0;
 	virtual double GetResult(int player) const = 0;
 	virtual int GetWinner() const = 0;

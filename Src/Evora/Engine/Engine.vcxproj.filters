@@ -55,6 +55,12 @@
     <Filter Include="AI\MonteCarloAI\Source Files">
       <UniqueIdentifier>{25e84d73-a28f-4a94-8f55-6db8bfdb73e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI\MonteCarloAI\Header Files\UCT">
+      <UniqueIdentifier>{7f8fc1fc-d51a-4ee0-b40d-9a20c01c7803}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\MonteCarloAI\Source Files\UCT">
+      <UniqueIdentifier>{3242d6c2-0579-4a83-b270-123a32818a96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h">
@@ -171,6 +177,12 @@
     <ClInclude Include="GameMove.h">
       <Filter>AI\MonteCarloAI\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UCTTreeNode.h">
+      <Filter>AI\MonteCarloAI\Header Files\UCT</Filter>
+    </ClInclude>
+    <ClInclude Include="UCTTreeNodeCreator.h">
+      <Filter>AI\MonteCarloAI\Header Files\UCT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp">
@@ -283,6 +295,12 @@
     </ClCompile>
     <ClCompile Include="GameMove.cpp">
       <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UCTTreeNode.cpp">
+      <Filter>AI\MonteCarloAI\Source Files\UCT</Filter>
+    </ClCompile>
+    <ClCompile Include="UCTTreeNodeCreator.cpp">
+      <Filter>AI\MonteCarloAI\Source Files\UCT</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

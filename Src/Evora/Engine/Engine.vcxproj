@@ -55,6 +55,8 @@
     <ClInclude Include="tile_wall.h" />
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="TreeNodeCreator.h" />
+    <ClInclude Include="UCTTreeNode.h" />
+    <ClInclude Include="UCTTreeNodeCreator.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="wall.h" />
   </ItemGroup>
@@ -94,13 +96,10 @@
     <ClCompile Include="tile_wall.cpp" />
     <ClCompile Include="TreeNode.cpp" />
     <ClCompile Include="TreeNodeCreator.cpp" />
+    <ClCompile Include="UCTTreeNode.cpp" />
+    <ClCompile Include="UCTTreeNodeCreator.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="wall.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\mcts-cpp\mcts-cpp\mcts-cpp.vcxproj">
-      <Project>{23f4d735-c4e5-490e-a7ba-9e1d53750527}</Project>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
