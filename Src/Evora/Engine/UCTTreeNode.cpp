@@ -14,9 +14,6 @@ UCTTreeNode::UCTTreeNode(std::shared_ptr<const GameMove> move, std::shared_ptr<U
 	randomEng = std::make_shared<std::mt19937>(rng());
 }
 
-UCTTreeNode::~UCTTreeNode()
-{}
-
 UCTTreeNode::UCTTreeNode(const UCTTreeNode& src)
 {
 	CopyFrom(src);

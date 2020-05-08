@@ -8,7 +8,7 @@ class AzulGameState :
 	public GameState
 {
 public:
-	AzulGameState(control::game_controller state, int player);
+	AzulGameState(std::shared_ptr<control::game_controller> state, int player);
 	std::shared_ptr<GameState> Clone() const override;
 	std::vector<std::shared_ptr<const GameMove>> GetMoves() const override;
 	void DoMove(const GameMove& move) override;
@@ -20,7 +20,7 @@ public:
 	std::shared_ptr<const GameMove> ParseMove(const std::string& move) const override;
 private:
 	int mPlayerWhoJustMoved;
-	control::game_controller mState;
+	std::shared_ptr<control::game_controller> mState;
 	int mWinner;
 	bool mNotWin;
 	std::vector<std::shared_ptr<const GameMove>> mMoves;

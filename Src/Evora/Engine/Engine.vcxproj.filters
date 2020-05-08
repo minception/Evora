@@ -272,9 +272,6 @@
     <ClCompile Include="StrategyAI.cpp">
       <Filter>AI\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MonteCarloAI.cpp">
-      <Filter>AI\MonteCarloAI\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AzulGameMove.cpp">
       <Filter>AI\MonteCarloAI\Source Files</Filter>
     </ClCompile>
@@ -301,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="UCTTreeNodeCreator.cpp">
       <Filter>AI\MonteCarloAI\Source Files\UCT</Filter>
+    </ClCompile>
+    <ClCompile Include="MonteCarloAI.cpp">
+      <Filter>AI\Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

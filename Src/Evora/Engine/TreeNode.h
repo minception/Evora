@@ -7,7 +7,7 @@
 class TreeNode
 {
 public:
-	virtual ~TreeNode() = 0;
+	virtual ~TreeNode();
 	virtual std::shared_ptr<TreeNode> AddChild(std::shared_ptr<const GameMove> move, std::shared_ptr<TreeNode> parent, const GameState& state) = 0;
 	virtual std::shared_ptr<const GameMove> GetBestMove() const = 0;
 	virtual bool HasChildren() const = 0;

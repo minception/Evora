@@ -4,6 +4,7 @@
 #include "drop_center.h"
 #include "factory_offer.h"
 #include "drop_factory.h"
+#include <memory>
 
 AzulGameMove::AzulGameMove(int move) :
 	mMove(move)
@@ -30,21 +31,15 @@ std::shared_ptr<control::command> AzulGameMove::generateCommand()
 
 		if (mPatternLine < model::COLORS)
 		{
-			return make_shared<control::factory_offer>(mFactoryId, 0, mPatternLine, (model::tile)mColor);
+			return std::make_shared<control::factory_offer>(mFactoryId, 0, mPatternLine, (model::tile)mColor);
 		}
-		return make_shared<control::drop_factory>(mFactoryId, 0, (model::tile)mColor);
+		return std::make_shared<control::drop_factory>(mFactoryId, 0, (model::tile)mColor);
 	}
 	if(mPatternLine < model::COLORS)
 	{
-		return make_shared<control::center_offer>(0, mPatternLine, (model::tile)mColor);
+		return std::make_shared<control::center_offer>(0, mPatternLine, (model::tile)mColor);
 	}
-	return make_shared<control::drop_center>(0, (model::tile)mColor);
-}
-
-ostream& AzulGameMove::ToString(ostream& ostr) const
-{
-	ostr << mMove;
-	return ostr;
+	return std::make_shared<control::drop_center>(0, (model::tile)mColor);
 }
 
 bool operator==(const AzulGameMove& lhs, const AzulGameMove& rhs)

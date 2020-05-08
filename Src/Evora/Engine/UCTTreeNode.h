@@ -7,7 +7,7 @@ class UCTTreeNode : public TreeNode
 {
 public:
 	UCTTreeNode(std::shared_ptr<const GameMove> move, std::shared_ptr<UCTTreeNode> parent, const GameState& state, double constant = 1.0, bool generateUntriedMoves = true);
-	virtual ~UCTTreeNode();
+	virtual ~UCTTreeNode() = default;
 	UCTTreeNode(const UCTTreeNode& src);
 	UCTTreeNode& operator=(const UCTTreeNode& rhs);
 	UCTTreeNode(UCTTreeNode&& src) noexcept;

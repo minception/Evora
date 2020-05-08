@@ -31,7 +31,7 @@ void MCTSAlgorithm::DoIteration(const GameState& rootState, std::shared_ptr<Tree
 	}
 }
 
-std::shared_ptr<const GameMove> MCTSAlgorithm::Search(const GameState& rootState, float time)
+std::shared_ptr<const GameMove> MCTSAlgorithm::Search(const GameState& rootState, int time)
 {
 	auto start = std::chrono::system_clock::now();
 
