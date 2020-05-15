@@ -637,6 +637,16 @@ namespace model
 		m_lid.remove_tiles(pattern_line_index);
 	}
 
+	void game::remove_tile_from_bag(tile tile)
+	{
+		m_bag.remove_tile(tile);
+	}
+
+	void game::set_lid_state(std::vector<tile>& tiles)
+	{
+		m_lid.set_state(tiles);
+	}
+
 	/**
 	 * \brief Get a copy of a current lid state
 	 * \return Vector representing tiles in the lid

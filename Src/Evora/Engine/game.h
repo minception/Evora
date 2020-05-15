@@ -94,5 +94,7 @@ namespace model
 		void lid_to_floor(int player_index, int count);
 		void add_starter_to_floor(int player_index, int position);
 		void wall_to_pattern_line(int player_index, int pattern_line_index, tile tile);
+		void remove_tile_from_bag(tile tile);
+		void set_lid_state(std::vector<tile>& tiles);
 	};
 }

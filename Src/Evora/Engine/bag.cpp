@@ -56,4 +56,17 @@ namespace model
 	{
 		m_tiles.push_back(tile);
 	}
+
+	void bag::remove_tile(tile tile)
+	{
+		for(int i = 0; i < m_tiles.size(); ++i)
+		{
+			if(m_tiles[i] == tile)
+			{
+				m_tiles.erase(m_tiles.begin() + i);
+				return;
+			}
+		}
+		throw new std::exception("tile not found in bag");
+	}
 }

@@ -16,5 +16,6 @@ namespace model
 		std::vector<tile> get_state();
 		void remove_tiles(int count);
 		tile take_tile();
+		void set_state(std::vector<tile>& tiles);
 	};
 }

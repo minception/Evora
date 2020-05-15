@@ -11,6 +11,7 @@ namespace control
 		std::shared_ptr<model::game> m_model;
 		std::deque<std::unique_ptr<command>> m_commands;
 		int m_current_command = 0;
+		int m_current_player;
 		bool m_game_over = false;
 	public:
 		game_controller(std::shared_ptr<model::game> model):m_model(model){}

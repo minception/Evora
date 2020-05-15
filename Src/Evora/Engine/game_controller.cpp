@@ -57,6 +57,7 @@ void game_controller::add_command(std::unique_ptr<command> command)
 void game_controller::set_first_player(int player_index)
 {
 	m_model->set_first_player(player_index);
+	m_current_player = player_index;
 }
 
 int game_controller::add_game_end()
@@ -186,12 +187,14 @@ bool game_controller::step()
 			else
 			{
 				m_commands.emplace_back(std::make_unique<init_round>());
+				m_current_player = get_first_player();
 			}
 			return step();
 		}
 		return false;
 	}
 	m_commands[m_current_command++]->Execute(m_model);
+	m_current_player = (m_current_player + 1) % m_model->player_count();
 	return true;
 }
 

@@ -49,4 +49,9 @@ namespace model
 		m_tiles.pop_back();
 		return res;
 	}
+
+	void lid::set_state(std::vector<tile>& tiles)
+	{
+		m_tiles = tiles;
+	}
 }

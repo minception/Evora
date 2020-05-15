@@ -24,6 +24,14 @@ void control::init_round::Execute(std::shared_ptr<model::game> game)
 void control::init_round::Unexecute(std::shared_ptr<model::game> game)
 {
 	game->factories_to_bag();
+	if(m_bag_refilled)
+	{
+		for(auto&& lid_tile: m_lid_state)
+		{
+			game->remove_tile_from_bag(lid_tile);
+		}
+		game->set_lid_state(m_lid_state);
+	}
 }
 
 std::unique_ptr<control::command> control::init_round::clone()

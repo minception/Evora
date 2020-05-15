@@ -23,5 +23,6 @@ namespace model
 		bool refill(lid& lid);
 		bool empty();
 		void return_tile(tile tile);
+		void remove_tile(tile tile);
 	};
 }
