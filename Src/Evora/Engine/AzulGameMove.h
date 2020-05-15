@@ -8,9 +8,9 @@ class AzulGameMove : public GameMove
 public:
 	AzulGameMove(int move);
 	virtual ~AzulGameMove();
-	int GetMove() const;
+	int GetMove() const override;
 	friend bool operator== (const AzulGameMove& lhs, const AzulGameMove& rhs);
-	std::shared_ptr<control::command> generateCommand();
+	std::unique_ptr<control::command> generateCommand(int player_index) const;
 private:
 	int mMove;
 	int mFactoryId;

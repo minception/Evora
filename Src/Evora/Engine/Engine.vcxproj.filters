@@ -153,9 +153,6 @@
     <ClInclude Include="StrategyAI.h">
       <Filter>AI\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MonteCarloAI.h">
-      <Filter>AI\MonteCarloAI\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AzulGameMove.h">
       <Filter>AI\MonteCarloAI\Header Files</Filter>
     </ClInclude>
@@ -182,6 +179,9 @@
     </ClInclude>
     <ClInclude Include="UCTTreeNodeCreator.h">
       <Filter>AI\MonteCarloAI\Header Files\UCT</Filter>
+    </ClInclude>
+    <ClInclude Include="MonteCarloAI.h">
+      <Filter>AI\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,7 +300,7 @@
       <Filter>AI\MonteCarloAI\Source Files\UCT</Filter>
     </ClCompile>
     <ClCompile Include="MonteCarloAI.cpp">
-      <Filter>AI\Header Files</Filter>
+      <Filter>AI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

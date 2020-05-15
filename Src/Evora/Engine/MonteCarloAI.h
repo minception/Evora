@@ -12,7 +12,8 @@ namespace AI
 	{
 		std::time_t m_end_time;
 		int m_time;
-		MCTSAlgorithm m_mcts;
+		std::unique_ptr<MCTSAlgorithm> m_mcts;
+		std::unique_ptr<TreeNodeCreator> m_creator;
 	public:
 		void move() override;
 		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();

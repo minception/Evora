@@ -1,4 +1,5 @@
 #include "MCTSAlgorithm.h"
+#include "utils.h"
 #include <chrono>
 
 void MCTSAlgorithm::DoIteration(const GameState& rootState, std::shared_ptr<TreeNode> rootNode)
@@ -33,7 +34,7 @@ void MCTSAlgorithm::DoIteration(const GameState& rootState, std::shared_ptr<Tree
 
 std::shared_ptr<const GameMove> MCTSAlgorithm::Search(const GameState& rootState, int time)
 {
-	auto start = std::chrono::system_clock::now();
+	auto end_time = std::chrono::system_clock::now() + std::chrono::milliseconds(time);
 
 	if (!mbSearch) {
 		mbSearch = true;
@@ -45,14 +46,10 @@ std::shared_ptr<const GameMove> MCTSAlgorithm::Search(const GameState& rootState
 	while (true)
 	{
 		++mLastIterations;
-		auto iterationStart = std::chrono::system_clock::now();
 
 		DoIteration(rootState, rootNode);
 
-		auto now = std::chrono::system_clock::now();
-		auto iterationTime = (std::chrono::duration<double>(now - iterationStart)).count();
-		auto totalTime = (std::chrono::duration<double>(now - start)).count();
-		if (iterationTime + totalTime > time)
+		if (!utils::timeLeft(end_time));
 		{
 			break;
 		}

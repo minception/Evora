@@ -14,7 +14,6 @@ AzulGameState::AzulGameState(std::shared_ptr<control::game_controller> state, in
 	mState(state)
 {
 	CalculateMoves();
-
 	std::random_device rndDevice;
 	randomEng = std::make_shared<std::mt19937>(rndDevice());
 }
@@ -33,17 +32,19 @@ void AzulGameState::DoMove(const GameMove& move)
 {
 	const AzulGameMove& azulMove = dynamic_cast<const AzulGameMove&>(move);
 	mPlayerWhoJustMoved =  (mPlayerWhoJustMoved + 1) % mState->get_model()->player_count();
-
+	std::unique_ptr<control::command> command = azulMove.generateCommand(mPlayerWhoJustMoved);
+	mState->add_command(std::move(command));
+	mState->step();
 	mMoves.clear();
 	CalculateMoves();
+	if(IsTerminal())
+	{
+		mWinner = mState->get_winner();
+	}
 }
 
 double AzulGameState::GetResult(int player) const
 {
-	if (mWinner == 0)
-	{
-		return 0.5;
-	}
 	if (mWinner == player)
 	{
 		return 1.0;
@@ -79,7 +80,7 @@ std::shared_ptr<const GameMove> AzulGameState::ParseMove(const std::string& move
 
 void AzulGameState::addMove(int factory_index, int pattern_line_index, int color)
 {
-	int move = factory_index | (pattern_line_index >> 4) | (color >> 8);
+	int move = factory_index | (pattern_line_index << 4) | (color << 8);
 	mMoves.push_back(std::make_shared<AzulGameMove>(move));
 }
 
@@ -112,17 +113,4 @@ void AzulGameState::CalculateMoves()
 			}
 		}
 	}
-}
-
-bool AzulGameState::CheckWinDirections(int player, int x, int y)
-{
-	return false;
-}
-
-int AzulGameState::Near(int player, int x, int y, int dx, int dy)
-{
-	int count = 0;
-	int i = x + dx;
-	int j = y + dy;
-	return count;
 }

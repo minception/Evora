@@ -26,7 +26,5 @@ private:
 	std::vector<std::shared_ptr<const GameMove>> mMoves;
 	void addMove(int factory_index, int pattern_line_index, int color);
 	void CalculateMoves();
-	bool CheckWinDirections(int player, int x, int y);
-	int Near(int player, int x, int y, int dx, int dy);
 	std::shared_ptr<std::mt19937> randomEng;
 };
