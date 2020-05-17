@@ -16,3 +16,8 @@ std::unique_ptr<command> score_line::clone()
 {
 	return std::make_unique<score_line>(*this);
 }
+
+bool score_line::IsMove()
+{
+	return false;
+}

@@ -23,6 +23,7 @@ int game_controller::add_wall_tiling_faze()
 			if(m_model->pattern_line_full(player_index, pattern_line))
 			{
 				model::tile color = m_model->pattern_line_color(player_index, pattern_line);
+				_ASSERT(color != model::tile::empty);
 				m_commands.emplace_back(std::make_unique<tile_wall>(player_index, pattern_line));
 				m_commands.emplace_back(std::make_unique<score_wall_tile>(player_index, pattern_line, color));
 				count += 2;
@@ -41,10 +42,14 @@ int game_controller::add_wall_tiling_faze()
 game_controller::game_controller(const game_controller& other)
 {
 	m_model = std::make_unique<model::game>(*other.m_model);
+	// m_current_command = other.m_current_command;
+	m_current_player = other.m_current_player;
+	m_game_over = other.m_game_over;
 }
 
-void game_controller::start_game()
+void game_controller::start_game(int first_player)
 {
+	set_first_player(first_player);
 	m_commands.emplace_back(std::make_unique<init_round>());
 	step();
 }
@@ -52,6 +57,11 @@ void game_controller::start_game()
 void game_controller::add_command(std::unique_ptr<command> command)
 {
 	m_commands.push_back(std::move(command));
+}
+
+int game_controller::get_current_player()
+{
+	return m_current_player;
 }
 
 void game_controller::set_first_player(int player_index)
@@ -78,6 +88,7 @@ int game_controller::add_game_end()
 			m_commands.emplace_back(std::make_unique<score_color>(player_index, color));
 		}
 	}
+	// here three model::COLORS represent all lines, all rows and all colors
 	return 3 * model::COLORS;
 }
 
@@ -188,13 +199,17 @@ bool game_controller::step()
 			{
 				m_commands.emplace_back(std::make_unique<init_round>());
 				m_current_player = get_first_player();
+				++round;
 			}
 			return step();
 		}
 		return false;
 	}
+	if (m_commands[m_current_command]->IsMove())
+	{
+		m_current_player = (m_current_player + 1) % m_model->player_count();
+	}
 	m_commands[m_current_command++]->Execute(m_model);
-	m_current_player = (m_current_player + 1) % m_model->player_count();
 	return true;
 }
 

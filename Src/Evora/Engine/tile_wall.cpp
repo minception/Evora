@@ -3,6 +3,7 @@
 void control::tile_wall::Execute(std::shared_ptr<model::game> game)
 {
 	m_color = game->tile_wall(m_player_index, m_pattern_line_index);
+	_ASSERT(m_color != model::tile::empty);
 }
 
 void control::tile_wall::Unexecute(std::shared_ptr<model::game> game)
@@ -13,4 +14,9 @@ void control::tile_wall::Unexecute(std::shared_ptr<model::game> game)
 std::unique_ptr<control::command> control::tile_wall::clone()
 {
 	return std::make_unique<tile_wall>(*this);
+}
+
+bool control::tile_wall::IsMove()
+{
+	return false;
 }

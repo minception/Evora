@@ -20,7 +20,9 @@ AzulGameState::AzulGameState(std::shared_ptr<control::game_controller> state, in
 
 std::shared_ptr<GameState> AzulGameState::Clone() const
 {
-	return std::make_shared<AzulGameState>(*this);
+	auto cloned = std::make_shared<AzulGameState>(*this);
+	cloned->mState = std::make_shared<control::game_controller>(*mState);
+	return cloned;
 }
 
 std::vector<std::shared_ptr<const GameMove>> AzulGameState::GetMoves() const
@@ -31,15 +33,19 @@ std::vector<std::shared_ptr<const GameMove>> AzulGameState::GetMoves() const
 void AzulGameState::DoMove(const GameMove& move)
 {
 	const AzulGameMove& azulMove = dynamic_cast<const AzulGameMove&>(move);
-	mPlayerWhoJustMoved =  (mPlayerWhoJustMoved + 1) % mState->get_model()->player_count();
 	std::unique_ptr<control::command> command = azulMove.generateCommand(mPlayerWhoJustMoved);
 	mState->add_command(std::move(command));
-	mState->step();
+ 	while (mState->step())
+	{
+	}
 	mMoves.clear();
+	mPlayerWhoJustMoved = mState->get_current_player();
 	CalculateMoves();
+	int movessize = mMoves.size();
 	if(IsTerminal())
 	{
 		mWinner = mState->get_winner();
+		mNotWin = false;
 	}
 }
 
@@ -70,7 +76,7 @@ int AzulGameState::GetPlayerWhoJustMoved() const
 
 bool AzulGameState::IsTerminal() const
 {
-	return mMoves.size() == 0;
+	return mState->game_over();
 }
 
 std::shared_ptr<const GameMove> AzulGameState::ParseMove(const std::string& move) const

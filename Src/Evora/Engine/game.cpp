@@ -337,6 +337,7 @@ namespace model
 	tile game::tile_wall(int player_index, int pattern_line_index)
 	{
 		tile color = m_boards[player_index].pattern_line_color(pattern_line_index);
+		_ASSERT(color != tile::empty);
 		m_boards[player_index].clear_pattern_line(pattern_line_index);
 		m_boards[player_index].tile_wall(pattern_line_index, color);
 		m_lid.add_tiles(pattern_line_index, color);

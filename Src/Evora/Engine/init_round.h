@@ -9,6 +9,7 @@ namespace control
 		void Execute(std::shared_ptr<model::game> game) override;
 		void Unexecute(std::shared_ptr<model::game> game) override;
 		std::unique_ptr<command> clone() override;
+		bool IsMove() override;
 	private:
 		static const int FACTORY_SIZE = 4;
 		int m_added_before_refill = 0;

@@ -15,6 +15,7 @@ namespace control
 		void Execute(std::shared_ptr<model::game> game) override;
 		void Unexecute(std::shared_ptr<model::game> game) override;
 		std::unique_ptr<command> clone() override;
+		bool IsMove() override;
 	private:
 		int m_player_index;
 		int m_pattern_line_index;

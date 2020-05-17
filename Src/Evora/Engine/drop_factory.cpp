@@ -26,3 +26,8 @@ std::unique_ptr<command> drop_factory::clone()
 {
 	return std::make_unique<drop_factory>(*this);
 }
+
+bool drop_factory::IsMove()
+{
+	return true;
+}

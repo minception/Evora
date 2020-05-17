@@ -10,6 +10,15 @@ namespace model
 		}
 	}
 
+	//board::board(const board& other)
+	//{
+	//	m_score = other.m_score;
+	//	m_pattern_lines = other.m_pattern_lines;
+	//	m_wall = other.m_wall;
+	//	m_floor = other.m_floor;
+	//	m_has_starter_tile = other.m_has_starter_tile;
+	//}
+
 	void board::tile_wall(int pattern_line_index, tile color)
 	{
 		m_wall.add_tile(pattern_line_index, color);

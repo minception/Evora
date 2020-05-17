@@ -23,3 +23,8 @@ std::unique_ptr<command> tally_floor::clone()
 {
 	return std::make_unique<tally_floor>(*this);
 }
+
+bool tally_floor::IsMove()
+{
+	return false;
+}

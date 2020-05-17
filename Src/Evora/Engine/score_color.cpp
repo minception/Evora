@@ -16,3 +16,8 @@ std::unique_ptr<command> score_color::clone()
 {
 	return std::make_unique<score_color>(*this);
 }
+
+bool score_color::IsMove()
+{
+	return false;
+}

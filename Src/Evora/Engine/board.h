@@ -17,6 +17,7 @@ namespace model
 		bool m_has_starter_tile{false};
 	public:
 		board();
+		// board(const board& other);
 		void tile_wall(int pattern_line_index, tile color);
 		int get_score() const;
 

@@ -100,9 +100,8 @@ int main(int argc, const char** argv)
 		for(int i = 0; i < number_of_games; ++i)
 		{
 			std::shared_ptr<control::game_controller> controller = std::make_shared<control::game_controller>(std::make_shared<model::game>(2));
-			controller->start_game();
 			int current_player = 0;
-			controller->set_first_player(current_player);
+			controller->start_game(current_player);
 			std::vector<std::unique_ptr<AI::AI>> players;
 			players.push_back(ai_factories.at(AI1name.c_str())->get(controller, 0));
 			players.push_back(ai_factories.at(AI2name.c_str())->get(controller, 1));

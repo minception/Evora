@@ -24,3 +24,8 @@ std::unique_ptr<command> drop_center::clone()
 {
 	return std::make_unique<drop_center>(*this);
 }
+
+bool drop_center::IsMove()
+{
+	return true;
+}

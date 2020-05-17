@@ -64,6 +64,7 @@ namespace model
 	void wall::add_tile(int pattern_line_index, tile tile)
 	{
 		int row = ((int)tile + pattern_line_index) % COLORS;
+		_ASSERT(m_tiles[pattern_line_index][row] == tile::empty);
 		m_tiles[pattern_line_index][row] = tile;
 	}
 

@@ -28,3 +28,8 @@ std::unique_ptr<command> factory_offer::clone()
 {
 	return std::make_unique<factory_offer>(*this);
 }
+
+bool factory_offer::IsMove()
+{
+	return true;
+}

@@ -38,3 +38,8 @@ std::unique_ptr<control::command> control::init_round::clone()
 {
 	return std::make_unique<init_round>(*this);
 }
+
+bool control::init_round::IsMove()
+{
+	return false;
+}

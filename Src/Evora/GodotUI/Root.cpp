@@ -49,8 +49,7 @@ void Root::set_starting_player(int index)
 	GodotTile* starter_tile = cast_to<GodotTile>(get_node("StarterTile"));
 	starter_tile->set_color((int)tile::starter);
 
-	game_data->controller->set_first_player(index);
-	game_data->controller->start_game();
+	game_data->controller->start_game(index);
 	//game_data->players[index]->move();
 
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));

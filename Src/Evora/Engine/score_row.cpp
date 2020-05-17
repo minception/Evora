@@ -16,3 +16,8 @@ std::unique_ptr<command> score_row::clone()
 {
 	return std::make_unique<score_row>(*this);
 }
+
+bool score_row::IsMove()
+{
+	return false;
+}

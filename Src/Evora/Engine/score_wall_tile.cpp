@@ -16,3 +16,8 @@ std::unique_ptr<command> score_wall_tile::clone()
 {
 	return std::make_unique<score_wall_tile>(*this);
 }
+
+bool score_wall_tile::IsMove()
+{
+	return false;
+}

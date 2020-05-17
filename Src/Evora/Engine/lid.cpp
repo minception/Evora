@@ -30,8 +30,7 @@ namespace model
 
 	std::vector<tile> lid::get_state()
 	{
-		std::vector<tile> res;
-		// return std::copy(m_tiles.begin(), m_tiles.end(), res);
+		std::vector<tile> res(m_tiles);
 		return res;
 	}
 

@@ -26,3 +26,8 @@ std::unique_ptr<command> center_offer::clone()
 {
 	return std::make_unique<center_offer>(*this);
 }
+
+bool center_offer::IsMove()
+{
+	return true;
+}
