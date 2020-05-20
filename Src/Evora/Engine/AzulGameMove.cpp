@@ -26,7 +26,7 @@ int AzulGameMove::GetMove() const
 
 std::unique_ptr<control::command> AzulGameMove::generateCommand(int player_index) const
 {
-	if(mFactoryId < 5)
+	if (mFactoryId < 5)
 	{
 
 		if (mPatternLine < model::COLORS)
@@ -35,7 +35,7 @@ std::unique_ptr<control::command> AzulGameMove::generateCommand(int player_index
 		}
 		return std::make_unique<control::drop_factory>(mFactoryId, player_index, (model::tile)mColor);
 	}
-	if(mPatternLine < model::COLORS)
+	if (mPatternLine < model::COLORS)
 	{
 		return std::make_unique<control::center_offer>(player_index, mPatternLine, (model::tile)mColor);
 	}

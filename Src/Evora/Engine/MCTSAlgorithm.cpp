@@ -49,7 +49,7 @@ std::shared_ptr<const GameMove> MCTSAlgorithm::Search(const GameState& rootState
 
 		DoIteration(rootState, rootNode);
 
-		if (!utils::timeLeft(end_time));
+		if (!utils::timeLeft(end_time))
 		{
 			break;
 		}
@@ -60,11 +60,6 @@ std::shared_ptr<const GameMove> MCTSAlgorithm::Search(const GameState& rootState
 			break;
 		}
 	}
-
-#ifdef DEBUG
-	rootNode->ChildrenToString(cout) << endl;
-	//rootNode->TreeToString(cout, 0) << endl;
-#endif // DEBUG
 
 	return rootNode->GetBestMove();
 }

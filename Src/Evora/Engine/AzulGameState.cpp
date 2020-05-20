@@ -38,10 +38,8 @@ void AzulGameState::DoMove(const GameMove& move)
  	while (mState->step())
 	{
 	}
-	mMoves.clear();
 	mPlayerWhoJustMoved = mState->get_current_player();
 	CalculateMoves();
-	int movessize = mMoves.size();
 	if(IsTerminal())
 	{
 		mWinner = mState->get_winner();
@@ -65,8 +63,23 @@ int AzulGameState::GetWinner() const
 
 const GameMove& AzulGameState::GetSimulationMove() const
 {
-	std::uniform_int_distribution<int> dist(0, mMoves.size() - 1);
-	return *mMoves[dist(*randomEng)];
+	std::uniform_real_distribution<float> dist(0, mTotalWeight);
+	float randomNumber = dist(*randomEng);
+	int moveIndex = 0;
+	float weightSum = 0.f;
+	while(moveIndex < mMoves.size())
+	{
+		weightSum += mMoveWeights[moveIndex];
+		if(weightSum < randomNumber)
+		{
+			moveIndex++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return *mMoves[moveIndex];
 }
 
 int AzulGameState::GetPlayerWhoJustMoved() const
@@ -84,16 +97,21 @@ std::shared_ptr<const GameMove> AzulGameState::ParseMove(const std::string& move
 	return std::dynamic_pointer_cast<const GameMove>(std::make_shared<const AzulGameMove>(stoi(move)));
 }
 
-void AzulGameState::addMove(int factory_index, int pattern_line_index, int color)
+void AzulGameState::addMove(int factory_index, int pattern_line_index, int color, float weight)
 {
 	int move = factory_index | (pattern_line_index << 4) | (color << 8);
 	mMoves.push_back(std::make_shared<AzulGameMove>(move));
+	mMoveWeights.push_back(weight);
+	mTotalWeight += weight;
 }
 
 void AzulGameState::CalculateMoves()
 {
 	if (mNotWin)
 	{
+		mTotalWeight = 0;
+		mMoves.clear();
+		mMoveWeights.clear();
 		for (int factory_index = 0; factory_index <= mState->get_model()->factory_count(); ++factory_index)
 		{
 			std::vector<model::tile> colors;
@@ -111,11 +129,11 @@ void AzulGameState::CalculateMoves()
 				{
 					if(mState->get_model()->can_add_to_pattern_line(mPlayerWhoJustMoved, pattern_line_index, color))
 					{
-						addMove(factory_index, pattern_line_index, (int)color);
+						addMove(factory_index, pattern_line_index, (int)color, 1.0f);
 					}
 				}
 				// for every color adding move to floor
-				addMove(factory_index, model::COLORS, (int)color);
+				addMove(factory_index, model::COLORS, (int)color, 0.05f);
 			}
 		}
 	}

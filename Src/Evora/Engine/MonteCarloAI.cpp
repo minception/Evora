@@ -13,7 +13,7 @@
 AI::MonteCarloAI::MonteCarloAI(std::shared_ptr<control::game_controller> controller, int board_index, int time) :
 	AI(controller, board_index), m_time(time)
 {
-	m_creator = std::make_unique<UCTTreeNodeCreator>();
+	m_creator = std::make_unique<UCTTreeNodeCreator>(1.6);
 	m_mcts = std::make_unique<MCTSAlgorithm>(*m_creator);
 }
 

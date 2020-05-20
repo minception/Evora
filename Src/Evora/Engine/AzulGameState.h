@@ -24,7 +24,9 @@ private:
 	int mWinner;
 	bool mNotWin;
 	std::vector<std::shared_ptr<const GameMove>> mMoves;
-	void addMove(int factory_index, int pattern_line_index, int color);
+	std::vector<float> mMoveWeights;
+	float mTotalWeight;
+	void addMove(int factory_index, int pattern_line_index, int color, float weight);
 	void CalculateMoves();
 	std::shared_ptr<std::mt19937> randomEng;
 };

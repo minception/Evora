@@ -87,7 +87,7 @@ std::shared_ptr<const GameMove> UCTTreeNode::GetMove() const
 std::shared_ptr<TreeNode> UCTTreeNode::SelectChild() const
 {
 	std::vector<std::shared_ptr<UCTTreeNode>> sortedChildNodes(mChildNodes);
-	sort(sortedChildNodes.begin(), sortedChildNodes.end(), [](std::shared_ptr<UCTTreeNode> x, std::shared_ptr<UCTTreeNode> y) {return x->UCTValue() > y->UCTValue(); });
+	sort(sortedChildNodes.begin(), sortedChildNodes.end(), [](std::shared_ptr<UCTTreeNode> x, std::shared_ptr<UCTTreeNode> y) {return x->UCTValue() < y->UCTValue(); });
 	return sortedChildNodes[0];
 }
 
