@@ -1,4 +1,4 @@
-﻿#include "MinimaxAI.h"
+﻿#include "minimax_ai.h"
 #include "center_offer.h"
 #include <memory>
 #include "drop_center.h"
@@ -6,7 +6,7 @@
 #include "drop_factory.h"
 #include "utils.h"
 
-int AI::MinimaxAI::evaluate(std::shared_ptr<control::game_controller>& controller)
+int ai::minimax_ai::evaluate(std::shared_ptr<control::game_controller>& controller)
 {
 	int moves = controller->add_wall_tiling_faze();
 	for (int i = 0; i < moves; ++i)
@@ -32,7 +32,7 @@ int AI::MinimaxAI::evaluate(std::shared_ptr<control::game_controller>& controlle
 	return score;
 }
 
-bool AI::MinimaxAI::update_scores(int player_index, int& best_score, int score)
+bool ai::minimax_ai::update_scores(int player_index, int& best_score, int score)
 {
 	if (player_index == m_board_index)
 	{
@@ -61,14 +61,12 @@ bool AI::MinimaxAI::update_scores(int player_index, int& best_score, int score)
 	return false;
 }
 
-int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control::game_controller> controller)
+int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control::game_controller> controller)
 {
-	
 	if(depth!= 0)
 	{
 		controller->step();
 	}
-	
 	std::shared_ptr<model::game> game = controller->get_model();
 	if(depth == m_max_depth && !game->round_finished())
 	{
@@ -78,13 +76,9 @@ int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control:
 	{
 		return utils::evaluate(controller, m_board_index);
 	}
-	int next_player = (player_index + 1) % game->player_count();
 	int best_score = player_index == m_board_index ? std::numeric_limits<int>::min() : std::numeric_limits<int>::max();
-	std::unique_ptr<control::command> best_move;
-	int center_offers = 0;
-	int factory_offers = 0;
+	int center_offers(0), factory_offers(0);
 	std::vector<model::tile> center_colors = game->get_center_colors();
-	int center_colors_count = center_colors.size();
 	// all center to pattern line moves
 	for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
 	{
@@ -92,15 +86,8 @@ int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control:
 		{
 			if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
 			{
-				controller->add_command(std::make_unique<control::center_offer>(player_index, pattern_line_index, color));
-				int score = minimax(next_player, depth + 1, controller);
-				controller->step_back();
-				bool updated = update_scores(player_index, best_score, score);
-				if (depth == 0 && updated)
-				{
-					best_move = std::make_unique<control::center_offer>(player_index, pattern_line_index, color);
-				}
-				else if(updated && m_alpha >= m_beta)
+				auto&& move = std::make_unique<control::center_offer>(player_index, pattern_line_index, color);
+				if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
 				{
 					return best_score;
 				}
@@ -118,16 +105,8 @@ int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control:
 			{
 				if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
 				{
-					//commands.push_back(std::move(std::make_unique<factory_offer>(factory_index, player_index, pattern_line_index, color)));
-					controller->add_command(std::make_unique<control::factory_offer>(factory_index, player_index, pattern_line_index, color));
-					int score = minimax(next_player, depth + 1, controller);
-					controller->step_back();
-					bool updated = update_scores(player_index, best_score, score);
-					if (depth == 0 && updated)
-					{
-						best_move = std::make_unique<control::factory_offer>(factory_index, player_index, pattern_line_index, color);
-					}
-					else if (m_alpha >= m_beta && updated)
+					auto&& move = std::make_unique<control::factory_offer>(factory_index, player_index, pattern_line_index, color);
+					if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
 					{
 						return best_score;
 					}
@@ -144,16 +123,8 @@ int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control:
 			std::vector<model::tile> factory_colors = game->get_factory_colors(factory_index);
 			for (auto&& color : factory_colors)
 			{
-				//commands.push_back(std::move(std::make_unique<drop_factory>(factory_index, player_index, color)));
-				controller->add_command(std::make_unique<control::drop_factory>(factory_index, player_index, color));
-				int score = minimax(next_player, depth + 1, controller);
-				controller->step_back();
-				bool updated = update_scores(player_index, best_score, score);
-				if (depth == 0 && updated)
-				{
-					best_move = std::make_unique<control::drop_factory>(factory_index, player_index, color);
-				}
-				else if (m_alpha >= m_beta && updated)
+				auto&& move = std::make_unique<control::drop_factory>(factory_index, player_index, color);
+				if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
 				{
 					return best_score;
 				}
@@ -162,37 +133,44 @@ int AI::MinimaxAI::minimax(int player_index, int depth, std::shared_ptr<control:
 		// all center to floor moves
 		for (auto&& color : center_colors)
 		{
-			//commands.push_back(std::move(std::make_unique<drop_center>(player_index, color)));
-			controller->add_command(std::make_unique<control::drop_center>(player_index, color));
-			int score = minimax(next_player, depth + 1, controller);
-			controller->step_back();
-			bool updated = update_scores(player_index, best_score, score);
-			if (depth == 0 && updated)
-			{
-				best_move = std::make_unique<control::drop_center>(player_index, color);
-			}
-			else if (m_alpha >= m_beta && updated)
+			auto&& move = std::make_unique<control::drop_center>(player_index, color);
+			if(alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
 			{
 				return best_score;
 			}
 		}
 	}
-	if(depth == 0)
-	{
-		m_best_move = std::move(best_move);
-	}
 	return best_score;
 }
 
-void AI::MinimaxAI::move()
+bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_controller>& controller, std::unique_ptr<control::command> move,
+                                  int& best_score, int depth, int player_index)
+{
+	int next_player = controller->get_current_player();
+	controller->add_command(move->clone());
+	int score = minimax(next_player, depth + 1, controller);
+	controller->step_back();
+	bool updated = update_scores(player_index, best_score, score);
+	if (depth == 0 && updated)
+	{
+		m_best_move = std::move(move);
+		return false;
+	}
+	if (m_alpha >= m_beta && updated)
+	{
+		return true;
+	}
+	return false;
+}
+
+void ai::minimax_ai::move()
 {
 	int max_move_score = std::numeric_limits<int>::min();
-	//printf("possible moves = %d\n", possible_moves);
 	m_max_depth = 0;
 	m_end_time = std::chrono::system_clock::now() + std::chrono::milliseconds(m_time);
 	std::shared_ptr<control::game_controller> mockup = std::make_shared<control::game_controller>(*m_controller);
 	m_round_finished = false;
-	while(utils::timeLeft(m_end_time) && !m_round_finished)
+	while(utils::time_left(m_end_time) && !m_round_finished)
 	{
 		m_round_finished = true;
 		++m_max_depth;
@@ -204,7 +182,7 @@ void AI::MinimaxAI::move()
 	m_controller->step();
 }
 
-const char* AI::MinimaxAI::get_name() const
+const char* ai::minimax_ai::get_name() const
 {
 	return "MinimaxAI";
 }

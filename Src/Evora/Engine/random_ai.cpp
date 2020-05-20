@@ -1,8 +1,8 @@
-﻿#include "RandomAI.h"
+﻿#include "random_ai.h"
 
-namespace AI
+namespace ai
 {
-	void RandomAI::move()
+	void random_ai::move()
 	{
 		std::vector<std::unique_ptr<control::command>> moves = m_controller->get_possible_moves(m_board_index);
 		auto start = moves.begin();
@@ -12,13 +12,13 @@ namespace AI
 		m_controller->step();
 	}
 
-	RandomAI::RandomAI(std::shared_ptr<control::game_controller> controller, int board_index) : AI(controller, board_index)
+	random_ai::random_ai(std::shared_ptr<control::game_controller> controller, int board_index) : ai(controller, board_index)
 	{
 		std::random_device seed;
 		m_rng = std::mt19937{ seed() };
 	}
 
-	const char* RandomAI::get_name() const
+	const char* random_ai::get_name() const
 	{
 		return "RandomAI";
 	}

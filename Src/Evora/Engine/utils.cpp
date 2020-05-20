@@ -2,7 +2,7 @@
 
 namespace utils
 {
-	int play_game(std::vector<std::unique_ptr<AI::AI>>& players, std::shared_ptr<control::game_controller> controller, int current_player)
+	int play_game(std::vector<std::unique_ptr<ai::ai>>& players, std::shared_ptr<control::game_controller> controller, int current_player)
 	{
 		bool round_over = false;
 		while (true)
@@ -55,7 +55,7 @@ namespace utils
 		return score;
 	}
 
-	bool timeLeft(std::chrono::system_clock::time_point end_time)
+	bool time_left(std::chrono::system_clock::time_point end_time)
 	{
 		return std::chrono::system_clock::now() < end_time;
 	}

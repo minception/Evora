@@ -1,7 +1,11 @@
-﻿#include "StrategyAI.h"
+﻿#include "greedy_ai.h"
+
+#include <limits>
 #include "utils.h"
 
-void AI::StrategyAI::move()
+using namespace ai;
+
+void greedy_ai::move()
 {
 	std::vector<std::unique_ptr<control::command>> moves = m_controller->get_possible_moves(m_board_index);
 	int to_execute = 0;
@@ -12,7 +16,7 @@ void AI::StrategyAI::move()
 		mockup->add_command(std::move(moves[i]->clone()));
 		mockup->step();
 		int move_score = utils::evaluate(mockup, m_board_index);
-		if (move_score > max_move_score)
+		if(move_score > max_move_score)
 		{
 			max_move_score = move_score;
 			to_execute = i;
@@ -23,7 +27,7 @@ void AI::StrategyAI::move()
 	m_controller->step();
 }
 
-const char* AI::StrategyAI::get_name() const
+const char* greedy_ai::get_name() const
 {
-	return "StrategyAI";
+	return "GreedyAI";
 }
