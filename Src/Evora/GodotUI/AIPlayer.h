@@ -1,15 +1,15 @@
 #pragma once
 #include "Player.h"
-#include "AI.h"
+#include "ai.h"
 #include <thread>
 
 namespace godot
 {
 	class AIPlayer :public Player
 	{
-		std::unique_ptr<AI::AI> m_player;
+		std::unique_ptr<ai::ai> m_player;
 	public:
 		void move() override;
-		AIPlayer(std::unique_ptr<AI::AI> player) :m_player(std::move(player)){}
+		AIPlayer(std::unique_ptr<ai::ai> player) :m_player(std::move(player)){}
 	};
 }

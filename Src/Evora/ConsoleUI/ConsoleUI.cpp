@@ -6,8 +6,8 @@
 #include <string>
 #include <cmath>
 
-#include "AI.h"
-#include "AIFactory.h"
+#include "ai.h"
+#include "ai_factory.h"
 #include "game.h"
 #include "game_controller.h"
 #include "utils.h"
@@ -16,9 +16,9 @@
 
 void display_usage()
 {
-	std::cout << "Usage : evora <AI name> <AI name> <number of games>" << std::endl;
+	std::cout << "Usage : evora <ai name> <ai name> <number of games>" << std::endl;
 	std::cout << "Available AIs:" << std::endl;
-	auto ai_factories = AI::AIFactory::get_factories();
+	auto ai_factories = ai::ai_factory::get_factories();
 	for (auto&& ai_factory : ai_factories)
 	{
 		std::cout << '\t' << ai_factory.first << std::endl;
@@ -76,18 +76,18 @@ int main(int argc, const char** argv)
 	if(argc == 4)
 	{
 		std::vector<std::string> arg_list(argv + 1, argv + argc);
-		auto ai_factories = AI::AIFactory::get_factories();
+		auto ai_factories = ai::ai_factory::get_factories();
 		std::string AI1name = arg_list[0];
 		std::string AI2name = arg_list[1];
 		if (!ai_factories.count(AI1name.c_str()))
 		{
-			std::cout << "Unknown AI " << AI1name << std::endl;
+			std::cout << "Unknown ai " << AI1name << std::endl;
 			display_usage();
 			return 1;
 		}
 		if(!ai_factories.count(AI2name.c_str()))
 		{
-			std::cout << "Unknown AI " << AI2name << std::endl;
+			std::cout << "Unknown ai " << AI2name << std::endl;
 			display_usage();
 			return 1;
 		}
@@ -102,7 +102,7 @@ int main(int argc, const char** argv)
 			std::shared_ptr<control::game_controller> controller = std::make_shared<control::game_controller>(std::make_shared<model::game>(2));
 			int current_player = 0;
 			controller->start_game(current_player);
-			std::vector<std::unique_ptr<AI::AI>> players;
+			std::vector<std::unique_ptr<ai::ai>> players;
 			players.push_back(ai_factories.at(AI1name.c_str())->get(controller, 0));
 			players.push_back(ai_factories.at(AI2name.c_str())->get(controller, 1));
 			int winner = utils::play_game(players, controller, current_player);

@@ -97,7 +97,7 @@ std::shared_ptr<const game_move> azul_game_state::parse_move(const std::string& 
 	return std::dynamic_pointer_cast<const game_move>(std::make_shared<const azul_game_move>(stoi(move)));
 }
 
-void azul_game_state::addMove(int factory_index, int pattern_line_index, int color, float weight)
+void azul_game_state::add_move(int factory_index, int pattern_line_index, int color, float weight)
 {
 	int move = factory_index | (pattern_line_index << 4) | (color << 8);
 	m_moves.push_back(std::make_shared<azul_game_move>(move));

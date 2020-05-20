@@ -49,7 +49,7 @@ void godot::Board::_ready()
 {
 	OptionButton* player_select = (OptionButton*)get_node("PlayerSelect");
 	player_select->add_item("Human", 0);
-	auto ai_factories = AI::AIFactory::get_factories();
+	auto ai_factories = ai::ai_factory::get_factories();
 	int64_t player_index = 1;
 	for (auto&& ai_factory : ai_factories)
 	{

@@ -4,7 +4,7 @@
 #include <Node2D.hpp>
 #include <OptionButton.hpp>
 
-#include "AIFactory.h"
+#include "ai_factory.h"
 
 namespace godot
 {

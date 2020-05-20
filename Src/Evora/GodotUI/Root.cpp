@@ -182,7 +182,7 @@ void Root::start_game()
 	game_data->set("number_of_players", m_number_of_players);
 	game_data->set_data();
 
-	auto ai_factories = AI::AIFactory::get_factories();
+	auto ai_factories = ai::ai_factory::get_factories();
 	// hide player selection and prepare for starting player select
 	for (int i = 0; i < boards_count; ++i)
 	{
