@@ -29,5 +29,7 @@ namespace model
 		void add_starter_tile();
 		void remove_tiles(int count);
 		tile pop_tile();
+		std::vector<std::tuple<tile, int>> get_colors_count();
+		int tile_count(tile color);
 	};
 }

@@ -49,6 +49,7 @@
     <ClInclude Include="score_line.h" />
     <ClInclude Include="score_row.h" />
     <ClInclude Include="score_wall_tile.h" />
+    <ClInclude Include="strategy_move.h" />
     <ClInclude Include="strategy_ai.h" />
     <ClInclude Include="tally_floor.h" />
     <ClInclude Include="tile.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="score_line.cpp" />
     <ClCompile Include="score_row.cpp" />
     <ClCompile Include="score_wall_tile.cpp" />
+    <ClCompile Include="strategy_move.cpp" />
     <ClCompile Include="strategy_ai.cpp" />
     <ClCompile Include="tally_floor.cpp" />
     <ClCompile Include="tile_wall.cpp" />

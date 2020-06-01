@@ -29,5 +29,7 @@ namespace model
 		void add_tiles(tile color, int count);
 		void add_from_center(center& center, int count);
 		void return_to_bag(bag& bag);
+		std::vector<std::tuple<tile, int>> get_colors_count();
+		int tile_count(tile color);
 	};
 }

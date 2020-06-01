@@ -1,5 +1,6 @@
 #include "uct_tree_node.h"
 #include <memory>
+#include <algorithm>
 
 uct_tree_node::uct_tree_node(std::shared_ptr<const game_move> move, std::shared_ptr<uct_tree_node> parent,
                          const game_state& state, double constant, bool generateUntriedMoves)
@@ -46,10 +47,10 @@ uct_tree_node& uct_tree_node::operator=(uct_tree_node&& rhs) noexcept
 
 std::shared_ptr<tree_node> uct_tree_node::add_child(std::shared_ptr<const game_move> move, std::shared_ptr<tree_node> parent, const game_state& state)
 {
-	std::shared_ptr<uct_tree_node> n = std::make_shared<uct_tree_node>(move, std::dynamic_pointer_cast<uct_tree_node>(parent), state, m_constant);
-	m_untried_moves.erase(remove(m_untried_moves.begin(), m_untried_moves.end(), move), m_untried_moves.end());
-	m_child_nodes.push_back(n);
-	return n;
+	std::shared_ptr<uct_tree_node> node = std::make_shared<uct_tree_node>(move, std::dynamic_pointer_cast<uct_tree_node>(parent), state, m_constant);
+	m_untried_moves.erase(std::remove(m_untried_moves.begin(), m_untried_moves.end(), move), m_untried_moves.end());
+	m_child_nodes.push_back(node);
+	return node;
 }
 
 std::shared_ptr<const game_move> uct_tree_node::get_best_move() const

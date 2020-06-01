@@ -96,5 +96,10 @@ namespace model
 		void wall_to_pattern_line(int player_index, int pattern_line_index, tile tile);
 		void remove_tile_from_bag(tile tile);
 		void set_lid_state(std::vector<tile>& tiles);
+		std::vector<std::tuple<tile, int>> get_center_colors_count();
+		std::vector<std::tuple<tile, int>> get_factory_colors_count(int factory_index);
+		int get_pattern_line_tile_count(int player_index, int pattern_line_index);
+		int factory_tile_count(int factory_index, tile color);
+		int center_tile_count(tile color);
 	};
 }

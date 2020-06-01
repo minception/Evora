@@ -61,6 +61,15 @@
     <Filter Include="AI\MonteCarloAI\Source Files\UCT">
       <UniqueIdentifier>{3242d6c2-0579-4a83-b270-123a32818a96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI\StrategyAI">
+      <UniqueIdentifier>{e23d701a-790d-4c4c-9288-4d4c59fad9e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\StrategyAI\Header Files">
+      <UniqueIdentifier>{4b97d687-1ab4-4f80-b2b7-c69ac2349613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\StrategyAI\Source Files">
+      <UniqueIdentifier>{011d0c41-052d-42eb-a4b9-6223633a2d2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_controller.h">
@@ -183,6 +192,9 @@
     <ClInclude Include="tree_node_creator.h">
       <Filter>AI\MonteCarloAI\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="strategy_move.h">
+      <Filter>AI\StrategyAI\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_controller.cpp">
@@ -301,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="tree_node_creator.cpp">
       <Filter>AI\MonteCarloAI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strategy_move.cpp">
+      <Filter>AI\StrategyAI\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

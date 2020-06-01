@@ -237,4 +237,9 @@ namespace model
 		m_wall.remove_tile(pattern_line_index, tile);
 		m_pattern_lines[pattern_line_index].fill(tile);
 	}
+
+	int board::get_pattern_line_tile_count(int pattern_line_index)
+	{
+		return m_pattern_lines[pattern_line_index].get_tile_count();
+	}
 }

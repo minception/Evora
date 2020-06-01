@@ -51,4 +51,9 @@ namespace model
 		m_count = m_size;
 		m_color = tile;
 	}
+
+	int pattern_line::get_tile_count()
+	{
+		return m_count;
+	}
 }

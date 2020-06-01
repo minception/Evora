@@ -23,7 +23,6 @@ int game_controller::add_wall_tiling_faze()
 			if(m_model->pattern_line_full(player_index, pattern_line))
 			{
 				model::tile color = m_model->pattern_line_color(player_index, pattern_line);
-				_ASSERT(color != model::tile::empty);
 				m_commands.emplace_back(std::make_unique<tile_wall>(player_index, pattern_line));
 				m_commands.emplace_back(std::make_unique<score_wall_tile>(player_index, pattern_line, color));
 				count += 2;

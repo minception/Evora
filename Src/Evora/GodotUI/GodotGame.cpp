@@ -46,7 +46,6 @@ int GodotGame::bag_to_factories()
 
 int GodotGame::factory_to_pattern_line(int factory_index, int player_index, int pattern_line_index, tile color)
 {
-	//_ASSERT(false);
 	int count = game::factory_to_pattern_line(factory_index, player_index, pattern_line_index, color);
 	Board* board = (Board*)ObjectLoader::board_loader->get_child(player_index);
 	std::vector<Vector2> positions = board->get_pattern_line_positions(pattern_line_index, count);

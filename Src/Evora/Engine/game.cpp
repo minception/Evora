@@ -337,7 +337,6 @@ namespace model
 	tile game::tile_wall(int player_index, int pattern_line_index)
 	{
 		tile color = m_boards[player_index].pattern_line_color(pattern_line_index);
-		_ASSERT(color != tile::empty);
 		m_boards[player_index].clear_pattern_line(pattern_line_index);
 		m_boards[player_index].tile_wall(pattern_line_index, color);
 		m_lid.add_tiles(pattern_line_index, color);
@@ -646,6 +645,31 @@ namespace model
 	void game::set_lid_state(std::vector<tile>& tiles)
 	{
 		m_lid.set_state(tiles);
+	}
+
+	std::vector<std::tuple<tile, int>> game::get_center_colors_count()
+	{
+		return m_center.get_colors_count();
+	}
+
+	std::vector<std::tuple<tile, int>> game::get_factory_colors_count(int factory_index)
+	{
+		return m_factories[factory_index].get_colors_count();
+	}
+
+	int game::get_pattern_line_tile_count(int player_index, int pattern_line_index)
+	{
+		return m_boards[player_index].get_pattern_line_tile_count(pattern_line_index);
+	}
+
+	int game::factory_tile_count(int factory_index, tile color)
+	{
+		return m_factories[factory_index].tile_count(color);
+	}
+
+	int game::center_tile_count(tile color)
+	{
+		return m_center.tile_count(color);
 	}
 
 	/**

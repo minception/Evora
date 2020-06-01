@@ -21,5 +21,6 @@ namespace model
 		void clear();
 		void remove_tiles(int count);
 		void fill(tile tile);
+		int get_tile_count();
 	};
 }

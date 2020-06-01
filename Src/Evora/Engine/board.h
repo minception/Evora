@@ -58,5 +58,6 @@ namespace model
 		void lid_to_floor(lid& lid, int count);
 		void add_starter_to_floor(int position);
 		void wall_to_pattern_line(int pattern_line_index, tile tile);
+		int get_pattern_line_tile_count(int pattern_line_index);
 	};
 }

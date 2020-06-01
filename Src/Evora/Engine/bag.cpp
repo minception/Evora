@@ -67,6 +67,5 @@ namespace model
 				return;
 			}
 		}
-		throw new std::exception("tile not found in bag");
 	}
 }

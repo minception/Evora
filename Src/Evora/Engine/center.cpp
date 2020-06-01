@@ -99,4 +99,35 @@ namespace model
 		m_tiles.pop_back();
 		return color;
 	}
+
+	std::vector<std::tuple<tile, int>> center::get_colors_count()
+	{
+		std::vector<std::tuple<tile, int>> res;
+		for (auto&& tile : m_tiles)
+		{
+			if (tile == tile::starter) continue;
+			bool found = false;
+			for(auto&& cq : res)
+			{
+				if(std::get<0>(cq) == tile)
+				{
+					std::get<1>(cq)++;
+					found = true;
+					break;
+				}
+			}
+			if(!found)
+			{
+				res.emplace_back(tile, 1);
+			}
+		}
+		return res;
+	}
+
+	int center::tile_count(tile color)
+	{
+		int res(0);
+		std::for_each(m_tiles.begin(), m_tiles.end(), [&res, color](auto tile) {if (tile == color) { ++res; }});
+		return res;
+	}
 }
