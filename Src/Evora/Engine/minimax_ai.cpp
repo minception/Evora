@@ -8,7 +8,7 @@
 
 int ai::minimax_ai::evaluate(std::shared_ptr<control::game_controller>& controller)
 {
-	int moves = controller->add_wall_tiling_faze();
+	int moves = controller->add_wall_tiling_phase();
 	for (int i = 0; i < moves; ++i)
 	{
 		controller->step();
@@ -149,7 +149,7 @@ bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_control
 	int next_player = controller->get_current_player();
 	controller->add_command(move->clone());
 	int score = minimax(next_player, depth + 1, controller);
-	controller->step_back();
+	controller->player_move_back();
 	bool updated = update_scores(player_index, best_score, score);
 	if (depth == 0 && updated)
 	{

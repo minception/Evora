@@ -304,11 +304,11 @@ namespace model
 	}
 
 	/**
-	 * \brief Make starter tile unhandled in the current round
+	 * \brief Set whether a starter tile was handled in the current round
 	 */
-	void game::starter_tile_unhandled()
+	void game::set_starter_tile_handled(bool val)
 	{
-		m_starter_tile_handled = false;
+		m_starter_tile_handled = val;
 	}
 
 	/**

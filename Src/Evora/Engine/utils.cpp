@@ -30,7 +30,7 @@ namespace utils
 	
 	int evaluate(std::shared_ptr<control::game_controller>& controller, int player_index)
 	{
-		int moves = controller->add_wall_tiling_faze();
+		int moves = controller->add_wall_tiling_phase();
 		moves += controller->add_game_end();
 		for (int i = 0; i < moves; ++i)
 		{

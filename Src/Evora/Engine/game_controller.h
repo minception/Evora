@@ -21,13 +21,14 @@ namespace control
 		void add_command(std::unique_ptr<command> command);
 		int get_current_player();
 		void set_first_player(int player_index);
-		int add_wall_tiling_faze();
+		int add_wall_tiling_phase();
 		int add_game_end();
 		std::vector<std::unique_ptr<command>> get_possible_moves(int player_index);
 		int possible_moves_count(int player_index);
 		bool step();
 		bool is_round_over();
 		void step_back();
+		void player_move_back();
 		int evaluate_state(int player_index);
 		bool game_over();
 		int get_winner();

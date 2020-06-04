@@ -15,6 +15,7 @@ namespace ai
 		std::map<int, std::vector<strategy_move>> sort_moves(const std::vector<strategy_move>& moves);
 		std::vector<std::pair<int, float>> calculate_possible_fill(const std::map<int, std::vector<strategy_move>>& sorted_moves);
 		std::tuple<int, int> calculate_coordinates(int position);
+		const strategy_move& best_fill(const std::vector<strategy_move>& moves);
 		std::unique_ptr<control::command> pick_move();
 		std::vector<strategy_move> get_moves();
 	};

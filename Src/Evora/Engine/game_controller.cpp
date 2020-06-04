@@ -13,7 +13,7 @@
 
 using namespace control;
 
-int game_controller::add_wall_tiling_faze()
+int game_controller::add_wall_tiling_phase()
 {
 	int count = 0;
 	for (int player_index = 0; player_index < m_model->player_count(); ++player_index)
@@ -188,7 +188,7 @@ bool game_controller::step()
 		if (m_game_over) return false;
 		if (m_model->round_finished())
 		{
-			add_wall_tiling_faze();
+			add_wall_tiling_phase();
 			if(m_game_over)
 			{
 				add_game_end();
@@ -204,11 +204,11 @@ bool game_controller::step()
 		}
 		return false;
 	}
-	if (m_commands[m_current_command]->IsMove())
+	if (m_commands[m_current_command]->is_move())
 	{
 		m_current_player = (m_current_player + 1) % m_model->player_count();
 	}
-	m_commands[m_current_command++]->Execute(m_model);
+	m_commands[m_current_command++]->execute(m_model);
 	return true;
 }
 
@@ -219,7 +219,19 @@ bool game_controller::is_round_over()
 
 void game_controller::step_back()
 {
-	m_commands[--m_current_command]->Unexecute(m_model);
+	m_commands[--m_current_command]->unexecute(m_model);
+	m_current_player = m_commands[m_current_command]->player_index() != -1 ? m_commands[m_current_command]->player_index() : m_current_player;
+	m_commands.erase(m_commands.begin() + m_current_command, m_commands.end());
+}
+
+void game_controller::player_move_back()
+{
+	do
+	{
+		m_commands[--m_current_command]->unexecute(m_model);
+
+	} while (m_current_command > 0 && !m_commands[m_current_command]->is_move());
+	m_current_player = m_commands[m_current_command]->player_index() != -1 ? m_commands[m_current_command]->player_index() : m_current_player;
 	m_commands.erase(m_commands.begin() + m_current_command, m_commands.end());
 }
 

@@ -12,10 +12,11 @@ namespace control
 			  m_color(color)
 		{}
 
-		void Execute(std::shared_ptr<model::game> game) override;
-		void Unexecute(std::shared_ptr<model::game> game) override;
+		void execute(std::shared_ptr<model::game> game) override;
+		void unexecute(std::shared_ptr<model::game> game) override;
 		std::unique_ptr<command> clone() override;
-		bool IsMove() override;
+		bool is_move() override;
+		int player_index() override;
 	private:
 		int m_player_index;
 		int m_line;

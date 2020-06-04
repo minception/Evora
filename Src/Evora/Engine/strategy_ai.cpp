@@ -25,11 +25,12 @@ std::vector<std::pair<int, float>> ai::strategy_ai::calculate_possible_fill(
 	std::shared_ptr<model::game> model = m_controller->get_model();
 	for (auto && position : sorted_moves)
 	{
-		if(position.first >= 0)
+		if(position.first >= 0 && !position.second.empty())
 		{
 			
 			int pattern_line = position.first / model::COLORS;
-			res.emplace_back(position.first, model->get_pattern_line_tile_count(m_board_index, pattern_line));
+			int current_fill = model->get_pattern_line_tile_count(m_board_index, pattern_line);
+			res.emplace_back(position.first, current_fill);
 			for (auto&& move : position.second)
 			{
 				res.back().second += move.get_tile_count();
@@ -48,6 +49,33 @@ std::tuple<int, int> ai::strategy_ai::calculate_coordinates(int position)
 	return std::make_tuple(position % model::COLORS, position / model::COLORS);
 }
 
+const strategy_move& ai::strategy_ai::best_fill(const std::vector<strategy_move>& moves)
+{
+	int to_fill = moves.begin()->to_fill();
+	int least_empty = to_fill;
+	const strategy_move* least_empty_move = nullptr;
+	int smallest_overflow = moves[0].get_overflow(); // Here 20 is simply the largest possible overflow that could occur in a 2 player game
+	const strategy_move* smallest_overflow_move = &moves[0];
+	for(auto&& move: moves)
+	{
+		int move_hole = to_fill - move.get_tile_count();
+		int move_overflow = move.get_overflow();
+		if(move_hole >= 0 && move_hole < least_empty)
+		{
+			least_empty = move_hole;
+			least_empty_move = &move;
+		}
+		if(move_overflow < smallest_overflow)
+		{
+			smallest_overflow = move_overflow;
+			smallest_overflow_move = &move;
+		}
+	}
+	if (least_empty_move) return *least_empty_move;
+	return *smallest_overflow_move;
+	
+}
+
 void ai::strategy_ai::move()
 {
 	
@@ -62,12 +90,25 @@ const char* ai::strategy_ai::get_name() const
 
 std::unique_ptr<control::command> ai::strategy_ai::pick_move()
 {
-
+	auto model = m_controller->get_model();
 	std::vector<strategy_move> moves = get_moves();
+	// Sort moves into groups by tiles on the wall
 	std::map<int, std::vector<strategy_move>> sorted_moves = sort_moves(moves);
+	// Filling partially filled lines first
+	for(int i = model::COLORS - 1; i >= 0; --i)
+	{
+		model::tile color_i = model->pattern_line_color(m_board_index, i);
+		if(color_i != model::tile::empty)
+		{
+			int index = (((int)color_i + i) % model::COLORS) + i * model::COLORS;
+			if (sorted_moves[index].size() > 0) return best_fill(sorted_moves[index]).gen_move();
+		}
+	}
+	// If no pattern line requires filling, pick the pattern line that can be filled the most
 	std::vector<std::pair<int, float>> possible_fill = calculate_possible_fill(sorted_moves);
 	std::sort(possible_fill.begin(), possible_fill.end(), [](auto a, auto b) {return a.second > b.second; });
-	return sorted_moves[possible_fill[0].first].begin()->gen_move();
+	return best_fill(sorted_moves[possible_fill[0].first]).gen_move();
+	
 }
 
 std::vector<strategy_move> ai::strategy_ai::get_moves()

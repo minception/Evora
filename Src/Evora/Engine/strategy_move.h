@@ -17,9 +17,11 @@ public:
 	{
 		calculate_parameters();
 	}
-	std::unique_ptr<control::command> gen_move();
+	std::unique_ptr<control::command> gen_move() const;
 	std::tuple<int, int> get_wall_position() const;
 	float get_tile_count() const;
+	int to_fill() const;
+	int get_overflow() const;
 private:
 	std::shared_ptr<model::game> m_model;
 	int m_player_index;
@@ -32,6 +34,7 @@ private:
 	int m_tile_count;
 	int m_line_overflow;
 	int m_score_gain;
+	int m_to_fill;
 	std::tuple<int, int> m_wall_position;
 	
 	void calculate_parameters();

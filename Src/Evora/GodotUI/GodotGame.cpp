@@ -266,9 +266,9 @@ bool GodotGame::handle_center_starter_tile(int player_index)
 	return false;
 }
 
-void godot::GodotGame::starter_tile_unhandled()
+void godot::GodotGame::set_starter_tile_handled(bool val)
 {
-	game::starter_tile_unhandled();
+	game::set_starter_tile_handled(val);
 	GodotTile* starter_tile = (GodotTile*)GodotScenes::root->get_node("StarterTile");
 	int starter_player_index = game::get_first_player();
 	GodotScenes::game_data->current_player = starter_player_index;

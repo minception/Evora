@@ -63,7 +63,7 @@ namespace model
 		virtual int score_floor(int player_index);
 		int handle_floor_starter_tile(int player_index);
 
-		virtual void starter_tile_unhandled();
+		virtual void set_starter_tile_handled(bool val);
 
 		tile pattern_line_color(int player_index, int pattern_line_index);
 		bool pattern_line_full(int player_index, int pattern_line_index);
