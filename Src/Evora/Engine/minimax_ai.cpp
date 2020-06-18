@@ -32,16 +32,16 @@ int ai::minimax_ai::evaluate(std::shared_ptr<control::game_controller>& controll
 	return score;
 }
 
-bool ai::minimax_ai::update_scores(int player_index, int& best_score, int score)
+bool ai::minimax_ai::update_scores(int player_index, int& best_score, int score, int& alpha, int& beta)
 {
 	if (player_index == m_board_index)
 	{
 		if (score > best_score)
 		{
 			best_score = score;
-			if(score > m_alpha)
+			if(score > alpha)
 			{
-				m_alpha = score;
+				alpha = score;
 			}
 			return true;
 		}
@@ -51,9 +51,9 @@ bool ai::minimax_ai::update_scores(int player_index, int& best_score, int score)
 		if (score < best_score)
 		{
 			best_score = score;
-			if(score < m_beta)
+			if(score < beta)
 			{
-				m_beta = score;
+				beta = score;
 			}
 			return true;
 		}
@@ -61,7 +61,7 @@ bool ai::minimax_ai::update_scores(int player_index, int& best_score, int score)
 	return false;
 }
 
-int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control::game_controller> controller)
+int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control::game_controller> controller, int alpha, int beta)
 {
 	if(depth!= 0)
 	{
@@ -87,7 +87,7 @@ int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control
 			if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
 			{
 				auto&& move = std::make_unique<control::center_offer>(player_index, pattern_line_index, color);
-				if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
+				if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index, alpha, beta))
 				{
 					return best_score;
 				}
@@ -106,7 +106,7 @@ int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control
 				if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
 				{
 					auto&& move = std::make_unique<control::factory_offer>(factory_index, player_index, pattern_line_index, color);
-					if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
+					if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index, alpha, beta))
 					{
 						return best_score;
 					}
@@ -124,7 +124,7 @@ int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control
 			for (auto&& color : factory_colors)
 			{
 				auto&& move = std::make_unique<control::drop_factory>(factory_index, player_index, color);
-				if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
+				if (alpha_beta_move(controller, std::move(move), best_score, depth, player_index, alpha, beta))
 				{
 					return best_score;
 				}
@@ -134,7 +134,7 @@ int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control
 		for (auto&& color : center_colors)
 		{
 			auto&& move = std::make_unique<control::drop_center>(player_index, color);
-			if(alpha_beta_move(controller, std::move(move), best_score, depth, player_index))
+			if(alpha_beta_move(controller, std::move(move), best_score, depth, player_index, alpha, beta))
 			{
 				return best_score;
 			}
@@ -144,19 +144,19 @@ int ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control
 }
 
 bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_controller>& controller, std::unique_ptr<control::command> move,
-                                  int& best_score, int depth, int player_index)
+                                  int& best_score, int depth, int player_index, int& alpha, int& beta)
 {
 	int next_player = controller->get_current_player();
 	controller->add_command(move->clone());
-	int score = minimax(next_player, depth + 1, controller);
+	int score = minimax(next_player, depth + 1, controller, alpha, beta);
 	controller->player_move_back();
-	bool updated = update_scores(player_index, best_score, score);
+	bool updated = update_scores(player_index, best_score, score, alpha, beta);
 	if (depth == 0 && updated)
 	{
 		m_best_move = std::move(move);
 		return false;
 	}
-	if (m_alpha >= m_beta && updated)
+	if (alpha >= beta && updated)
 	{
 		return true;
 	}
@@ -174,9 +174,9 @@ void ai::minimax_ai::move()
 	{
 		m_round_finished = true;
 		++m_max_depth;
-		m_alpha = std::numeric_limits<int>::min();
-		m_beta = std::numeric_limits<int>::max();
-		minimax(m_board_index, 0, mockup);
+		int alpha = std::numeric_limits<int>::min();
+		int beta = std::numeric_limits<int>::max();
+		minimax(m_board_index, 0, mockup, alpha, beta);
 	}
 	m_controller->add_command(std::move(m_best_move));
 	m_controller->step();
