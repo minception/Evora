@@ -272,9 +272,9 @@ namespace model
 		if (m_center.pick_starter_tile())
 		{
 			m_boards[player_index].set_starter_player();
-			if(!m_boards[player_index].floor_full())
+			if (!m_boards[player_index].floor_full())
 			{
-				m_boards[player_index].add_to_floor(tile::starter);
+				m_boards[player_index].add_starter_to_floor();
 			}
 			return true;
 		}
