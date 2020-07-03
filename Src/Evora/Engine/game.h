@@ -21,7 +21,7 @@ namespace model
 		std::vector<board> m_boards;
 		bool m_starter_tile_handled; // keeps track of whether the starter tile has been handled this factory offer round
 	public:
-		game(int number_of_players);
+		game(int number_of_players, int seed = -1);
 		int factory_count();
 		int player_count();
 
@@ -32,6 +32,8 @@ namespace model
 		std::vector<board>::const_iterator players_end() const;
 		std::vector<tile>::const_iterator center_begin() const;
 		std::vector<tile>::const_iterator center_end() const;
+
+        board &get_board(int i) { return m_boards[i]; }
 
 		void shuffle_bag();
 		std::vector<tile> get_lid_state();
@@ -61,7 +63,7 @@ namespace model
 		
 		virtual int floor_to_lid(int player_index);
 		virtual int score_floor(int player_index);
-		int handle_floor_starter_tile(int player_index);
+		bool handle_floor_starter_tile(int player_index);
 
 		virtual void set_starter_tile_handled(bool val);
 
@@ -92,7 +94,7 @@ namespace model
 		void factories_to_bag();
 		void take_score(int player_index, int score);
 		void lid_to_floor(int player_index, int count);
-		void add_starter_to_floor(int player_index, int position);
+		void add_starter_to_floor(int player_index);
 		void wall_to_pattern_line(int player_index, int pattern_line_index, tile tile);
 		void remove_tile_from_bag(tile tile);
 		void set_lid_state(std::vector<tile>& tiles);

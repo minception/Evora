@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ad_ai.h" />
     <ClInclude Include="ai.h" />
     <ClInclude Include="ai_factory.h" />
     <ClInclude Include="azul_game_move.h" />
@@ -62,6 +63,7 @@
     <ClInclude Include="wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ad_ai.cpp" />
     <ClCompile Include="ai.cpp" />
     <ClCompile Include="ai_factory.cpp" />
     <ClCompile Include="azul_game_move.cpp" />

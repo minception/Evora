@@ -10,7 +10,6 @@ namespace model
 	class center
 	{
 		std::vector<tile> m_tiles;
-		bool first_pick = true;
 		
 	public:
 		void add_tile(tile type);

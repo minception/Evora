@@ -12,10 +12,11 @@ namespace model
 		}
 	}
 
-	bag::bag()
+	bag::bag(int seed)
 	{
-		std::random_device seed;
-		m_rng = std::mt19937{ seed() };
+		std::random_device rand;
+		m_seed = seed >= 0 ? seed : rand();
+		m_rng = std::mt19937{ m_seed };
 		generate_tiles(TILES / COLORS, tile::red);
 		generate_tiles(TILES / COLORS, tile::yellow);
 		generate_tiles(TILES / COLORS, tile::blue);

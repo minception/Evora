@@ -152,7 +152,7 @@ namespace model
 		return m_floor.move_to_lid(lid);
 	}
 
-	int board::handle_floor_starter_tile()
+	bool board::handle_floor_starter_tile()
 	{
 		return m_floor.handle_starter_tile();
 	}
@@ -227,9 +227,9 @@ namespace model
 		}
 	}
 
-	void board::add_starter_to_floor(int position)
+	void board::add_starter_to_floor()
 	{
-		m_floor.add_starter(position);
+		m_floor.add_starter();
 	}
 
 	void board::wall_to_pattern_line(int pattern_line_index, tile tile)

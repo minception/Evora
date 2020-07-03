@@ -1,4 +1,7 @@
 #pragma once
+
+#include <string>
+
 namespace model
 {
 	static const int COLORS = 5;
@@ -12,4 +15,6 @@ namespace model
 		empty,
 		starter
 	};
+
+    std::string tile_to_string(tile t);	
 }

@@ -10,8 +10,7 @@ namespace control
 		score_row(int player_index, int row)
 			: m_player_index(player_index),
 			  m_row(row)
-		{
-		}
+		{}
 
 		void execute(std::shared_ptr<model::game> game) override;
 		void unexecute(std::shared_ptr<model::game> game) override;

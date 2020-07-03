@@ -18,7 +18,7 @@ namespace control
 	private:
 		int m_player_index;
 		int m_score = 0;
-		int m_starter_tile_position = 0;
+		bool m_starter_tile = 0;
 		// the floor size here won't include the starter tile
 		int m_floor_size = 0;
 	};

@@ -6,7 +6,7 @@ namespace model
 	 * \brief Creates a game instance with a given number of players
 	 * \param number_of_players Number of players in game
 	 */
-	game::game(int number_of_players)
+	game::game(int number_of_players, int seed) : m_bag(seed)
 	{
 		const int number_of_factories = number_of_players * 2 + 1;
 		for (int i = 0; i < number_of_factories; i++)
@@ -173,7 +173,7 @@ namespace model
 		if(!m_starter_tile_handled
 			&& m_boards[player_index].has_starter_tile())
 		{
-			m_center.add_tile(tile::starter);
+			m_center.add_starter_tile();
 			m_boards[player_index].take_starter_tile();
 			m_starter_tile_handled = true;
 			return true;
@@ -414,7 +414,7 @@ namespace model
 	 * \param player_index Player index
 	 * \return A position of the starter tile on the floor, if not present, returns -1
 	 */
-	int game::handle_floor_starter_tile(int player_index)
+	bool game::handle_floor_starter_tile(int player_index)
 	{
 		return m_boards[player_index].handle_floor_starter_tile();
 	}
@@ -496,7 +496,7 @@ namespace model
 		int max_score = 0;
 		int winner_index = 0;
 		int max_horizontal_lines = 0;
-		for (int i = 0; i < m_boards.size(); ++i)
+		for (unsigned int i = 0; i < m_boards.size(); ++i)
 		{
 			int player_score = m_boards[i].get_score();
 			if(player_score > max_score)
@@ -626,9 +626,9 @@ namespace model
 		m_boards[player_index].lid_to_floor(m_lid, count);
 	}
 
-	void game::add_starter_to_floor(int player_index, int position)
+	void game::add_starter_to_floor(int player_index)
 	{
-		m_boards[player_index].add_starter_to_floor(position);
+		m_boards[player_index].add_starter_to_floor();
 	}
 
 	void game::wall_to_pattern_line(int player_index, int pattern_line_index, tile tile)

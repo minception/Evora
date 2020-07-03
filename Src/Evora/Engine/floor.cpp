@@ -45,17 +45,14 @@ namespace model
 		return size;
 	}
 
-	int floor::handle_starter_tile()
+	bool floor::handle_starter_tile()
 	{
-		for (int i = 0; i < m_tiles.size(); ++i)
+		if (!m_tiles.empty() && m_tiles[0] == tile::starter)
 		{
-			if (m_tiles[i] == tile::starter)
-			{
-				m_tiles.erase(m_tiles.begin() + i);
-				return i;
-			}
+			m_tiles.erase(m_tiles.begin());
+			return true;
 		}
-		return -1;
+		return false;
 	}
 
 	void floor::remove_tiles(int count)
@@ -65,18 +62,14 @@ namespace model
 
 	void floor::take_starter_tile()
 	{
-		for (int i = 0; i < m_tiles.size(); ++i)
+		if (m_tiles.size() > 0 && m_tiles[0] == tile::starter)
 		{
-			if(m_tiles[i] == tile::starter)
-			{
-				m_tiles.erase(m_tiles.begin() + i);
-				return;
-			}
+			m_tiles.erase(m_tiles.begin());
 		}
 	}
 
-	void floor::add_starter(int position)
+	void floor::add_starter()
 	{
-		m_tiles.insert(m_tiles.begin() + position, tile::starter);
+		m_tiles.insert(m_tiles.begin(), tile::starter);
 	}
 }

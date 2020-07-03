@@ -28,6 +28,7 @@ namespace model
 		std::vector<pattern_line>::const_iterator pattern_lines_end() const;
 		std::vector<tile>::const_iterator floor_begin() const;
 		std::vector<tile>::const_iterator floor_end() const;
+		wall &get_wall() { return m_wall; }
 		void add_to_floor(tile color);
 		bool has_starter_tile();
 		void set_starter_tile(bool cond);
@@ -43,7 +44,7 @@ namespace model
 		std::vector<int> get_score_indices(int pattern_line_index, tile tile);
 		int score_floor();
 		int floor_to_lid(lid& lid);
-		int handle_floor_starter_tile();
+		bool handle_floor_starter_tile();
 		bool game_finished();
 		int score_wall_color(tile tile);
 		int score_wall_line(int line);
@@ -56,7 +57,7 @@ namespace model
 		int horizontal_lines();
 		void take_score(int score);
 		void lid_to_floor(lid& lid, int count);
-		void add_starter_to_floor(int position);
+		void add_starter_to_floor();
 		void wall_to_pattern_line(int pattern_line_index, tile tile);
 		int get_pattern_line_tile_count(int pattern_line_index);
 	};

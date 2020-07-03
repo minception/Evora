@@ -29,6 +29,7 @@ namespace control
 		bool is_round_over();
 		void step_back();
 		void player_move_back();
+		void player_move();
 		int evaluate_state(int player_index);
 		bool game_over();
 		int get_winner();

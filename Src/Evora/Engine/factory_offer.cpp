@@ -21,6 +21,7 @@ void factory_offer::unexecute(std::shared_ptr<model::game> game)
 	{
 		game->set_first_player(m_player_index);
 		game->remove_center_starter_tile();
+		game->set_starter_tile_handled(false);
 	}
 }
 

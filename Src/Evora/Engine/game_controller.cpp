@@ -233,6 +233,13 @@ void game_controller::player_move_back()
 	} while (m_current_command > 0 && !m_commands[m_current_command]->is_move());
 	m_current_player = m_commands[m_current_command]->player_index() != -1 ? m_commands[m_current_command]->player_index() : m_current_player;
 	m_commands.erase(m_commands.begin() + m_current_command, m_commands.end());
+	if (m_game_over) {
+		m_game_over = false;
+	}
+}
+
+void game_controller::player_move() {
+	while (step());
 }
 
 int game_controller::evaluate_state(int player_index)

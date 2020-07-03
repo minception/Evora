@@ -4,7 +4,8 @@ namespace utils
 {
 	int play_game(std::vector<std::unique_ptr<ai::ai>>& players, std::shared_ptr<control::game_controller> controller, int current_player)
 	{
-		bool round_over = false;
+		int move_counter = 0;
+		//bool round_over = false;
 		while (true)
 		{
 			if (!controller->step())
@@ -13,18 +14,19 @@ namespace utils
 				{
 					return controller->get_winner();
 				}
-				if (round_over)
-				{
-					current_player = controller->get_first_player();
-					round_over = false;
-				}
+				//if (round_over)
+				//{
+				//	current_player = controller->get_first_player();
+				//	round_over = false;
+				//}
+				current_player = controller->get_current_player();
 				players[current_player]->move();
-				current_player = (current_player + 1) % 2;
+				++move_counter;
 			}
-			else if (!round_over && controller->is_round_over())
-			{
-				round_over = true;
-			}
+			//else if (!round_over && controller->is_round_over())
+			//{
+			//	round_over = true;
+			//}
 		}
 	}
 	
