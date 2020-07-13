@@ -8,7 +8,11 @@
 #include "factory_offer.h"
 #include "game_controller.h"
 #include "uct_tree_node_creator.h"
+#include "uct_tree_node.h"
 #include "utils.h"
+#include <iostream>
+
+#define COUNTNODES 0
 
 ai::monte_carlo_ai::monte_carlo_ai(std::shared_ptr<control::game_controller> controller, int board_index, int time) :
 	ai(controller, board_index), m_time(time)
@@ -24,8 +28,12 @@ void ai::monte_carlo_ai::move()
 	auto best_move = m_mcts->search(state, m_time);
 	const azul_game_move& azulMove = dynamic_cast<const azul_game_move&>(*best_move);
 
+#ifdef COUNTNODES
+	std::cout << "Nodes created in " << m_time << " ms: " << uct_tree_node::get_nodes_created() << std::endl;
+#endif
 	m_controller->add_command(azulMove.generate_command(m_board_index));
 	m_controller->step();
+
 }
 
 

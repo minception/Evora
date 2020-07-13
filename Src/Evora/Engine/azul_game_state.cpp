@@ -1,5 +1,6 @@
 #include "azul_game_state.h"
 #include "azul_game_move.h"
+#include "utils.h"
 
 #include "game.h"
 #include <memory>
@@ -100,6 +101,7 @@ std::shared_ptr<const game_move> azul_game_state::parse_move(const std::string& 
 void azul_game_state::add_move(int factory_index, int pattern_line_index, int color, float weight)
 {
 	int move = factory_index | (pattern_line_index << 4) | (color << 8);
+	weight = weight == 0 ? 0.1 : weight; // make sure weight is not 0, that would suck
 	m_moves.push_back(std::make_shared<azul_game_move>(move));
 	m_move_weights.push_back(weight);
 	m_total_weight += weight;
@@ -129,11 +131,13 @@ void azul_game_state::calculate_moves()
 				{
 					if(m_state->get_model()->can_add_to_pattern_line(m_player_who_just_moved, pattern_line_index, color))
 					{
-						add_move(factory_index, pattern_line_index, (int)color, 1.0f);
+						double weight = utils::score_move(m_state, m_player_who_just_moved, pattern_line_index, (model::tile)color);
+						add_move(factory_index, pattern_line_index, (int)color, weight);
 					}
 				}
 				// for every color adding move to floor
-				add_move(factory_index, model::COLORS, (int)color, 0.05f);
+				double weight = utils::score_move(m_state, m_player_who_just_moved, model::COLORS, (model::tile)color);
+				add_move(factory_index, model::COLORS, (int)color, weight);
 			}
 		}
 	}

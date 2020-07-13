@@ -2,10 +2,13 @@
 #include <memory>
 #include <algorithm>
 
+int uct_tree_node::nodes_created = 0;
+
 uct_tree_node::uct_tree_node(std::shared_ptr<const game_move> move, std::shared_ptr<uct_tree_node> parent,
                          const game_state& state, double constant, bool generateUntriedMoves)
 	:m_move(move), m_parent(parent), m_constant(constant), m_wins(0), m_visits(0)
 {
+	nodes_created++;
 	m_player_who_just_moved = state.get_player_who_just_moved();
 	if(generateUntriedMoves)
 	{
@@ -135,6 +138,14 @@ void uct_tree_node::update(double result)
 {
 	++m_visits;
 	m_wins += result;
+}
+
+int uct_tree_node::get_nodes_created()
+{
+	int res = nodes_created;
+	nodes_created = 0;
+	return res;
+
 }
 
 double uct_tree_node::uct_value() const

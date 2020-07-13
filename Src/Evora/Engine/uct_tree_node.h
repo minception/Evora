@@ -23,6 +23,7 @@ public:
 	std::shared_ptr<tree_node> select_child() const override;
 	std::shared_ptr<const game_move> select_untried_move() const override;
 	void update(double result) override;
+	static int get_nodes_created();
 
 protected:
 	std::vector<std::shared_ptr<uct_tree_node>> m_child_nodes;
@@ -40,4 +41,5 @@ private:
 	double m_wins;
 	int m_player_who_just_moved;
 	std::shared_ptr<std::mt19937> m_rng;
+	static int nodes_created;
 };

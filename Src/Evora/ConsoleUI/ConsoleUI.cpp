@@ -13,7 +13,6 @@
 #include "utils.h"
 #include <numeric>
 
-
 void display_usage()
 {
 	std::cout << "Usage : evora <ai name> <ai name> <number of games>" << std::endl;

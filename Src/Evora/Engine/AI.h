@@ -13,6 +13,7 @@ namespace ai
 	protected:
 		std::shared_ptr<control::game_controller> m_controller;
 		int m_board_index;
+		int64_t flags;
 	public:
 		virtual ~ai() = default;
 		virtual void move() = 0;
