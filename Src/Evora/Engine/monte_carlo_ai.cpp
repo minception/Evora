@@ -28,7 +28,7 @@ void ai::monte_carlo_ai::move()
 	auto best_move = m_mcts->search(state, m_time);
 	const azul_game_move& azulMove = dynamic_cast<const azul_game_move&>(*best_move);
 
-#ifdef COUNTNODES
+#if COUNTNODES
 	std::cout << "Nodes created in " << m_time << " ms: " << uct_tree_node::get_nodes_created() << std::endl;
 #endif
 	m_controller->add_command(azulMove.generate_command(m_board_index));
