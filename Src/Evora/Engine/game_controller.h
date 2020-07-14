@@ -36,5 +36,6 @@ namespace control
 		int get_score(int player_index);
 		int get_first_player();
 		std::shared_ptr<model::game> get_model();
+		std::shared_ptr<std::mt19937> get_rng();
 	};
 }

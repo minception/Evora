@@ -98,7 +98,7 @@ int main(int argc, const char** argv)
 		
 		for(int i = 0; i < number_of_games; ++i)
 		{
-			std::shared_ptr<control::game_controller> controller = std::make_shared<control::game_controller>(std::make_shared<model::game>(2));
+			std::shared_ptr<control::game_controller> controller = std::make_shared<control::game_controller>(std::make_shared<model::game>(2, i));
 			int current_player = 0;
 			controller->start_game(current_player);
 			std::vector<std::unique_ptr<ai::ai>> players;

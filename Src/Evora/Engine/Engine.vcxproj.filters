@@ -323,5 +323,8 @@
     <ClCompile Include="ad_ai.cpp">
       <Filter>AI\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

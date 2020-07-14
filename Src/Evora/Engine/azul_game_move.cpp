@@ -5,6 +5,7 @@
 #include "factory_offer.h"
 #include "drop_factory.h"
 #include <memory>
+#include <string>
 
 azul_game_move::azul_game_move(int move) :
 	m_move(move)
@@ -40,6 +41,15 @@ std::unique_ptr<control::command> azul_game_move::generate_command(int player_in
 		return std::make_unique<control::center_offer>(player_index, m_pattern_line, (model::tile)m_color);
 	}
 	return std::make_unique<control::drop_center>(player_index, (model::tile)m_color);
+}
+
+std::string azul_game_move::to_string() const
+{
+	std::string color = model::tile_to_string((model::tile)m_color);
+	std::string factory = m_factory_id == model::COLORS ? "center" : "factory " + std::to_string(m_factory_id);
+	std::string pattern_line = m_pattern_line == model::COLORS ? "floor" : "pattern line " + std::to_string(m_pattern_line + 1);
+	return color + " tile from " + factory + " to " + pattern_line;
+
 }
 
 bool operator==(const azul_game_move& lhs, const azul_game_move& rhs)

@@ -97,6 +97,7 @@
     <ClCompile Include="strategy_move.cpp" />
     <ClCompile Include="strategy_ai.cpp" />
     <ClCompile Include="tally_floor.cpp" />
+    <ClCompile Include="tile.cpp" />
     <ClCompile Include="tile_wall.cpp" />
     <ClCompile Include="tree_node.cpp" />
     <ClCompile Include="tree_node_creator.cpp" />

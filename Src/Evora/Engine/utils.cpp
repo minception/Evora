@@ -40,7 +40,7 @@ namespace utils
 			return 0;
 		}
 		else {
-			return controller->get_model()->score_wall_tile(player_index, pattern_line_index, color);
+			return controller->get_model()->get_wall_tile_score(player_index, pattern_line_index, color);
 		}
 	}
 

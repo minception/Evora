@@ -20,6 +20,7 @@ namespace model
 		void add_tile(tile color);
 		bool full();
 		int score();
+		int score(int tiles);
 		int move_to_lid(lid& lid);
 		bool handle_starter_tile();
 		void remove_tiles(int count);

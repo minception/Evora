@@ -280,3 +280,8 @@ std::shared_ptr<model::game> game_controller::get_model()
 {
 	return m_model;
 }
+
+std::shared_ptr<std::mt19937> control::game_controller::get_rng()
+{
+	return m_model->get_rng();
+}

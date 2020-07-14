@@ -9,6 +9,7 @@ public:
 	azul_game_move(int move);
 	virtual ~azul_game_move();
 	int get_move() const override;
+	virtual std::string to_string() const override;
 	friend bool operator== (const azul_game_move& lhs, const azul_game_move& rhs);
 	std::unique_ptr<control::command> generate_command(int player_index) const;
 private:
@@ -16,6 +17,7 @@ private:
 	int m_factory_id;
 	int m_pattern_line;
 	int m_color;
+
 };
 
 namespace std

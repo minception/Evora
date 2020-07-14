@@ -15,6 +15,7 @@ namespace model
 	class game
 	{
 		bag m_bag;
+		std::shared_ptr<std::mt19937> m_rng;
 		center m_center;
 		std::vector<factory> m_factories;
 		lid m_lid;
@@ -38,6 +39,7 @@ namespace model
 		void shuffle_bag();
 		std::vector<tile> get_lid_state();
 		void refill_bag();
+		std::shared_ptr<std::mt19937> get_rng();
 
 		virtual int bag_to_factories();
 		
@@ -80,6 +82,8 @@ namespace model
 		
 		int wall_line_count(int player_index, int line);
 		int get_floor_score(int player_index);
+		int get_floor_score(int player_index, int tiles);
+		int get_wall_tile_score(int player_index, int line, tile color);
 		int get_pattern_line_score(int player_index, int pattern_line_index);
 		int get_board_score(int player_index);
 		void pattern_line_to_center(int player_index, int pattern_line_index, tile color, int count, std::vector<int>& is);

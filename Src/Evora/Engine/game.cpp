@@ -6,7 +6,7 @@ namespace model
 	 * \brief Creates a game instance with a given number of players
 	 * \param number_of_players Number of players in game
 	 */
-	game::game(int number_of_players, int seed) : m_bag(seed)
+	game::game(int number_of_players, int seed) : m_bag()
 	{
 		const int number_of_factories = number_of_players * 2 + 1;
 		for (int i = 0; i < number_of_factories; i++)
@@ -18,6 +18,10 @@ namespace model
 			m_boards.emplace_back();
 		}
 		m_starter_tile_handled = false;
+
+		std::random_device rand;
+		seed = seed >= 0 ? seed : rand();
+		m_rng = std::make_shared<std::mt19937>(seed);
 	}
 
 	/**
@@ -73,7 +77,7 @@ namespace model
 	 */
 	void game::shuffle_bag()
 	{
-		m_bag.shuffle();
+		m_bag.shuffle(m_rng);
 	}
 
 	/**
@@ -540,6 +544,16 @@ namespace model
 		return m_boards[player_index].get_floor_score();
 	}
 
+	int game::get_floor_score(int player_index, int tiles)
+	{
+		return m_boards[player_index].get_floor_score(tiles);
+	}
+
+	int game::get_wall_tile_score(int player_index, int line, tile color)
+	{
+		return m_boards[player_index].get_wall_tile_score(line, color);
+	}
+
 	/**
 	 * \brief get a score a given pattern line will add in the wall tiling phase
 	 * \param player_index Player index
@@ -687,5 +701,9 @@ namespace model
 	void game::refill_bag()
 	{
 		m_bag.refill(m_lid); 
+	}
+	std::shared_ptr<std::mt19937> game::get_rng()
+	{
+		return m_rng;
 	}
 }

@@ -36,6 +36,8 @@ private:
 	void move_from(const uct_tree_node& src);
 	double uct_value() const;
 
+	void print_best_moves(std::vector<std::shared_ptr<uct_tree_node>> sorted_moves) const;
+
 	std::weak_ptr<uct_tree_node> m_parent;
 	std::shared_ptr<const game_move> m_move;
 	double m_wins;

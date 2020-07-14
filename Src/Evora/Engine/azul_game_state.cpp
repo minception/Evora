@@ -4,9 +4,6 @@
 
 #include "game.h"
 #include <memory>
-#include <memory>
-#include <memory>
-#include <memory>
 
 azul_game_state::azul_game_state(std::shared_ptr<control::game_controller> state, int player) :
 	m_player_who_just_moved(player),
@@ -15,8 +12,7 @@ azul_game_state::azul_game_state(std::shared_ptr<control::game_controller> state
 	m_state(state)
 {
 	calculate_moves();
-	std::random_device rndDevice;
-	m_rng = std::make_shared<std::mt19937>(rndDevice());
+	m_rng = state->get_rng();
 }
 
 std::shared_ptr<game_state> azul_game_state::clone() const
@@ -36,12 +32,12 @@ void azul_game_state::do_move(const game_move& move)
 	const azul_game_move& azulMove = dynamic_cast<const azul_game_move&>(move);
 	std::unique_ptr<control::command> command = azulMove.generate_command(m_player_who_just_moved);
 	m_state->add_command(std::move(command));
- 	while (m_state->step())
+	while (m_state->step())
 	{
 	}
 	m_player_who_just_moved = m_state->get_current_player();
 	calculate_moves();
-	if(is_terminal())
+	if (is_terminal())
 	{
 		m_winner = m_state->get_winner();
 		m_not_win = false;
@@ -68,10 +64,10 @@ const game_move& azul_game_state::get_simulation_move() const
 	float randomNumber = dist(*m_rng);
 	int moveIndex = 0;
 	float weightSum = 0.f;
-	while(moveIndex < m_moves.size())
+	while (moveIndex < m_moves.size())
 	{
 		weightSum += m_move_weights[moveIndex];
-		if(weightSum < randomNumber)
+		if (weightSum < randomNumber)
 		{
 			moveIndex++;
 		}
@@ -101,7 +97,7 @@ std::shared_ptr<const game_move> azul_game_state::parse_move(const std::string& 
 void azul_game_state::add_move(int factory_index, int pattern_line_index, int color, float weight)
 {
 	int move = factory_index | (pattern_line_index << 4) | (color << 8);
-	weight = weight == 0 ? 0.1 : weight; // make sure weight is not 0, that would suck
+	weight = weight == 0 ? 0.1 : weight; // make sure weight is not 0, that would never get chosen
 	m_moves.push_back(std::make_shared<azul_game_move>(move));
 	m_move_weights.push_back(weight);
 	m_total_weight += weight;
@@ -117,7 +113,7 @@ void azul_game_state::calculate_moves()
 		for (int factory_index = 0; factory_index <= m_state->get_model()->factory_count(); ++factory_index)
 		{
 			std::vector<model::tile> colors;
-			if(factory_index == m_state->get_model()->factory_count())
+			if (factory_index == m_state->get_model()->factory_count())
 			{
 				colors = m_state->get_model()->get_center_colors();
 			}
@@ -127,9 +123,9 @@ void azul_game_state::calculate_moves()
 			}
 			for (auto&& color : colors)
 			{
-				for(int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
+				for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
 				{
-					if(m_state->get_model()->can_add_to_pattern_line(m_player_who_just_moved, pattern_line_index, color))
+					if (m_state->get_model()->can_add_to_pattern_line(m_player_who_just_moved, pattern_line_index, color))
 					{
 						double weight = utils::score_move(m_state, m_player_who_just_moved, pattern_line_index, (model::tile)color);
 						add_move(factory_index, pattern_line_index, (int)color, weight);

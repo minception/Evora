@@ -12,11 +12,8 @@ namespace model
 		}
 	}
 
-	bag::bag(int seed)
+	bag::bag()
 	{
-		std::random_device rand;
-		m_seed = seed >= 0 ? seed : rand();
-		m_rng = std::mt19937{ m_seed };
 		generate_tiles(TILES / COLORS, tile::red);
 		generate_tiles(TILES / COLORS, tile::yellow);
 		generate_tiles(TILES / COLORS, tile::blue);
@@ -24,9 +21,9 @@ namespace model
 		generate_tiles(TILES / COLORS, tile::white);
 	}
 
-	void bag::shuffle()
+	void bag::shuffle(std::shared_ptr<std::mt19937> rng)
 	{
-		std::shuffle(m_tiles.begin(), m_tiles.end(), m_rng);
+		std::shuffle(m_tiles.begin(), m_tiles.end(), *rng);
 	}
 
 	bool bag::draw_tile(tile& out)

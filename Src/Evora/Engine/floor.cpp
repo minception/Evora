@@ -34,6 +34,18 @@ namespace model
 		return score;
 	}
 
+	int floor::score(int tiles)
+	{
+
+		int score = 0;
+		for (int i = m_tiles.size(); i < m_tiles.size() + tiles; ++i)
+		{
+			if (i == FLOOR_SIZE) break;
+			score += FLOOR_SCORE[i];
+		}
+		return score;
+	}
+
 	int floor::move_to_lid(lid& lid)
 	{
 		int size = static_cast<int>(m_tiles.size());

@@ -1,6 +1,7 @@
 #include "uct_tree_node.h"
 #include <memory>
 #include <algorithm>
+#include <iostream>
 
 int uct_tree_node::nodes_created = 0;
 
@@ -60,6 +61,7 @@ std::shared_ptr<const game_move> uct_tree_node::get_best_move() const
 {
 	std::vector<std::shared_ptr<uct_tree_node>> sortedChildNodes(m_child_nodes);
 	std::sort(sortedChildNodes.begin(), sortedChildNodes.end(), [](std::shared_ptr<uct_tree_node> x, std::shared_ptr<uct_tree_node> y) {return x->m_visits > y->m_visits; });
+	print_best_moves(sortedChildNodes);
 	return sortedChildNodes[0]->m_move;
 }
 
@@ -152,6 +154,15 @@ double uct_tree_node::uct_value() const
 {
 	auto parent = m_parent.lock();
 	return m_wins / m_visits + m_constant * sqrt(2 * log(parent->m_visits) / m_visits);
+}
+
+void uct_tree_node::print_best_moves(std::vector<std::shared_ptr<uct_tree_node>> sorted_nodes) const
+{
+	std::cout << "Best moves:" << std::endl;
+	for (int i = 0; i < 10; ++i) {
+		if (i == sorted_nodes.size()) break;
+		std::cout << i + 1 << ". " << sorted_nodes[i]->m_move->to_string() << "\n\tGames won " << sorted_nodes[i]->m_wins << "/" << sorted_nodes[i]->m_visits << std::endl;
+	}
 }
 
 
