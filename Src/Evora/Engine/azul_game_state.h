@@ -1,6 +1,5 @@
 #pragma once
 #include "game_state.h"
-#include <random>
 #include "game_controller.h"
 
 
@@ -29,4 +28,6 @@ private:
 	void add_move(int factory_index, int pattern_line_index, int color, float weight);
 	void calculate_moves();
 	std::shared_ptr<std::mt19937> m_rng;
+
+	virtual std::shared_ptr<std::mt19937> get_rng() const override;
 };

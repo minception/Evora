@@ -32,10 +32,8 @@ void mcts_algorithm::do_iteration(const game_state& root_state, std::shared_ptr<
 	}
 }
 
-std::shared_ptr<const game_move> mcts_algorithm::search(const game_state& root_state, int time)
+std::shared_ptr<const game_move> mcts_algorithm::search(const game_state& root_state, int iterations)
 {
-	auto end_time = std::chrono::system_clock::now() + std::chrono::milliseconds(time);
-
 	if (!m_b_search) {
 		m_b_search = true;
 	}
@@ -49,18 +47,15 @@ std::shared_ptr<const game_move> mcts_algorithm::search(const game_state& root_s
 
 		do_iteration(root_state, rootNode);
 
-		if (!utils::time_left(end_time))
-		{
+		if (m_last_iterations == iterations) {
 			break;
 		}
-
 		if (!m_b_search)
 		{
 			m_b_search = true;
 			break;
 		}
 	}
-
 	return rootNode->get_best_move();
 }
 

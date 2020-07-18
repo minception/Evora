@@ -19,8 +19,10 @@ namespace model
 		}
 		m_starter_tile_handled = false;
 
-		std::random_device rand;
-		seed = seed >= 0 ? seed : rand();
+		if (seed < 0) {
+			std::random_device rand;
+			seed = rand();
+		}
 		m_rng = std::make_shared<std::mt19937>(seed);
 	}
 

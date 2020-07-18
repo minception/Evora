@@ -15,8 +15,7 @@ uct_tree_node::uct_tree_node(std::shared_ptr<const game_move> move, std::shared_
 	{
 		m_untried_moves = state.get_moves();
 	}
-	std::random_device rng;
-	m_rng = std::make_shared<std::mt19937>(rng());
+	m_rng = state.get_rng();
 }
 
 uct_tree_node::uct_tree_node(const uct_tree_node& src)
@@ -100,7 +99,8 @@ std::shared_ptr<tree_node> uct_tree_node::select_child() const
 std::shared_ptr<const game_move> uct_tree_node::select_untried_move() const
 {
 	std::uniform_int_distribution<int> dist(0, m_untried_moves.size() - 1);
-	return m_untried_moves[dist(*m_rng)];
+	int random_number = dist(*m_rng);
+	return m_untried_moves[random_number];
 }
 
 void uct_tree_node::copy_from(const uct_tree_node& src)

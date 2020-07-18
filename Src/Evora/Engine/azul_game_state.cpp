@@ -19,6 +19,7 @@ std::shared_ptr<game_state> azul_game_state::clone() const
 {
 	auto cloned = std::make_shared<azul_game_state>(*this);
 	cloned->m_state = std::make_shared<control::game_controller>(*m_state);
+	cloned->m_rng = m_rng;
 	return cloned;
 }
 
@@ -137,4 +138,9 @@ void azul_game_state::calculate_moves()
 			}
 		}
 	}
+}
+
+std::shared_ptr<std::mt19937> azul_game_state::get_rng() const
+{
+	return m_rng;
 }
