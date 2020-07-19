@@ -17,7 +17,7 @@ namespace ai
 	public:
 		void move() override;
 		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-		monte_carlo_ai(std::shared_ptr<control::game_controller> controller, int board_index, int time = 200);
+		monte_carlo_ai(std::shared_ptr<control::game_controller> controller, int board_index, int time = 2000);
 		const char* get_name() const override;
 		
 	};

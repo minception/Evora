@@ -34,13 +34,27 @@ namespace utils
 		}
 	}
 
-	double score_move(std::shared_ptr<control::game_controller> controller, int player_index, int pattern_line_index, model::tile color)
+	double score_move(std::shared_ptr<control::game_controller> controller, int factory_index, int player_index, int pattern_line_index, model::tile color)
 	{
 		if (pattern_line_index == model::COLORS) {
 			return 0;
 		}
 		else {
-			return controller->get_model()->get_wall_tile_score(player_index, pattern_line_index, color);
+			auto model = controller->get_model();
+			int pattern_line_count = model->get_pattern_line_tile_count(player_index, pattern_line_index);
+			int count;
+			if (factory_index == model::COLORS) {
+				count = model->center_tile_count(color);
+			}
+			else {
+				count = model->factory_tile_count(factory_index, color);
+			}
+			int overflow = pattern_line_count + count - pattern_line_index - 1;
+			overflow = overflow < 0 ? 0 : overflow;
+			float fraction = (float)(pattern_line_count + count - overflow) / (pattern_line_index + 1);
+			int penalty = model->get_floor_score(player_index, overflow);
+			int score = controller->get_model()->get_wall_tile_score(player_index, pattern_line_index, color) * fraction;
+			return score - penalty >= 0 ? score - penalty : 0;
 		}
 	}
 
@@ -58,14 +72,14 @@ namespace utils
 				if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
 				{
 					auto&& move = std::make_unique<control::center_offer>(player_index, pattern_line_index, color);
-					double score = score_move(controller, player_index, pattern_line_index, color);
+					double score = score_move(controller, model::COLORS, player_index, pattern_line_index, color);
 					auto&& move_score = std::make_pair(std::move(move), score);
 					res.push_back(std::move(move_score));
 				}
 			}
 			// all center to floor moves
 			auto&& move = std::make_unique<control::drop_center>(player_index, color);
-			double score = score_move(controller, player_index, model::COLORS, color);
+			double score = score_move(controller, model::COLORS, player_index, model::COLORS, color);
 			auto&& move_score = std::make_pair(std::move(move), score);
 			res.push_back(std::move(move_score));
 		}
@@ -81,14 +95,14 @@ namespace utils
 					if (game->can_add_to_pattern_line(player_index, pattern_line_index, color))
 					{
 						auto&& move = std::make_unique<control::factory_offer>(factory_index, player_index, pattern_line_index, color);
-						double score = score_move(controller, player_index, pattern_line_index, color);
+						double score = score_move(controller, factory_index, player_index, pattern_line_index, color);
 						auto&& move_score = std::make_pair(std::move(move), score);
 						res.push_back(std::move(move_score));
 					}
 				}
 				// all factory to floor moves
 				auto&& move = std::make_unique<control::drop_factory>(factory_index, player_index, color);
-				double score = score_move(controller, player_index, model::COLORS, color);
+				double score = score_move(controller, factory_index, player_index, model::COLORS, color);
 				auto&& move_score = std::make_pair(std::move(move), score);
 				res.push_back(std::move(move_score));
 			}

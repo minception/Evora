@@ -128,12 +128,12 @@ void azul_game_state::calculate_moves()
 				{
 					if (m_state->get_model()->can_add_to_pattern_line(m_player_who_just_moved, pattern_line_index, color))
 					{
-						double weight = utils::score_move(m_state, m_player_who_just_moved, pattern_line_index, (model::tile)color);
+						double weight = utils::score_move(m_state, m_player_who_just_moved, factory_index, pattern_line_index, (model::tile)color);
 						add_move(factory_index, pattern_line_index, (int)color, weight);
 					}
 				}
 				// for every color adding move to floor
-				double weight = utils::score_move(m_state, m_player_who_just_moved, model::COLORS, (model::tile)color);
+				double weight = utils::score_move(m_state, factory_index, m_player_who_just_moved, model::COLORS, (model::tile)color);
 				add_move(factory_index, model::COLORS, (int)color, weight);
 			}
 		}
