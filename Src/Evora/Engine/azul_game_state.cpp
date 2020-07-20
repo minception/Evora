@@ -6,7 +6,7 @@
 #include <memory>
 
 azul_game_state::azul_game_state(std::shared_ptr<control::game_controller> state, int player) :
-	m_player_who_just_moved(player),
+	m_current_player(player),
 	m_winner(0),
 	m_not_win(true),
 	m_state(state)
@@ -31,12 +31,10 @@ std::vector<std::shared_ptr<const game_move>> azul_game_state::get_moves() const
 void azul_game_state::do_move(const game_move& move)
 {
 	const azul_game_move& azulMove = dynamic_cast<const azul_game_move&>(move);
-	std::unique_ptr<control::command> command = azulMove.generate_command(m_player_who_just_moved);
+	std::unique_ptr<control::command> command = azulMove.generate_command(m_current_player);
 	m_state->add_command(std::move(command));
-	while (m_state->step())
-	{
-	}
-	m_player_who_just_moved = m_state->get_current_player();
+	m_state->player_move();
+	m_current_player = m_state->get_current_player();
 	calculate_moves();
 	if (is_terminal())
 	{
@@ -82,7 +80,7 @@ const game_move& azul_game_state::get_simulation_move() const
 
 int azul_game_state::get_player_who_just_moved() const
 {
-	return m_player_who_just_moved;
+	return m_current_player;
 }
 
 bool azul_game_state::is_terminal() const
@@ -126,14 +124,14 @@ void azul_game_state::calculate_moves()
 			{
 				for (int pattern_line_index = 0; pattern_line_index < model::COLORS; ++pattern_line_index)
 				{
-					if (m_state->get_model()->can_add_to_pattern_line(m_player_who_just_moved, pattern_line_index, color))
+					if (m_state->get_model()->can_add_to_pattern_line(m_current_player, pattern_line_index, color))
 					{
-						double weight = utils::score_move(m_state, factory_index, m_player_who_just_moved, pattern_line_index, (model::tile)color);
+						double weight = utils::score_move(m_state, factory_index, m_current_player, pattern_line_index, (model::tile)color);
 						add_move(factory_index, pattern_line_index, (int)color, weight);
 					}
 				}
 				// for every color adding move to floor
-				double weight = utils::score_move(m_state, factory_index, m_player_who_just_moved, model::COLORS, (model::tile)color);
+				double weight = utils::score_move(m_state, factory_index, m_current_player, model::COLORS, (model::tile)color);
 				add_move(factory_index, model::COLORS, (int)color, weight);
 			}
 		}

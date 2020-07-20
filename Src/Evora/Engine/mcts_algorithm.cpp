@@ -27,7 +27,7 @@ void mcts_algorithm::do_iteration(const game_state& root_state, std::shared_ptr<
 
 	// Backpropagate
 	while (node != nullptr) {
-		node->update(state->get_result(node->get_player_who_just_moved()));
+		node->update(state->get_result(1 - node->get_player_who_just_moved()));
 		node = node->get_parent();
 	}
 }

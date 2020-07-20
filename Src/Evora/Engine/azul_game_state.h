@@ -18,7 +18,7 @@ public:
 	bool is_terminal() const override;
 	std::shared_ptr<const game_move> parse_move(const std::string& move) const override;
 private:
-	int m_player_who_just_moved;
+	int m_current_player;
 	std::shared_ptr<control::game_controller> m_state;
 	int m_winner;
 	bool m_not_win;

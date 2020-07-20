@@ -60,7 +60,7 @@ std::shared_ptr<const game_move> uct_tree_node::get_best_move() const
 {
 	std::vector<std::shared_ptr<uct_tree_node>> sortedChildNodes(m_child_nodes);
 	std::sort(sortedChildNodes.begin(), sortedChildNodes.end(), [](std::shared_ptr<uct_tree_node> x, std::shared_ptr<uct_tree_node> y) {return (float)x->m_wins / x->m_visits > (float)y->m_wins / y->m_visits; });
-	print_best_moves(sortedChildNodes);
+	//print_best_moves(sortedChildNodes);
 	return sortedChildNodes[0]->m_move;
 }
 
