@@ -70,6 +70,12 @@
     <Filter Include="AI\StrategyAI\Source Files">
       <UniqueIdentifier>{011d0c41-052d-42eb-a4b9-6223633a2d2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI\MonteCarloAI\Header Files\Azul">
+      <UniqueIdentifier>{0e2f85d5-6175-48fb-8a2b-037e382928ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\MonteCarloAI\Source Files\Azul">
+      <UniqueIdentifier>{ac6e1d5d-2b8e-4b4b-b4bd-1a72504d80e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_controller.h">
@@ -171,12 +177,6 @@
     <ClInclude Include="uct_tree_node_creator.h">
       <Filter>AI\MonteCarloAI\Header Files\UCT</Filter>
     </ClInclude>
-    <ClInclude Include="azul_game_move.h">
-      <Filter>AI\MonteCarloAI\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="azul_game_state.h">
-      <Filter>AI\MonteCarloAI\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_move.h">
       <Filter>AI\MonteCarloAI\Header Files</Filter>
     </ClInclude>
@@ -197,6 +197,12 @@
     </ClInclude>
     <ClInclude Include="ad_ai.h">
       <Filter>AI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="azul_game_state.h">
+      <Filter>AI\MonteCarloAI\Header Files\Azul</Filter>
+    </ClInclude>
+    <ClInclude Include="azul_game_move.h">
+      <Filter>AI\MonteCarloAI\Header Files\Azul</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -296,12 +302,6 @@
     <ClCompile Include="uct_tree_node_creator.cpp">
       <Filter>AI\MonteCarloAI\Source Files\UCT</Filter>
     </ClCompile>
-    <ClCompile Include="azul_game_move.cpp">
-      <Filter>AI\MonteCarloAI\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="azul_game_state.cpp">
-      <Filter>AI\MonteCarloAI\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game_move.cpp">
       <Filter>AI\MonteCarloAI\Source Files</Filter>
     </ClCompile>
@@ -325,6 +325,12 @@
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="azul_game_move.cpp">
+      <Filter>AI\MonteCarloAI\Source Files\Azul</Filter>
+    </ClCompile>
+    <ClCompile Include="azul_game_state.cpp">
+      <Filter>AI\MonteCarloAI\Source Files\Azul</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,8 +7,8 @@
 #include <memory>
 #include <string>
 
-azul_game_move::azul_game_move(int move) :
-	m_move(move)
+azul_game_move::azul_game_move(int move, float value) :
+	m_move(move), m_value(value)
 {
 	int mask = 0b1111;
 	m_factory_id = m_move & mask;
@@ -41,6 +41,11 @@ std::unique_ptr<control::command> azul_game_move::generate_command(int player_in
 		return std::make_unique<control::center_offer>(player_index, m_pattern_line, (model::tile)m_color);
 	}
 	return std::make_unique<control::drop_center>(player_index, (model::tile)m_color);
+}
+
+float azul_game_move::get_value() const
+{
+	return m_value;
 }
 
 std::string azul_game_move::to_string() const

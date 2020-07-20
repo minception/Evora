@@ -153,7 +153,12 @@ int uct_tree_node::get_nodes_created()
 double uct_tree_node::uct_value() const
 {
 	auto parent = m_parent.lock();
-	return m_wins / m_visits + m_constant * sqrt(2 * log(parent->m_visits) / m_visits);
+	return m_wins / m_visits + m_constant * sqrt(2 * log(parent->m_visits) / m_visits) + progressive_bias();
+}
+
+double uct_tree_node::progressive_bias() const
+{
+	return m_move->get_value() / (m_visits + 1);
 }
 
 void uct_tree_node::print_best_moves(std::vector<std::shared_ptr<uct_tree_node>> sorted_nodes) const

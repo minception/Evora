@@ -35,7 +35,7 @@ private:
 	void free_memory();
 	void move_from(const uct_tree_node& src);
 	double uct_value() const;
-
+	double progressive_bias() const;
 	void print_best_moves(std::vector<std::shared_ptr<uct_tree_node>> sorted_moves) const;
 
 	std::weak_ptr<uct_tree_node> m_parent;

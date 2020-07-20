@@ -90,14 +90,14 @@ bool azul_game_state::is_terminal() const
 
 std::shared_ptr<const game_move> azul_game_state::parse_move(const std::string& move) const
 {
-	return std::dynamic_pointer_cast<const game_move>(std::make_shared<const azul_game_move>(stoi(move)));
+	return std::dynamic_pointer_cast<const game_move>(std::make_shared<const azul_game_move>(stoi(move), 0.0f));
 }
 
 void azul_game_state::add_move(int factory_index, int pattern_line_index, int color, float weight)
 {
 	int move = factory_index | (pattern_line_index << 4) | (color << 8);
 	weight = weight == 0 ? 0.1 : weight; // make sure weight is not 0, that would never get chosen
-	m_moves.push_back(std::make_shared<azul_game_move>(move));
+	m_moves.push_back(std::make_shared<azul_game_move>(move, weight));
 	m_move_weights.push_back(weight);
 	m_total_weight += weight;
 }
