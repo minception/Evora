@@ -124,9 +124,9 @@ namespace utils
 				frac = std::floorf(frac);
 			}
 			else {
-				frac = frac * frac;
+				// frac = frac * frac;
 				// 5 points for having a starter tile
-				score += model->get_board(player_index).has_starter_tile() ? 5 : 0;
+				score += model->get_board(player_index).has_starter_tile() ? 0.5f : 0;
 			}
 			score += frac * wall.score_tile(i, color);
 		}
