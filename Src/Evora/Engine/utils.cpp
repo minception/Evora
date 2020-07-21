@@ -3,13 +3,12 @@
 #include "factory_offer.h"
 #include "drop_factory.h"
 #include "drop_center.h"
-
+#include <cmath>
 namespace utils
 {
 	int play_game(std::vector<std::unique_ptr<ai::ai>>& players, std::shared_ptr<control::game_controller> controller, int current_player)
 	{
 		int move_counter = 0;
-		//bool round_over = false;
 		while (true)
 		{
 			if (!controller->step())
@@ -18,19 +17,10 @@ namespace utils
 				{
 					return controller->get_winner();
 				}
-				//if (round_over)
-				//{
-				//	current_player = controller->get_first_player();
-				//	round_over = false;
-				//}
 				current_player = controller->get_current_player();
 				players[current_player]->move();
 				++move_counter;
 			}
-			//else if (!round_over && controller->is_round_over())
-			//{
-			//	round_over = true;
-			//}
 		}
 	}
 
@@ -110,8 +100,54 @@ namespace utils
 		return res;
 	}
 
-	int evaluate(std::shared_ptr<control::game_controller>& controller, int player_index)
+	float evaluate_player(std::shared_ptr<control::game_controller>& controller, int player_index)
 	{
+		float score = controller->get_score(player_index);
+		auto model = controller->get_model();
+		// local copy of the wall
+		model::wall wall = model->get_board(player_index).get_wall();
+		bool last_round = false;
+		for (size_t i = 0; i < model::COLORS; i++)
+		{
+			if (wall.line_count(i) >= model::COLORS - 1 && model->pattern_line_full(player_index, i)) {
+				last_round = true;
+				break;
+			}
+		}
+		for (size_t i = 0; i < model::COLORS; i++)
+		{
+			model::tile color = model->get_board(player_index).pattern_line_color(i);
+			if (color == model::tile::empty) continue;
+			int pl_count = model->get_pattern_line_tile_count(player_index, i);
+			float frac = (float)pl_count / (i + 1);
+			if (last_round) {
+				frac = std::floorf(frac);
+			}
+			else {
+				frac = frac * frac;
+				// 5 points for having a starter tile
+				score += model->get_board(player_index).has_starter_tile() ? 5 : 0;
+			}
+			score += frac * wall.score_tile(i, color);
+		}
+		score += model->get_floor_score(player_index);
+		return score;
+	}
+
+	float evaluate(std::shared_ptr<control::game_controller>& controller, int player_index) {
+		float res = 0;
+		for (size_t i = 0; i < controller->get_model()->player_count(); i++)
+		{
+			if (i == player_index) {
+				res += evaluate_player(controller, i);
+			}
+			else {
+				res -= evaluate_player(controller, i);
+			}
+		}
+		return res;
+	}
+	int legacy_evaluate(std::shared_ptr<control::game_controller>& controller, int player_index) {
 		int moves = controller->add_wall_tiling_phase();
 		moves += controller->add_game_end();
 		for (int i = 0; i < moves; ++i)
