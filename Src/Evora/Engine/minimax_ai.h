@@ -16,6 +16,7 @@ namespace ai
 		int m_time;
 		bool m_round_finished = false;
 		std::unique_ptr<control::command> m_best_move;
+		bool m_abpruning = true;
 
 	public:
 		void move() override;

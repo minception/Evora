@@ -52,7 +52,7 @@ void ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> a
 		}
 		else if(arg.first == "constant")
 		{
-			m_creator = std::make_unique<uct_tree_node_creator>(std::stoi(arg.second));
+			m_creator = std::make_unique<uct_tree_node_creator>(std::stof(arg.second));
 			m_mcts = std::make_unique<mcts_algorithm>(*m_creator);
 		}
 	}

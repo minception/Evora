@@ -81,7 +81,7 @@ bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_control
 		m_best_move = std::move(move);
 		return false;
 	}
-	if (alpha >= beta && updated)
+	if (m_abpruning && alpha >= beta && updated)
 	{
 		return true;
 	}
@@ -129,10 +129,21 @@ void ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
 		{
 			m_time = std::stoi(arg.second);
 		}
-		if(arg.first == "depth")
+		else if(arg.first == "depth")
 		{
 			m_fixed_depth = true;
 			m_max_depth = std::stoi(arg.second);
+		}
+		else if(arg.first == "abpruning")
+		{
+			if(arg.second == "true")
+			{
+				m_abpruning = true;
+			}
+			else
+			{
+				m_abpruning = false;
+			}
 		}
 	}
 }
