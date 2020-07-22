@@ -4,6 +4,7 @@
 #include "strategy_move.h"
 #include <algorithm>
 #include <map>
+#include <string>
 
 std::map<int, std::vector<strategy_move>> ai::strategy_ai::sort_moves(const std::vector<strategy_move>& moves)
 {
@@ -140,4 +141,8 @@ std::vector<strategy_move> ai::strategy_ai::get_moves()
 		}
 	}
 	return res;
+}
+
+void ai::strategy_ai::init(std::vector<std::pair<std::string, std::string>> args)
+{
 }

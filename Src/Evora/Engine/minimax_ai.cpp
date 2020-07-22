@@ -90,17 +90,27 @@ bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_control
 
 void ai::minimax_ai::move()
 {
-	m_max_depth = 0;
-	m_end_time = std::chrono::system_clock::now() + std::chrono::milliseconds(m_time);
 	std::shared_ptr<control::game_controller> mockup = std::make_shared<control::game_controller>(*m_controller);
-	m_round_finished = false;
-	while (utils::time_left(m_end_time) && !m_round_finished)
+	if(m_fixed_depth)
 	{
-		m_round_finished = true;
-		++m_max_depth;
+
 		float beta = std::numeric_limits<float>::max();
 		float alpha = -beta;
 		minimax(m_board_index, 0, mockup, alpha, beta);
+	}
+	else 
+	{
+		m_max_depth = 0;
+		m_end_time = std::chrono::system_clock::now() + std::chrono::milliseconds(m_time);
+		m_round_finished = false;
+		while (utils::time_left(m_end_time) && !m_round_finished)
+		{
+			m_round_finished = true;
+			++m_max_depth;
+			float beta = std::numeric_limits<float>::max();
+			float alpha = -beta;
+			minimax(m_board_index, 0, mockup, alpha, beta);
+		}
 	}
 	m_controller->add_command(std::move(m_best_move));
 	m_controller->step();
@@ -109,4 +119,20 @@ void ai::minimax_ai::move()
 const char* ai::minimax_ai::get_name() const
 {
 	return "MinimaxAI";
+}
+
+void ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
+{
+	for (auto && arg : args)
+	{
+		if(arg.first == "time")
+		{
+			m_time = std::stoi(arg.second);
+		}
+		if(arg.first == "depth")
+		{
+			m_fixed_depth = true;
+			m_max_depth = std::stoi(arg.second);
+		}
+	}
 }

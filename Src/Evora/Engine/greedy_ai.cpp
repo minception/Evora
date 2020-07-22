@@ -31,3 +31,7 @@ const char* greedy_ai::get_name() const
 {
 	return "GreedyAI";
 }
+
+void greedy_ai::init(std::vector<std::pair<std::string, std::string>> args)
+{
+}

@@ -22,5 +22,9 @@ namespace ai
 	{
 		return "RandomAI";
 	}
+
+	void random_ai::init(std::vector<std::pair<std::string, std::string>> args)
+	{
+	}
 }
 	
