@@ -1,7 +1,7 @@
 ﻿#include "greedy_ai.h"
 
 #include <limits>
-#include "utils.h"
+#include "scoring.h"
 
 using namespace ai;
 
@@ -30,8 +30,4 @@ void greedy_ai::move()
 const char* greedy_ai::get_name() const
 {
 	return "GreedyAI";
-}
-
-void greedy_ai::init(std::vector<std::pair<std::string, std::string>> args)
-{
 }

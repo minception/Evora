@@ -204,6 +204,9 @@
     <ClInclude Include="azul_game_move.h">
       <Filter>AI\MonteCarloAI\Header Files\Azul</Filter>
     </ClInclude>
+    <ClInclude Include="scoring.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_controller.cpp">
@@ -331,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="azul_game_state.cpp">
       <Filter>AI\MonteCarloAI\Source Files\Azul</Filter>
+    </ClCompile>
+    <ClCompile Include="scoring.cpp">
+      <Filter>Common\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

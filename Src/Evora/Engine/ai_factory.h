@@ -24,6 +24,8 @@ namespace ai
 
 		virtual std::unique_ptr<ai> get(std::shared_ptr<control::game_controller> controller, int player_index) = 0;
 		static std::map<const char*, std::unique_ptr<ai_factory>, raw_pointer_comparison> get_factories();
+		virtual std::string options();
+		
 	};
 	
 	class random_ai_factory :public ai_factory
@@ -42,6 +44,7 @@ namespace ai
 	{
 	public:
 		std::unique_ptr<ai> get(std::shared_ptr<control::game_controller> controller, int board_index) override;
+		std::string options() override;
 	};
 
 	class strategy_ai_factory :public ai_factory
@@ -54,6 +57,7 @@ namespace ai
 	{
 	public:
 		std::unique_ptr<ai> get(std::shared_ptr<control::game_controller> controller, int board_index) override;
+		std::string options() override;
 	};
 
 	class ad_ai_factory :public ai_factory

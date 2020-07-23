@@ -142,7 +142,3 @@ std::vector<strategy_move> ai::strategy_ai::get_moves()
 	}
 	return res;
 }
-
-void ai::strategy_ai::init(std::vector<std::pair<std::string, std::string>> args)
-{
-}

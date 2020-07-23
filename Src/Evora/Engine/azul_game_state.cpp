@@ -1,9 +1,10 @@
 #include "azul_game_state.h"
-#include "azul_game_move.h"
-#include "utils.h"
 
-#include "game.h"
 #include <memory>
+
+#include "azul_game_move.h"
+#include "game.h"
+#include "scoring.h"
 
 azul_game_state::azul_game_state(std::shared_ptr<control::game_controller> state, int player) :
 	m_current_player(player),

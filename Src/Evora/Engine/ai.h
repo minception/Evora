@@ -18,7 +18,7 @@ namespace ai
 		virtual ~ai() = default;
 		virtual void move() = 0;
 		virtual const char* get_name() const = 0;
-		virtual void init(std::vector<std::pair<std::string, std::string>> args) = 0;
+		virtual bool init(std::vector<std::pair<std::string, std::string>> args);
 		ai(std::shared_ptr<control::game_controller> controller, int board_index):m_controller(controller), m_board_index(board_index){};
 	};
 }

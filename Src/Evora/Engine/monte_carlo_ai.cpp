@@ -42,7 +42,7 @@ const char* ai::monte_carlo_ai::get_name() const
 	return "MonteCarloAI";
 }
 
-void ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> args)
+bool ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> args)
 {
 	for (auto && arg : args)
 	{
@@ -55,5 +55,10 @@ void ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> a
 			m_creator = std::make_unique<uct_tree_node_creator>(std::stof(arg.second));
 			m_mcts = std::make_unique<mcts_algorithm>(*m_creator);
 		}
+		else
+		{
+			return false;
+		}
 	}
+	return true;
 }

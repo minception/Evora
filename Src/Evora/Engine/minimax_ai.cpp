@@ -1,9 +1,10 @@
 ﻿#include "minimax_ai.h"
-#include "center_offer.h"
+
 #include <memory>
-#include "drop_center.h"
-#include "factory_offer.h"
+
+#include "center_offer.h"
 #include "drop_factory.h"
+#include "scoring.h"
 #include "utils.h"
 
 
@@ -130,7 +131,7 @@ const char* ai::minimax_ai::get_name() const
 	return "MinimaxAI";
 }
 
-void ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
+bool ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
 {
 	for (auto && arg : args)
 	{
@@ -165,5 +166,10 @@ void ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
 				m_past_rounds = false;
 			}
 		}
+		else
+		{
+			return false;
+		}
 	}
+	return true;
 }

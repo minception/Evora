@@ -24,6 +24,6 @@ namespace ai
 		void move() override;
 		minimax_ai(std::shared_ptr<control::game_controller> controller, int board_index, int time = 100) :ai(controller, board_index), m_time(time) {}
 		const char* get_name() const override;
-		void init(std::vector<std::pair<std::string, std::string>> args) override;
+		bool init(std::vector<std::pair<std::string, std::string>> args) override;
 	};
 }

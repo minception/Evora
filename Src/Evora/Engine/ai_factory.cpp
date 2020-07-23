@@ -1,6 +1,8 @@
 ﻿#include "ai_factory.h"
 
 //#include "ad_ai.h"
+#include <ostream>
+
 #include "greedy_ai.h"
 #include "minimax_ai.h"
 #include "monte_carlo_ai.h"
@@ -22,6 +24,11 @@ std::map<const char*, std::unique_ptr<ai_factory>, raw_pointer_comparison> ai_fa
 	return res;
 }
 
+std::string ai_factory::options()
+{
+	return "";
+}
+
 std::unique_ptr<::ai::ai> random_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)
 {
 	return std::move(std::make_unique<random_ai>(controller, board_index));
@@ -37,6 +44,11 @@ std::unique_ptr<::ai::ai> minimax_ai_factory::get(std::shared_ptr<control::game_
 	return std::move(std::make_unique<minimax_ai>(controller, board_index));
 }
 
+std::string minimax_ai_factory::options()
+{
+	return "[options:time(int), depth(int), abpruning(true or false), pastround(true or false)]";
+}
+
 std::unique_ptr<::ai::ai> strategy_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)
 {
 	return std::move(std::make_unique<strategy_ai>(controller, board_index));
@@ -45,6 +57,11 @@ std::unique_ptr<::ai::ai> strategy_ai_factory::get(std::shared_ptr<control::game
 std::unique_ptr<::ai::ai> monte_carlo_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)
 {
 	return std::move(std::make_unique<monte_carlo_ai>(controller, board_index));
+}
+
+std::string monte_carlo_ai_factory::options()
+{
+	return "[options:iterations(int), constant(float)]";
 }
 
 //std::unique_ptr<::ai::ai> ad_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)

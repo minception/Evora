@@ -18,7 +18,5 @@ namespace ai
 		const strategy_move& best_fill(const std::vector<strategy_move>& moves);
 		std::unique_ptr<control::command> pick_move();
 		std::vector<strategy_move> get_moves();
-	public:
-		void init(std::vector<std::pair<std::string, std::string>> args) override;
 	};
 }
