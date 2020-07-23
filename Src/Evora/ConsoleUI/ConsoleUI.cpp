@@ -84,7 +84,7 @@ bool parse_args(const std::vector<std::basic_string<char>>& arg_list, std::strin
 		{
 			auto delim_pos = arg_list[index].find("=");
 			if (delim_pos == std::string::npos) break;
-			ai1_args.emplace_back(arg_list[index].substr(delim_pos), arg_list[index].substr(delim_pos + 1, arg_list[index].size()));
+			ai1_args.emplace_back(arg_list[index].substr(0, delim_pos), arg_list[index].substr(delim_pos + 1, arg_list[index].size()));
 			index++;
 		}
 		ai2_name = arg_list[index++];
