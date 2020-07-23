@@ -10,6 +10,8 @@ namespace ai
 		bool update_scores(int player_index, float& best_score, float score, float& alpha, float& beta);
 		float minimax(int player_index, int depth, std::shared_ptr<control::game_controller> controller, float alpha, float beta);
 		bool alpha_beta_move(const std::shared_ptr<control::game_controller>& controller, std::unique_ptr<control::command> move, float& best_score, int depth, int player_index, float& alpha, float& beta);
+		bool is_leaf(std::shared_ptr<control::game_controller>& controller);
+		bool m_past_rounds = true;
 		int m_max_depth = 0;
 		bool m_fixed_depth = false;
 		std::chrono::system_clock::time_point m_end_time;

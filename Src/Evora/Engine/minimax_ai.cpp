@@ -43,11 +43,11 @@ float ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<contr
 		controller->player_move();
 	}
 	std::shared_ptr<model::game> game = controller->get_model();
-	if (depth == m_max_depth && !controller->game_over())
+	if (depth == m_max_depth && !is_leaf(controller))
 	{
 		m_round_finished = false;
 	}
-	if (depth == m_max_depth || controller->game_over())
+	if (depth == m_max_depth || is_leaf(controller))
 	{
 		return utils::evaluate(controller, m_board_index);
 	}
@@ -86,6 +86,15 @@ bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_control
 		return true;
 	}
 	return false;
+}
+
+bool ai::minimax_ai::is_leaf(std::shared_ptr<control::game_controller>& controller)
+{
+	if(m_past_rounds)
+	{
+		return controller->game_over();
+	}
+	return controller->is_round_over();
 }
 
 void ai::minimax_ai::move()
@@ -143,6 +152,17 @@ void ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
 			else
 			{
 				m_abpruning = false;
+			}
+		}
+		else if(arg.first == "pastround")
+		{
+			if (arg.second == "true")
+			{
+				m_past_rounds = true;
+			}
+			else
+			{
+				m_past_rounds = false;
 			}
 		}
 	}
