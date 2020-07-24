@@ -39,10 +39,6 @@ bool ai::minimax_ai::update_scores(int player_index, float& best_score, float sc
 
 float ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<control::game_controller> controller, float alpha, float beta)
 {
- 	if (depth != 0)
-	{
-		controller->player_move();
-	}
 	std::shared_ptr<model::game> game = controller->get_model();
 	if (depth == m_max_depth && !is_leaf(controller))
 	{
@@ -61,19 +57,15 @@ float ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<contr
 			return best_score;
 		}
 	}
-	//if (depth == 0 && m_best_move == nullptr) {
-	//	auto safenet_moves = utils::get_scored_moves(controller, player_index);
-	//	std::sort(scored_moves.begin(), scored_moves.end(), [](auto&& a, auto&& b) {return std::get<1>(a) > std::get<1>(b); });
-	//	m_best_move = std::move(std::get<0>(safenet_moves[0]));
-	//}
 	return best_score;
 }
 
 bool ai::minimax_ai::alpha_beta_move(const std::shared_ptr<control::game_controller>& controller, std::unique_ptr<control::command> move,
 	float& best_score, int depth, int player_index, float& alpha, float& beta)
 {
-	int next_player = controller->get_current_player();
 	controller->add_command(move->clone());
+	controller->player_move();
+	int next_player = controller->get_current_player();
 	float score = minimax(next_player, depth + 1, controller, alpha, beta);
 	controller->player_move_back();
 	bool updated = update_scores(player_index, best_score, score, alpha, beta);
