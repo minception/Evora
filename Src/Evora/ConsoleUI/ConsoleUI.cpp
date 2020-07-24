@@ -115,7 +115,7 @@ bool parse_args(const std::vector<std::basic_string<char>>& arg_list, std::strin
 	{
 		auto delim_pos = arg_list[index].find("=");
 		if (delim_pos == std::string::npos) break;
-		ai2_args.emplace_back(arg_list[index].substr(delim_pos), arg_list[index].substr(delim_pos + 1, arg_list[index].size()));
+		ai2_args.emplace_back(arg_list[index].substr(0, delim_pos), arg_list[index].substr(delim_pos + 1, arg_list[index].size()));
 		index++;
 	}
 	number_of_games = std::stoi(arg_list[index]);
@@ -169,12 +169,14 @@ int main(int argc, const char** argv)
 			players.push_back(ai_factories.at(AI1name.c_str())->get(controller, 0));
 			if(!players[0]->init(AI1args))
 			{
+				*output << "Wrong arguments for the first AI" << std::endl;
 				display_usage(*output);
 				return 1;
 			}
 			players.push_back(ai_factories.at(AI2name.c_str())->get(controller, 1));
 			if(!players[1]->init(AI2args))
 			{
+				*output << "Wrong arguments for the second AI" << std::endl;
 				display_usage(*output);
 				return 1;
 			}

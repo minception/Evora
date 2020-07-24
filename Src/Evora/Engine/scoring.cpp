@@ -114,6 +114,13 @@ namespace utils
 				score += model->get_board(player_index).has_starter_tile() ? 0.5f : 0;
 			}
 			score += frac * wall.score_tile(i, color);
+			wall.add_tile(i, color);
+			score += wall.score_line(i);
+		}
+		for(size_t i = 0; i < model::COLORS; i++)
+		{
+			score += wall.score_row(i);
+			score += wall.score_color((model::tile)i);
 		}
 		score += model->get_floor_score(player_index);
 		return score;
