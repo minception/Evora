@@ -22,7 +22,7 @@ void mcts_algorithm::do_iteration(const game_state& root_state, std::shared_ptr<
 
 	// Rollout
 	while (!state->is_terminal()) {
-		state->do_move(state->get_simulation_move());
+		state->do_move(state->get_simulation_move(m_heavy_playouts));
 	}
 
 	// Backpropagate
@@ -77,3 +77,5 @@ void mcts_algorithm::abort()
 mcts_algorithm::~mcts_algorithm()
 {
 }
+
+bool mcts_algorithm::m_heavy_playouts = true;

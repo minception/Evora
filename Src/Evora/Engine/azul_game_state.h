@@ -13,7 +13,7 @@ public:
 	void do_move(const game_move& move) override;
 	double get_result(int player) const override;
 	int get_winner() const override;
-	const game_move& get_simulation_move() const override;
+	const game_move& get_simulation_move(bool heavy_playouts = true) const override;
 	int get_player_who_just_moved() const override;
 	bool is_terminal() const override;
 	std::shared_ptr<const game_move> parse_move(const std::string& move) const override;

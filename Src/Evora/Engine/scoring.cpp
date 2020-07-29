@@ -89,16 +89,21 @@ namespace utils
 	{
 		float score = controller->get_score(player_index);
 		auto model = controller->get_model();
-		// local copy of the wall
-		model::wall wall = model->get_board(player_index).get_wall();
 		bool last_round = false;
-		for (size_t i = 0; i < model::COLORS; i++)
+		for (int i = 0; i < model->player_count(); ++i)
 		{
-			if (wall.line_count(i) >= model::COLORS - 1 && model->pattern_line_full(player_index, i)) {
-				last_round = true;
-				break;
+			for (size_t j = 0; j < model::COLORS; ++j)
+			{
+				model::wall wall = model->get_board(i).get_wall();
+					if ((wall.line_count(j) == model::COLORS - 1 && model->pattern_line_full(i, j)) 
+						|| wall.full_line(j)) {
+						last_round = true;
+						break;
+					}
 			}
 		}
+		// local copy of the wall
+		model::wall wall = model->get_board(player_index).get_wall();
 		for (size_t i = 0; i < model::COLORS; i++)
 		{
 			model::tile color = model->get_board(player_index).pattern_line_color(i);

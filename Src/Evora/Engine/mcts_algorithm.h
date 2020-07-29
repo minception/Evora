@@ -15,9 +15,11 @@ public:
 	void abort();
 	const tree_node_creator& get_tree_creator() const;
 	int get_last_iterations() const;
+	static void set_heavy_playouts(bool value) { m_heavy_playouts = value; }
 private:
 	const tree_node_creator& m_tree_creator;
 	bool m_b_search;
+	static bool m_heavy_playouts;
 	int m_last_iterations;
 	static void do_iteration(const game_state& root_state, std::shared_ptr<tree_node> root_node);
 };

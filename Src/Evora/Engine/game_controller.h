@@ -13,6 +13,7 @@ namespace control
 		int m_current_command = 0;
 		int m_current_player = 0;
 		int round = 0;
+		bool m_round_over = false;
 		bool m_game_over = false;
 	public:
 		game_controller(std::shared_ptr<model::game> model):m_model(model){}

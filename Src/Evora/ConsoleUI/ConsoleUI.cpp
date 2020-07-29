@@ -14,13 +14,12 @@
 #include "ai_factory.h"
 #include "game.h"
 #include "game_controller.h"
+#include "logger_factory.h"
 #include "utils.h"
-
-bool print_time = false;
 
 void display_usage(std::ostream& out)
 {
-	out << "Usage : evora <ai name> [<option>=<value> ...] <ai name> [<option>=<value> ...] <number of games> [time]" << std::endl;
+	out << "Usage : evora <ai name> [<option>=<value> ...] <ai name> [<option>=<value> ...] <number of games> [logger]" << std::endl;
 	out << "Available AIs:" << std::endl;
 	auto ai_factories = ai::ai_factory::get_factories();
 	for (auto&& ai_factory : ai_factories)
@@ -98,7 +97,7 @@ void display_game_settings(const std::string& ai1_name, const std::string& ai2_n
 bool parse_args(const std::vector<std::basic_string<char>>& arg_list, std::string& ai1_name, std::string& ai2_name,
                 std::vector<std::pair<std::basic_string<char>, std::basic_string<char>>>& ai1_args,
                 std::vector<std::pair<std::basic_string<char>, std::basic_string<char>>>& ai2_args,
-	int& number_of_games)
+	int& number_of_games, std::string& logger)
 {
 	if (arg_list.size() < 3) return false;
 	int index = 0;
@@ -123,12 +122,11 @@ bool parse_args(const std::vector<std::basic_string<char>>& arg_list, std::strin
 	{
 		return true;
 	}
-	if(arg_list[index] == "time")
+	logger = arg_list[index];
+	if (++index == arg_list.size())
 	{
-		print_time = true;
 		return true;
 	}
-
 	return false;
 }
 
@@ -139,8 +137,9 @@ int main(int argc, const char** argv)
 	auto ai_factories = ai::ai_factory::get_factories();
 	std::string AI1name, AI2name;
 	std::vector<std::pair<std::string, std::string>> AI1args, AI2args;
+	std::string logger_name;
 	int number_of_games;
-	if (parse_args(arg_list, AI1name, AI2name, AI1args, AI2args, number_of_games)) {
+	if (parse_args(arg_list, AI1name, AI2name, AI1args, AI2args, number_of_games, logger_name)) {
 
 
 		if (!ai_factories.count(AI1name.c_str()))
@@ -155,10 +154,29 @@ int main(int argc, const char** argv)
 			display_usage(*output);
 			return 1;
 		}
+		auto logger = logging::logger_factory::get_logger(logger_name);
+		if(logger == nullptr)
+		{
+			std::cout << "Unknown logger " << logger_name << std::endl;
+			display_usage(*output);
+			return 1;
+		}
+		std::string output_name;
+		bool first = true;
+		for (auto && argument : arg_list)
+		{
+			if(!first)
+			{
+				output_name += "_";
+			}
+			output_name += argument;
+			first = false;
+		}
+		logger->set_output(output_name);
 		std::vector<int> wins{ 0,0 };
 		std::vector<int> score_delta;
 
-
+		auto begin = std::chrono::high_resolution_clock::now();
 		for (int i = 0; i < number_of_games; ++i)
 		{
 			auto start = std::chrono::high_resolution_clock::now();
@@ -180,18 +198,15 @@ int main(int argc, const char** argv)
 				display_usage(*output);
 				return 1;
 			}
-			
-			int winner = utils::play_game(players, controller, current_player);
+			// play the game
+			int winner = utils::play_game(players, controller, current_player, logger);
 			wins[winner]++;
 			std::cout << "Player " << winner + 1 << " : " << players[winner]->get_name() << " won game number " << i << std::endl;
 			std::cout << "Score: " << controller->get_score(0) << ":" << controller->get_score(1) << std::endl;
-			if(print_time)
-			{
-				score_delta.push_back(controller->get_score(0) - controller->get_score(1));
-				std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - start;
-				std::cout << "Elapsed time: " << elapsed.count() << std::endl;
-			}
 		}
+		logger->finish();
+		std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - begin;
+		std::cout << "Elapsed time: " << elapsed.count() << std::endl;
 
 		display_game_settings(AI1name, AI2name, AI1args, AI2args, *output);
 		display_player_stats(AI1name, wins[0], number_of_games, *output);

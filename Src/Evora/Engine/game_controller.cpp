@@ -188,6 +188,7 @@ bool game_controller::step()
 		if (m_game_over) return false;
 		if (m_model->round_finished())
 		{
+			m_round_over = true;
 			add_wall_tiling_phase();
 			if(m_game_over)
 			{
@@ -202,6 +203,7 @@ bool game_controller::step()
 			}
 			return step();
 		}
+		m_round_over = false;
 		return false;
 	}
 	if (m_commands[m_current_command]->is_move())

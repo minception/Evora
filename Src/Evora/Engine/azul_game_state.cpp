@@ -58,22 +58,30 @@ int azul_game_state::get_winner() const
 	return m_winner;
 }
 
-const game_move& azul_game_state::get_simulation_move() const
+const game_move& azul_game_state::get_simulation_move(bool heavy_playouts) const
 {
-	std::uniform_real_distribution<float> dist(0, m_total_weight);
-	float randomNumber = dist(*m_rng);
-	int moveIndex = 0;
-	float weightSum = 0.f;
-	while (moveIndex < m_moves.size())
+	int moveIndex;
+	if(!heavy_playouts)
 	{
-		weightSum += m_move_weights[moveIndex];
-		if (weightSum < randomNumber)
+		std::uniform_int_distribution<int> dist(0, m_moves.size());
+		moveIndex = dist(*m_rng);
+	}
+	else {
+		std::uniform_real_distribution<float> dist(0, m_total_weight);
+		float randomNumber = dist(*m_rng);
+		moveIndex = 0;
+		float weightSum = 0.f;
+		while (moveIndex < m_moves.size())
 		{
-			moveIndex++;
-		}
-		else
-		{
-			break;
+			weightSum += m_move_weights[moveIndex];
+			if (weightSum < randomNumber)
+			{
+				moveIndex++;
+			}
+			else
+			{
+				break;
+			}
 		}
 	}
 	return *m_moves[moveIndex];

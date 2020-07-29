@@ -61,7 +61,7 @@ std::unique_ptr<::ai::ai> monte_carlo_ai_factory::get(std::shared_ptr<control::g
 
 std::string monte_carlo_ai_factory::options()
 {
-	return "[options:iterations(int)|200, constant(float)|1.0]";
+	return "[options:iterations(int)|200, constant(float)|1.0, heavy_playouts(true or false)|true]";
 }
 
 //std::unique_ptr<::ai::ai> ad_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)

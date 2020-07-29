@@ -4,9 +4,10 @@
 
 namespace utils
 {
-	int play_game(std::vector<std::unique_ptr<ai::ai>>& players, std::shared_ptr<control::game_controller> controller, int current_player)
+	int play_game(std::vector<std::unique_ptr<ai::ai>>& players, std::shared_ptr<control::game_controller> controller, int current_player, std::shared_ptr<logging::logger> logger)
 	{
 		int move_counter = 0;
+		logger->init();
 		while (true)
 		{
 			if (!controller->step())
@@ -19,6 +20,7 @@ namespace utils
 				players[current_player]->move();
 				++move_counter;
 			}
+			logger->step(controller);
 		}
 	}
 

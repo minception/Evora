@@ -55,6 +55,17 @@ bool ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> a
 			m_creator = std::make_unique<uct_tree_node_creator>(std::stof(arg.second));
 			m_mcts = std::make_unique<mcts_algorithm>(*m_creator);
 		}
+		else if(arg.first == "heavy_playouts")
+		{
+			if(arg.second == "true")
+			{
+				m_mcts->set_heavy_playouts(true);
+			}
+			else
+			{
+				m_mcts->set_heavy_playouts(false);
+			}
+		}
 		else
 		{
 			return false;

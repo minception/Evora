@@ -76,6 +76,15 @@
     <Filter Include="AI\MonteCarloAI\Source Files\Azul">
       <UniqueIdentifier>{ac6e1d5d-2b8e-4b4b-b4bd-1a72504d80e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{4db3d466-5e55-488b-aca1-aeb46f78991f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger\Header Files">
+      <UniqueIdentifier>{2e68c858-67d1-4ef1-8d05-cfc0706f5849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger\Source Files">
+      <UniqueIdentifier>{7cfed426-57ff-4c26-bae8-457cd2c59988}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_controller.h">
@@ -207,6 +216,12 @@
     <ClInclude Include="scoring.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Logger\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger_factory.h">
+      <Filter>Logger\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_controller.cpp">
@@ -337,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="scoring.cpp">
       <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger_factory.cpp">
+      <Filter>Logger\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.cpp">
+      <Filter>Logger\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

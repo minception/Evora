@@ -41,6 +41,8 @@
     <ClInclude Include="greedy_ai.h" />
     <ClInclude Include="init_round.h" />
     <ClInclude Include="lid.h" />
+    <ClInclude Include="logger.h" />
+    <ClInclude Include="logger_factory.h" />
     <ClInclude Include="mcts_algorithm.h" />
     <ClInclude Include="minimax_ai.h" />
     <ClInclude Include="monte_carlo_ai.h" />
@@ -86,6 +88,8 @@
     <ClCompile Include="greedy_ai.cpp" />
     <ClCompile Include="init_round.cpp" />
     <ClCompile Include="lid.cpp" />
+    <ClCompile Include="logger.cpp" />
+    <ClCompile Include="logger_factory.cpp" />
     <ClCompile Include="mcts_algorithm.cpp" />
     <ClCompile Include="minimax_ai.cpp" />
     <ClCompile Include="monte_carlo_ai.cpp" />
