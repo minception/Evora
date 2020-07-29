@@ -14,6 +14,7 @@ namespace utils
 			{
 				if (controller->game_over())
 				{
+					logger->game_over(controller);
 					return controller->get_winner();
 				}
 				current_player = controller->get_current_player();

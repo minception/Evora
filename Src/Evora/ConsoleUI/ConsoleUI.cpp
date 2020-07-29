@@ -26,6 +26,7 @@ void display_usage(std::ostream& out)
 	{
 		out << '\t' << ai_factory.first << " " << ai_factory.second->options() << std::endl;
 	}
+	out << "Possible loggers: " << std::endl << "0\taverage score of player 1 after every round" << std::endl << "1\twin percentage of player 1";
 }
 
 void display_player_stats(std::string name, int wins, int games_played, std::ostream& out)

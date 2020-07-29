@@ -13,6 +13,7 @@ namespace logging
 	public:
 		virtual void init() = 0;
 		virtual void step(std::shared_ptr<control::game_controller> controller) = 0;
+		virtual void game_over(std::shared_ptr<control::game_controller> controller) = 0;
 		virtual void finish() = 0;
 		void set_output(std::string file_name) { m_output_path = file_name; }
 	};
@@ -23,10 +24,10 @@ namespace logging
 		void init() override{}
 		void step(std::shared_ptr<control::game_controller> controller) override{}
 		void finish() override{}
+		void game_over(std::shared_ptr<control::game_controller> controller) override{};
 	};
 	class avg_score_per_round: public logger
 	{
-	private:
 		int m_round;
 		int m_repeats;
 		std::ofstream m_output;
@@ -35,6 +36,17 @@ namespace logging
 	public:
 		void init() override;
 		void step(std::shared_ptr<control::game_controller> controller) override;
+		void finish() override;
+		void game_over(std::shared_ptr<control::game_controller> controller) override{};
+	};
+	class win_percentage: public logger
+	{
+		int m_plays = 0;
+		int m_wins = 0;
+	public:
+		void init() override{};
+		void step(std::shared_ptr<control::game_controller> controller) override{};
+		void game_over(std::shared_ptr<control::game_controller> controller) override;
 		void finish() override;
 	};
 	

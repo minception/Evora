@@ -42,3 +42,18 @@ void logging::avg_score_per_round::finish()
 	m_output.close();
 }
 
+void logging::win_percentage::game_over(std::shared_ptr<control::game_controller> controller)
+{
+	if(controller->get_winner() == 0)
+	{
+		m_wins++;
+	}
+	m_plays++;
+}
+
+void logging::win_percentage::finish()
+{
+	std::ofstream output(m_output_path, std::ios_base::app);
+	output << (float)m_wins/m_plays * 100 << std::endl;
+}
+
