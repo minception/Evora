@@ -10,5 +10,9 @@ std::shared_ptr<logging::logger> logging::logger_factory::get_logger(std::string
 	{
 		return std::make_shared<logging::avg_score_per_round>();
 	}
+	if(name == "1")
+	{
+		return std::make_shared<logging::win_percentage>();
+	}
 	return nullptr;
 }
