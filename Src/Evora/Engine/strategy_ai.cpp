@@ -55,7 +55,7 @@ const strategy_move& ai::strategy_ai::best_fill(const std::vector<strategy_move>
 	int to_fill = moves.begin()->to_fill();
 	int least_empty = to_fill;
 	const strategy_move* least_empty_move = nullptr;
-	int smallest_overflow = moves[0].get_overflow(); // Here 20 is simply the largest possible overflow that could occur in a 2 player game
+	int smallest_overflow = moves[0].get_overflow();
 	const strategy_move* smallest_overflow_move = &moves[0];
 	for(auto&& move: moves)
 	{
@@ -109,7 +109,6 @@ std::unique_ptr<control::command> ai::strategy_ai::pick_move()
 	std::vector<std::pair<int, float>> possible_fill = calculate_possible_fill(sorted_moves);
 	std::sort(possible_fill.begin(), possible_fill.end(), [](auto a, auto b) {return a.second > b.second; });
 	return best_fill(sorted_moves[possible_fill[0].first]).gen_move();
-	
 }
 
 std::vector<strategy_move> ai::strategy_ai::get_moves()

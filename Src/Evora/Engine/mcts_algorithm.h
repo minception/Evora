@@ -11,7 +11,7 @@ public:
 	mcts_algorithm(mcts_algorithm&& rhs) noexcept = delete;
 	mcts_algorithm& operator=(mcts_algorithm&& rhs) noexcept = delete;
 
-	std::shared_ptr<const game_move> search(const game_state& root_state, int time);
+	std::shared_ptr<const game_move> search(const game_state& root_state, int iterations);
 	void abort();
 	const tree_node_creator& get_tree_creator() const;
 	int get_last_iterations() const;
