@@ -6,7 +6,7 @@ Make sure to update submodules recursively before proceeding.
 ### Requirements
 * Scons
 * Godot game engine
-* Visual studio with visual c++
+* Microsoft Visual studio with visual c++
 * NSIS (for installer creation)
 ### Build Instructions
 * First build the bindings  
