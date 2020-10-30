@@ -46,7 +46,7 @@ std::unique_ptr<::ai::ai> minimax_ai_factory::get(std::shared_ptr<control::game_
 
 std::string minimax_ai_factory::options()
 {
-	return "[options:time(int)|500, depth(int)|iterative deepening, abpruning(true or false)|true, pastround(true or false)|true]";
+	return "[options:time(int)|100, depth(int)|iterative deepening, abpruning(true or false)|true, pastround(true or false)|true]";
 }
 
 std::unique_ptr<::ai::ai> strategy_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)
@@ -61,7 +61,7 @@ std::unique_ptr<::ai::ai> monte_carlo_ai_factory::get(std::shared_ptr<control::g
 
 std::string monte_carlo_ai_factory::options()
 {
-	return "[options:iterations(int)|200, constant(float)|1.0, heavy_playouts(true or false)|true]";
+	return "[options:iterations(int)|500, constant(float)|1.0, heavy_playouts(true or false)|true]";
 }
 
 //std::unique_ptr<::ai::ai> ad_ai_factory::get(std::shared_ptr<control::game_controller> controller, int board_index)
