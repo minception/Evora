@@ -17,7 +17,7 @@
 ai::monte_carlo_ai::monte_carlo_ai(std::shared_ptr<control::game_controller> controller, int board_index, int iterations) :
 	ai(controller, board_index), m_iterations(iterations)
 {
-	m_creator = std::make_unique<uct_tree_node_creator>(1.0);
+	m_creator = std::make_unique<uct_tree_node_creator>(0.2);
 	m_mcts = std::make_unique<mcts_algorithm>(*m_creator);
 }
 

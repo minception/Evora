@@ -19,6 +19,7 @@ namespace ai
 		bool m_round_finished = false;
 		std::unique_ptr<control::command> m_best_move;
 		bool m_abpruning = true;
+		bool m_move_ordering = true;
 
 	public:
 		void move() override;

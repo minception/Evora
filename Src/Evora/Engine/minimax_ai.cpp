@@ -50,7 +50,10 @@ float ai::minimax_ai::minimax(int player_index, int depth, std::shared_ptr<contr
 	}
 	float best_score = player_index == m_board_index ? -std::numeric_limits<float>::max() : std::numeric_limits<float>::max();
 	auto scored_moves = utils::get_scored_moves(controller, player_index);
-	std::sort(scored_moves.begin(), scored_moves.end(), [](auto&& a, auto&& b) {return std::get<1>(a) > std::get<1>(b); });
+	if(m_move_ordering)
+	{
+		std::sort(scored_moves.begin(), scored_moves.end(), [](auto&& a, auto&& b) {return std::get<1>(a) > std::get<1>(b); });
+	}
 	for (auto&& move : scored_moves) {
 		if (alpha_beta_move(controller, std::move(std::get<0>(move)), best_score, depth, player_index, alpha, beta))
 		{
@@ -136,15 +139,26 @@ bool ai::minimax_ai::init(std::vector<std::pair<std::string, std::string>> args)
 			m_fixed_depth = true;
 			m_max_depth = std::stoi(arg.second);
 		}
-		else if(arg.first == "abpruning")
+		else if (arg.first == "abpruning")
 		{
-			if(arg.second == "true")
+			if (arg.second == "true")
 			{
 				m_abpruning = true;
 			}
 			else
 			{
 				m_abpruning = false;
+			}
+		}
+		else if (arg.first == "moveordering")
+		{
+			if (arg.second == "true")
+			{
+				m_move_ordering = true;
+			}
+			else
+			{
+				m_move_ordering = false;
 			}
 		}
 		else if(arg.first == "pastround")
