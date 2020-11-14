@@ -26,7 +26,7 @@ void display_usage(std::ostream& out)
 	{
 		out << '\t' << ai_factory.first << " " << ai_factory.second->options() << std::endl;
 	}
-	out << "Possible loggers: " << std::endl << "0\taverage score of player 1 after every round" << std::endl << "1\twin percentage of player 1";
+	out << "Possible loggers: " << std::endl << "0\taverage score of player 1 after every round" << std::endl << "1\twin percentage of player 1" << std::endl;
 }
 
 void display_player_stats(std::string name, int wins, int games_played, std::ostream& out)
@@ -42,6 +42,7 @@ void display_player_stats(std::string name, int wins, int games_played, std::ost
 
 	out << "Player " << name << " won " << wins << " out of " << games_played << " games. Win rate: " << win_ratio * 100 << "%" << std::endl;
 	out << "With confidence " << confidence << " % " << win_ratio - interval_delta << " < p < " << win_ratio + interval_delta << std::endl;
+	out << "Confidence interval delta is " << interval_delta << std::endl;
 }
 
 void display_score_stats(const std::vector<int>& score_delta, std::ostream& out)
@@ -71,8 +72,8 @@ void display_score_stats(const std::vector<int>& score_delta, std::ostream& out)
 
 	float confidence = 95;
 	float z = 1.960;
-	float confidence_interval_delta = z * (standard_deviation / sqrt(score_delta.size()));;
-	out << "With confidence " << confidence << " %  the score difference is between " << abs(mean) - confidence_interval_delta << " and " << abs(mean) + confidence_interval_delta;
+	float confidence_interval_delta = z * (standard_deviation / sqrt(score_delta.size()));
+	out << "With confidence " << confidence << " %  the score difference is between " << abs(mean) - confidence_interval_delta << " and " << abs(mean) + confidence_interval_delta << std::endl;
 }
 
 void display_game_settings(const std::string& ai1_name, const std::string& ai2_name,
@@ -180,7 +181,6 @@ int main(int argc, const char** argv)
 		auto begin = std::chrono::high_resolution_clock::now();
 		for (int i = 0; i < number_of_games; ++i)
 		{
-			auto start = std::chrono::high_resolution_clock::now();
 			std::shared_ptr<control::game_controller> controller = std::make_shared<control::game_controller>(std::make_shared<model::game>(2, i));
 			int current_player = 0;
 			controller->start_game(current_player);
