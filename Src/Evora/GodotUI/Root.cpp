@@ -225,7 +225,7 @@ void Root::start_game()
 			game_data->add_player(std::move(player));
 			m_stepping = false;
 		}
-		else if (player_name == "Dr. No")
+		else if (player_name == "Jamesinator")
 		{
 			auto dr_no = std::move(ai_factories.at("MonteCarloAI")->get(game_data->m_controller,i));
 			dr_no->init({ {"iterations", "10000"} });
