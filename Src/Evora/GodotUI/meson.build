@@ -5,6 +5,6 @@ shared_library('godot_ui',
      'GodotScenes.cpp','PatternLine.cpp', 'PatternLineLoader.cpp', 'Player.cpp',
      'HumanPlayer.cpp', 'AIPlayer.cpp', 'GameData.cpp', 'Floor.cpp', 'Center.cpp', 'ColorHighlight.cpp'],
 
-    dependencies: godot_lib,
+    dependencies: [godot_lib, thread_dep],
     include_directories: [engine_inc, godot_includes],
     link_with: [engine_lib])

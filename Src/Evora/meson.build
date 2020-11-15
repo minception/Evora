@@ -13,6 +13,7 @@ endif
 
 cpp = meson.get_compiler('cpp')
 godot_lib = cpp.find_library(godot_libname, dirs: [godot_bin])
+thread_dep = dependency('threads')
 
 godot_includes = include_directories(
     godot_dir + '/godot_headers',
