@@ -86,7 +86,7 @@ SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
 File "Evora.exe"
 File "Evora.pck"
-File "LibGodotUI-x64-Debug.dll"
+File "LibGodotUI-x64-Release.dll"
 SectionEnd
 
 ######################################################################
