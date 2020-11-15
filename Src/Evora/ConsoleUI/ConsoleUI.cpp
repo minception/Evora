@@ -34,7 +34,7 @@ void display_player_stats(std::string name, int wins, int games_played, std::ost
 
 	float win_ratio = wins / (float)games_played;
 
-	float standard_deviation = sqrt((1 - win_ratio) * win_ratio * win_ratio + (win_ratio) * (1 - win_ratio) * (1 - win_ratio));
+	float standard_deviation = sqrt((1 - win_ratio) * win_ratio);
 
 	float confidence = 95;
 	float z = 1.960;

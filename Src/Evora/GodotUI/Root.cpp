@@ -228,7 +228,7 @@ void Root::start_game()
 		else if (player_name == "Jamesinator")
 		{
 			auto dr_no = std::move(ai_factories.at("MonteCarloAI")->get(game_data->m_controller,i));
-			dr_no->init({ {"iterations", "10000"} });
+			dr_no->init({ {"time", "5000"} });
 			std::unique_ptr<Player> player = std::make_unique<AIPlayer>(std::move(dr_no));
 			game_data->add_player(std::move(player));
 		}

@@ -1,5 +1,5 @@
 #pragma once
-#include "game_move.h";
+#include "game_move.h"
 #include <vector>
 #include <string>
 #include <memory>
