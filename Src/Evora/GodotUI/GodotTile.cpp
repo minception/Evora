@@ -125,6 +125,8 @@ void GodotTile::_init()
 	redTexture = rl->load("res://Textures/red-tile.png");
 	yellowTexture = rl->load("res://Textures/yellow-tile.png");
 	starterTexture = rl->load("res://Textures/starter-tile.png");
+
+	m_animated = true;
 }
 
 void GodotTile::_ready()
@@ -143,7 +145,7 @@ void GodotTile::_process(float delta)
 		Vector2 target_location = m_animating_to;
 		Vector2 starting_location = get_global_position();
 		Vector2 speed = target_location - starting_location;
-		if (speed.length() < 3 /*|| !m_animated*/)
+		if (speed.length() < 3 || !m_animated)
 		{
 			set_global_position(target_location);
 			m_animating = false;
