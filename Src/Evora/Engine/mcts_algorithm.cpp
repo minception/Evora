@@ -1,6 +1,7 @@
 #include "mcts_algorithm.h"
 #include "utils.h"
 #include <chrono>
+#include <functional>
 
 void mcts_algorithm::do_iteration(const game_state& root_state, std::shared_ptr<tree_node> root_node)
 {
@@ -32,13 +33,24 @@ void mcts_algorithm::do_iteration(const game_state& root_state, std::shared_ptr<
 	}
 }
 
-std::shared_ptr<const game_move> mcts_algorithm::search(const game_state& root_state, int iterations)
+std::shared_ptr<const game_move> mcts_algorithm::search(const game_state& root_state, int iterations, int time)
 {
 	if (!m_b_search) {
 		m_b_search = true;
 	}
 
-	m_last_iterations = 0;
+	std::function<bool()> exit_condition;
+	if(time > -1)
+	{
+		m_end_time = std::chrono::system_clock::now() + std::chrono::milliseconds(time);
+		exit_condition = [this]() {return !utils::time_left(m_end_time); };
+	}
+	else
+	{
+		m_last_iterations = 0;
+		exit_condition = [this, iterations]() {return m_last_iterations == iterations; };
+	}
+	
 
 	std::shared_ptr<tree_node> rootNode = m_tree_creator.gen_root_node(root_state);
 	while (true)
@@ -47,7 +59,7 @@ std::shared_ptr<const game_move> mcts_algorithm::search(const game_state& root_s
 
 		do_iteration(root_state, rootNode);
 
-		if (m_last_iterations == iterations) {
+		if (exit_condition()) {
 			break;
 		}
 		if (!m_b_search)

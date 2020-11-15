@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 #include "tree_node_creator.h"
 
 class mcts_algorithm
@@ -11,7 +13,7 @@ public:
 	mcts_algorithm(mcts_algorithm&& rhs) noexcept = delete;
 	mcts_algorithm& operator=(mcts_algorithm&& rhs) noexcept = delete;
 
-	std::shared_ptr<const game_move> search(const game_state& root_state, int iterations);
+	std::shared_ptr<const game_move> search(const game_state& root_state, int iterations, int time);
 	void abort();
 	const tree_node_creator& get_tree_creator() const;
 	int get_last_iterations() const;
@@ -21,5 +23,6 @@ private:
 	bool m_b_search;
 	static bool m_heavy_playouts;
 	int m_last_iterations;
+	std::chrono::system_clock::time_point m_end_time;
 	static void do_iteration(const game_state& root_state, std::shared_ptr<tree_node> root_node);
 };

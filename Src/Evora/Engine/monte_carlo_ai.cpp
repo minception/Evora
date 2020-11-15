@@ -1,21 +1,18 @@
 ﻿#include "monte_carlo_ai.h"
 
+#include <string>
+
 #include "azul_game_move.h"
 #include "azul_game_state.h"
-#include "center_offer.h"
-#include "drop_center.h"
 #include "drop_factory.h"
-#include "factory_offer.h"
 #include "game_controller.h"
 #include "uct_tree_node_creator.h"
-#include "uct_tree_node.h"
 #include "utils.h"
-#include <string>
 
 #define COUNTNODES 0
 
-ai::monte_carlo_ai::monte_carlo_ai(std::shared_ptr<control::game_controller> controller, int board_index, int iterations) :
-	ai(controller, board_index), m_iterations(iterations)
+ai::monte_carlo_ai::monte_carlo_ai(std::shared_ptr<control::game_controller> controller, int board_index, int iterations, int time) :
+	ai(controller, board_index), m_iterations(iterations), m_time(time)
 {
 	m_creator = std::make_unique<uct_tree_node_creator>(0.2);
 	m_mcts = std::make_unique<mcts_algorithm>(*m_creator);
@@ -25,7 +22,7 @@ void ai::monte_carlo_ai::move()
 {
 	std::shared_ptr<control::game_controller> mockup = std::make_shared<control::game_controller>(*m_controller);
 	azul_game_state state(mockup, m_board_index);
-	auto best_move = m_mcts->search(state, m_iterations);
+	auto best_move = m_mcts->search(state, m_iterations, m_time);
 	const azul_game_move& azulMove = dynamic_cast<const azul_game_move&>(*best_move);
 
 #if COUNTNODES
@@ -49,6 +46,10 @@ bool ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> a
 		if(arg.first == "iterations")
 		{
 			m_iterations = std::stoi(arg.second);
+		}
+		if(arg.first == "time")
+		{
+			m_time = std::stoi(arg.second);
 		}
 		else if(arg.first == "constant")
 		{
