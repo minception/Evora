@@ -282,6 +282,7 @@ void Root::announce_winner()
 	start_button->set_text("Play again");
 	start_button->set_global_position(Vector2((viewport_size.x - start_button->get_size().x) / 2, 400 - start_button->get_size().y / 2));
 	start_button->set_visible(true);
+	start_button->grab_focus();
 }
 
 void Root::animation_finished()

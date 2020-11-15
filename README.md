@@ -1,4 +1,6 @@
 # Evora
+![game](https://github.com/minception/evora/blob/master/game.png?raw=true)
+
 An implementation of a popular board game Azul.  
 Make sure to update submodules recursively before proceeding.
 
