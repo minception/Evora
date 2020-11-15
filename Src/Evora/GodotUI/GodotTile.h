@@ -35,6 +35,7 @@ namespace godot
 		
 		bool m_animating;
 		Vector2 m_animating_to;
+		bool m_animated;
 
 		static Ref<Texture> blackTexture;
 		static Ref<Texture> whiteTexture;

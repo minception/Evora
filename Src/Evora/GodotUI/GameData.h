@@ -15,7 +15,7 @@ namespace godot
 		std::shared_ptr<GodotGame> m_game;
 		int current_player;
 		int number_of_players;
-		std::shared_ptr<control::game_controller> controller;
+		std::shared_ptr<control::game_controller> m_controller;
 		static void _register_methods();
 		void add_player(std::unique_ptr<Player> player);
 		void _init();

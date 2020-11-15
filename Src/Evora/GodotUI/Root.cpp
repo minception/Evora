@@ -21,6 +21,8 @@
 #include <string>
 #include <Label.hpp>
 
+#include "PatternLine.h"
+
 using namespace godot;
 
 void Root::add_start_button()
@@ -49,7 +51,7 @@ void Root::set_starting_player(int index)
 	GodotTile* starter_tile = cast_to<GodotTile>(get_node("StarterTile"));
 	starter_tile->set_color((int)tile::starter);
 
-	game_data->controller->start_game(index);
+	game_data->m_controller->start_game(index);
 	//game_data->players[index]->move();
 
 	Board* highlighted = cast_to<Board>(ObjectLoader::board_loader->get_child(index));
@@ -175,6 +177,7 @@ void Root::create_player_change_animations()
 
 void Root::start_game()
 {
+	
 	Node2D* boards = (Node2D*)get_node("Boards");
 	int64_t boards_count = boards->get_child_count();
 
@@ -182,11 +185,37 @@ void Root::start_game()
 	game_data->set("number_of_players", m_number_of_players);
 	game_data->set_data();
 
+	// get rid of old game data
+	game_data->players.clear();
+	int64_t tile_count = ObjectLoader::tile_loader->get_child_count();
+	for (int i = 0; i < tile_count; ++i)
+	{
+		GodotTile* godot_tile = (GodotTile*)ObjectLoader::tile_loader->get_child(i);
+		godot_tile->set_follow(false);
+		Vector2 tile_position = godot_tile->get_global_position();
+		godot_tile->set("factory_index", -1);
+		godot_tile->set_global_position(Vector2(tile_position.x, tile_position.y + 800));
+		//ObjectLoader::tile_loader->remove_child(godot_tile);
+	}
+
+	Label* winner_label = cast_to<Label>(get_node("AnnounceWinner"));
+	winner_label->set_visible(false);
+	
+
 	auto ai_factories = ai::ai_factory::get_factories();
 	// hide player selection and prepare for starting player select
 	for (int i = 0; i < boards_count; ++i)
 	{
 		Board* board = (Board*)boards->get_child(i);
+
+		Label* score_label = cast_to<Label>(board->get_node("Image/Score"));
+		score_label->set_text("0");
+		int pl_count = board->get_node("Image/PatternLines")->get_child_count();
+		for(int pl = 0; pl < pl_count; ++pl)
+		{
+			PatternLine* pattern_line = (PatternLine*)board->get_node("Image/PatternLines")->get_child(pl);
+			pattern_line->set("tile_count", 0);
+		}
 		board->_hide_player_select();
 		String player_name = board->get_player_name();
 		cast_to<Label>(board->get_node("PlayerName"))->set_text(player_name);
@@ -196,10 +225,17 @@ void Root::start_game()
 			game_data->add_player(std::move(player));
 			m_stepping = false;
 		}
+		else if (player_name == "Dr. No")
+		{
+			auto dr_no = std::move(ai_factories.at("MonteCarloAI")->get(game_data->m_controller,i));
+			dr_no->init({ {"iterations", "10000"} });
+			std::unique_ptr<Player> player = std::make_unique<AIPlayer>(std::move(dr_no));
+			game_data->add_player(std::move(player));
+		}
 		else
 		{
 			std::unique_ptr<Player> player = std::make_unique<AIPlayer>(
-				ai_factories.at(player_name.alloc_c_string())->get(game_data->controller, i));
+				ai_factories.at(player_name.alloc_c_string())->get(game_data->m_controller, i));
 			game_data->add_player(std::move(player));
 		}
 		board->set("player_select", true);
@@ -240,15 +276,17 @@ void Root::announce_winner()
 	Label* winner_label = cast_to<Label>(get_node("AnnounceWinner"));
 	winner_label->set_text(text);
 	Vector2 viewport_size = get_viewport_rect().size;
-	winner_label->set_global_position(Vector2((viewport_size.x - winner_label->get_size().x) / 2, 300 - winner_label->get_size().y / 2));
+	winner_label->set_global_position(Vector2((viewport_size.x - winner_label->get_size().x) / 2, 300 - winner_label->get_size().y  / 2));
 	winner_label->set_visible(true);
-	//Button* start_button = (Button*)get_node("StartButton");
-	//start_button->set_visible(true);
+	Button* start_button = (Button*)get_node("StartButton");
+	start_button->set_text("Play again");
+	start_button->set_global_position(Vector2((viewport_size.x - start_button->get_size().x) / 2, 400 - start_button->get_size().y / 2));
+	start_button->set_visible(true);
 }
 
 void Root::animation_finished()
 {
-	if(!GodotScenes::game_data->controller->step())
+	if(!GodotScenes::game_data->m_controller->step())
 	{
 		if (GodotScenes::game_data->m_game->game_over())
 		{
@@ -299,7 +337,7 @@ void Root::tile_dropped(int factory_index, int color)
 	{
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())
 		{
-			GodotScenes::game_data->controller->add_command(
+			GodotScenes::game_data->m_controller->add_command(
 				std::move(
 					std::make_unique<control::drop_center>(
 						board_index,
@@ -309,7 +347,7 @@ void Root::tile_dropped(int factory_index, int color)
 		}
 		else
 		{
-			GodotScenes::game_data->controller->add_command(
+			GodotScenes::game_data->m_controller->add_command(
 				std::move(
 					std::make_unique<control::drop_factory>(
 						factory_index,
@@ -319,14 +357,14 @@ void Root::tile_dropped(int factory_index, int color)
 			);
 		}
 		board->set_floor_highlight(false);
-		GodotScenes::game_data->controller->step();
+		GodotScenes::game_data->m_controller->step();
 	}
 	else if(pattern_line_index != -1
 		&& GodotScenes::game_data->m_game->can_add_to_pattern_line(board_index, pattern_line_index, model::tile(color)))
 	{
 		if(factory_index == ObjectLoader::factory_loader->get_child_count())
 		{
-			GodotScenes::game_data->controller->add_command(
+			GodotScenes::game_data->m_controller->add_command(
 				std::move(
 					std::make_unique<control::center_offer>(
 						board_index,
@@ -337,7 +375,7 @@ void Root::tile_dropped(int factory_index, int color)
 		}
 		else
 		{
-			GodotScenes::game_data->controller->add_command(
+			GodotScenes::game_data->m_controller->add_command(
 				std::move(
 					std::make_unique<control::factory_offer>(
 						factory_index,
@@ -348,7 +386,7 @@ void Root::tile_dropped(int factory_index, int color)
 			);
 		}
 		board->set_pattern_line_highlight(pattern_line_index, false);
-		GodotScenes::game_data->controller->step();
+		GodotScenes::game_data->m_controller->step();
 	}
 	else
 	{

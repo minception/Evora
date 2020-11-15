@@ -104,6 +104,7 @@ void GodotTile::_register_methods()
 	register_property("animating_to", &GodotTile::m_animating_to, Vector2(0, 0));
 	register_property("pattern_line_index", &GodotTile::set_pattern_line_index, &GodotTile::get_pattern_line_index, -1);
 	register_property("board_index", &GodotTile::_board_index, -1);
+	register_property("animated", &GodotTile::m_animated, true);
 	
 	register_signal<GodotTile>("mouse_entered", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
 	register_signal<GodotTile>("mouse_exited", "factory_index", GODOT_VARIANT_TYPE_INT, "color", GODOT_VARIANT_TYPE_INT);
@@ -143,7 +144,7 @@ void GodotTile::_process(float delta)
 		Vector2 target_location = m_animating_to;
 		Vector2 starting_location = get_global_position();
 		Vector2 speed = target_location - starting_location;
-		if (speed.length() < 3)
+		if (speed.length() < 3 || !m_animated)
 		{
 			set_global_position(target_location);
 			m_animating = false;
@@ -280,6 +281,7 @@ void GodotTile::set_move_back(bool cond)
 void GodotTile::animate_to(Vector2 position)
 {
 	Vector2 tile_position = get_global_position();
+	//_ASSERT(false);
 	set("animating", true);
 	set("animating_to", position);
 	emit_signal("animation_started");

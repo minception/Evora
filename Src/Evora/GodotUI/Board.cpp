@@ -55,6 +55,7 @@ void godot::Board::_ready()
 	{
 		player_select->add_item(ai_factory.first, player_index++);
 	}
+	player_select->add_item("Dr. No", player_index);
 	connect_children();
 }
 

@@ -23,5 +23,5 @@ void GameData::_init()
 void GameData::set_data()
 {
 	m_game = std::make_shared<GodotGame>(number_of_players);
-	controller = std::make_shared<control::game_controller>(m_game);
+	m_controller = std::make_shared<control::game_controller>(m_game);
 }
