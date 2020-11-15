@@ -5,7 +5,9 @@ An implementation of a popular board game Azul.
 Make sure to update submodules recursively before proceeding.
 
 ## Windows
-### Requirements
+### Installation requirements
+VC redistributable V16 x64 - can be found at https://aka.ms/vs/16/release/vc_redist.x64.exe
+### Build Requirements
 * Scons
 * Godot game engine
 * Microsoft Visual studio with visual c++
