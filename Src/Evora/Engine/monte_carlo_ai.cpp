@@ -47,7 +47,7 @@ bool ai::monte_carlo_ai::init(std::vector<std::pair<std::string, std::string>> a
 		{
 			m_iterations = std::stoi(arg.second);
 		}
-		if(arg.first == "time")
+		else if(arg.first == "time")
 		{
 			m_time = std::stoi(arg.second);
 		}
