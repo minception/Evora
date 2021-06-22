@@ -204,9 +204,6 @@
     <ClInclude Include="strategy_move.h">
       <Filter>AI\StrategyAI\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ad_ai.h">
-      <Filter>AI\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="azul_game_state.h">
       <Filter>AI\MonteCarloAI\Header Files\Azul</Filter>
     </ClInclude>
@@ -337,9 +334,6 @@
     </ClCompile>
     <ClCompile Include="strategy_move.cpp">
       <Filter>AI\StrategyAI\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ad_ai.cpp">
-      <Filter>AI\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>Model\Source Files</Filter>
