@@ -16,7 +16,7 @@ VC redistributable V16 x64 - can be found at https://aka.ms/vs/16/release/vc_red
 * First build the bindings  
 ```
 $ cd godot-cpp
-$ scons platform=windows generate_bindings=yes target=runtime
+$ scons platform=windows generate_bindings=yes target=release
 ```
 * In visual studio set build to release and build the project. After this it should be possible to run the game in godot, following instructions are for creating the installer  
 
